@@ -5,17 +5,17 @@ Continue in Claude Code. This folder is the working copy; the artifact is the li
 
 ## Everything, in one place
 
-| what | where |
-|---|---|
-| **The site** | `index.html` — artifact format (`<title>` line 1, NO doctype/html/head/body) |
-| **Live artifact** | https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5 |
-| **Companion: Reading the Figures** | `figure-legend.html` · https://claude.ai/code/artifact/b57df703-2efe-4d12-96c0-876abdbccd21 |
-| **Companion: What You Study** | `POSITION.html` · https://claude.ai/code/artifact/4608ef2a-f8c0-4a1f-a427-500a74b7e048 |
-| **How to edit** | `EDITING.md` — file map, anchors, rules, sanity checks |
-| **Dev server** | `./dev.py` → localhost:4173 (live; edit + refresh, no build) |
-| **Figma reference** | `reference-figma/` — their App.tsx, content, plan |
-| **Version control** | git, initialised, one commit on `main` |
-| **Memory** | `project_paramvaswani_redesign.md` (v1→v9 decision log) · `project_sensemaking_instruments.md` (the thesis) |
+| what                               | where                                                                                                       |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **The site**                       | `index.html` — artifact format (`<title>` line 1, NO doctype/html/head/body)                                |
+| **Live artifact**                  | https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5                                        |
+| **Companion: Reading the Figures** | `figure-legend.html` · https://claude.ai/code/artifact/b57df703-2efe-4d12-96c0-876abdbccd21                 |
+| **Companion: What You Study**      | `POSITION.html` · https://claude.ai/code/artifact/4608ef2a-f8c0-4a1f-a427-500a74b7e048                      |
+| **How to edit**                    | `EDITING.md` — file map, anchors, rules, sanity checks                                                      |
+| **Dev server**                     | `./dev.py` → localhost:4173 (live; edit + refresh, no build)                                                |
+| **Figma reference**                | `reference-figma/` — their App.tsx, content, plan                                                           |
+| **Version control**                | git, initialised, one commit on `main`                                                                      |
+| **Memory**                         | `project_paramvaswani_redesign.md` (v1→v9 decision log) · `project_sensemaking_instruments.md` (the thesis) |
 
 To update the artifact from a new session, pass `url:` with the artifact URL so it updates in
 place rather than creating a duplicate.
@@ -44,14 +44,16 @@ the fig. 4 "always" → "first" decision (yours), and fig. 5's hidden brick type
 ## What the page is
 
 One file, vanilla JS, Newsreader + IBM Plex Mono (the ONLY outbound request; see ship-gates).
-Single dark theme, deliberately (artifact-design allows committed single-look). All engines are
-`setInterval`-driven — **zero requestAnimationFrame** (see gotchas).
+Single dark theme, deliberately (artifact-design allows committed single-look). All engines run
+on the **hybrid clocks** (`fixedLoop`/`frameLoop`, sept 1 polish pass): rAF-smooth rendering in
+real browsers, `setInterval` watchdog fallback for rAF-less documents, fixed 30 ms physics
+steps with interpolated canvas rendering (see gotchas + EDITING.md rule 3).
 
 | piece        | what it is                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | fig. 1 hero  | 5-domain venn (mind/body M, technology T, philosophy P, society S, creation C) + unlabeled off-record set. Click = filter (bloom glow, dashed halo, panel card), click again = deep-link (M→#log, T→#distribution, P→#cohere, S→#influences, C→#create), Esc clears. 7 named intersections + red me-dot at M∩T∩P (430,325). 2 drift balls + breathing me-dot = the 3 moving points. |
 | fig. 2       | Panel with two views: **curve** (default; instant SVG normal curve, ±1σ bands w/ hover captions, "the feed's thumb" slider slides μ while the three overcorrection stations stay pinned) and **machine** (Galton board canvas; slider biases every peg; red tracked "me" ball; caps n=600).                                                                                         |
-| fig. 3       | Influence graph, me-centered, idle wobble. Captions mark one-way edges as one-way; only feed↔me and (weakly) machines↔me are bidirectional — fixed in v9, do not re-inflate.                                                                                                                                                                                                                                                                                                            |
+| fig. 3       | Influence graph, me-centered, idle wobble. Captions mark one-way edges as one-way; only feed↔me and (weakly) machines↔me are bidirectional — fixed in v9, do not re-inflate.                                                                                                                                                                                                        |
 | four rooms   | 2×2 boxed panels = verb architecture (create/consume/curate/cohere) with enter→ links. Nav bar uses the same verbs.                                                                                                                                                                                                                                                                 |
 | fig. 4       | Precedence tree (which value governs when), situation chips, privacy leaf ends early.                                                                                                                                                                                                                                                                                               |
 | fig. 5       | Truth-seeker breakout: pass-through bricks bend the ball toward/away from a drifting "truth · approx." marker; paddle = JUDGMENT; score = live angle (gold ≤25°); field repopulates every 20 s.                                                                                                                                                                                     |
@@ -138,8 +140,10 @@ weakly, the machines actually are; captions now mark one-way edges as one-way). 
 
 - **The in-app browser pane is a permanently-hidden document**: no rAF ever fires, timers clamp to
   ~1 Hz, IntersectionObserver may never call back, screenshots go stale, tabs can degrade to a 0×0
-  viewport (`innerWidth === 0`). Hence: all animation loops are `setInterval`, gated by IO +
-  `visibilitychange` where possible. **Verify animations in a real browser**; verify logic in the
+  viewport (`innerWidth === 0`). Hence the hybrid clocks (EDITING.md rule 3): rAF for real
+  browsers, `setInterval` watchdog so the pane still ticks at its clamped ~1 Hz, IO +
+  `visibilitychange` gating on every engine (drift + wobble included since the sept 1 polish
+  pass). **Verify animations in a real browser**; verify logic in the
   pane with synthetic events after monkey-patching
   `svg.getBoundingClientRect = () => ({left:0,top:0,width:900,height:640})`.
 - A PostToolUse prettier hook reformats this file on Write/Edit — re-grep before exact-match edits.

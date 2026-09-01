@@ -1,4 +1,6 @@
 <title>Param Vaswani</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
   rel="stylesheet"
   href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&display=swap"
@@ -92,8 +94,8 @@
     color: var(--dim);
     border-bottom: 1px solid transparent;
     transition:
-      color 0.25s ease,
-      border-color 0.25s ease;
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
   nav a:hover {
     color: var(--paper);
@@ -260,8 +262,8 @@
     fill: transparent;
     stroke-width: 1.1;
     transition:
-      fill 0.35s ease,
-      fill-opacity 0.35s ease;
+      fill 0.25s ease,
+      fill-opacity 0.25s ease;
   }
   svg.venn circle.set:focus-visible {
     outline: none;
@@ -296,13 +298,13 @@
   }
   svg.venn circle.set {
     transition:
-      stroke-opacity 0.3s ease,
-      stroke-width 0.22s ease,
-      fill-opacity 0.3s ease;
+      stroke-opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1),
+      stroke-width 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+      fill-opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1);
   }
   svg.venn circle.tint {
     pointer-events: none;
-    transition: fill-opacity 0.3s ease;
+    transition: fill-opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
   svg.venn circle.halo {
     pointer-events: none;
@@ -310,7 +312,7 @@
     stroke-width: 0.6;
     stroke-dasharray: 4 6;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
   }
   svg.venn g.xg {
     pointer-events: none;
@@ -341,7 +343,7 @@
     font-style: normal;
     font-size: 11px;
     letter-spacing: 0.12em;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.25s ease;
   }
   .vennpanel {
     max-width: 680px;
@@ -349,7 +351,7 @@
     min-height: 96px;
     padding-left: 16px;
     border-left: 2px solid var(--hair);
-    transition: border-color 0.28s ease;
+    transition: border-color 0.22s ease;
   }
   .vennpanel .vp-k {
     font-family: var(--mono);
@@ -554,8 +556,8 @@
     color: var(--faint-t);
     border-bottom: 1px solid var(--hair);
     transition:
-      color 0.25s ease,
-      border-color 0.25s ease;
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
   .room[data-c="create"] .enter:hover {
     color: var(--c-create);
@@ -654,8 +656,8 @@
     font-weight: 400;
     border-bottom: 1px solid var(--faint);
     transition:
-      color 0.25s ease,
-      border-color 0.25s ease;
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
   .t .unlinked {
     border-bottom: none;
@@ -818,8 +820,8 @@
     padding: 6px 14px;
     cursor: pointer;
     transition:
-      color 0.25s ease,
-      border-color 0.25s ease;
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
   .chips button:hover {
     color: var(--paper);
@@ -1109,6 +1111,7 @@
     width: max-content;
     animation: tape 44s linear infinite;
     padding: 9px 0;
+    will-change: transform;
   }
   .tape:hover .tape-rail {
     animation-play-state: paused;
@@ -1162,7 +1165,7 @@
   .contact a {
     color: var(--dim);
     border-bottom: 1px solid var(--hair);
-    transition: color 0.25s ease;
+    transition: color 0.18s ease;
   }
   .contact a:hover {
     color: var(--paper);
@@ -1184,8 +1187,8 @@
     color: var(--faint-t);
     border-bottom: 1px solid transparent;
     transition:
-      color 0.25s ease,
-      border-color 0.25s ease;
+      color 0.18s ease,
+      border-color 0.18s ease;
   }
   .figindex a:hover {
     color: var(--paper);
@@ -1276,89 +1279,367 @@
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
     <div class="figlabel">fig. 1 · what coexists</div>
-    <svg class="venn" viewBox="0 0 900 640" role="group" aria-label="A Venn diagram of five domains — mind/body, technology, philosophy, society, creation — inside the universal set, labeled both/and, nuance. Named intersections: cognitive architecture, structural difference, phenomenology, AI alignment, building your way out, power and consent. A red dot marks the point where mind, technology, and philosophy meet. One set is unlabeled and drawn partly outside the frame. Click a domain to filter; click again to visit its part of the site.">
+    <svg
+      class="venn"
+      viewBox="0 0 900 640"
+      role="group"
+      aria-label="A Venn diagram of five domains — mind/body, technology, philosophy, society, creation — inside the universal set, labeled both/and, nuance. Named intersections: cognitive architecture, structural difference, phenomenology, AI alignment, building your way out, power and consent. A red dot marks the point where mind, technology, and philosophy meet. One set is unlabeled and drawn partly outside the frame. Click a domain to filter; click again to visit its part of the site."
+    >
       <defs>
-        <clipPath id="uclip"><rect x="18" y="16" width="864" height="606" rx="26"/></clipPath>
+        <clipPath id="uclip">
+          <rect x="18" y="16" width="864" height="606" rx="26" />
+        </clipPath>
         <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="6" result="b"/>
-          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          <feGaussianBlur stdDeviation="6" result="b" />
+          <feMerge>
+            <feMergeNode in="b" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
         </filter>
-        <clipPath id="cp-mindbody"><circle cx="300" cy="255" r="178"/></clipPath>
-        <clipPath id="cp-tech"><circle cx="560" cy="255" r="178"/></clipPath>
-        <clipPath id="cp-philosophy"><circle cx="430" cy="445" r="152"/></clipPath>
-        <clipPath id="cp-society"><circle cx="190" cy="420" r="115"/></clipPath>
-        <clipPath id="cp-creation"><circle cx="665" cy="430" r="112"/></clipPath>
+        <clipPath id="cp-mindbody">
+          <circle cx="300" cy="255" r="178" />
+        </clipPath>
+        <clipPath id="cp-tech"><circle cx="560" cy="255" r="178" /></clipPath>
+        <clipPath id="cp-philosophy">
+          <circle cx="430" cy="445" r="152" />
+        </clipPath>
+        <clipPath id="cp-society">
+          <circle cx="190" cy="420" r="115" />
+        </clipPath>
+        <clipPath id="cp-creation">
+          <circle cx="665" cy="430" r="112" />
+        </clipPath>
       </defs>
-      <rect x="18" y="16" width="864" height="606" rx="26" fill="none" stroke="#3a3b3e" stroke-width="1" stroke-dasharray="1 6" stroke-linecap="round"/>
+      <rect
+        x="18"
+        y="16"
+        width="864"
+        height="606"
+        rx="26"
+        fill="none"
+        stroke="#3a3b3e"
+        stroke-width="1"
+        stroke-dasharray="1 6"
+        stroke-linecap="round"
+      />
       <text class="u-label" x="48" y="58" font-size="13">𝒰 · both / and</text>
 
-      <circle class="offrec" id="c-offrec" cx="820" cy="580" r="76" clip-path="url(#uclip)" tabindex="0" role="img" aria-label="an unlabeled set, partly outside the frame"/>
+      <circle
+        class="offrec"
+        id="c-offrec"
+        cx="820"
+        cy="580"
+        r="76"
+        clip-path="url(#uclip)"
+        tabindex="0"
+        role="img"
+        aria-label="an unlabeled set, partly outside the frame"
+      />
 
-      <circle class="tint" id="t-mindbody"   cx="300" cy="255" r="178" fill="#b48ede" fill-opacity="0.01"/>
-      <circle class="tint" id="t-tech"       cx="560" cy="255" r="178" fill="#6fa8dc" fill-opacity="0.01"/>
-      <circle class="tint" id="t-philosophy" cx="430" cy="445" r="152" fill="#7fb069" fill-opacity="0.01"/>
-      <circle class="tint" id="t-society"    cx="190" cy="420" r="115" fill="#e3c567" fill-opacity="0.01"/>
-      <circle class="tint" id="t-creation"   cx="665" cy="430" r="112" fill="#d98aa8" fill-opacity="0.01"/>
+      <circle
+        class="tint"
+        id="t-mindbody"
+        cx="300"
+        cy="255"
+        r="178"
+        fill="#b48ede"
+        fill-opacity="0.01"
+      />
+      <circle
+        class="tint"
+        id="t-tech"
+        cx="560"
+        cy="255"
+        r="178"
+        fill="#6fa8dc"
+        fill-opacity="0.01"
+      />
+      <circle
+        class="tint"
+        id="t-philosophy"
+        cx="430"
+        cy="445"
+        r="152"
+        fill="#7fb069"
+        fill-opacity="0.01"
+      />
+      <circle
+        class="tint"
+        id="t-society"
+        cx="190"
+        cy="420"
+        r="115"
+        fill="#e3c567"
+        fill-opacity="0.01"
+      />
+      <circle
+        class="tint"
+        id="t-creation"
+        cx="665"
+        cy="430"
+        r="112"
+        fill="#d98aa8"
+        fill-opacity="0.01"
+      />
 
-      <g class="lens" data-pair="mindbody,tech" clip-path="url(#cp-mindbody)"><circle cx="560" cy="255" r="178" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="mindbody,society" clip-path="url(#cp-mindbody)"><circle cx="190" cy="420" r="115" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="mindbody,philosophy" clip-path="url(#cp-mindbody)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="philosophy,tech" clip-path="url(#cp-tech)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="creation,tech" clip-path="url(#cp-tech)"><circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="philosophy,society" clip-path="url(#cp-society)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
-      <g class="lens" data-pair="creation,philosophy" clip-path="url(#cp-philosophy)"><circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="mindbody,tech" clip-path="url(#cp-mindbody)">
+        <circle cx="560" cy="255" r="178" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g
+        class="lens"
+        data-pair="mindbody,society"
+        clip-path="url(#cp-mindbody)"
+      >
+        <circle cx="190" cy="420" r="115" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g
+        class="lens"
+        data-pair="mindbody,philosophy"
+        clip-path="url(#cp-mindbody)"
+      >
+        <circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g class="lens" data-pair="philosophy,tech" clip-path="url(#cp-tech)">
+        <circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g class="lens" data-pair="creation,tech" clip-path="url(#cp-tech)">
+        <circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g
+        class="lens"
+        data-pair="philosophy,society"
+        clip-path="url(#cp-society)"
+      >
+        <circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0" />
+      </g>
+      <g
+        class="lens"
+        data-pair="creation,philosophy"
+        clip-path="url(#cp-philosophy)"
+      >
+        <circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0" />
+      </g>
 
-      <circle class="halo" id="h-mindbody"   cx="300" cy="255" r="187" stroke="#b48ede"/>
-      <circle class="halo" id="h-tech"       cx="560" cy="255" r="187" stroke="#6fa8dc"/>
-      <circle class="halo" id="h-philosophy" cx="430" cy="445" r="161" stroke="#7fb069"/>
-      <circle class="halo" id="h-society"    cx="190" cy="420" r="124" stroke="#e3c567"/>
-      <circle class="halo" id="h-creation"   cx="665" cy="430" r="121" stroke="#d98aa8"/>
+      <circle
+        class="halo"
+        id="h-mindbody"
+        cx="300"
+        cy="255"
+        r="187"
+        stroke="#b48ede"
+      />
+      <circle
+        class="halo"
+        id="h-tech"
+        cx="560"
+        cy="255"
+        r="187"
+        stroke="#6fa8dc"
+      />
+      <circle
+        class="halo"
+        id="h-philosophy"
+        cx="430"
+        cy="445"
+        r="161"
+        stroke="#7fb069"
+      />
+      <circle
+        class="halo"
+        id="h-society"
+        cx="190"
+        cy="420"
+        r="124"
+        stroke="#e3c567"
+      />
+      <circle
+        class="halo"
+        id="h-creation"
+        cx="665"
+        cy="430"
+        r="121"
+        stroke="#d98aa8"
+      />
 
-      <circle class="set" id="c-mindbody"   cx="300" cy="255" r="178" fill="transparent" stroke="#b48ede" tabindex="0" role="link" aria-label="mind / body — a nervous system I am still learning to read"/>
-      <circle class="set" id="c-tech"       cx="560" cy="255" r="178" fill="transparent" stroke="#6fa8dc" tabindex="0" role="link" aria-label="technology — understood in order to be seen through"/>
-      <circle class="set" id="c-philosophy" cx="430" cy="445" r="152" fill="transparent" stroke="#7fb069" tabindex="0" role="link" aria-label="philosophy — epistemology for its own sake"/>
-      <circle class="set" id="c-society"    cx="190" cy="420" r="115" fill="transparent" stroke="#e3c567" tabindex="0" role="link" aria-label="society — power, consent, and collective dynamics"/>
-      <circle class="set" id="c-creation"   cx="665" cy="430" r="112" fill="transparent" stroke="#d98aa8" tabindex="0" role="link" aria-label="creation — curiosity-guided projects"/>
+      <circle
+        class="set"
+        id="c-mindbody"
+        cx="300"
+        cy="255"
+        r="178"
+        fill="transparent"
+        stroke="#b48ede"
+        tabindex="0"
+        role="link"
+        aria-label="mind / body — a nervous system I am still learning to read"
+      />
+      <circle
+        class="set"
+        id="c-tech"
+        cx="560"
+        cy="255"
+        r="178"
+        fill="transparent"
+        stroke="#6fa8dc"
+        tabindex="0"
+        role="link"
+        aria-label="technology — understood in order to be seen through"
+      />
+      <circle
+        class="set"
+        id="c-philosophy"
+        cx="430"
+        cy="445"
+        r="152"
+        fill="transparent"
+        stroke="#7fb069"
+        tabindex="0"
+        role="link"
+        aria-label="philosophy — epistemology for its own sake"
+      />
+      <circle
+        class="set"
+        id="c-society"
+        cx="190"
+        cy="420"
+        r="115"
+        fill="transparent"
+        stroke="#e3c567"
+        tabindex="0"
+        role="link"
+        aria-label="society — power, consent, and collective dynamics"
+      />
+      <circle
+        class="set"
+        id="c-creation"
+        cx="665"
+        cy="430"
+        r="112"
+        fill="transparent"
+        stroke="#d98aa8"
+        tabindex="0"
+        role="link"
+        aria-label="creation — curiosity-guided projects"
+      />
 
-      <text class="dlabel" id="l-mindbody"   x="300" y="60"  text-anchor="middle" fill="#b48ede">MIND / BODY</text>
-      <text class="dlabel" id="l-tech"       x="560" y="60"  text-anchor="middle" fill="#6fa8dc">TECHNOLOGY</text>
-      <text class="dlabel" id="l-philosophy" x="430" y="617" text-anchor="middle" fill="#7fb069">PHILOSOPHY</text>
-      <text class="dlabel" id="l-society"    x="120" y="290" text-anchor="middle" fill="#e3c567">SOCIETY</text>
-      <text class="dlabel" id="l-creation"   x="795" y="415" text-anchor="middle" fill="#d98aa8">CREATION</text>
+      <text
+        class="dlabel"
+        id="l-mindbody"
+        x="300"
+        y="60"
+        text-anchor="middle"
+        fill="#b48ede"
+      >
+        MIND / BODY
+      </text>
+      <text
+        class="dlabel"
+        id="l-tech"
+        x="560"
+        y="60"
+        text-anchor="middle"
+        fill="#6fa8dc"
+      >
+        TECHNOLOGY
+      </text>
+      <text
+        class="dlabel"
+        id="l-philosophy"
+        x="430"
+        y="617"
+        text-anchor="middle"
+        fill="#7fb069"
+      >
+        PHILOSOPHY
+      </text>
+      <text
+        class="dlabel"
+        id="l-society"
+        x="120"
+        y="290"
+        text-anchor="middle"
+        fill="#e3c567"
+      >
+        SOCIETY
+      </text>
+      <text
+        class="dlabel"
+        id="l-creation"
+        x="795"
+        y="415"
+        text-anchor="middle"
+        fill="#d98aa8"
+      >
+        CREATION
+      </text>
 
       <g class="xg" data-pair="mindbody,tech">
-        <text class="xname" x="430" y="225" text-anchor="middle">cognitive architecture</text>
+        <text class="xname" x="430" y="225" text-anchor="middle">
+          cognitive architecture
+        </text>
         <text class="xform" x="430" y="239" text-anchor="middle">M ∩ T</text>
       </g>
       <g class="xg" data-pair="mindbody,society">
-        <text class="xname" x="221" y="358" text-anchor="middle">structural difference</text>
+        <text class="xname" x="221" y="358" text-anchor="middle">
+          structural difference
+        </text>
         <text class="xform" x="221" y="372" text-anchor="middle">M ∩ S</text>
       </g>
       <g class="xg" data-pair="mindbody,philosophy">
-        <text class="xname" x="352" y="380" text-anchor="middle">phenomenology</text>
+        <text class="xname" x="352" y="380" text-anchor="middle">
+          phenomenology
+        </text>
         <text class="xform" x="352" y="394" text-anchor="middle">M ∩ P</text>
       </g>
       <g class="xg" data-pair="philosophy,tech">
-        <text class="xname" x="512" y="380" text-anchor="middle">ai alignment</text>
+        <text class="xname" x="512" y="380" text-anchor="middle">
+          ai alignment
+        </text>
         <text class="xform" x="512" y="394" text-anchor="middle">T ∩ P</text>
       </g>
       <g class="xg" data-pair="creation,tech">
-        <text class="xname" x="637" y="362" text-anchor="middle">building your way out</text>
+        <text class="xname" x="637" y="362" text-anchor="middle">
+          building your way out
+        </text>
         <text class="xform" x="637" y="376" text-anchor="middle">T ∩ C</text>
       </g>
       <g class="xg" data-pair="philosophy,society">
-        <text class="xname" x="286" y="470" text-anchor="middle">power &amp; consent</text>
+        <text class="xname" x="286" y="470" text-anchor="middle">
+          power &amp; consent
+        </text>
         <text class="xform" x="286" y="484" text-anchor="middle">S ∩ P</text>
       </g>
       <g class="xg" data-pair="creation,philosophy">
-        <text class="xname" x="571" y="463" text-anchor="middle">making as thinking</text>
+        <text class="xname" x="571" y="463" text-anchor="middle">
+          making as thinking
+        </text>
         <text class="xform" x="571" y="477" text-anchor="middle">P ∩ C</text>
       </g>
 
-      <circle class="drift" id="drift1" cx="200" cy="150" r="2.6" fill="#e9e6de" opacity="0.45" pointer-events="none"/>
-      <circle class="drift" id="drift2" cx="700" cy="520" r="2.6" fill="#e9e6de" opacity="0.45" pointer-events="none"/>
-      <circle class="me-dot" cx="430" cy="325" r="3.5"/>
-      <text class="melbl" x="444" y="330" font-size="14" fill="#e07a6b">me</text>
+      <circle
+        class="drift"
+        id="drift1"
+        cx="200"
+        cy="150"
+        r="2.6"
+        fill="#e9e6de"
+        opacity="0.45"
+        pointer-events="none"
+      />
+      <circle
+        class="drift"
+        id="drift2"
+        cx="700"
+        cy="520"
+        r="2.6"
+        fill="#e9e6de"
+        opacity="0.45"
+        pointer-events="none"
+      />
+      <circle class="me-dot" cx="430" cy="325" r="3.5" />
+      <text class="melbl" x="444" y="330" font-size="14" fill="#e07a6b">
+        me
+      </text>
     </svg>
     <div class="vennpanel" id="cap1" aria-live="polite"></div>
   </div>
@@ -1392,7 +1673,9 @@
     <div class="panel">
       <div class="panel-bar">
         <span class="dots" aria-hidden="true"><i></i><i></i></span>
-        <span class="pt">distribution.sim — the curve, and the machine that proves it</span>
+        <span class="pt"
+          >distribution.sim — the curve, and the machine that proves it</span
+        >
         <span class="sp"></span>
         <button
           class="minb"
@@ -1412,38 +1695,214 @@
       </div>
       <div class="panel-body" id="p-galton">
         <div class="galton-wrap" id="curveView">
-          <svg id="smooth" viewBox="0 0 900 300" role="img" aria-label="A normal distribution. Shaded bands mark within one sigma of the mean and the tails. A slider biases the mean rightward; the curve slides while three fixed markers — autumn 2025 at the far right tail, spring 2026 at the far left, and a red dot labeled now — stay put.">
+          <svg
+            id="smooth"
+            viewBox="0 0 900 300"
+            role="img"
+            aria-label="A normal distribution. Shaded bands mark within one sigma of the mean and the tails. A slider biases the mean rightward; the curve slides while three fixed markers — autumn 2025 at the far right tail, spring 2026 at the far left, and a red dot labeled now — stay put."
+          >
             <defs>
-              <clipPath id="sc-l"><rect id="scl" x="0" y="0" width="320" height="300"/></clipPath>
-              <clipPath id="sc-c"><rect id="scc" x="320" y="0" width="260" height="300"/></clipPath>
-              <clipPath id="sc-r"><rect id="scr" x="580" y="0" width="320" height="300"/></clipPath>
+              <clipPath id="sc-l">
+                <rect id="scl" x="0" y="0" width="320" height="300" />
+              </clipPath>
+              <clipPath id="sc-c">
+                <rect id="scc" x="320" y="0" width="260" height="300" />
+              </clipPath>
+              <clipPath id="sc-r">
+                <rect id="scr" x="580" y="0" width="320" height="300" />
+              </clipPath>
             </defs>
-            <path id="smFillL" fill="#b48ede" fill-opacity="0.04" clip-path="url(#sc-l)"/>
-            <path id="smFillC" fill="#7fb069" fill-opacity="0.05" clip-path="url(#sc-c)"/>
-            <path id="smFillR" fill="#b48ede" fill-opacity="0.04" clip-path="url(#sc-r)"/>
-            <line x1="40" y1="250" x2="860" y2="250" stroke="#26272a" stroke-width="1"/>
-            <line id="smSigL" y1="30" y2="250" stroke="#4a4a44" stroke-width="0.8" stroke-dasharray="3 4"/>
-            <line id="smSigR" y1="30" y2="250" stroke="#4a4a44" stroke-width="0.8" stroke-dasharray="3 4"/>
-            <line id="smMu"   y1="24" y2="250" stroke="#7fb069" stroke-width="0.8" stroke-opacity="0.45" stroke-dasharray="2 5"/>
-            <line x1="450" y1="250" x2="450" y2="258" stroke="#96917f" stroke-width="1"/>
-            <text x="450" y="272" text-anchor="middle" font-size="10" fill="#7c7869" font-family="IBM Plex Mono, monospace">μ, fair — the default settings</text>
-            <text id="smMuLbl" y="288" text-anchor="middle" font-size="10" fill="#e07a6b" font-family="IBM Plex Mono, monospace"></text>
-            <text id="smSigLLbl" y="266" text-anchor="middle" font-size="9.5" fill="#7c7869" font-family="IBM Plex Mono, monospace">−1σ</text>
-            <text id="smSigRLbl" y="266" text-anchor="middle" font-size="9.5" fill="#7c7869" font-family="IBM Plex Mono, monospace">+1σ</text>
-            <path id="smCurve" fill="none" stroke="#e9e6de" stroke-width="1.2" stroke-opacity="0.7" style="transition: stroke-opacity 0.22s ease"/>
-            <text class="swing2" x="450" y="42" text-anchor="middle" font-size="10.5" letter-spacing="0.14em" fill="#7c7869" font-family="IBM Plex Mono, monospace">overcorrection</text>
-            <circle id="smGhR" r="3.5" fill="none" stroke="#e07a6b" stroke-width="1.2" opacity="0.45"/>
-            <circle id="smGhL" r="3.5" fill="none" stroke="#e07a6b" stroke-width="1.2" opacity="0.45"/>
-            <text x="852" y="220" text-anchor="end" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">autumn ’25 — every decision through the machine</text>
-            <text x="48" y="220" text-anchor="start" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">spring ’26 — cold turkey</text>
-            <circle id="smNow" class="me-dot" r="3.5"/>
-            <text id="smNowLbl" y="150" text-anchor="middle" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">now — chosen, revised monthly</text>
-            <rect id="smHovL" x="0" y="0" width="320" height="300" fill="transparent"/>
-            <rect id="smHovC" x="320" y="0" width="260" height="300" fill="transparent"/>
-            <rect id="smHovR" x="580" y="0" width="320" height="300" fill="transparent"/>
+            <path
+              id="smFillL"
+              fill="#b48ede"
+              fill-opacity="0.04"
+              clip-path="url(#sc-l)"
+            />
+            <path
+              id="smFillC"
+              fill="#7fb069"
+              fill-opacity="0.05"
+              clip-path="url(#sc-c)"
+            />
+            <path
+              id="smFillR"
+              fill="#b48ede"
+              fill-opacity="0.04"
+              clip-path="url(#sc-r)"
+            />
+            <line
+              x1="40"
+              y1="250"
+              x2="860"
+              y2="250"
+              stroke="#26272a"
+              stroke-width="1"
+            />
+            <line
+              id="smSigL"
+              y1="30"
+              y2="250"
+              stroke="#4a4a44"
+              stroke-width="0.8"
+              stroke-dasharray="3 4"
+            />
+            <line
+              id="smSigR"
+              y1="30"
+              y2="250"
+              stroke="#4a4a44"
+              stroke-width="0.8"
+              stroke-dasharray="3 4"
+            />
+            <line
+              id="smMu"
+              y1="24"
+              y2="250"
+              stroke="#7fb069"
+              stroke-width="0.8"
+              stroke-opacity="0.45"
+              stroke-dasharray="2 5"
+            />
+            <line
+              x1="450"
+              y1="250"
+              x2="450"
+              y2="258"
+              stroke="#96917f"
+              stroke-width="1"
+            />
+            <text
+              x="450"
+              y="272"
+              text-anchor="middle"
+              font-size="10"
+              fill="#7c7869"
+              font-family="IBM Plex Mono, monospace"
+            >
+              μ, fair — the default settings
+            </text>
+            <text
+              id="smMuLbl"
+              y="288"
+              text-anchor="middle"
+              font-size="10"
+              fill="#e07a6b"
+              font-family="IBM Plex Mono, monospace"
+            ></text>
+            <text
+              id="smSigLLbl"
+              y="266"
+              text-anchor="middle"
+              font-size="9.5"
+              fill="#7c7869"
+              font-family="IBM Plex Mono, monospace"
+            >
+              −1σ
+            </text>
+            <text
+              id="smSigRLbl"
+              y="266"
+              text-anchor="middle"
+              font-size="9.5"
+              fill="#7c7869"
+              font-family="IBM Plex Mono, monospace"
+            >
+              +1σ
+            </text>
+            <path
+              id="smCurve"
+              fill="none"
+              stroke="#e9e6de"
+              stroke-width="1.2"
+              stroke-opacity="0.7"
+              style="transition: stroke-opacity 0.22s ease"
+            />
+            <text
+              class="swing2"
+              x="450"
+              y="42"
+              text-anchor="middle"
+              font-size="10.5"
+              letter-spacing="0.14em"
+              fill="#7c7869"
+              font-family="IBM Plex Mono, monospace"
+            >
+              overcorrection
+            </text>
+            <circle
+              id="smGhR"
+              r="3.5"
+              fill="none"
+              stroke="#e07a6b"
+              stroke-width="1.2"
+              opacity="0.45"
+            />
+            <circle
+              id="smGhL"
+              r="3.5"
+              fill="none"
+              stroke="#e07a6b"
+              stroke-width="1.2"
+              opacity="0.45"
+            />
+            <text
+              x="852"
+              y="220"
+              text-anchor="end"
+              font-size="10.5"
+              fill="#96917f"
+              font-family="IBM Plex Mono, monospace"
+            >
+              autumn ’25 — every decision through the machine
+            </text>
+            <text
+              x="48"
+              y="220"
+              text-anchor="start"
+              font-size="10.5"
+              fill="#96917f"
+              font-family="IBM Plex Mono, monospace"
+            >
+              spring ’26 — cold turkey
+            </text>
+            <circle id="smNow" class="me-dot" r="3.5" />
+            <text
+              id="smNowLbl"
+              y="150"
+              text-anchor="middle"
+              font-size="10.5"
+              fill="#96917f"
+              font-family="IBM Plex Mono, monospace"
+            >
+              now — chosen, revised monthly
+            </text>
+            <rect
+              id="smHovL"
+              x="0"
+              y="0"
+              width="320"
+              height="300"
+              fill="transparent"
+            />
+            <rect
+              id="smHovC"
+              x="320"
+              y="0"
+              width="260"
+              height="300"
+              fill="transparent"
+            />
+            <rect
+              id="smHovR"
+              x="580"
+              y="0"
+              width="320"
+              height="300"
+              fill="transparent"
+            />
           </svg>
         </div>
-        <div class="galton-wrap" id="gWrap" style="display:none">
+        <div class="galton-wrap" id="gWrap" style="display: none">
           <canvas
             id="galton"
             height="430"
@@ -2342,6 +2801,81 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var hoverNone = window.matchMedia("(hover: none)").matches;
 
+    /* clocks:begin — hybrid drivers: rAF-smooth in real browsers, with a
+       setInterval watchdog for documents where rAF never fires (hidden
+       panes clamp timers to ~1 Hz, so behavior there matches the old
+       pure-setInterval engines). Physics still steps at a fixed cadence —
+       the Node sims that validated it stay valid. */
+    function fixedLoop(stepFn, ms, renderFn) {
+      var stopped = false,
+        last = null,
+        acc = 0,
+        rafAt = performance.now(),
+        rafId = null;
+      function frame(now) {
+        if (stopped) return;
+        rafAt = now;
+        if (last !== null) acc += Math.min(now - last, 240);
+        last = now;
+        var ran = 0;
+        while (acc >= ms && !stopped) {
+          acc -= ms;
+          stepFn();
+          if (++ran > 8) {
+            acc = 0;
+            break;
+          }
+        }
+        if (stopped) return;
+        if (renderFn) renderFn(acc / ms);
+        rafId = requestAnimationFrame(frame);
+      }
+      rafId = requestAnimationFrame(frame);
+      var fb = setInterval(function () {
+        if (stopped) return;
+        var now = performance.now();
+        if (now - rafAt > ms * 3) {
+          last = now;
+          acc = 0;
+          stepFn();
+          if (!stopped && renderFn) renderFn(1);
+        }
+      }, ms);
+      return {
+        stop: function () {
+          stopped = true;
+          clearInterval(fb);
+          if (rafId !== null) cancelAnimationFrame(rafId);
+        },
+      };
+    }
+    function frameLoop(drawFn, fallbackMs) {
+      var stopped = false,
+        rafAt = performance.now(),
+        rafId = null;
+      function frame(now) {
+        if (stopped) return;
+        rafAt = now;
+        drawFn(now);
+        if (stopped) return;
+        rafId = requestAnimationFrame(frame);
+      }
+      rafId = requestAnimationFrame(frame);
+      var fb = setInterval(function () {
+        if (stopped) return;
+        var now = performance.now();
+        if (now - rafAt > fallbackMs * 3) drawFn(now);
+      }, fallbackMs);
+      return {
+        stop: function () {
+          stopped = true;
+          clearInterval(fb);
+          if (rafId !== null) cancelAnimationFrame(rafId);
+        },
+      };
+    }
+    /* clocks:end */
+
     /* ================= PANELS ================= */
     document.querySelectorAll(".panel-bar .minb").forEach(function (b) {
       b.addEventListener("click", function () {
@@ -2364,18 +2898,67 @@
     var svg = document.querySelector("svg.venn");
     var cap1 = document.getElementById("cap1");
     var sets = [
-      { id: "mindbody",   cx: 300, cy: 255, r: 178, color: "#b48ede", letter: "M", label: "mind / body", dest: "log",         destName: "thoughts.log" },
-      { id: "tech",       cx: 560, cy: 255, r: 178, color: "#6fa8dc", letter: "T", label: "technology",  dest: "distribution", destName: "fig. 2, the machine" },
-      { id: "philosophy", cx: 430, cy: 445, r: 152, color: "#7fb069", letter: "P", label: "philosophy",  dest: "cohere",      destName: "cohere — tree, ledger, principles" },
-      { id: "society",    cx: 190, cy: 420, r: 115, color: "#e3c567", letter: "S", label: "society",     dest: "influences",  destName: "fig. 3, the influence graph" },
-      { id: "creation",   cx: 665, cy: 430, r: 112, color: "#d98aa8", letter: "C", label: "creation",    dest: "create",      destName: "create — essays &amp; systems" },
+      {
+        id: "mindbody",
+        cx: 300,
+        cy: 255,
+        r: 178,
+        color: "#b48ede",
+        letter: "M",
+        label: "mind / body",
+        dest: "log",
+        destName: "thoughts.log",
+      },
+      {
+        id: "tech",
+        cx: 560,
+        cy: 255,
+        r: 178,
+        color: "#6fa8dc",
+        letter: "T",
+        label: "technology",
+        dest: "distribution",
+        destName: "fig. 2, the machine",
+      },
+      {
+        id: "philosophy",
+        cx: 430,
+        cy: 445,
+        r: 152,
+        color: "#7fb069",
+        letter: "P",
+        label: "philosophy",
+        dest: "cohere",
+        destName: "cohere — tree, ledger, principles",
+      },
+      {
+        id: "society",
+        cx: 190,
+        cy: 420,
+        r: 115,
+        color: "#e3c567",
+        letter: "S",
+        label: "society",
+        dest: "influences",
+        destName: "fig. 3, the influence graph",
+      },
+      {
+        id: "creation",
+        cx: 665,
+        cy: 430,
+        r: 112,
+        color: "#d98aa8",
+        letter: "C",
+        label: "creation",
+        dest: "create",
+        destName: "create — essays &amp; systems",
+      },
     ];
     var offrec = { cx: 820, cy: 580, r: 76 };
     var SET_COPY = {
       mindbody:
         "A nervous system I’m still learning to read. Neurodivergence as signal, not deficit. Interoception, pattern recognition, obsession and compulsion as data. I finally have language for how I’m wired — it changed everything.",
-      tech:
-        "A year spent speedrunning ML fundamentals and AI safety from first principles — not to serve it, to understand it and see through it. Power concentrates here. So do the tools to build your way out. Both/and.",
+      tech: "A year spent speedrunning ML fundamentals and AI safety from first principles — not to serve it, to understand it and see through it. Power concentrates here. So do the tools to build your way out. Both/and.",
       philosophy:
         "Epistemology for its own sake. Truth-seeking not instrumentalised by profit or performance. Frameworks to evaluate claims, name my own patterns, and calibrate toward clarity rather than comfort.",
       society:
@@ -2384,13 +2967,41 @@
         "Curiosity-guided projects. Novelty and whimsy are legitimate values. A sliver of fuck-the-establishment, a sliver of use-the-tools-to-build-your-own-thing. A foot in the old world, always making.",
     };
     var PAIRS = {
-      "mindbody,tech":       { name: "cognitive architecture", form: "M ∩ T", line: "how the wiring runs, studied with the machines’ own tools." },
-      "mindbody,society":    { name: "structural difference",  form: "M ∩ S", line: "a mind built differently, in a world built for the default." },
-      "mindbody,philosophy": { name: "phenomenology",          form: "M ∩ P", line: "what experience is like from inside — the data only I can collect." },
-      "philosophy,tech":     { name: "ai alignment",           form: "T ∩ P", line: "getting the powerful thing to want what we’d endorse. the century’s homework." },
-      "creation,tech":       { name: "building your way out",  form: "T ∩ C", line: "the tools of the platform, turned toward the exit." },
-      "philosophy,society":  { name: "power &amp; consent",    form: "S ∩ P", line: "who decides, who’s asked, who’s merely enrolled." },
-      "creation,philosophy": { name: "making as thinking",     form: "P ∩ C", line: "the essay and the system are the same move — output as proof of thought." },
+      "mindbody,tech": {
+        name: "cognitive architecture",
+        form: "M ∩ T",
+        line: "how the wiring runs, studied with the machines’ own tools.",
+      },
+      "mindbody,society": {
+        name: "structural difference",
+        form: "M ∩ S",
+        line: "a mind built differently, in a world built for the default.",
+      },
+      "mindbody,philosophy": {
+        name: "phenomenology",
+        form: "M ∩ P",
+        line: "what experience is like from inside — the data only I can collect.",
+      },
+      "philosophy,tech": {
+        name: "ai alignment",
+        form: "T ∩ P",
+        line: "getting the powerful thing to want what we’d endorse. the century’s homework.",
+      },
+      "creation,tech": {
+        name: "building your way out",
+        form: "T ∩ C",
+        line: "the tools of the platform, turned toward the exit.",
+      },
+      "philosophy,society": {
+        name: "power &amp; consent",
+        form: "S ∩ P",
+        line: "who decides, who’s asked, who’s merely enrolled.",
+      },
+      "creation,philosophy": {
+        name: "making as thinking",
+        form: "P ∩ C",
+        line: "the essay and the system are the same move — output as proof of thought.",
+      },
     };
     function toLocal(evt) {
       var r = svg.getBoundingClientRect();
@@ -2400,23 +3011,38 @@
       };
     }
     function inCircle(p, c) {
-      var dx = p.x - c.cx, dy = p.y - c.cy;
+      var dx = p.x - c.cx,
+        dy = p.y - c.cy;
       return dx * dx + dy * dy <= c.r * c.r;
     }
     function activeAt(p) {
-      return sets.filter(function (c) { return inCircle(p, c); });
+      return sets.filter(function (c) {
+        return inCircle(p, c);
+      });
     }
     function nearest(act, p) {
       return act.slice().sort(function (a2, b2) {
-        return Math.hypot(p.x - a2.cx, p.y - a2.cy) / a2.r -
-               Math.hypot(p.x - b2.cx, p.y - b2.cy) / b2.r;
+        return (
+          Math.hypot(p.x - a2.cx, p.y - a2.cy) / a2.r -
+          Math.hypot(p.x - b2.cx, p.y - b2.cy) / b2.r
+        );
       })[0];
     }
     function byId(id) {
-      return sets.filter(function (x) { return x.id === id; })[0];
+      return sets.filter(function (x) {
+        return x.id === id;
+      })[0];
     }
 
-    var hovSets = [], hovOff = false, fltSet = null;
+    var lensGs = Array.prototype.slice.call(
+      document.querySelectorAll("svg.venn g.lens"),
+    );
+    var xgGs = Array.prototype.slice.call(
+      document.querySelectorAll("svg.venn g.xg"),
+    );
+    var hovSets = [],
+      hovOff = false,
+      fltSet = null;
     function panelRest() {
       cap1.innerHTML =
         '<div class="vp-k">𝒰 · both / and</div>' +
@@ -2426,16 +3052,29 @@
     function paint() {
       var pairKey = null;
       if (hovSets.length === 2) {
-        var k = hovSets.map(function (x) { return x.id; }).sort().join(",");
+        var k = hovSets
+          .map(function (x) {
+            return x.id;
+          })
+          .sort()
+          .join(",");
         if (PAIRS[k]) pairKey = k;
       }
       var effId =
-        hovSets.length === 1 ? hovSets[0].id :
-        hovSets.length === 0 && !hovOff ? fltSet : null;
+        hovSets.length === 1
+          ? hovSets[0].id
+          : hovSets.length === 0 && !hovOff
+            ? fltSet
+            : null;
 
       sets.forEach(function (c) {
         var op;
-        if (hovSets.length >= 2) op = hovSets.some(function (h) { return h.id === c.id; }) ? 1 : 0.12;
+        if (hovSets.length >= 2)
+          op = hovSets.some(function (h) {
+            return h.id === c.id;
+          })
+            ? 1
+            : 0.12;
         else if (effId) op = c.id === effId ? 1 : 0.12;
         else if (hovOff) op = 0.25;
         else op = 0.72;
@@ -2444,13 +3083,16 @@
         el.style.strokeOpacity = op;
         el.style.strokeWidth = lit ? 2.6 : 1.4;
         el.setAttribute("filter", lit ? "url(#bloom)" : "");
-        document.getElementById("t-" + c.id).style.fillOpacity = lit ? 0.055 : 0.01;
+        document.getElementById("t-" + c.id).style.fillOpacity = lit
+          ? 0.055
+          : 0.01;
         var lbl = document.getElementById("l-" + c.id);
         lbl.style.opacity = Math.max(op, 0.2);
-        document.getElementById("h-" + c.id).style.opacity = fltSet === c.id ? 0.3 : 0;
+        document.getElementById("h-" + c.id).style.opacity =
+          fltSet === c.id ? 0.3 : 0;
       });
 
-      document.querySelectorAll("svg.venn g.lens").forEach(function (g) {
+      lensGs.forEach(function (g) {
         var pk2 = g.getAttribute("data-pair");
         var pp = pk2.split(",");
         var lop = 0;
@@ -2458,7 +3100,7 @@
         else if (effId && pp.indexOf(effId) !== -1) lop = 0.045;
         g.firstElementChild.style.fillOpacity = lop;
       });
-      document.querySelectorAll("svg.venn g.xg").forEach(function (g) {
+      xgGs.forEach(function (g) {
         var pk = g.getAttribute("data-pair");
         var parents = pk.split(",");
         var op;
@@ -2470,11 +3112,18 @@
       });
 
       if (hovOff) {
-        cap1.innerHTML = '<div class="vp-k">∁ · unlabeled</div><div class="vp-name">off the record.</div>';
+        cap1.innerHTML =
+          '<div class="vp-k">∁ · unlabeled</div><div class="vp-name">off the record.</div>';
         cap1.style.borderColor = "var(--faint)";
       } else if (hovSets.length >= 3) {
-        var ids = hovSets.map(function (x) { return x.id; });
-        var isMe = ids.indexOf("mindbody") !== -1 && ids.indexOf("tech") !== -1 && ids.indexOf("philosophy") !== -1 && hovSets.length === 3;
+        var ids = hovSets.map(function (x) {
+          return x.id;
+        });
+        var isMe =
+          ids.indexOf("mindbody") !== -1 &&
+          ids.indexOf("tech") !== -1 &&
+          ids.indexOf("philosophy") !== -1 &&
+          hovSets.length === 3;
         if (isMe) {
           cap1.innerHTML =
             '<div class="vp-k">M ∩ T ∩ P</div>' +
@@ -2483,26 +3132,55 @@
           cap1.style.borderColor = "var(--c-me)";
         } else {
           cap1.innerHTML =
-            '<div class="vp-k">' + hovSets.map(function (x) { return x.letter; }).sort().join(" ∩ ") + "</div>" +
+            '<div class="vp-k">' +
+            hovSets
+              .map(function (x) {
+                return x.letter;
+              })
+              .sort()
+              .join(" ∩ ") +
+            "</div>" +
             '<div class="vp-desc">rare air — the named regions are one set over.</div>';
           cap1.style.borderColor = "var(--hair)";
         }
       } else if (pairKey) {
         var pr = PAIRS[pairKey];
-        var names = pairKey.split(",").map(function (id) { return byId(id).label; }).join(" · ");
+        var names = pairKey
+          .split(",")
+          .map(function (id) {
+            return byId(id).label;
+          })
+          .join(" · ");
         cap1.innerHTML =
-          '<div class="vp-k">' + pr.form + '&#160;&#160;<span class="vp-hint">' + names + "</span></div>" +
-          '<div class="vp-name">' + pr.name + "</div>" +
-          '<div class="vp-desc">' + pr.line + "</div>";
+          '<div class="vp-k">' +
+          pr.form +
+          '&#160;&#160;<span class="vp-hint">' +
+          names +
+          "</span></div>" +
+          '<div class="vp-name">' +
+          pr.name +
+          "</div>" +
+          '<div class="vp-desc">' +
+          pr.line +
+          "</div>";
         cap1.style.borderColor = "var(--faint)";
       } else if (effId) {
         var c2 = byId(effId);
-        var hint = fltSet === effId
-          ? "click again → " + c2.destName + " · esc to clear"
-          : "click to filter";
+        var hint =
+          fltSet === effId
+            ? "click again → " + c2.destName + " · esc to clear"
+            : "click to filter";
         cap1.innerHTML =
-          '<div class="vp-k" style="color:' + c2.color + '">' + c2.label + '&#160;<span class="vp-hint">· ' + hint + "</span></div>" +
-          '<div class="vp-desc">' + SET_COPY[effId] + "</div>";
+          '<div class="vp-k" style="color:' +
+          c2.color +
+          '">' +
+          c2.label +
+          '&#160;<span class="vp-hint">· ' +
+          hint +
+          "</span></div>" +
+          '<div class="vp-desc">' +
+          SET_COPY[effId] +
+          "</div>";
         cap1.style.borderColor = c2.color;
       } else {
         panelRest();
@@ -2525,7 +3203,10 @@
     function enterSet(c) {
       var target = document.getElementById(c.dest);
       if (target)
-        target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        target.scrollIntoView({
+          behavior: reduce ? "auto" : "smooth",
+          block: "start",
+        });
     }
     svg.addEventListener("click", function (evt) {
       var p = toLocal(evt);
@@ -2538,7 +3219,10 @@
       }
       var chosen = nearest(act, p);
       if (fltSet === chosen.id) enterSet(chosen);
-      else { fltSet = chosen.id; paint(); }
+      else {
+        fltSet = chosen.id;
+        paint();
+      }
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && fltSet) {
@@ -2548,19 +3232,36 @@
     });
     sets.forEach(function (c) {
       var el = document.getElementById("c-" + c.id);
-      el.addEventListener("focus", function () { hovSets = [c]; hovOff = false; paint(); });
-      el.addEventListener("blur", function () { hovSets = []; paint(); });
+      el.addEventListener("focus", function () {
+        hovSets = [c];
+        hovOff = false;
+        paint();
+      });
+      el.addEventListener("blur", function () {
+        hovSets = [];
+        paint();
+      });
       el.addEventListener("keydown", function (e) {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
           if (fltSet === c.id) enterSet(c);
-          else { fltSet = c.id; paint(); }
+          else {
+            fltSet = c.id;
+            paint();
+          }
         }
       });
     });
     var offEl = document.getElementById("c-offrec");
-    offEl.addEventListener("focus", function () { hovOff = true; hovSets = []; paint(); });
-    offEl.addEventListener("blur", function () { hovOff = false; paint(); });
+    offEl.addEventListener("focus", function () {
+      hovOff = true;
+      hovSets = [];
+      paint();
+    });
+    offEl.addEventListener("blur", function () {
+      hovOff = false;
+      paint();
+    });
 
     /* draw-on at load: circumference sweep, staggered */
     if (!reduce) {
@@ -2570,13 +3271,20 @@
         el.style.strokeDasharray = circ;
         el.style.strokeDashoffset = circ;
         el.style.transition =
-          "stroke-dashoffset 2.4s cubic-bezier(0.4,0,0.2,1) " + (i * 0.28) + "s, " +
-          "stroke-opacity 0.3s ease, stroke-width 0.22s ease";
-        setTimeout(function () { el.style.strokeDashoffset = 0; }, 80);
+          "stroke-dashoffset 2.4s cubic-bezier(0.4,0,0.2,1) " +
+          i * 0.28 +
+          "s, " +
+          "stroke-opacity 0.22s cubic-bezier(0.16,1,0.3,1), stroke-width 0.18s cubic-bezier(0.16,1,0.3,1)";
         setTimeout(function () {
-          el.style.strokeDasharray = "none";
-          el.style.transition = "";
-        }, 2700 + i * 280);
+          el.style.strokeDashoffset = 0;
+        }, 80);
+        setTimeout(
+          function () {
+            el.style.strokeDasharray = "none";
+            el.style.transition = "";
+          },
+          2700 + i * 280,
+        );
       });
     }
 
@@ -2661,6 +3369,8 @@
         row: -1,
         x: LW / 2,
         y: TOP - 26,
+        px: LW / 2,
+        py: TOP - 26,
         tx: LW / 2,
         k: 0,
         me: isMe,
@@ -2686,15 +3396,13 @@
       return s / n;
     }
 
-    function draw() {
+    var C_DIM = "#96917f",
+      C_FAINT = "#7c7869",
+      C_HAIR = "#26272a",
+      C_ME = "#e07a6b";
+    function draw(alpha) {
+      if (alpha == null) alpha = 1;
       ctx.clearRect(0, 0, LW, LH);
-      var css = getComputedStyle(document.body);
-      var C_PAPER = css.getPropertyValue("--paper").trim() || "#e9e6de";
-      var C_DIM = "#96917f",
-        C_FAINT = "#7c7869",
-        C_HAIR = "#26272a",
-        C_ME = "#e07a6b",
-        C_GOLD = "#e3c567";
 
       // pegs
       ctx.fillStyle = "#55524a";
@@ -2784,9 +3492,13 @@
           });
           ctx.stroke();
         }
+        var bx =
+          ball.px == null ? ball.x : ball.px + (ball.x - ball.px) * alpha;
+        var by =
+          ball.py == null ? ball.y : ball.py + (ball.y - ball.py) * alpha;
         ctx.fillStyle = ball.me ? C_ME : "rgba(233, 230, 222, 0.55)";
         ctx.beginPath();
-        ctx.arc(ball.x, ball.y, ball.me ? 3.5 : 2.4, 0, 7);
+        ctx.arc(bx, by, ball.me ? 3.5 : 2.4, 0, 7);
         ctx.fill();
       });
     }
@@ -2830,6 +3542,8 @@
       // advance
       balls.forEach(function (ball) {
         if (ball.done) return;
+        ball.px = ball.x;
+        ball.py = ball.y;
         ball.t += 1 / 6;
         if (ball.t >= 1) {
           if (ball.landed) {
@@ -2870,21 +3584,23 @@
           balls.splice(i, 1);
         }
       }
-      draw();
-      if (!running && balls.length === 0) stopLoop();
+      if (!running && balls.length === 0) {
+        draw();
+        stopLoop();
+      }
     }
 
-    var loopTimer = null;
+    var loopHandle = null;
     function stopLoop() {
-      if (loopTimer !== null) {
-        clearInterval(loopTimer);
-        loopTimer = null;
+      if (loopHandle !== null) {
+        loopHandle.stop();
+        loopHandle = null;
       }
     }
     function ensureLoop() {
       if (reduce) return;
-      if (loopTimer === null && visible) {
-        loopTimer = setInterval(step, 30);
+      if (loopHandle === null && visible) {
+        loopHandle = fixedLoop(step, 30, draw);
       }
     }
 
@@ -2984,11 +3700,20 @@
       now: document.getElementById("smNow"),
       nowLbl: document.getElementById("smNowLbl"),
     };
-    var SM_SIG = 130, SM_BASE = 250, SM_A = 205;
-    function smX(sig) { return 60 + ((sig + 3) / 6) * 780; }
-    function smShift() { return (9 * p - 4.5) * 40; }
+    var SM_SIG = 130,
+      SM_BASE = 250,
+      SM_A = 205;
+    function smX(sig) {
+      return 60 + ((sig + 3) / 6) * 780;
+    }
+    function smShift() {
+      return (9 * p - 4.5) * 40;
+    }
     function smY(x, mux) {
-      return SM_BASE - SM_A * Math.exp(-((x - mux) * (x - mux)) / (2 * SM_SIG * SM_SIG));
+      return (
+        SM_BASE -
+        SM_A * Math.exp(-((x - mux) * (x - mux)) / (2 * SM_SIG * SM_SIG))
+      );
     }
     function drawSmooth() {
       var mux = 450 + smShift();
@@ -3002,28 +3727,43 @@
       smES.fl.setAttribute("d", closed);
       smES.fc.setAttribute("d", closed);
       smES.fr.setAttribute("d", closed);
-      var lx = mux - SM_SIG, rx = mux + SM_SIG;
+      var lx = mux - SM_SIG,
+        rx = mux + SM_SIG;
       smES.scl.setAttribute("width", Math.max(0, lx));
       smES.scc.setAttribute("x", lx);
       smES.scr.setAttribute("x", rx);
       smES.scr.setAttribute("width", Math.max(0, 900 - rx));
-      smES.sigL.setAttribute("x1", lx); smES.sigL.setAttribute("x2", lx);
-      smES.sigR.setAttribute("x1", rx); smES.sigR.setAttribute("x2", rx);
+      smES.sigL.setAttribute("x1", lx);
+      smES.sigL.setAttribute("x2", lx);
+      smES.sigR.setAttribute("x1", rx);
+      smES.sigR.setAttribute("x2", rx);
       smES.sigLLbl.setAttribute("x", lx);
       smES.sigRLbl.setAttribute("x", rx);
-      smES.mu.setAttribute("x1", mux); smES.mu.setAttribute("x2", mux);
+      smES.mu.setAttribute("x1", mux);
+      smES.mu.setAttribute("x2", mux);
       var shifted = Math.abs(smShift()) > 4;
       smES.muLbl.setAttribute("x", mux);
-      smES.muLbl.textContent = shifted ? "μ, actual — the thumb moved everyone" : "";
-      [[smES.ghR, 762], [smES.ghL, 138], [smES.now, 554]].forEach(function (pr2) {
+      smES.muLbl.textContent = shifted
+        ? "μ, actual — the thumb moved everyone"
+        : "";
+      [
+        [smES.ghR, 762],
+        [smES.ghL, 138],
+        [smES.now, 554],
+      ].forEach(function (pr2) {
         pr2[0].setAttribute("cx", pr2[1]);
         pr2[0].setAttribute("cy", smY(pr2[1], mux).toFixed(1));
       });
       smES.nowLbl.setAttribute("x", 554);
-      smES.nowLbl.setAttribute("y", Math.min(150, smY(554, mux) - 16).toFixed(1));
+      smES.nowLbl.setAttribute(
+        "y",
+        Math.min(150, smY(554, mux) - 16).toFixed(1),
+      );
     }
     drawSmooth();
-    biasEl.addEventListener("input", function () { drawSmooth(); });
+    biasEl.addEventListener("input", function () {
+      drawSmooth();
+    });
 
     var SM_TAIL = "the unexpected · rare events · calibrate for tails";
     var SM_MID = "where most things cluster · base rates matter · the probable";
@@ -3047,10 +3787,11 @@
     drawSmooth = function () {
       _origDrawSmooth();
       var mux = 450 + smShift();
-      var lx = mux - SM_SIG, rx = mux + SM_SIG;
+      var lx = mux - SM_SIG,
+        rx = mux + SM_SIG;
       var hl = document.getElementById("smHovL"),
-          hc = document.getElementById("smHovC"),
-          hr = document.getElementById("smHovR");
+        hc = document.getElementById("smHovC"),
+        hr = document.getElementById("smHovR");
       hl.setAttribute("width", Math.max(0, lx));
       hc.setAttribute("x", lx);
       hr.setAttribute("x", rx);
@@ -3080,10 +3821,13 @@
       }
       setCap();
     }
-    vCurve.addEventListener("click", function () { setView2("curve"); });
-    vMach.addEventListener("click", function () { setView2("machine"); });
+    vCurve.addEventListener("click", function () {
+      setView2("curve");
+    });
+    vMach.addEventListener("click", function () {
+      setView2("machine");
+    });
     setView2("curve");
-
 
     /* ================= FIG 3 · INFLUENCE GRAPH ================= */
     var infl = document.getElementById("inflSvg");
@@ -3243,7 +3987,9 @@
     });
     if (!reduce) {
       var t0G = performance.now();
-      setInterval(function wobble() {
+      var wobbleHandle = null,
+        wobbleVisible = true;
+      var wobbleTick = function () {
         var t = (performance.now() - t0G) / 1000;
         NODES.forEach(function (nd, i) {
           if (nd.me) return;
@@ -3261,7 +4007,29 @@
             }
           });
         });
-      }, 50);
+      };
+      var stopWobble = function () {
+        if (wobbleHandle !== null) {
+          wobbleHandle.stop();
+          wobbleHandle = null;
+        }
+      };
+      var ensureWobble = function () {
+        if (wobbleHandle === null && wobbleVisible)
+          wobbleHandle = frameLoop(wobbleTick, 50);
+      };
+      var ioW = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            wobbleVisible = e.isIntersecting;
+            if (wobbleVisible) ensureWobble();
+            else stopWobble();
+          });
+        },
+        { threshold: 0 },
+      );
+      ioW.observe(infl);
+      ensureWobble();
     }
 
     /* ================= FIG 4 · GOVERNOR ================= */
@@ -3418,27 +4186,34 @@
 
     /* ================= HERO DRIFT LAYER ================= */
     if (!reduce) {
+      /* velocities in px/s (was px per 40 ms tick) */
       var driftBalls = [
         {
           el: document.getElementById("drift1"),
           x: 200,
           y: 150,
-          vx: 1.3,
-          vy: 0.9,
+          vx: 32,
+          vy: 22,
         },
         {
           el: document.getElementById("drift2"),
           x: 700,
           y: 520,
-          vx: -1.1,
-          vy: -1.2,
+          vx: -27,
+          vy: -30,
         },
       ];
       var FR = { x0: 28, y0: 26, x1: 872, y1: 612 };
-      setInterval(function () {
+      var driftHandle = null,
+        driftVisible = true,
+        driftLast = null;
+      var driftTick = function (now) {
+        if (driftLast === null) driftLast = now;
+        var dt = Math.min((now - driftLast) / 1000, 0.1);
+        driftLast = now;
         driftBalls.forEach(function (b) {
-          b.x += b.vx;
-          b.y += b.vy;
+          b.x += b.vx * dt;
+          b.y += b.vy * dt;
           if (b.x < FR.x0 || b.x > FR.x1) {
             b.vx *= -1;
             b.x = Math.max(FR.x0, Math.min(FR.x1, b.x));
@@ -3464,16 +4239,37 @@
             b.y = offrec.cy + ny * push;
           }
           var act = activeAt(b);
-          var tint =
-            act.length === 1
-              ? getComputedStyle(document.getElementById("c-" + act[0].id))
-                  .stroke
-              : "#e9e6de";
-          b.el.setAttribute("fill", tint);
+          b.el.setAttribute(
+            "fill",
+            act.length === 1 ? act[0].color : "#e9e6de",
+          );
           b.el.setAttribute("cx", b.x.toFixed(1));
           b.el.setAttribute("cy", b.y.toFixed(1));
         });
-      }, 40);
+      };
+      var stopDrift = function () {
+        if (driftHandle !== null) {
+          driftHandle.stop();
+          driftHandle = null;
+        }
+        driftLast = null;
+      };
+      var ensureDrift = function () {
+        if (driftHandle === null && driftVisible)
+          driftHandle = frameLoop(driftTick, 40);
+      };
+      var ioD = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            driftVisible = e.isIntersecting;
+            if (driftVisible) ensureDrift();
+            else stopDrift();
+          });
+        },
+        { threshold: 0 },
+      );
+      ioD.observe(svg);
+      ensureDrift();
     } else {
       document.querySelectorAll("svg.venn .drift").forEach(function (el) {
         el.setAttribute("opacity", "0");
@@ -3590,6 +4386,8 @@
       ballB = {
         x: padX,
         y: PADY - 10,
+        px: padX,
+        py: PADY - 10,
         vx: Math.cos(a) * SPEED,
         vy: Math.sin(a) * SPEED,
       };
@@ -3635,6 +4433,8 @@
       }
       tTruth++;
       if (ballB && !waiting) {
+        ballB.px = ballB.x;
+        ballB.py = ballB.y;
         ballB.x += ballB.vx;
         ballB.y += ballB.vy;
         if (ballB.x < 6) {
@@ -3733,10 +4533,18 @@
         " · updates " +
         updates;
       if (bStats.textContent !== stat) bStats.textContent = stat;
-      drawB();
     }
 
-    function drawB() {
+    function drawB(alpha) {
+      if (alpha == null) alpha = 1;
+      var bix = null,
+        biy = null;
+      if (ballB) {
+        bix =
+          ballB.px == null ? ballB.x : ballB.px + (ballB.x - ballB.px) * alpha;
+        biy =
+          ballB.py == null ? ballB.y : ballB.py + (ballB.y - ballB.py) * alpha;
+      }
       bCtx.clearRect(0, 0, BW, BH);
       // truth marker
       var tx = truthX();
@@ -3766,7 +4574,7 @@
         bCtx.strokeStyle = "rgba(227, 197, 103, 0.16)";
         bCtx.setLineDash([2, 6]);
         bCtx.beginPath();
-        bCtx.moveTo(ballB.x, ballB.y);
+        bCtx.moveTo(bix, biy);
         bCtx.lineTo(tx, TRUTH_Y);
         bCtx.stroke();
         bCtx.setLineDash([]);
@@ -3796,7 +4604,7 @@
       if (ballB) {
         bCtx.fillStyle = "#e07a6b";
         bCtx.beginPath();
-        bCtx.arc(ballB.x, ballB.y, 4, 0, 7);
+        bCtx.arc(bix, biy, 4, 0, 7);
         bCtx.fill();
       } else if (waiting) {
         bCtx.fillStyle = "#e07a6b";
@@ -3846,17 +4654,17 @@
       }
     });
 
-    var bTimer = null,
+    var bHandle = null,
       bVisible = !reduce;
     function stopB() {
-      if (bTimer !== null) {
-        clearInterval(bTimer);
-        bTimer = null;
+      if (bHandle !== null) {
+        bHandle.stop();
+        bHandle = null;
       }
     }
     function ensureB() {
       if (reduce) return;
-      if (bTimer === null && bVisible) bTimer = setInterval(stepB, 30);
+      if (bHandle === null && bVisible) bHandle = fixedLoop(stepB, 30, drawB);
     }
     var ioB = new IntersectionObserver(
       function (entries) {
