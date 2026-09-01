@@ -1,17 +1,45 @@
 # paramvaswani-site — handoff
 
-**State as of 2026-08-31, session 359ae23d (v6, label v6-domain-hero).**
-Continue in Claude Code. The artifact is the live canonical render; this folder is the working copy.
+**State as of 2026-09-01, session 359ae23d (v9, label `v9-honest-edges`). Not published publicly.**
+Continue in Claude Code. This folder is the working copy; the artifact is the live render.
 
-- **Artifact (private, updates in place):** https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5
-  — republish by passing this URL as `url` to the Artifact tool from any session.
-- **Companion doc — "Reading the Figures":** https://claude.ai/code/artifact/b57df703-2efe-4d12-96c0-876abdbccd21
-  (local: `figure-legend.html`). Explains what each figure claims, what every animation
-  means, and how the five cohere. Keep it in sync when figures change — it is also the
-  source material for an "about the diagrams" page or an essay.
-- **Source of truth:** `index.html` (artifact format: `<title>` on line 1, NO doctype/html/head/body — the wrapper adds them; keep it that way).
-- **Local preview:** `./make-preview.sh` → http://localhost:4173/index.html
-- **Memory:** `project_paramvaswani_redesign.md` in auto-memory has the full decision log (v1→v6).
+## Everything, in one place
+
+| what | where |
+|---|---|
+| **The site** | `index.html` — artifact format (`<title>` line 1, NO doctype/html/head/body) |
+| **Live artifact** | https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5 |
+| **Companion: Reading the Figures** | `figure-legend.html` · https://claude.ai/code/artifact/b57df703-2efe-4d12-96c0-876abdbccd21 |
+| **Companion: What You Study** | `POSITION.html` · https://claude.ai/code/artifact/4608ef2a-f8c0-4a1f-a427-500a74b7e048 |
+| **How to edit** | `EDITING.md` — file map, anchors, rules, sanity checks |
+| **Dev server** | `./dev.py` → localhost:4173 (live; edit + refresh, no build) |
+| **Figma reference** | `reference-figma/` — their App.tsx, content, plan |
+| **Version control** | git, initialised, one commit on `main` |
+| **Memory** | `project_paramvaswani_redesign.md` (v1→v9 decision log) · `project_sensemaking_instruments.md` (the thesis) |
+
+To update the artifact from a new session, pass `url:` with the artifact URL so it updates in
+place rather than creating a duplicate.
+
+## START HERE (new session)
+
+```bash
+cd ~/Code/paramvaswani-site && ./dev.py
+```
+
+Then open **http://localhost:4173/** in a real browser (not the in-app pane — it freezes
+animation; see Gotchas). Read `EDITING.md` for the file map and the rules. Edit `index.html`,
+refresh, commit.
+
+Paste this to kick off:
+
+> Working on ~/Code/paramvaswani-site. Read HANDOFF.md and EDITING.md first — they have the
+> file map, the settled decisions, the privacy rules, and the gotchas. The site is index.html
+> (artifact format: no doctype/body tags — keep it that way). Run ./dev.py to preview at
+> localhost:4173. Don't publish or deploy unless I say so. Here's what I want to change: ...
+
+**Three open items** (details in Open honesty items below): the fig. 1 geometry disclaimer,
+the fig. 4 "always" → "first" decision (yours), and fig. 5's hidden brick types.
+**Ship-gates before any public URL** are further down — register the domain first.
 
 ## What the page is
 
@@ -21,9 +49,9 @@ Single dark theme, deliberately (artifact-design allows committed single-look). 
 
 | piece        | what it is                                                                                                                                                                                                                                                                                                                                                                          |
 | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| fig. 1 hero  | 5-domain venn (mind/body M, technology T, philosophy P, society S, creation C) + unlabeled off-record set. Click = filter (bloom glow, dashed halo, panel card), click again = deep-link (M→#log, T→#distribution, P→#cohere, S→#influences, C→#create), Esc clears. 6 named intersections + red me-dot at M∩T∩P (430,325). 2 drift balls + breathing me-dot = the 3 moving points. |
+| fig. 1 hero  | 5-domain venn (mind/body M, technology T, philosophy P, society S, creation C) + unlabeled off-record set. Click = filter (bloom glow, dashed halo, panel card), click again = deep-link (M→#log, T→#distribution, P→#cohere, S→#influences, C→#create), Esc clears. 7 named intersections + red me-dot at M∩T∩P (430,325). 2 drift balls + breathing me-dot = the 3 moving points. |
 | fig. 2       | Panel with two views: **curve** (default; instant SVG normal curve, ±1σ bands w/ hover captions, "the feed's thumb" slider slides μ while the three overcorrection stations stay pinned) and **machine** (Galton board canvas; slider biases every peg; red tracked "me" ball; caps n=600).                                                                                         |
-| fig. 3       | Influence graph, me-centered, bidirectional hover captions, idle wobble.                                                                                                                                                                                                                                                                                                            |
+| fig. 3       | Influence graph, me-centered, idle wobble. Captions mark one-way edges as one-way; only feed↔me and (weakly) machines↔me are bidirectional — fixed in v9, do not re-inflate.                                                                                                                                                                                                                                                                                                            |
 | four rooms   | 2×2 boxed panels = verb architecture (create/consume/curate/cohere) with enter→ links. Nav bar uses the same verbs.                                                                                                                                                                                                                                                                 |
 | fig. 4       | Precedence tree (which value governs when), situation chips, privacy leaf ends early.                                                                                                                                                                                                                                                                                               |
 | fig. 5       | Truth-seeker breakout: pass-through bricks bend the ball toward/away from a drifting "truth · approx." marker; paddle = JUDGMENT; score = live angle (gold ≤25°); field repopulates every 20 s.                                                                                                                                                                                     |
