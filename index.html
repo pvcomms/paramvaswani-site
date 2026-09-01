@@ -1,0 +1,3938 @@
+<title>Param Vaswani</title>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+/>
+<style>
+  :root {
+    --ink: #0b0c0e;
+    --paper: #e9e6de;
+    --dim: #96917f;
+    --faint: #4a4a44;
+    --faint-t: #7c7869;
+    --hair-2: #66635a;
+    --hair: #26272a;
+    --edge: #3a3b3e;
+    --panel-bar: #101216;
+    --c-create: #7fb069;
+    --c-consume: #b48ede;
+    --c-curate: #6fa8dc;
+    --c-cohere: #e3c567;
+    --c-me: #e07a6b;
+    --c-creation: #d98aa8;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  ::selection {
+    background: var(--c-cohere);
+    color: var(--ink);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .col {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  .colwide {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- masthead ---------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0 0;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  nav {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  nav a {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  nav a:hover {
+    color: var(--paper);
+  }
+  nav a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  nav a[data-c="create"]:hover {
+    border-color: var(--c-create);
+  }
+  nav a[data-c="consume"]:hover {
+    border-color: var(--c-consume);
+  }
+  nav a[data-c="curate"]:hover {
+    border-color: var(--c-curate);
+  }
+  nav a[data-c="cohere"]:hover {
+    border-color: var(--c-cohere);
+  }
+
+  /* ---------- shared figure grammar ---------- */
+  .figlabel {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+  }
+  .figdek {
+    color: var(--dim);
+    font-style: italic;
+    font-size: 15.5px;
+    margin-top: 3px;
+  }
+  .capbar {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--dim);
+    text-align: center;
+    min-height: 2.4em;
+    padding: 10px 16px 0;
+    letter-spacing: 0.02em;
+  }
+  .capbar em {
+    color: var(--paper);
+    font-style: normal;
+  }
+  .capbar a {
+    color: var(--paper);
+    border-bottom: 1px solid var(--faint);
+  }
+  .capbar a:hover {
+    border-color: var(--paper);
+  }
+  .capbar a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .fignote {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--faint-t);
+    text-align: center;
+    letter-spacing: 0.06em;
+    padding-top: 8px;
+  }
+  .hint {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--faint-t);
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding-top: 6px;
+  }
+
+  /* ---------- panel chrome (the boxes) ---------- */
+  .panel {
+    border: 1.5px solid var(--edge);
+    background: var(--ink);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+  .panel-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    background: var(--panel-bar);
+    border-bottom: 1.5px solid var(--edge);
+    user-select: none;
+  }
+  .panel-bar .dots {
+    display: flex;
+    gap: 5px;
+  }
+  .panel-bar .dots i {
+    width: 7px;
+    height: 7px;
+    border: 1.2px solid var(--hair-2);
+    display: block;
+  }
+  .panel-bar .pt {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .panel-bar .sp {
+    flex: 1;
+  }
+  .panel-bar button {
+    font: inherit;
+    color: var(--dim);
+    background: var(--ink);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    line-height: 1;
+    border: 1.2px solid var(--hair-2);
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-family: var(--mono);
+    transition:
+      transform 0.12s ease,
+      color 0.2s ease;
+  }
+  .panel-bar button:hover {
+    transform: translate(-1px, -1px);
+    color: var(--paper);
+  }
+  .panel-bar button:active {
+    transform: translate(1px, 1px);
+  }
+  .panel-bar button:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .panel-body {
+    padding: 18px;
+  }
+  .panel[data-min="1"] .panel-body {
+    display: none;
+  }
+
+  /* ---------- fig 1 · venn ---------- */
+  .hero {
+    padding: 18px 0 8px;
+  }
+  .hero .figlabel {
+    padding-bottom: 6px;
+  }
+  svg.venn {
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: crosshair;
+  }
+  svg.venn circle.set {
+    fill: transparent;
+    stroke-width: 1.1;
+    transition:
+      fill 0.35s ease,
+      fill-opacity 0.35s ease;
+  }
+  svg.venn circle.set:focus-visible {
+    outline: none;
+    stroke-width: 2.4;
+  }
+  svg.venn circle.offrec {
+    fill: none;
+    stroke: var(--faint);
+    stroke-width: 1.1;
+    stroke-dasharray: 2 7;
+    stroke-linecap: round;
+  }
+  svg.venn circle.offrec:focus-visible {
+    outline: none;
+    stroke: var(--dim);
+  }
+  svg.venn text {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 300;
+    fill: var(--paper);
+    pointer-events: none;
+  }
+  svg.venn .u-label {
+    font-family: var(--mono);
+    font-style: normal;
+    fill: var(--dim);
+    letter-spacing: 0.14em;
+  }
+  .me-dot {
+    fill: var(--c-me);
+  }
+  svg.venn circle.set {
+    transition:
+      stroke-opacity 0.3s ease,
+      stroke-width 0.22s ease,
+      fill-opacity 0.3s ease;
+  }
+  svg.venn circle.tint {
+    pointer-events: none;
+    transition: fill-opacity 0.3s ease;
+  }
+  svg.venn circle.halo {
+    pointer-events: none;
+    fill: none;
+    stroke-width: 0.6;
+    stroke-dasharray: 4 6;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  svg.venn g.xg {
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  svg.venn g.lens {
+    pointer-events: none;
+  }
+  svg.venn g.lens circle {
+    transition: fill-opacity 0.25s ease;
+  }
+  svg.venn g.xg text {
+    font-family: var(--mono);
+    font-style: normal;
+  }
+  svg.venn g.xg .xname {
+    fill: var(--paper);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+  }
+  svg.venn g.xg .xform {
+    fill: var(--faint-t);
+    font-size: 8px;
+    letter-spacing: 0.08em;
+  }
+  svg.venn text.dlabel {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    transition: opacity 0.3s ease;
+  }
+  .vennpanel {
+    max-width: 680px;
+    margin: 16px auto 0;
+    min-height: 96px;
+    padding-left: 16px;
+    border-left: 2px solid var(--hair);
+    transition: border-color 0.28s ease;
+  }
+  .vennpanel .vp-k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .vennpanel .vp-k .vp-hint {
+    color: var(--faint-t);
+    text-transform: none;
+    letter-spacing: 0.08em;
+  }
+  .vennpanel .vp-name {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 400;
+    color: var(--paper);
+    margin-top: 4px;
+  }
+  .vennpanel .vp-desc {
+    font-size: 14.5px;
+    line-height: 1.68;
+    color: var(--dim);
+    max-width: 540px;
+    margin-top: 4px;
+  }
+  @keyframes breathe {
+    0%,
+    100% {
+      opacity: 0.55;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  .me-dot {
+    animation: breathe 3.2s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .me-dot {
+      animation: none;
+    }
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  @media (max-width: 560px) {
+    svg.venn text {
+      font-size: 34px;
+    }
+    svg.venn .u-label {
+      font-size: 20px;
+    }
+    svg.venn .melbl {
+      font-size: 22px;
+    }
+  }
+
+  /* ---------- intro ---------- */
+  .intro {
+    padding: 64px 0 8px;
+  }
+  .intro p {
+    font-size: 19px;
+    line-height: 1.7;
+  }
+  .intro p + p {
+    margin-top: 1.05em;
+  }
+  .intro .mut {
+    color: var(--dim);
+  }
+
+  /* ---------- fig 2 · galton ---------- */
+  .galton-sec {
+    padding: 78px 0 8px;
+  }
+  .galton-sec .panel {
+    margin-top: 14px;
+  }
+  .galton-wrap {
+    overflow-x: auto;
+  }
+  #galton {
+    display: block;
+    min-width: 640px;
+    width: 100%;
+  }
+  .g-controls {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 12px 4px 2px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--dim);
+  }
+  .g-controls label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .g-controls .sublab {
+    color: var(--faint-t);
+    letter-spacing: 0.08em;
+  }
+  .g-controls input[type="range"] {
+    width: 150px;
+    accent-color: #e07a6b;
+  }
+  .g-controls input[type="range"]:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .g-controls .pval {
+    color: var(--c-cohere);
+    font-variant-numeric: tabular-nums;
+    min-width: 8ch;
+  }
+  .g-controls button {
+    font: inherit;
+    font-family: var(--mono);
+    color: var(--dim);
+    background: none;
+    cursor: pointer;
+    border: 1px solid var(--hair);
+    border-radius: 100px;
+    padding: 4px 14px;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .g-controls button:hover {
+    color: var(--paper);
+    border-color: var(--faint);
+  }
+  .g-controls button:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .g-controls .n {
+    margin-left: auto;
+    font-variant-numeric: tabular-nums;
+    color: var(--faint-t);
+  }
+  .g-controls button[aria-pressed="true"] {
+    color: var(--c-cohere);
+    border-color: var(--c-cohere);
+  }
+  svg#smooth {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+  }
+
+  /* ---------- four rooms ---------- */
+  .rooms {
+    padding: 88px 0 8px;
+  }
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 18px;
+  }
+  .room .panel-bar .rdot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid;
+  }
+  .room[data-c="create"] .rdot {
+    border-color: var(--c-create);
+  }
+  .room[data-c="consume"] .rdot {
+    border-color: var(--c-consume);
+  }
+  .room[data-c="curate"] .rdot {
+    border-color: var(--c-curate);
+  }
+  .room[data-c="cohere"] .rdot {
+    border-color: var(--c-cohere);
+  }
+  .room .panel-body p {
+    font-size: 16px;
+    color: var(--dim);
+    line-height: 1.7;
+  }
+  .room .panel-body p b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+  .room .enter {
+    display: inline-block;
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--faint-t);
+    border-bottom: 1px solid var(--hair);
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .room[data-c="create"] .enter:hover {
+    color: var(--c-create);
+    border-color: var(--c-create);
+  }
+  .room[data-c="consume"] .enter:hover {
+    color: var(--c-consume);
+    border-color: var(--c-consume);
+  }
+  .room[data-c="curate"] .enter:hover {
+    color: var(--c-curate);
+    border-color: var(--c-curate);
+  }
+  .room[data-c="cohere"] .enter:hover {
+    color: var(--c-cohere);
+    border-color: var(--c-cohere);
+  }
+  .room .enter:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+
+  /* ---------- sections ---------- */
+  section {
+    padding: 88px 0 8px;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+  }
+  .sec-head .tick {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid;
+  }
+  .sec-head h2 {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .sec-head .notation {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint-t);
+    margin-left: auto;
+    text-align: right;
+  }
+  #create .tick {
+    border-color: var(--c-create);
+  }
+  #consume .tick {
+    border-color: var(--c-consume);
+  }
+  #curate .tick {
+    border-color: var(--c-curate);
+  }
+  #cohere .tick {
+    border-color: var(--c-cohere);
+  }
+
+  .sub {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin: 40px 0 4px;
+  }
+  .subnote {
+    color: var(--dim);
+    font-style: italic;
+    font-size: 15.5px;
+    margin: 2px 0 6px;
+  }
+  ul.index {
+    list-style: none;
+  }
+  ul.index li {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  ul.index li:last-child {
+    border-bottom: 0;
+  }
+  .t a,
+  .t .unlinked {
+    font-size: 17px;
+    font-weight: 400;
+    border-bottom: 1px solid var(--faint);
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .t .unlinked {
+    border-bottom: none;
+  }
+  .t a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  #create .t a:hover {
+    color: var(--c-create);
+    border-color: var(--c-create);
+  }
+  #consume .t a:hover {
+    color: var(--c-consume);
+    border-color: var(--c-consume);
+  }
+  #curate .t a:hover {
+    color: var(--c-curate);
+    border-color: var(--c-curate);
+  }
+  #cohere .t a:hover {
+    color: var(--c-cohere);
+    border-color: var(--c-cohere);
+  }
+  .dek {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+  .when {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint-t);
+    margin-left: auto;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .li-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .now {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-top: 8px;
+  }
+  .now h3 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--dim);
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .now ul {
+    list-style: none;
+  }
+  .now li {
+    padding: 6px 0;
+    font-size: 17px;
+    border-bottom: 1px dotted var(--hair);
+  }
+  .now li:last-child {
+    border: 0;
+  }
+  .now .d {
+    color: var(--dim);
+    font-size: 14px;
+  }
+
+  /* ---------- fig 3 · influence graph ---------- */
+  .graph-sec {
+    padding: 88px 0 8px;
+  }
+  .graph-sec .panel {
+    margin-top: 14px;
+  }
+  .graph-wrap {
+    overflow-x: auto;
+  }
+  svg.infl {
+    display: block;
+    width: 100%;
+    min-width: 640px;
+    height: auto;
+  }
+  svg.infl line {
+    stroke: var(--hair);
+    stroke-width: 1;
+    transition:
+      stroke 0.3s ease,
+      stroke-width 0.3s ease;
+  }
+  svg.infl line.on {
+    stroke: var(--c-cohere);
+    stroke-width: 1.4;
+  }
+  svg.infl .node circle {
+    fill: var(--ink);
+    stroke: var(--dim);
+    stroke-width: 1;
+    transition: stroke 0.3s ease;
+  }
+  svg.infl .node.me circle {
+    fill: var(--c-me);
+    stroke: var(--c-me);
+  }
+  svg.infl .node:hover circle,
+  svg.infl .node.on circle {
+    stroke: var(--paper);
+  }
+  svg.infl .node:focus-visible {
+    outline: none;
+  }
+  svg.infl .node:focus-visible circle {
+    stroke: var(--c-cohere);
+    stroke-width: 2;
+  }
+  svg.infl .node text {
+    font-family: var(--mono);
+    font-size: 11px;
+    fill: var(--dim);
+    pointer-events: none;
+    transition: fill 0.3s ease;
+  }
+  svg.infl .node:hover text,
+  svg.infl .node.on text {
+    fill: var(--paper);
+  }
+  svg.infl .node.me text {
+    fill: var(--c-me);
+    font-style: normal;
+  }
+  svg.infl .node {
+    cursor: default;
+  }
+
+  /* ---------- fig 4 · governor ---------- */
+  .fig3-head {
+    margin-top: 34px;
+  }
+  .chips {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 18px 0 6px;
+  }
+  .chips button {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    background: none;
+    border: 1px solid var(--hair);
+    border-radius: 100px;
+    padding: 6px 14px;
+    cursor: pointer;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .chips button:hover {
+    color: var(--paper);
+    border-color: var(--faint);
+  }
+  .chips button:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .chips button[aria-pressed="true"] {
+    color: var(--c-cohere);
+    border-color: var(--c-cohere);
+  }
+  .tree-wrap {
+    overflow-x: auto;
+    margin-top: 4px;
+  }
+  svg.gov {
+    display: block;
+    width: 100%;
+    min-width: 620px;
+    height: auto;
+  }
+  svg.gov line {
+    stroke: var(--hair-2);
+    stroke-width: 1;
+    transition:
+      stroke 0.3s ease,
+      stroke-width 0.3s ease;
+  }
+  svg.gov line.lit {
+    stroke: var(--c-cohere);
+    stroke-width: 1.6;
+  }
+  svg.gov circle.node {
+    fill: var(--ink);
+    stroke: var(--dim);
+    stroke-width: 1;
+  }
+  svg.gov circle.leafnode {
+    fill: var(--ink);
+    stroke: var(--paper);
+    stroke-width: 1;
+    transition:
+      fill 0.3s ease,
+      stroke 0.3s ease;
+  }
+  svg.gov g.leaf.on circle.leafnode {
+    fill: var(--c-cohere);
+    stroke: var(--c-cohere);
+  }
+  svg.gov g.leaf {
+    cursor: default;
+  }
+  svg.gov g.leaf:focus-visible {
+    outline: none;
+  }
+  svg.gov g.leaf:focus-visible circle.leafnode {
+    stroke: var(--c-cohere);
+    stroke-width: 2;
+  }
+  svg.gov .q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14.5px;
+    fill: var(--paper);
+  }
+  svg.gov .leaflbl {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    fill: var(--paper);
+  }
+  svg.gov .leafsub {
+    font-family: var(--mono);
+    font-size: 10px;
+    fill: var(--faint-t);
+  }
+  svg.gov .yn {
+    font-family: var(--mono);
+    font-size: 10px;
+    fill: var(--faint-t);
+  }
+  svg.gov .always {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 12.5px;
+    fill: var(--c-me);
+  }
+
+  /* both/and */
+  .pairs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 40px;
+    margin-top: 6px;
+  }
+  .pairs div {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .pairs .and {
+    color: var(--c-me);
+    padding: 0 8px;
+  }
+
+  /* ledger */
+  table.ledger {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 6px;
+  }
+  table.ledger th {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    text-align: left;
+    border-bottom: 1px solid var(--faint);
+    padding: 0 8px 8px 0;
+  }
+  table.ledger th.num,
+  table.ledger td.num {
+    text-align: right;
+    padding-right: 0;
+  }
+  table.ledger td {
+    padding: 12px 8px 12px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 17px;
+    vertical-align: baseline;
+  }
+  table.ledger td.num {
+    font-family: var(--mono);
+    font-size: 13.5px;
+    color: var(--c-cohere);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  table.ledger .tr-up {
+    color: var(--c-me);
+  }
+  table.ledger .tr-dn {
+    color: var(--dim);
+  }
+  table.ledger tbody tr {
+    transition: background 0.25s ease;
+  }
+  table.ledger tbody tr:hover {
+    background: #101216;
+  }
+  table.ledger tbody tr:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: -1px;
+  }
+  .ledger-note {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--dim);
+    min-height: 3em;
+    padding-top: 12px;
+    line-height: 1.7;
+  }
+  .ledger-foot {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    margin-top: 4px;
+  }
+
+  /* principles */
+  ol.principles {
+    list-style: none;
+    counter-reset: p;
+  }
+  ol.principles li {
+    counter-increment: p;
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 0 10px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  ol.principles li:last-child {
+    border-bottom: 0;
+  }
+  ol.principles li::before {
+    content: counter(p, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--c-cohere);
+    position: relative;
+    top: 3px;
+  }
+  ol.principles b {
+    font-weight: 500;
+  }
+  ol.principles .why {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+
+  /* currently */
+  ul.current {
+    list-style: none;
+  }
+  ul.current li {
+    padding: 11px 0;
+    border-bottom: 1px solid var(--hair);
+    display: flex;
+    gap: 12px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  ul.current li:last-child {
+    border-bottom: 0;
+  }
+  ul.current .c-note {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint-t);
+    margin-left: auto;
+    white-space: nowrap;
+  }
+
+  /* ---------- thoughts.log ---------- */
+  .log-sec {
+    padding: 88px 0 8px;
+  }
+  .log-sec .panel {
+    margin-top: 14px;
+  }
+  .log-entry {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0 18px;
+    padding: 16px 4px;
+    border-bottom: 1px dotted var(--hair);
+  }
+  .log-entry:last-child {
+    border-bottom: 0;
+  }
+  .log-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-variant-numeric: tabular-nums;
+  }
+  .log-tag {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    border: 1px solid var(--hair);
+    border-radius: 100px;
+    padding: 2px 8px;
+    color: var(--dim);
+    align-self: flex-start;
+    white-space: nowrap;
+  }
+  .log-body {
+    font-size: 16.5px;
+    color: var(--paper);
+    line-height: 1.7;
+  }
+  .log-body .m {
+    color: var(--dim);
+  }
+
+  /* ---------- the tape ---------- */
+  .tape {
+    margin-top: 96px;
+    border-top: 1.5px solid var(--edge);
+    border-bottom: 1.5px solid var(--edge);
+    background: var(--panel-bar);
+    overflow: hidden;
+  }
+  .tape-rail {
+    display: flex;
+    white-space: nowrap;
+    width: max-content;
+    animation: tape 44s linear infinite;
+    padding: 9px 0;
+  }
+  .tape:hover .tape-rail {
+    animation-play-state: paused;
+  }
+  @keyframes tape {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tape {
+      overflow-x: auto;
+    }
+    .tape-rail {
+      animation: none;
+      width: auto;
+    }
+  }
+  .tape .q {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--dim);
+    padding: 0 1.6em;
+  }
+  .tape .q b {
+    color: var(--c-cohere);
+    font-weight: 400;
+  }
+  .tape .q .up {
+    color: var(--c-me);
+  }
+  .tape .q .dn {
+    color: var(--faint-t);
+  }
+  .tape .q .sep {
+    color: var(--faint);
+  }
+
+  /* footer */
+  footer {
+    padding: 64px 0 64px;
+  }
+  .contact {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .contact a {
+    color: var(--dim);
+    border-bottom: 1px solid var(--hair);
+    transition: color 0.25s ease;
+  }
+  .contact a:hover {
+    color: var(--paper);
+  }
+  .contact a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .figindex {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 22px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+  .figindex a {
+    color: var(--faint-t);
+    border-bottom: 1px solid transparent;
+    transition:
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .figindex a:hover {
+    color: var(--paper);
+    border-color: var(--hair-2);
+  }
+  .figindex a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .colophon {
+    margin-top: 26px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    line-height: 2;
+  }
+
+  /* reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  @media (max-width: 760px) {
+    .now {
+      grid-template-columns: 1fr;
+    }
+    .pairs {
+      grid-template-columns: 1fr;
+    }
+    .rooms-grid {
+      grid-template-columns: 1fr;
+    }
+    header {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .sec-head .notation {
+      display: none;
+    }
+    .when {
+      display: none;
+    }
+    ul.current .c-note {
+      display: none;
+    }
+    table.ledger td:nth-child(3),
+    table.ledger th:nth-child(3) {
+      display: none;
+    }
+    .log-entry {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .log-meta {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+</style>
+
+<div class="wrap" id="top">
+  <header>
+    <h1 class="brand">Param Vaswani</h1>
+    <nav>
+      <a href="#create" data-c="create">create</a>
+      <a href="#consume" data-c="consume">consume</a>
+      <a href="#curate" data-c="curate">curate</a>
+      <a href="#cohere" data-c="cohere">cohere</a>
+      <a href="#contact">contact</a>
+    </nav>
+  </header>
+
+  <!-- ============ FIG 1 · VENN ============ -->
+  <div class="hero">
+    <div class="figlabel">fig. 1 · what coexists</div>
+    <svg class="venn" viewBox="0 0 900 640" role="group" aria-label="A Venn diagram of five domains — mind/body, technology, philosophy, society, creation — inside the universal set, labeled both/and, nuance. Named intersections: cognitive architecture, structural difference, phenomenology, AI alignment, building your way out, power and consent. A red dot marks the point where mind, technology, and philosophy meet. One set is unlabeled and drawn partly outside the frame. Click a domain to filter; click again to visit its part of the site.">
+      <defs>
+        <clipPath id="uclip"><rect x="18" y="16" width="864" height="606" rx="26"/></clipPath>
+        <filter id="bloom" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <clipPath id="cp-mindbody"><circle cx="300" cy="255" r="178"/></clipPath>
+        <clipPath id="cp-tech"><circle cx="560" cy="255" r="178"/></clipPath>
+        <clipPath id="cp-philosophy"><circle cx="430" cy="445" r="152"/></clipPath>
+        <clipPath id="cp-society"><circle cx="190" cy="420" r="115"/></clipPath>
+        <clipPath id="cp-creation"><circle cx="665" cy="430" r="112"/></clipPath>
+      </defs>
+      <rect x="18" y="16" width="864" height="606" rx="26" fill="none" stroke="#3a3b3e" stroke-width="1" stroke-dasharray="1 6" stroke-linecap="round"/>
+      <text class="u-label" x="48" y="58" font-size="13">𝒰 · both / and</text>
+
+      <circle class="offrec" id="c-offrec" cx="820" cy="580" r="76" clip-path="url(#uclip)" tabindex="0" role="img" aria-label="an unlabeled set, partly outside the frame"/>
+
+      <circle class="tint" id="t-mindbody"   cx="300" cy="255" r="178" fill="#b48ede" fill-opacity="0.01"/>
+      <circle class="tint" id="t-tech"       cx="560" cy="255" r="178" fill="#6fa8dc" fill-opacity="0.01"/>
+      <circle class="tint" id="t-philosophy" cx="430" cy="445" r="152" fill="#7fb069" fill-opacity="0.01"/>
+      <circle class="tint" id="t-society"    cx="190" cy="420" r="115" fill="#e3c567" fill-opacity="0.01"/>
+      <circle class="tint" id="t-creation"   cx="665" cy="430" r="112" fill="#d98aa8" fill-opacity="0.01"/>
+
+      <g class="lens" data-pair="mindbody,tech" clip-path="url(#cp-mindbody)"><circle cx="560" cy="255" r="178" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="mindbody,society" clip-path="url(#cp-mindbody)"><circle cx="190" cy="420" r="115" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="mindbody,philosophy" clip-path="url(#cp-mindbody)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="philosophy,tech" clip-path="url(#cp-tech)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="creation,tech" clip-path="url(#cp-tech)"><circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="philosophy,society" clip-path="url(#cp-society)"><circle cx="430" cy="445" r="152" fill="#e9e6de" fill-opacity="0"/></g>
+      <g class="lens" data-pair="creation,philosophy" clip-path="url(#cp-philosophy)"><circle cx="665" cy="430" r="112" fill="#e9e6de" fill-opacity="0"/></g>
+
+      <circle class="halo" id="h-mindbody"   cx="300" cy="255" r="187" stroke="#b48ede"/>
+      <circle class="halo" id="h-tech"       cx="560" cy="255" r="187" stroke="#6fa8dc"/>
+      <circle class="halo" id="h-philosophy" cx="430" cy="445" r="161" stroke="#7fb069"/>
+      <circle class="halo" id="h-society"    cx="190" cy="420" r="124" stroke="#e3c567"/>
+      <circle class="halo" id="h-creation"   cx="665" cy="430" r="121" stroke="#d98aa8"/>
+
+      <circle class="set" id="c-mindbody"   cx="300" cy="255" r="178" fill="transparent" stroke="#b48ede" tabindex="0" role="link" aria-label="mind / body — a nervous system I am still learning to read"/>
+      <circle class="set" id="c-tech"       cx="560" cy="255" r="178" fill="transparent" stroke="#6fa8dc" tabindex="0" role="link" aria-label="technology — understood in order to be seen through"/>
+      <circle class="set" id="c-philosophy" cx="430" cy="445" r="152" fill="transparent" stroke="#7fb069" tabindex="0" role="link" aria-label="philosophy — epistemology for its own sake"/>
+      <circle class="set" id="c-society"    cx="190" cy="420" r="115" fill="transparent" stroke="#e3c567" tabindex="0" role="link" aria-label="society — power, consent, and collective dynamics"/>
+      <circle class="set" id="c-creation"   cx="665" cy="430" r="112" fill="transparent" stroke="#d98aa8" tabindex="0" role="link" aria-label="creation — curiosity-guided projects"/>
+
+      <text class="dlabel" id="l-mindbody"   x="300" y="60"  text-anchor="middle" fill="#b48ede">MIND / BODY</text>
+      <text class="dlabel" id="l-tech"       x="560" y="60"  text-anchor="middle" fill="#6fa8dc">TECHNOLOGY</text>
+      <text class="dlabel" id="l-philosophy" x="430" y="617" text-anchor="middle" fill="#7fb069">PHILOSOPHY</text>
+      <text class="dlabel" id="l-society"    x="120" y="290" text-anchor="middle" fill="#e3c567">SOCIETY</text>
+      <text class="dlabel" id="l-creation"   x="795" y="415" text-anchor="middle" fill="#d98aa8">CREATION</text>
+
+      <g class="xg" data-pair="mindbody,tech">
+        <text class="xname" x="430" y="225" text-anchor="middle">cognitive architecture</text>
+        <text class="xform" x="430" y="239" text-anchor="middle">M ∩ T</text>
+      </g>
+      <g class="xg" data-pair="mindbody,society">
+        <text class="xname" x="221" y="358" text-anchor="middle">structural difference</text>
+        <text class="xform" x="221" y="372" text-anchor="middle">M ∩ S</text>
+      </g>
+      <g class="xg" data-pair="mindbody,philosophy">
+        <text class="xname" x="352" y="380" text-anchor="middle">phenomenology</text>
+        <text class="xform" x="352" y="394" text-anchor="middle">M ∩ P</text>
+      </g>
+      <g class="xg" data-pair="philosophy,tech">
+        <text class="xname" x="512" y="380" text-anchor="middle">ai alignment</text>
+        <text class="xform" x="512" y="394" text-anchor="middle">T ∩ P</text>
+      </g>
+      <g class="xg" data-pair="creation,tech">
+        <text class="xname" x="637" y="362" text-anchor="middle">building your way out</text>
+        <text class="xform" x="637" y="376" text-anchor="middle">T ∩ C</text>
+      </g>
+      <g class="xg" data-pair="philosophy,society">
+        <text class="xname" x="286" y="470" text-anchor="middle">power &amp; consent</text>
+        <text class="xform" x="286" y="484" text-anchor="middle">S ∩ P</text>
+      </g>
+      <g class="xg" data-pair="creation,philosophy">
+        <text class="xname" x="571" y="463" text-anchor="middle">making as thinking</text>
+        <text class="xform" x="571" y="477" text-anchor="middle">P ∩ C</text>
+      </g>
+
+      <circle class="drift" id="drift1" cx="200" cy="150" r="2.6" fill="#e9e6de" opacity="0.45" pointer-events="none"/>
+      <circle class="drift" id="drift2" cx="700" cy="520" r="2.6" fill="#e9e6de" opacity="0.45" pointer-events="none"/>
+      <circle class="me-dot" cx="430" cy="325" r="3.5"/>
+      <text class="melbl" x="444" y="330" font-size="14" fill="#e07a6b">me</text>
+    </svg>
+    <div class="vennpanel" id="cap1" aria-live="polite"></div>
+  </div>
+</div>
+
+<div class="col">
+  <!-- ============ INTRO ============ -->
+  <div class="intro reveal">
+    <p>
+      I’m Param. I run the experiments on myself and file the reports — small
+      systems, and essays about what constant machine mediation does to a mind.
+    </p>
+    <p>Raised by the algorithm, realigning by hand.</p>
+    <p class="mut">
+      A diet of Aeon and LessWrong, in unequal measure. Studying the philosophy
+      of mind after a year of building with the machines. Vegan. Lived all over
+      the world; only ever really lived online. Bangalore, briefly — then
+      westward.
+    </p>
+  </div>
+</div>
+
+<!-- ============ FIG 2 · GALTON ============ -->
+<div class="colwide">
+  <div class="galton-sec reveal" id="distribution">
+    <div class="figlabel">fig. 2 · the galton machine</div>
+    <div class="figdek">
+      the curve everyone forms, and the peg machine that generates it — toggle
+      between the result and the proof.
+    </div>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt">distribution.sim — the curve, and the machine that proves it</span>
+        <span class="sp"></span>
+        <button
+          class="minb"
+          data-p="p-galton"
+          aria-expanded="true"
+          aria-label="collapse panel"
+        >
+          –
+        </button>
+        <button
+          class="fakex"
+          title="nothing really closes"
+          aria-label="close, which minimizes"
+        >
+          ×
+        </button>
+      </div>
+      <div class="panel-body" id="p-galton">
+        <div class="galton-wrap" id="curveView">
+          <svg id="smooth" viewBox="0 0 900 300" role="img" aria-label="A normal distribution. Shaded bands mark within one sigma of the mean and the tails. A slider biases the mean rightward; the curve slides while three fixed markers — autumn 2025 at the far right tail, spring 2026 at the far left, and a red dot labeled now — stay put.">
+            <defs>
+              <clipPath id="sc-l"><rect id="scl" x="0" y="0" width="320" height="300"/></clipPath>
+              <clipPath id="sc-c"><rect id="scc" x="320" y="0" width="260" height="300"/></clipPath>
+              <clipPath id="sc-r"><rect id="scr" x="580" y="0" width="320" height="300"/></clipPath>
+            </defs>
+            <path id="smFillL" fill="#b48ede" fill-opacity="0.04" clip-path="url(#sc-l)"/>
+            <path id="smFillC" fill="#7fb069" fill-opacity="0.05" clip-path="url(#sc-c)"/>
+            <path id="smFillR" fill="#b48ede" fill-opacity="0.04" clip-path="url(#sc-r)"/>
+            <line x1="40" y1="250" x2="860" y2="250" stroke="#26272a" stroke-width="1"/>
+            <line id="smSigL" y1="30" y2="250" stroke="#4a4a44" stroke-width="0.8" stroke-dasharray="3 4"/>
+            <line id="smSigR" y1="30" y2="250" stroke="#4a4a44" stroke-width="0.8" stroke-dasharray="3 4"/>
+            <line id="smMu"   y1="24" y2="250" stroke="#7fb069" stroke-width="0.8" stroke-opacity="0.45" stroke-dasharray="2 5"/>
+            <line x1="450" y1="250" x2="450" y2="258" stroke="#96917f" stroke-width="1"/>
+            <text x="450" y="272" text-anchor="middle" font-size="10" fill="#7c7869" font-family="IBM Plex Mono, monospace">μ, fair — the default settings</text>
+            <text id="smMuLbl" y="288" text-anchor="middle" font-size="10" fill="#e07a6b" font-family="IBM Plex Mono, monospace"></text>
+            <text id="smSigLLbl" y="266" text-anchor="middle" font-size="9.5" fill="#7c7869" font-family="IBM Plex Mono, monospace">−1σ</text>
+            <text id="smSigRLbl" y="266" text-anchor="middle" font-size="9.5" fill="#7c7869" font-family="IBM Plex Mono, monospace">+1σ</text>
+            <path id="smCurve" fill="none" stroke="#e9e6de" stroke-width="1.2" stroke-opacity="0.7" style="transition: stroke-opacity 0.22s ease"/>
+            <text class="swing2" x="450" y="42" text-anchor="middle" font-size="10.5" letter-spacing="0.14em" fill="#7c7869" font-family="IBM Plex Mono, monospace">overcorrection</text>
+            <circle id="smGhR" r="3.5" fill="none" stroke="#e07a6b" stroke-width="1.2" opacity="0.45"/>
+            <circle id="smGhL" r="3.5" fill="none" stroke="#e07a6b" stroke-width="1.2" opacity="0.45"/>
+            <text x="852" y="220" text-anchor="end" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">autumn ’25 — every decision through the machine</text>
+            <text x="48" y="220" text-anchor="start" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">spring ’26 — cold turkey</text>
+            <circle id="smNow" class="me-dot" r="3.5"/>
+            <text id="smNowLbl" y="150" text-anchor="middle" font-size="10.5" fill="#96917f" font-family="IBM Plex Mono, monospace">now — chosen, revised monthly</text>
+            <rect id="smHovL" x="0" y="0" width="320" height="300" fill="transparent"/>
+            <rect id="smHovC" x="320" y="0" width="260" height="300" fill="transparent"/>
+            <rect id="smHovR" x="580" y="0" width="320" height="300" fill="transparent"/>
+          </svg>
+        </div>
+        <div class="galton-wrap" id="gWrap" style="display:none">
+          <canvas
+            id="galton"
+            height="430"
+            role="img"
+            aria-label="A live Galton board. Balls fall through nine rows of pegs, branching left or right at each one, and pile into bins that form a bell curve. A slider biases every branch slightly rightward; the whole pile’s mean moves with it. Occasional red balls are tracked individually."
+          ></canvas>
+        </div>
+        <div class="g-controls">
+          <button id="vCurve" aria-pressed="true">the curve</button>
+          <button id="vMach" aria-pressed="false">the machine</button>
+          <label>
+            <span class="sublab">the feed’s thumb</span>
+            <input
+              type="range"
+              id="bias"
+              min="0.50"
+              max="0.70"
+              step="0.01"
+              value="0.50"
+              aria-label="probability of branching right at every peg"
+            />
+            <span class="pval" id="pval">p(right) = .50</span>
+          </label>
+          <button id="gReset">reset</button>
+          <span class="n" id="gCount" aria-live="off">n = 0 · me: 0</span>
+        </div>
+      </div>
+    </div>
+    <div class="capbar" id="cap2" aria-live="polite"></div>
+    <div class="fignote">
+      real randomness, real binomial, real sample mean — no thumbs except the
+      one you place.
+    </div>
+  </div>
+
+  <!-- ============ FOUR ROOMS ============ -->
+  <div class="rooms reveal" id="rooms">
+    <div class="figlabel">the four rooms · one house</div>
+    <div class="rooms-grid">
+      <div class="panel room" data-c="create">
+        <div class="panel-bar">
+          <span class="rdot"></span><span class="pt">create/</span
+          ><span class="sp"></span>
+          <button
+            class="minb"
+            data-p="p-create"
+            aria-expanded="true"
+            aria-label="collapse panel"
+          >
+            –
+          </button>
+        </div>
+        <div class="panel-body" id="p-create">
+          <p>
+            <b>Making is thinking.</b> Output forces a precision that reading,
+            talking, and planning never quite demand — even when the thing made
+            is imperfect. Especially then.
+          </p>
+          <a class="enter" href="#create">enter →</a>
+        </div>
+      </div>
+      <div class="panel room" data-c="consume">
+        <div class="panel-bar">
+          <span class="rdot"></span><span class="pt">consume/</span
+          ><span class="sp"></span>
+          <button
+            class="minb"
+            data-p="p-consume"
+            aria-expanded="true"
+            aria-label="collapse panel"
+          >
+            –
+          </button>
+        </div>
+        <div class="panel-body" id="p-consume">
+          <p>
+            <b>Reading widely isn’t the goal; models that predict are.</b>
+            Otherwise it’s a larger pile of interesting things you once
+            encountered.
+          </p>
+          <a class="enter" href="#consume">enter →</a>
+        </div>
+      </div>
+      <div class="panel room" data-c="curate">
+        <div class="panel-bar">
+          <span class="rdot"></span><span class="pt">curate/</span
+          ><span class="sp"></span>
+          <button
+            class="minb"
+            data-p="p-curate"
+            aria-expanded="true"
+            aria-label="collapse panel"
+          >
+            –
+          </button>
+        </div>
+        <div class="panel-body" id="p-curate">
+          <p>
+            <b>Attention is the scarce resource.</b> The diet sets the prior you
+            bring to everything else. What you refuse to attend to matters as
+            much as what you keep.
+          </p>
+          <a class="enter" href="#curate">enter →</a>
+        </div>
+      </div>
+      <div class="panel room" data-c="cohere">
+        <div class="panel-bar">
+          <span class="rdot"></span><span class="pt">cohere/</span
+          ><span class="sp"></span>
+          <button
+            class="minb"
+            data-p="p-cohere"
+            aria-expanded="true"
+            aria-label="collapse panel"
+          >
+            –
+          </button>
+        </div>
+        <div class="panel-body" id="p-cohere">
+          <p>
+            <b
+              >The views should fit together — or the contradictions should be
+              named.</b
+            >
+            Invisible incoherence is rot. A named contradiction is sometimes
+            just honesty.
+          </p>
+          <a class="enter" href="#cohere">enter →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <!-- ============ CREATE ============ -->
+  <section id="create">
+    <div class="sec-head reveal">
+      <span class="tick"></span>
+      <h2>create</h2>
+      <span class="notation">create = { essays } ∪ { systems }</span>
+    </div>
+
+    <div class="sub reveal">essays</div>
+    <ul class="index">
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Taste Is Security</a></span>
+          <span class="dek"
+            >When everything can be generated, discernment is the last thing you
+            can’t.</span
+          >
+        </div>
+        <span class="when">aug 2026</span>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">The Delegation Discount</a></span>
+          <span class="dek"
+            >What you save in effort you pay back in judgment, at compound
+            interest.</span
+          >
+        </div>
+        <span class="when">jul 2026</span>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Fieldwork, Not a Gap</a></span>
+          <span class="dek"
+            >A year inside the machines, as both subject and journalist.</span
+          >
+        </div>
+        <span class="when">jun 2026</span>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Anxiety Is Information</a></span>
+          <span class="dek"
+            >Kierkegaard, wearables, and reading your own signal without
+            flinching.</span
+          >
+        </div>
+        <span class="when">may 2026</span>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">The Sameness Engine</a></span>
+          <span class="dek"
+            >Every feed optimizes toward the same person. Notes on wanting your
+            own desires.</span
+          >
+        </div>
+        <span class="when">apr 2026</span>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Keep the Exit</a></span>
+          <span class="dek"
+            >You don’t have to leave the platform. You have to be able to.</span
+          >
+        </div>
+        <span class="when">mar 2026</span>
+      </li>
+    </ul>
+
+    <div class="sub reveal">systems</div>
+    <div class="subnote reveal">
+      some built for use, some for the joy of the rabbit hole.
+    </div>
+    <ul class="index">
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Keep</a></span>
+          <span class="dek"
+            >Prediction markets on your own biometrics. Break your word, fund a
+            charity.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">BONP</a></span>
+          <span class="dek"
+            >An open protocol for verifying biometric claims with oracle
+            quorums.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">mcp-red-team</a></span>
+          <span class="dek"
+            >An adversarial scanner for MCP servers. Eight attack
+            categories.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">CMCHP</a></span>
+          <span class="dek"
+            >A protocol and benchmark for handing context between rival
+            models.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Pickless</a></span>
+          <span class="dek"
+            >An agent that picks one dish and orders it. The menu never
+            opens.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">shosai 書斎</span></span>
+          <span class="dek"
+            >A morning dashboard that replaced five newsletters and three
+            feeds.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Claude Code Playbook</a></span>
+          <span class="dek"
+            >MCP servers, skills, hooks, and evals — the tooling, in the
+            open.</span
+          >
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ CONSUME ============ -->
+  <section id="consume">
+    <div class="sec-head reveal">
+      <span class="tick"></span>
+      <h2>consume</h2>
+      <span class="notation">what goes in decides what comes out</span>
+    </div>
+    <div class="now reveal">
+      <div>
+        <h3>reading</h3>
+        <ul>
+          <li>Clark &amp; Chalmers, <em>The Extended Mind</em></li>
+          <li>Aeon &amp; Psyche, most mornings</li>
+          <li>LessWrong, with a raised eyebrow</li>
+          <li>80,000 Hours, selectively</li>
+        </ul>
+      </div>
+      <div>
+        <h3>watching</h3>
+        <ul>
+          <li>Slow cinema on MUBI</li>
+          <li>Anything Joachim Trier</li>
+          <li class="d">no shorts. deleted the apps.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>listening</h3>
+        <ul>
+          <li>Fleet Foxes · Wilco</li>
+          <li>Vampire Weekend · Bon Iver</li>
+          <li>Phoebe Bridgers</li>
+          <li class="d">and the old ghosts — Peep, Lean — for the record.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FIG 3 · INFLUENCE GRAPH ============ -->
+<div class="colwide">
+  <div class="graph-sec reveal" id="influences">
+    <div class="figlabel">fig. 3 · the influence graph</div>
+    <div class="figdek">
+      nothing arrives alone. most of these run one way — two run both, and that
+      difference is the whole story.
+    </div>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt">influences.map — bidirectional</span>
+        <span class="sp"></span>
+        <button
+          class="minb"
+          data-p="p-graph"
+          aria-expanded="true"
+          aria-label="collapse panel"
+        >
+          –
+        </button>
+        <button
+          class="fakex"
+          title="nothing really closes"
+          aria-label="close, which minimizes"
+        >
+          ×
+        </button>
+      </div>
+      <div class="panel-body" id="p-graph">
+        <div class="graph-wrap">
+          <svg
+            class="infl"
+            id="inflSvg"
+            viewBox="0 0 900 400"
+            role="group"
+            aria-label="A network graph. A red node labeled me sits at the center, connected by bidirectional edges to the feed, the machines, Aeon and Psyche, LessWrong, Kierkegaard, Clark and Chalmers, Meredith Whittaker, MUBI, Fleet Foxes, and the old ghosts. Hovering a node explains the influence in both directions."
+          ></svg>
+        </div>
+      </div>
+    </div>
+    <div class="capbar" id="capG" aria-live="polite">
+      fig. 1 shows what overlaps; this shows what flows. hover a node — the
+      two-way edges are the ones that changed me.
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <!-- ============ CURATE ============ -->
+  <section id="curate">
+    <div class="sec-head reveal">
+      <span class="tick"></span>
+      <h2>curate</h2>
+      <span class="notation">kept, cut, passed on</span>
+    </div>
+    <ul class="index">
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"
+            ><a href="#"
+              >Meredith Whittaker, on Signal and surveillance</a
+            ></span
+          >
+          <span class="dek"
+            >The opt-out argument made flesh. Watch every talk she gives.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"
+            ><a href="#">Zvi Mowshowitz, Don’t Worry About the Vase</a></span
+          >
+          <span class="dek"
+            >The highest signal-to-noise ratio in AI commentary.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Emily Sundberg, Feed Me</a></span>
+          <span class="dek">Proof that taste is a reporting beat.</span>
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">Andy Clark, in Aeon</a></span>
+          <span class="dek"
+            >Where the mind ends and the world begins — the question under all
+            my questions.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div class="li-body">
+          <span class="t"><a href="#">MUBI Notebook</a></span>
+          <span class="dek"
+            >Film writing that assumes you can sit still for two hours.</span
+          >
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ COHERE ============ -->
+  <section id="cohere">
+    <div class="sec-head reveal">
+      <span class="tick"></span>
+      <h2>cohere</h2>
+      <span class="notation">making it hang together</span>
+    </div>
+
+    <!-- fig 4 -->
+    <div class="fig3-head reveal">
+      <div class="figlabel">fig. 4 · precedence</div>
+      <div class="figdek">which value gets the last word, by situation.</div>
+    </div>
+    <div class="chips reveal" role="group" aria-label="situations to route">
+      <button data-route="irrev" aria-pressed="false">
+        an irreversible choice
+      </button>
+      <button data-route="agree" aria-pressed="false">
+        everyone suddenly agrees
+      </button>
+      <button data-route="collide" aria-pressed="false">
+        two of my values collide
+      </button>
+      <button data-route="business" aria-pressed="false">
+        is it anyone’s business?
+      </button>
+    </div>
+    <div class="tree-wrap reveal">
+      <svg
+        class="gov"
+        id="govSvg"
+        viewBox="0 0 1010 335"
+        role="group"
+        aria-label="A decision tree titled precedence. Root: a call to make. If it touches a person, kindness governs — always. If it can’t be undone, uncertainty governs. If everyone is already doing it, individuality governs; otherwise taste. A separate short branch, is it anyone’s business, ends early at privacy."
+      >
+        <line id="e1" x1="50" y1="170" x2="230" y2="118" />
+        <line id="e2" x1="50" y1="170" x2="228" y2="296" />
+        <line id="e3" x1="230" y1="118" x2="458" y2="58" />
+        <line id="e4" x1="230" y1="118" x2="460" y2="190" />
+        <line id="e5" x1="460" y1="190" x2="678" y2="128" />
+        <line id="e6" x1="460" y1="190" x2="680" y2="250" />
+        <line id="e7" x1="680" y1="250" x2="866" y2="208" />
+        <line id="e8" x1="680" y1="250" x2="866" y2="288" />
+
+        <circle class="node" cx="50" cy="170" r="5" />
+        <circle class="node" cx="230" cy="118" r="5" />
+        <circle class="node" cx="460" cy="190" r="5" />
+        <circle class="node" cx="680" cy="250" r="5" />
+
+        <text class="q" x="116" y="206">a call to make.</text>
+        <text class="q" x="216" y="96" text-anchor="end">
+          does it touch a person?
+        </text>
+        <text class="q" x="460" y="222" text-anchor="middle">
+          can it be undone?
+        </text>
+        <text class="q" x="680" y="290" text-anchor="middle">
+          is everyone already doing it?
+        </text>
+
+        <text class="always" x="336" y="72" text-anchor="middle">always</text>
+        <text class="yn" x="352" y="178">no</text>
+        <text class="yn" x="560" y="148">no</text>
+        <text class="yn" x="560" y="234">yes</text>
+        <text class="yn" x="768" y="218">yes</text>
+        <text class="yn" x="768" y="284">no</text>
+
+        <g
+          class="leaf"
+          id="leaf-kind"
+          tabindex="0"
+          role="button"
+          aria-label="kindness — rigor can wait thirty seconds"
+        >
+          <circle class="leafnode" cx="462" cy="60" r="5.5" />
+          <text class="leaflbl" x="478" y="64">KINDNESS</text>
+        </g>
+        <g
+          class="leaf"
+          id="leaf-unc"
+          tabindex="0"
+          role="button"
+          aria-label="uncertainty — one-way doors get a credence first"
+        >
+          <circle class="leafnode" cx="682" cy="130" r="5.5" />
+          <text class="leaflbl" x="698" y="134">UNCERTAINTY</text>
+        </g>
+        <g
+          class="leaf"
+          id="leaf-ind"
+          tabindex="0"
+          role="button"
+          aria-label="individuality — the mean moved, not the truth"
+        >
+          <circle class="leafnode" cx="870" cy="210" r="5.5" />
+          <text class="leaflbl" x="886" y="214">INDIVIDUALITY</text>
+        </g>
+        <g
+          class="leaf"
+          id="leaf-taste"
+          tabindex="0"
+          role="button"
+          aria-label="taste — when nothing else claims jurisdiction, judgment does"
+        >
+          <circle class="leafnode" cx="870" cy="290" r="5.5" />
+          <text class="leaflbl" x="886" y="294">TASTE</text>
+        </g>
+        <g
+          class="leaf"
+          id="leaf-priv"
+          tabindex="0"
+          role="button"
+          aria-label="privacy — end of route"
+        >
+          <circle class="leafnode" cx="232" cy="298" r="5.5" />
+          <text class="leaflbl" x="248" y="296">PRIVACY</text>
+          <text class="leafsub" x="248" y="312">end of route.</text>
+        </g>
+
+        <circle class="me-dot" id="dot3" cx="50" cy="170" r="3.5" />
+      </svg>
+    </div>
+    <div class="capbar" id="cap3" aria-live="polite">— pick a situation —</div>
+    <div class="fignote">deterministic here. messier in production.</div>
+
+    <!-- standing contradictions -->
+    <div class="sub reveal">standing contradictions</div>
+    <div class="subnote reveal">held open on purpose.</div>
+    <div class="pairs reveal">
+      <div>builds with AI <span class="and">∧</span> suspicious of AI</div>
+      <div>loves systems <span class="and">∧</span> distrusts platforms</div>
+      <div>fleet foxes <span class="and">∧</span> yung lean</div>
+      <div>craves order <span class="and">∧</span> trains for uncertainty</div>
+      <div>online since forever <span class="and">∧</span> keeps the exit</div>
+    </div>
+
+    <!-- ledger -->
+    <div class="sub reveal">the ledger</div>
+    <div class="subnote reveal" id="ledgerSub">
+      numbers are commitments to update, not positions to defend. hover for the
+      working.
+    </div>
+    <table class="ledger reveal">
+      <thead>
+        <tr>
+          <th>proposition</th>
+          <th class="num">p</th>
+          <th class="num">Δ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          tabindex="0"
+          data-note="visa math and courage math, both improving."
+        >
+          <td>I move westward by spring ’27</td>
+          <td class="num">.85</td>
+          <td class="num"><span class="tr-up">▲</span></td>
+        </tr>
+        <tr
+          tabindex="0"
+          data-note="conditional on moving. brooklyn for the walking and the writing; sf for proximity — which is also the argument against."
+        >
+          <td>…to Brooklyn, given that I move</td>
+          <td class="num">.65</td>
+          <td class="num">—</td>
+        </tr>
+        <tr
+          tabindex="0"
+          data-note="the delegation discount, self-measured. the systems above exist to catch it early."
+        >
+          <td>Heavy LLM use atrophies unaided judgment (in me, by 2031)</td>
+          <td class="num">.70</td>
+          <td class="num"><span class="tr-up">▲</span></td>
+        </tr>
+        <tr
+          tabindex="0"
+          data-note="kierkegaard called anxiety the dizziness of freedom. the feed manufactures the dizziness, then sells the cure."
+        >
+          <td>Gen Z anxiety is signal, not disorder</td>
+          <td class="num">.75</td>
+          <td class="num"><span class="tr-up">▲</span></td>
+        </tr>
+        <tr tabindex="0" data-note="the easiest belief I hold.">
+          <td>I’ll still be vegan at 40</td>
+          <td class="num">.93</td>
+          <td class="num">—</td>
+        </tr>
+        <tr tabindex="0" data-note="settles august 2027.">
+          <td>This design survives twelve months</td>
+          <td class="num">.35</td>
+          <td class="num"><span class="tr-dn">▼</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="ledger-note" id="ledgerNote" aria-live="polite">
+      — hover a proposition —
+    </div>
+    <div class="ledger-foot">last audit: august 2026.</div>
+
+    <!-- principles -->
+    <div class="sub reveal">principles</div>
+    <ol class="principles">
+      <li class="reveal">
+        <div>
+          <b>Dissect the package.</b
+          ><span class="why">
+            What is said, how it’s sold, what actually arrives — three different
+            things.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div>
+          <b>Keep the exit.</b
+          ><span class="why"> Any system you cannot leave owns you.</span>
+        </div>
+      </li>
+      <li class="reveal">
+        <div>
+          <b>Judgment is the last thing to outsource.</b
+          ><span class="why">
+            Automate the work; never the choice of which work is worth
+            doing.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div>
+          <b>Question the frameworks you question with.</b
+          ><span class="why">
+            Every instrument has assumptions baked in — especially the ones that
+            feel like plain glass.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div>
+          <b>Impact over intent</b
+          ><span class="why">
+            — in both directions, including when I’m the one who meant
+            well.</span
+          >
+        </div>
+      </li>
+      <li class="reveal">
+        <div>
+          <b>Credences, not vibes.</b
+          ><span class="why">
+            Numbers keep me honest about what I actually believe. See the
+            ledger.</span
+          >
+        </div>
+      </li>
+    </ol>
+
+    <!-- currently -->
+    <div class="sub reveal">currently</div>
+    <ul class="current">
+      <li class="reveal">
+        <span>Philosophy of mind, read properly.</span
+        ><span class="c-note">clark, chalmers, the extended-mind fight</span>
+      </li>
+      <li class="reveal">
+        <span
+          >Stanford, from afar: Tech Ethics &amp; Policy · Applied
+          Presence.</span
+        ><span class="c-note">a foot in the old world</span>
+      </li>
+      <li class="reveal">
+        <span>Practicing: organizing — people, not files.</span
+        ><span class="c-note">does not come naturally</span>
+      </li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ FIG 5 · DIRECTIONALLY CORRECT ============ -->
+<div class="colwide">
+  <div class="breakout-sec reveal" id="truthseeker">
+    <div class="figlabel">fig. 5 &#183; directionally correct</div>
+    <div class="figdek">
+      the think-for-yourself layer &#8212; a toy for truth seekers. every brick
+      is an input; the paddle is judgment; the score is an angle.
+    </div>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt"
+          >truthseeker.sim &#8212; every brick bends the path</span
+        >
+        <span class="sp"></span>
+        <button
+          class="minb"
+          data-p="p-breakout"
+          aria-expanded="true"
+          aria-label="collapse panel"
+        >
+          &#8211;
+        </button>
+        <button
+          class="fakex"
+          title="nothing really closes"
+          aria-label="close, which minimizes"
+        >
+          &#215;
+        </button>
+      </div>
+      <div class="panel-body" id="p-breakout">
+        <div class="galton-wrap">
+          <canvas
+            id="breakout"
+            height="430"
+            tabindex="0"
+            role="img"
+            aria-label="A breakout game. A red ball, the belief, bounces through bricks labeled with epistemic inputs. Green bricks like evidence and base rate bend its path toward a slowly drifting truth marker; violet bricks like vibes and the feed bend it away. A paddle labeled judgment keeps the belief in play. A readout shows the live angle between the ball&#8217;s heading and the direction of truth. Arrow keys move the paddle; space launches."
+          ></canvas>
+        </div>
+        <div class="g-controls">
+          <span class="sublab" style="color: var(--c-create)"
+            >green bends you toward truth</span
+          >
+          <span class="sublab" style="color: var(--c-consume)"
+            >violet bends you away</span
+          >
+          <span class="n" id="bStats" aria-live="off"
+            >error &#8212;&#176; &#183; updates 0</span
+          >
+        </div>
+      </div>
+    </div>
+    <div class="capbar" id="capB" aria-live="polite">
+      keep the belief in play. the score is an angle, not a number.
+    </div>
+    <div class="fignote">you don&#8217;t arrive. you stay pointed.</div>
+  </div>
+</div>
+
+<!-- ============ THOUGHTS.LOG ============ -->
+<div class="colwide">
+  <div class="log-sec reveal" id="log">
+    <div class="figlabel">running commentary</div>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt">thoughts.log — tail -f</span>
+        <span class="sp"></span>
+        <button
+          class="minb"
+          data-p="p-log"
+          aria-expanded="true"
+          aria-label="collapse panel"
+        >
+          –
+        </button>
+        <button
+          class="fakex"
+          title="nothing really closes"
+          aria-label="close, which minimizes"
+        >
+          ×
+        </button>
+      </div>
+      <div class="panel-body" id="p-log">
+        <div class="log-entry">
+          <div class="log-meta">
+            <span>aug 2026</span><span class="log-tag">both / and</span>
+          </div>
+          <div class="log-body">
+            I overcorrected with the machine — every hour planned, every note
+            processed, every decision routed through it. Then cold turkey. Both
+            were positions the pendulum picked, not me. The right relationship
+            keeps shifting; that’s probably the honest answer.
+          </div>
+        </div>
+        <div class="log-entry">
+          <div class="log-meta">
+            <span>aug 2026</span><span class="log-tag">wiring</span>
+          </div>
+          <div class="log-body">
+            The vocabulary preceded the clarity. Getting language for how my
+            nervous system actually runs wasn’t pathologising — it was finally
+            being able to describe myself to myself.
+            <span class="m"
+              >A neurodivergent mind in a neurotypical world is a translation
+              job, and I finally have the dictionary.</span
+            >
+          </div>
+        </div>
+        <div class="log-entry">
+          <div class="log-meta">
+            <span>aug 2026</span><span class="log-tag">power / tech</span>
+          </div>
+          <div class="log-body">
+            The algorithm gave me language, community, intellectual access. It
+            also flattened things, extracted attention, made ambient
+            dissociation feel normal.
+            <span class="m"
+              >Genetics plus environment — and the environment was built by a
+              business model nobody consented to.</span
+            >
+          </div>
+        </div>
+        <div class="log-entry">
+          <div class="log-meta">
+            <span>jul 2026</span><span class="log-tag">epistemics</span>
+          </div>
+          <div class="log-body">
+            Life isn’t optimisation toward a maximum; it’s variance around a
+            mean. Calibrate for the tails — expect them.
+            <span class="m"
+              >Individuality is distance from the mean, chosen on purpose.
+              See&#160;fig.&#160;2.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ THE TAPE ============ -->
+<div
+  class="tape"
+  role="marquee"
+  aria-label="a ticker tape of current credences, quoted like market prices"
+>
+  <div class="tape-rail" id="tapeRail">
+    <span class="q">WESTWARD ’27 <b>.85</b> <span class="up">▲</span></span
+    ><span class="q sep">···</span>
+    <span class="q">BROOKLYN | MOVE <b>.65</b> —</span
+    ><span class="q sep">···</span>
+    <span class="q"
+      >JUDGMENT ATROPHY ’31 <b>.70</b> <span class="up">▲</span></span
+    ><span class="q sep">···</span>
+    <span class="q">GEN Z = SIGNAL <b>.75</b> <span class="up">▲</span></span
+    ><span class="q sep">···</span>
+    <span class="q">VEGAN @ 40 <b>.93</b> —</span><span class="q sep">···</span>
+    <span class="q"
+      >THIS DESIGN, 12 MO <b>.35</b> <span class="dn">▼</span></span
+    ><span class="q sep">···</span> <span class="q">𝒰 REMAINS OPEN</span
+    ><span class="q sep">···</span>
+  </div>
+</div>
+
+<div class="col">
+  <footer id="contact">
+    <div class="contact reveal">
+      <a href="mailto:hello@paramvaswani.com">hello@paramvaswani.com</a>
+      <a href="https://www.linkedin.com/in/paramvaswani"
+        >linkedin / paramvaswani</a
+      >
+      <a href="https://bsky.app/profile/paramvaswani.bsky.social"
+        >bluesky / paramvaswani</a
+      >
+    </div>
+    <div class="figindex reveal">
+      <a href="#top">fig. 1 · what coexists</a>
+      <a href="#distribution">fig. 2 · how far from the mean</a>
+      <a href="#influences">fig. 3 · the influence graph</a>
+      <a href="#cohere">fig. 4 · precedence</a>
+      <a href="#truthseeker">fig. 5 · directionally correct</a>
+    </div>
+    <div class="colophon reveal">
+      hand-built · no analytics, no cookies, nothing sold · some sets aren’t
+      drawn<br />
+      the essays are written without machines; the site was built with them.<br />
+      the tape quotes the ledger, not the market · set in newsreader &amp; plex
+      mono — the one outbound request<br />
+      bangalore → westward, 2026 · 𝒰 remains open
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var hoverNone = window.matchMedia("(hover: none)").matches;
+
+    /* ================= PANELS ================= */
+    document.querySelectorAll(".panel-bar .minb").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var panel = b.closest(".panel");
+        var min = panel.getAttribute("data-min") === "1";
+        panel.setAttribute("data-min", min ? "0" : "1");
+        b.setAttribute("aria-expanded", min ? "true" : "false");
+        b.textContent = min ? "–" : "+";
+      });
+    });
+    document.querySelectorAll(".panel-bar .fakex").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var panel = b.closest(".panel");
+        var minb = panel.querySelector(".minb");
+        if (minb && panel.getAttribute("data-min") !== "1") minb.click();
+      });
+    });
+
+    /* ================= FIG 1 · VENN ================= */
+    var svg = document.querySelector("svg.venn");
+    var cap1 = document.getElementById("cap1");
+    var sets = [
+      { id: "mindbody",   cx: 300, cy: 255, r: 178, color: "#b48ede", letter: "M", label: "mind / body", dest: "log",         destName: "thoughts.log" },
+      { id: "tech",       cx: 560, cy: 255, r: 178, color: "#6fa8dc", letter: "T", label: "technology",  dest: "distribution", destName: "fig. 2, the machine" },
+      { id: "philosophy", cx: 430, cy: 445, r: 152, color: "#7fb069", letter: "P", label: "philosophy",  dest: "cohere",      destName: "cohere — tree, ledger, principles" },
+      { id: "society",    cx: 190, cy: 420, r: 115, color: "#e3c567", letter: "S", label: "society",     dest: "influences",  destName: "fig. 3, the influence graph" },
+      { id: "creation",   cx: 665, cy: 430, r: 112, color: "#d98aa8", letter: "C", label: "creation",    dest: "create",      destName: "create — essays &amp; systems" },
+    ];
+    var offrec = { cx: 820, cy: 580, r: 76 };
+    var SET_COPY = {
+      mindbody:
+        "A nervous system I’m still learning to read. Neurodivergence as signal, not deficit. Interoception, pattern recognition, obsession and compulsion as data. I finally have language for how I’m wired — it changed everything.",
+      tech:
+        "A year spent speedrunning ML fundamentals and AI safety from first principles — not to serve it, to understand it and see through it. Power concentrates here. So do the tools to build your way out. Both/and.",
+      philosophy:
+        "Epistemology for its own sake. Truth-seeking not instrumentalised by profit or performance. Frameworks to evaluate claims, name my own patterns, and calibrate toward clarity rather than comfort.",
+      society:
+        "Social contracts are breaking in real time. Coercive structures leave marks. Raised by the algorithm, shaped by insight — all of it informing how I read power, consent, and collective dynamics.",
+      creation:
+        "Curiosity-guided projects. Novelty and whimsy are legitimate values. A sliver of fuck-the-establishment, a sliver of use-the-tools-to-build-your-own-thing. A foot in the old world, always making.",
+    };
+    var PAIRS = {
+      "mindbody,tech":       { name: "cognitive architecture", form: "M ∩ T", line: "how the wiring runs, studied with the machines’ own tools." },
+      "mindbody,society":    { name: "structural difference",  form: "M ∩ S", line: "a mind built differently, in a world built for the default." },
+      "mindbody,philosophy": { name: "phenomenology",          form: "M ∩ P", line: "what experience is like from inside — the data only I can collect." },
+      "philosophy,tech":     { name: "ai alignment",           form: "T ∩ P", line: "getting the powerful thing to want what we’d endorse. the century’s homework." },
+      "creation,tech":       { name: "building your way out",  form: "T ∩ C", line: "the tools of the platform, turned toward the exit." },
+      "philosophy,society":  { name: "power &amp; consent",    form: "S ∩ P", line: "who decides, who’s asked, who’s merely enrolled." },
+      "creation,philosophy": { name: "making as thinking",     form: "P ∩ C", line: "the essay and the system are the same move — output as proof of thought." },
+    };
+    function toLocal(evt) {
+      var r = svg.getBoundingClientRect();
+      return {
+        x: (evt.clientX - r.left) * (900 / r.width),
+        y: (evt.clientY - r.top) * (640 / r.height),
+      };
+    }
+    function inCircle(p, c) {
+      var dx = p.x - c.cx, dy = p.y - c.cy;
+      return dx * dx + dy * dy <= c.r * c.r;
+    }
+    function activeAt(p) {
+      return sets.filter(function (c) { return inCircle(p, c); });
+    }
+    function nearest(act, p) {
+      return act.slice().sort(function (a2, b2) {
+        return Math.hypot(p.x - a2.cx, p.y - a2.cy) / a2.r -
+               Math.hypot(p.x - b2.cx, p.y - b2.cy) / b2.r;
+      })[0];
+    }
+    function byId(id) {
+      return sets.filter(function (x) { return x.id === id; })[0];
+    }
+
+    var hovSets = [], hovOff = false, fltSet = null;
+    function panelRest() {
+      cap1.innerHTML =
+        '<div class="vp-k">𝒰 · both / and</div>' +
+        '<div class="vp-desc">Five domains; the red dot sits where mind, technology, and philosophy meet. Hover to read — click to filter, click again to visit that part of the site.</div>';
+      cap1.style.borderColor = "var(--hair)";
+    }
+    function paint() {
+      var pairKey = null;
+      if (hovSets.length === 2) {
+        var k = hovSets.map(function (x) { return x.id; }).sort().join(",");
+        if (PAIRS[k]) pairKey = k;
+      }
+      var effId =
+        hovSets.length === 1 ? hovSets[0].id :
+        hovSets.length === 0 && !hovOff ? fltSet : null;
+
+      sets.forEach(function (c) {
+        var op;
+        if (hovSets.length >= 2) op = hovSets.some(function (h) { return h.id === c.id; }) ? 1 : 0.12;
+        else if (effId) op = c.id === effId ? 1 : 0.12;
+        else if (hovOff) op = 0.25;
+        else op = 0.72;
+        var lit = op === 1;
+        var el = document.getElementById("c-" + c.id);
+        el.style.strokeOpacity = op;
+        el.style.strokeWidth = lit ? 2.6 : 1.4;
+        el.setAttribute("filter", lit ? "url(#bloom)" : "");
+        document.getElementById("t-" + c.id).style.fillOpacity = lit ? 0.055 : 0.01;
+        var lbl = document.getElementById("l-" + c.id);
+        lbl.style.opacity = Math.max(op, 0.2);
+        document.getElementById("h-" + c.id).style.opacity = fltSet === c.id ? 0.3 : 0;
+      });
+
+      document.querySelectorAll("svg.venn g.lens").forEach(function (g) {
+        var pk2 = g.getAttribute("data-pair");
+        var pp = pk2.split(",");
+        var lop = 0;
+        if (pairKey === pk2) lop = 0.1;
+        else if (effId && pp.indexOf(effId) !== -1) lop = 0.045;
+        g.firstElementChild.style.fillOpacity = lop;
+      });
+      document.querySelectorAll("svg.venn g.xg").forEach(function (g) {
+        var pk = g.getAttribute("data-pair");
+        var parents = pk.split(",");
+        var op;
+        if (pairKey === pk) op = 1;
+        else if (effId && parents.indexOf(effId) !== -1) op = 0.9;
+        else if (effId || hovSets.length >= 2 || hovOff) op = 0.16;
+        else op = 0.6;
+        g.style.opacity = op;
+      });
+
+      if (hovOff) {
+        cap1.innerHTML = '<div class="vp-k">∁ · unlabeled</div><div class="vp-name">off the record.</div>';
+        cap1.style.borderColor = "var(--faint)";
+      } else if (hovSets.length >= 3) {
+        var ids = hovSets.map(function (x) { return x.id; });
+        var isMe = ids.indexOf("mindbody") !== -1 && ids.indexOf("tech") !== -1 && ids.indexOf("philosophy") !== -1 && hovSets.length === 3;
+        if (isMe) {
+          cap1.innerHTML =
+            '<div class="vp-k">M ∩ T ∩ P</div>' +
+            '<div class="vp-name">me</div>' +
+            '<div class="vp-desc">the one point in all three drawn. the rest is off the frame.</div>';
+          cap1.style.borderColor = "var(--c-me)";
+        } else {
+          cap1.innerHTML =
+            '<div class="vp-k">' + hovSets.map(function (x) { return x.letter; }).sort().join(" ∩ ") + "</div>" +
+            '<div class="vp-desc">rare air — the named regions are one set over.</div>';
+          cap1.style.borderColor = "var(--hair)";
+        }
+      } else if (pairKey) {
+        var pr = PAIRS[pairKey];
+        var names = pairKey.split(",").map(function (id) { return byId(id).label; }).join(" · ");
+        cap1.innerHTML =
+          '<div class="vp-k">' + pr.form + '&#160;&#160;<span class="vp-hint">' + names + "</span></div>" +
+          '<div class="vp-name">' + pr.name + "</div>" +
+          '<div class="vp-desc">' + pr.line + "</div>";
+        cap1.style.borderColor = "var(--faint)";
+      } else if (effId) {
+        var c2 = byId(effId);
+        var hint = fltSet === effId
+          ? "click again → " + c2.destName + " · esc to clear"
+          : "click to filter";
+        cap1.innerHTML =
+          '<div class="vp-k" style="color:' + c2.color + '">' + c2.label + '&#160;<span class="vp-hint">· ' + hint + "</span></div>" +
+          '<div class="vp-desc">' + SET_COPY[effId] + "</div>";
+        cap1.style.borderColor = c2.color;
+      } else {
+        panelRest();
+      }
+    }
+    panelRest();
+    paint();
+
+    svg.addEventListener("mousemove", function (evt) {
+      var p = toLocal(evt);
+      hovSets = activeAt(p);
+      hovOff = hovSets.length === 0 && inCircle(p, offrec);
+      paint();
+    });
+    svg.addEventListener("mouseleave", function () {
+      hovSets = [];
+      hovOff = false;
+      paint();
+    });
+    function enterSet(c) {
+      var target = document.getElementById(c.dest);
+      if (target)
+        target.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+    }
+    svg.addEventListener("click", function (evt) {
+      var p = toLocal(evt);
+      var act = activeAt(p);
+      if (!act.length) {
+        fltSet = null;
+        hovOff = inCircle(p, offrec);
+        paint();
+        return;
+      }
+      var chosen = nearest(act, p);
+      if (fltSet === chosen.id) enterSet(chosen);
+      else { fltSet = chosen.id; paint(); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && fltSet) {
+        fltSet = null;
+        paint();
+      }
+    });
+    sets.forEach(function (c) {
+      var el = document.getElementById("c-" + c.id);
+      el.addEventListener("focus", function () { hovSets = [c]; hovOff = false; paint(); });
+      el.addEventListener("blur", function () { hovSets = []; paint(); });
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          if (fltSet === c.id) enterSet(c);
+          else { fltSet = c.id; paint(); }
+        }
+      });
+    });
+    var offEl = document.getElementById("c-offrec");
+    offEl.addEventListener("focus", function () { hovOff = true; hovSets = []; paint(); });
+    offEl.addEventListener("blur", function () { hovOff = false; paint(); });
+
+    /* draw-on at load: circumference sweep, staggered */
+    if (!reduce) {
+      sets.forEach(function (c, i) {
+        var el = document.getElementById("c-" + c.id);
+        var circ = 2 * Math.PI * c.r;
+        el.style.strokeDasharray = circ;
+        el.style.strokeDashoffset = circ;
+        el.style.transition =
+          "stroke-dashoffset 2.4s cubic-bezier(0.4,0,0.2,1) " + (i * 0.28) + "s, " +
+          "stroke-opacity 0.3s ease, stroke-width 0.22s ease";
+        setTimeout(function () { el.style.strokeDashoffset = 0; }, 80);
+        setTimeout(function () {
+          el.style.strokeDasharray = "none";
+          el.style.transition = "";
+        }, 2700 + i * 280);
+      });
+    }
+
+    /* ================= FIG 2 · GALTON ================= */
+    var canvas = document.getElementById("galton");
+    var wrap = canvas.parentNode;
+    var ctx = canvas.getContext("2d");
+    var cap2 = document.getElementById("cap2");
+    var pval = document.getElementById("pval");
+    var gCount = document.getElementById("gCount");
+    var biasEl = document.getElementById("bias");
+
+    var LW = 860,
+      LH = 430; // logical space
+    var ROWS = 9,
+      BINS = ROWS + 1,
+      PITCH = 40,
+      STEP = PITCH / 2;
+    var TOP = 64,
+      ROW_H = 24,
+      PILE_BASE = LH - 56,
+      PILE_MAX = 96;
+    var pegY = function (i) {
+      return TOP + i * ROW_H;
+    };
+    var lastPegY = pegY(ROWS - 1);
+    var binCenter = function (b) {
+      return LW / 2 + (b - (BINS - 1) / 2) * PITCH;
+    };
+
+    var p = 0.5;
+    var bins = new Array(BINS).fill(0);
+    var myBins = new Array(BINS).fill(0);
+    var n = 0,
+      myN = 0;
+    var balls = [];
+    var running = true,
+      visible = !reduce;
+    var CAP_N = 600;
+
+    var CAP2_FAIR =
+      'every path is random. the pile is lawful.&#160;·&#160;<a href="#cohere">how i act from here → fig. 4</a>';
+    var CAP2_BIAS =
+      "a thumb on every branch. no single ball feels it — the mean moves anyway.";
+    var CAP2_FULL = "n = 600. enough to see it. reset to run it again.";
+    var CAP2_CURVE_FAIR =
+      'most things cluster. variance is the structure, not the error.&#160;·&#160;<a href="#cohere">how i act from here → fig. 4</a>';
+    var CAP2_CURVE_BIAS =
+      "the whole curve slid. my three marks didn’t move — the crowd did.";
+    var view2 = "curve";
+    function setCap() {
+      if (view2 === "curve") {
+        cap2.innerHTML = p > 0.505 ? CAP2_CURVE_BIAS : CAP2_CURVE_FAIR;
+        return;
+      }
+      if (n >= CAP_N) {
+        cap2.innerHTML = CAP2_FULL;
+        return;
+      }
+      cap2.innerHTML = p > 0.505 ? CAP2_BIAS : CAP2_FAIR;
+    }
+    setCap();
+
+    function sizeCanvas() {
+      var w = Math.max(640, wrap.clientWidth || 640);
+      var h = w * (LH / LW);
+      var dpr = window.devicePixelRatio || 1;
+      canvas.style.width = w + "px";
+      canvas.style.height = h + "px";
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform((w * dpr) / LW, 0, 0, (w * dpr) / LW, 0, 0);
+    }
+    sizeCanvas();
+    window.addEventListener("resize", function () {
+      sizeCanvas();
+      if (reduce) draw();
+    });
+
+    function spawn(isMe) {
+      balls.push({
+        row: -1,
+        x: LW / 2,
+        y: TOP - 26,
+        tx: LW / 2,
+        k: 0,
+        me: isMe,
+        t: 0,
+        trail: isMe ? [] : null,
+        landed: false,
+      });
+    }
+    function idealCurve() {
+      // binomial pmf over bins for current p
+      var pmf = [],
+        c = 1;
+      for (var b = 0; b < BINS; b++) {
+        if (b > 0) c = (c * (ROWS - b + 1)) / b;
+        pmf.push(c * Math.pow(p, b) * Math.pow(1 - p, ROWS - b));
+      }
+      return pmf;
+    }
+    function sampleMean() {
+      if (!n) return null;
+      var s = 0;
+      for (var b = 0; b < BINS; b++) s += binCenter(b) * bins[b];
+      return s / n;
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, LW, LH);
+      var css = getComputedStyle(document.body);
+      var C_PAPER = css.getPropertyValue("--paper").trim() || "#e9e6de";
+      var C_DIM = "#96917f",
+        C_FAINT = "#7c7869",
+        C_HAIR = "#26272a",
+        C_ME = "#e07a6b",
+        C_GOLD = "#e3c567";
+
+      // pegs
+      ctx.fillStyle = "#55524a";
+      for (var i = 0; i < ROWS; i++) {
+        for (var k = 0; k <= i; k++) {
+          var px = LW / 2 + (k - i / 2) * PITCH;
+          ctx.beginPath();
+          ctx.arc(px, pegY(i), 1.6, 0, 7);
+          ctx.fill();
+        }
+      }
+      // spout
+      ctx.strokeStyle = "#55524a";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(LW / 2 - 7, TOP - 44, 14, 14);
+
+      // bins baseline
+      ctx.strokeStyle = C_HAIR;
+      ctx.beginPath();
+      ctx.moveTo(LW / 2 - (BINS / 2) * PITCH - 10, PILE_BASE + 1);
+      ctx.lineTo(LW / 2 + (BINS / 2) * PITCH + 10, PILE_BASE + 1);
+      ctx.stroke();
+
+      // histogram
+      var maxC = Math.max(8, Math.max.apply(null, bins));
+      for (var b = 0; b < BINS; b++) {
+        var h = (bins[b] / maxC) * PILE_MAX;
+        var x = binCenter(b);
+        ctx.fillStyle = "#1c1d21";
+        ctx.fillRect(x - 15, PILE_BASE - h, 30, h);
+        ctx.fillStyle = C_FAINT;
+        ctx.fillRect(x - 15, PILE_BASE - h, 30, 1);
+        // my landings, same scale, narrow red bar
+        var mh = (myBins[b] / maxC) * PILE_MAX;
+        if (mh > 0) {
+          ctx.fillStyle = C_ME;
+          ctx.fillRect(x + 9, PILE_BASE - mh, 4, mh);
+        }
+      }
+
+      // ideal curve for current p (same normalization)
+      var pmf = idealCurve();
+      var pk = Math.max.apply(null, pmf);
+      var scale = (Math.max.apply(null, bins) || 8) / pk;
+      ctx.strokeStyle = "rgba(233, 230, 222, 0.35)";
+      ctx.setLineDash([3, 5]);
+      ctx.beginPath();
+      for (var b2 = 0; b2 < BINS; b2++) {
+        var yy = PILE_BASE - ((pmf[b2] * scale) / maxC) * PILE_MAX;
+        var xx = binCenter(b2);
+        if (b2 === 0) ctx.moveTo(xx, yy);
+        else ctx.lineTo(xx, yy);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      // mean markers
+      ctx.font = '10.5px "IBM Plex Mono", monospace';
+      var fairX = LW / 2 + (p === 0.5 ? 0 : 0); // fair mean is center by definition
+      ctx.strokeStyle = C_DIM;
+      ctx.beginPath();
+      ctx.moveTo(LW / 2, PILE_BASE + 8);
+      ctx.lineTo(LW / 2, PILE_BASE + 16);
+      ctx.stroke();
+      ctx.fillStyle = C_DIM;
+      ctx.textAlign = "center";
+      ctx.fillText("μ, fair", LW / 2, PILE_BASE + 30);
+      var sm = sampleMean();
+      if (sm !== null && Math.abs(sm - LW / 2) > 2) {
+        ctx.strokeStyle = C_ME;
+        ctx.beginPath();
+        ctx.moveTo(sm, PILE_BASE + 8);
+        ctx.lineTo(sm, PILE_BASE + 16);
+        ctx.stroke();
+        ctx.fillStyle = C_ME;
+        ctx.fillText("μ, actual", sm, PILE_BASE + 44);
+      }
+
+      // trails + balls
+      balls.forEach(function (ball) {
+        if (ball.trail && ball.trail.length > 1) {
+          ctx.strokeStyle = "rgba(224, 122, 107, 0.28)";
+          ctx.beginPath();
+          ball.trail.forEach(function (pt, idx) {
+            if (idx === 0) ctx.moveTo(pt[0], pt[1]);
+            else ctx.lineTo(pt[0], pt[1]);
+          });
+          ctx.stroke();
+        }
+        ctx.fillStyle = ball.me ? C_ME : "rgba(233, 230, 222, 0.55)";
+        ctx.beginPath();
+        ctx.arc(ball.x, ball.y, ball.me ? 3.5 : 2.4, 0, 7);
+        ctx.fill();
+      });
+    }
+
+    function land(ball) {
+      var b = ball.k;
+      bins[b] += 1;
+      n += 1;
+      if (ball.me) {
+        myBins[b] += 1;
+        myN += 1;
+      }
+      gCount.textContent = "n = " + n + " · me: " + myN;
+      if (n >= CAP_N) {
+        running = false;
+        setCap();
+      }
+    }
+
+    var lastSpawn = 0,
+      sinceMe = 0,
+      meActive = false;
+    function step() {
+      if (!visible) {
+        stopLoop();
+        return;
+      }
+      var ts = performance.now();
+      // spawn
+      if (running && n + balls.length < CAP_N && ts - lastSpawn > 230) {
+        lastSpawn = ts;
+        var isMe = !meActive && sinceMe >= 3;
+        if (isMe) {
+          meActive = true;
+          sinceMe = 0;
+        } else {
+          sinceMe += 1;
+        }
+        spawn(isMe);
+      }
+      // advance
+      balls.forEach(function (ball) {
+        if (ball.done) return;
+        ball.t += 1 / 6;
+        if (ball.t >= 1) {
+          if (ball.landed) {
+            ball.done = true;
+            ball.x = ball.tx;
+            ball.y = PILE_BASE - 4;
+            return;
+          }
+          ball.t = 0;
+          ball.x = ball.tx;
+          ball.row += 1;
+          if (ball.row < ROWS) {
+            if (Math.random() < p) ball.k += 1;
+            ball.tx = LW / 2 + (ball.k - (ball.row + 1) / 2) * PITCH;
+          } else {
+            ball.tx = binCenter(ball.k);
+            ball.landed = true;
+          }
+        }
+        var targetY = ball.row < ROWS ? pegY(ball.row) + ROW_H : PILE_BASE - 4;
+        var startY =
+          ball.row < 0
+            ? TOP - 26
+            : ball.row === 0
+              ? TOP - 26
+              : pegY(ball.row - 1) + ROW_H;
+        if (ball.row >= ROWS) startY = lastPegY + ROW_H;
+        ball.y = startY + (targetY - startY) * Math.min(1, ball.t);
+        ball.x = ball.x + (ball.tx - ball.x) * 0.4;
+        if (ball.trail) ball.trail.push([ball.x, ball.y]);
+      });
+      // resolve landings
+      for (var i = balls.length - 1; i >= 0; i--) {
+        var ball = balls[i];
+        if (ball.done) {
+          land(ball);
+          if (ball.me) meActive = false;
+          balls.splice(i, 1);
+        }
+      }
+      draw();
+      if (!running && balls.length === 0) stopLoop();
+    }
+
+    var loopTimer = null;
+    function stopLoop() {
+      if (loopTimer !== null) {
+        clearInterval(loopTimer);
+        loopTimer = null;
+      }
+    }
+    function ensureLoop() {
+      if (reduce) return;
+      if (loopTimer === null && visible) {
+        loopTimer = setInterval(step, 30);
+      }
+    }
+
+    function instantFill(count) {
+      for (var i = 0; i < count; i++) {
+        var k = 0;
+        for (var r = 0; r < ROWS; r++) if (Math.random() < p) k += 1;
+        bins[k] += 1;
+        n += 1;
+        if (i % 4 === 0) {
+          myBins[k] += 1;
+          myN += 1;
+        }
+      }
+      gCount.textContent = "n = " + n + " · me: " + myN;
+      draw();
+    }
+
+    function resetG() {
+      bins = new Array(BINS).fill(0);
+      myBins = new Array(BINS).fill(0);
+      n = 0;
+      myN = 0;
+      balls = [];
+      meActive = false;
+      sinceMe = 0;
+      running = true;
+      gCount.textContent = "n = 0 · me: 0";
+      setCap();
+      if (reduce) {
+        instantFill(360);
+      } else {
+        draw();
+        ensureLoop();
+      }
+    }
+
+    biasEl.addEventListener("input", function () {
+      p = parseFloat(biasEl.value);
+      pval.textContent = "p(right) = " + p.toFixed(2).slice(1);
+      setCap();
+      if (reduce) {
+        bins = new Array(BINS).fill(0);
+        myBins = new Array(BINS).fill(0);
+        n = 0;
+        myN = 0;
+        instantFill(360);
+      } else {
+        draw();
+      }
+    });
+    document.getElementById("gReset").addEventListener("click", resetG);
+
+    var ioG = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          visible = e.isIntersecting && !reduce;
+          if (visible) ensureLoop();
+        });
+      },
+      { threshold: 0.15 },
+    );
+    ioG.observe(canvas);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        visible = false;
+      } else {
+        var r = canvas.getBoundingClientRect();
+        visible = !reduce && r.bottom > 0 && r.top < innerHeight;
+        ensureLoop();
+      }
+    });
+    if (reduce) {
+      instantFill(360);
+    } else {
+      draw();
+      ensureLoop();
+    }
+
+    /* ================= FIG 2b · SMOOTH CURVE VIEW ================= */
+    var smES = {
+      curve: document.getElementById("smCurve"),
+      fl: document.getElementById("smFillL"),
+      fc: document.getElementById("smFillC"),
+      fr: document.getElementById("smFillR"),
+      scl: document.getElementById("scl"),
+      scc: document.getElementById("scc"),
+      scr: document.getElementById("scr"),
+      sigL: document.getElementById("smSigL"),
+      sigR: document.getElementById("smSigR"),
+      mu: document.getElementById("smMu"),
+      muLbl: document.getElementById("smMuLbl"),
+      ghR: document.getElementById("smGhR"),
+      ghL: document.getElementById("smGhL"),
+      sigLLbl: document.getElementById("smSigLLbl"),
+      sigRLbl: document.getElementById("smSigRLbl"),
+      now: document.getElementById("smNow"),
+      nowLbl: document.getElementById("smNowLbl"),
+    };
+    var SM_SIG = 130, SM_BASE = 250, SM_A = 205;
+    function smX(sig) { return 60 + ((sig + 3) / 6) * 780; }
+    function smShift() { return (9 * p - 4.5) * 40; }
+    function smY(x, mux) {
+      return SM_BASE - SM_A * Math.exp(-((x - mux) * (x - mux)) / (2 * SM_SIG * SM_SIG));
+    }
+    function drawSmooth() {
+      var mux = 450 + smShift();
+      var d = [];
+      for (var x = 40; x <= 860; x += 8) {
+        d.push((d.length ? "L" : "M") + x + " " + smY(x, mux).toFixed(1));
+      }
+      var open = d.join(" ");
+      smES.curve.setAttribute("d", open);
+      var closed = open + " L 860 " + SM_BASE + " L 40 " + SM_BASE + " Z";
+      smES.fl.setAttribute("d", closed);
+      smES.fc.setAttribute("d", closed);
+      smES.fr.setAttribute("d", closed);
+      var lx = mux - SM_SIG, rx = mux + SM_SIG;
+      smES.scl.setAttribute("width", Math.max(0, lx));
+      smES.scc.setAttribute("x", lx);
+      smES.scr.setAttribute("x", rx);
+      smES.scr.setAttribute("width", Math.max(0, 900 - rx));
+      smES.sigL.setAttribute("x1", lx); smES.sigL.setAttribute("x2", lx);
+      smES.sigR.setAttribute("x1", rx); smES.sigR.setAttribute("x2", rx);
+      smES.sigLLbl.setAttribute("x", lx);
+      smES.sigRLbl.setAttribute("x", rx);
+      smES.mu.setAttribute("x1", mux); smES.mu.setAttribute("x2", mux);
+      var shifted = Math.abs(smShift()) > 4;
+      smES.muLbl.setAttribute("x", mux);
+      smES.muLbl.textContent = shifted ? "μ, actual — the thumb moved everyone" : "";
+      [[smES.ghR, 762], [smES.ghL, 138], [smES.now, 554]].forEach(function (pr2) {
+        pr2[0].setAttribute("cx", pr2[1]);
+        pr2[0].setAttribute("cy", smY(pr2[1], mux).toFixed(1));
+      });
+      smES.nowLbl.setAttribute("x", 554);
+      smES.nowLbl.setAttribute("y", Math.min(150, smY(554, mux) - 16).toFixed(1));
+    }
+    drawSmooth();
+    biasEl.addEventListener("input", function () { drawSmooth(); });
+
+    var SM_TAIL = "the unexpected · rare events · calibrate for tails";
+    var SM_MID = "where most things cluster · base rates matter · the probable";
+    [
+      { id: "smHovL", fill: smES.fl, text: SM_TAIL },
+      { id: "smHovC", fill: smES.fc, text: SM_MID },
+      { id: "smHovR", fill: smES.fr, text: SM_TAIL },
+    ].forEach(function (z) {
+      var el = document.getElementById(z.id);
+      el.addEventListener("mouseenter", function () {
+        z.fill.style.fillOpacity = 0.16;
+        cap2.textContent = z.text;
+      });
+      el.addEventListener("mouseleave", function () {
+        z.fill.style.fillOpacity = "";
+        setCap();
+      });
+    });
+    // keep hover zone rects tracking the sigma bands
+    var _origDrawSmooth = drawSmooth;
+    drawSmooth = function () {
+      _origDrawSmooth();
+      var mux = 450 + smShift();
+      var lx = mux - SM_SIG, rx = mux + SM_SIG;
+      var hl = document.getElementById("smHovL"),
+          hc = document.getElementById("smHovC"),
+          hr = document.getElementById("smHovR");
+      hl.setAttribute("width", Math.max(0, lx));
+      hc.setAttribute("x", lx);
+      hr.setAttribute("x", rx);
+      hr.setAttribute("width", Math.max(0, 900 - rx));
+    };
+    drawSmooth();
+
+    var vCurve = document.getElementById("vCurve");
+    var vMach = document.getElementById("vMach");
+    var curveView = document.getElementById("curveView");
+    var gWrap = document.getElementById("gWrap");
+    function setView2(v) {
+      var mach = v === "machine";
+      view2 = mach ? "machine" : "curve";
+      curveView.style.display = mach ? "none" : "";
+      gWrap.style.display = mach ? "" : "none";
+      vCurve.setAttribute("aria-pressed", String(!mach));
+      vMach.setAttribute("aria-pressed", String(mach));
+      if (mach) {
+        visible = !reduce;
+        sizeCanvas();
+        draw();
+        ensureLoop();
+      } else {
+        visible = false;
+        stopLoop();
+      }
+      setCap();
+    }
+    vCurve.addEventListener("click", function () { setView2("curve"); });
+    vMach.addEventListener("click", function () { setView2("machine"); });
+    setView2("curve");
+
+
+    /* ================= FIG 3 · INFLUENCE GRAPH ================= */
+    var infl = document.getElementById("inflSvg");
+    var capG = document.getElementById("capG");
+    var CAPG_REST =
+      "fig. 1 shows what overlaps; this shows what flows. hover a node — the two-way edges are the ones that changed me.";
+    var NODES = [
+      { id: "me", x: 450, y: 200, lbl: "me", me: true },
+      {
+        id: "feed",
+        x: 450,
+        y: 60,
+        lbl: "the feed",
+        note: "the feed ↔ me — genuinely both ways: it shaped my taste, my attention trained it back. neither of us is innocent.",
+      },
+      {
+        id: "machines",
+        x: 660,
+        y: 100,
+        lbl: "the machines",
+        note: "the machines ↔ me — i build with them; they rebuild me. terms under negotiation.",
+      },
+      {
+        id: "aeon",
+        x: 220,
+        y: 100,
+        lbl: "aeon &amp; psyche",
+        note: "aeon &amp; psyche → me — one way. the slow diet.",
+      },
+      {
+        id: "lw",
+        x: 130,
+        y: 210,
+        lbl: "lesswrong",
+        note: "lesswrong ↔ me — credences and priors, kept with an eyebrow raised.",
+      },
+      {
+        id: "kg",
+        x: 200,
+        y: 320,
+        lbl: "kierkegaard",
+        note: "kierkegaard → me — one way, obviously. anxiety as the dizziness of freedom; the first frame that made mine legible.",
+      },
+      {
+        id: "cc",
+        x: 400,
+        y: 345,
+        lbl: "clark &amp; chalmers",
+        note: "clark &amp; chalmers ↔ me — where does the mind end? i live inside the question now.",
+      },
+      {
+        id: "mw",
+        x: 770,
+        y: 200,
+        lbl: "whittaker",
+        note: "whittaker → me — one way. the exit is a design requirement, not a mood.",
+      },
+      {
+        id: "mubi",
+        x: 640,
+        y: 320,
+        lbl: "mubi",
+        note: "mubi → me — one way. two-hour attention, restored.",
+      },
+      {
+        id: "ff",
+        x: 790,
+        y: 320,
+        lbl: "fleet foxes",
+        note: "fleet foxes ↔ the old ghosts — side A and side B of the same person.",
+      },
+      {
+        id: "ghosts",
+        x: 790,
+        y: 80,
+        lbl: "the old ghosts",
+        note: "the old ghosts → me — the era that raised the register. found in the feed, kept for the record.",
+      },
+    ];
+    var EDGES = [
+      ["me", "feed"],
+      ["me", "machines"],
+      ["me", "aeon"],
+      ["me", "lw"],
+      ["me", "kg"],
+      ["me", "cc"],
+      ["me", "mw"],
+      ["me", "mubi"],
+      ["me", "ff"],
+      ["me", "ghosts"],
+      ["feed", "ghosts"],
+      ["feed", "machines"],
+      ["lw", "machines"],
+      ["kg", "cc"],
+      ["ff", "ghosts"],
+    ];
+    var nodeById = {};
+    NODES.forEach(function (nd) {
+      nodeById[nd.id] = nd;
+    });
+    var edgeEls = [];
+    EDGES.forEach(function (e) {
+      var a = nodeById[e[0]],
+        b = nodeById[e[1]];
+      var ln = document.createElementNS("http://www.w3.org/2000/svg", "line");
+      ln.setAttribute("x1", a.x);
+      ln.setAttribute("y1", a.y);
+      ln.setAttribute("x2", b.x);
+      ln.setAttribute("y2", b.y);
+      infl.appendChild(ln);
+      edgeEls.push({ el: ln, a: e[0], b: e[1] });
+    });
+    NODES.forEach(function (nd) {
+      var g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+      g.setAttribute("class", "node" + (nd.me ? " me" : ""));
+      if (!nd.me) {
+        g.setAttribute("tabindex", "0");
+        g.setAttribute("role", "img");
+        var tmp = document.createElement("div");
+        tmp.innerHTML = nd.note || nd.lbl;
+        g.setAttribute("aria-label", tmp.textContent);
+      }
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("cx", nd.x);
+      c.setAttribute("cy", nd.y);
+      c.setAttribute("r", nd.me ? 5 : 4.2);
+      var t = document.createElementNS("http://www.w3.org/2000/svg", "text");
+      t.setAttribute("x", nd.x);
+      t.setAttribute("y", nd.y - 12);
+      t.setAttribute("text-anchor", "middle");
+      t.innerHTML = nd.lbl;
+      g.appendChild(c);
+      g.appendChild(t);
+      infl.appendChild(g);
+      nd.g = g;
+      if (!nd.me) {
+        function on() {
+          capG.innerHTML = nd.note;
+          g.classList.add("on");
+          edgeEls.forEach(function (ed) {
+            ed.el.classList.toggle("on", ed.a === nd.id || ed.b === nd.id);
+          });
+        }
+        function off() {
+          capG.textContent = CAPG_REST;
+          g.classList.remove("on");
+          edgeEls.forEach(function (ed) {
+            ed.el.classList.remove("on");
+          });
+        }
+        g.addEventListener("mouseenter", on);
+        g.addEventListener("mouseleave", off);
+        g.addEventListener("focus", on);
+        g.addEventListener("blur", off);
+        g.addEventListener("click", on);
+      }
+    });
+    if (!reduce) {
+      var t0G = performance.now();
+      setInterval(function wobble() {
+        var t = (performance.now() - t0G) / 1000;
+        NODES.forEach(function (nd, i) {
+          if (nd.me) return;
+          var dx = Math.sin(t * 0.5 + i * 1.7) * 2.2;
+          var dy = Math.cos(t * 0.4 + i * 2.3) * 2.2;
+          nd.g.setAttribute("transform", "translate(" + dx + " " + dy + ")");
+          edgeEls.forEach(function (ed) {
+            if (ed.a === nd.id) {
+              ed.el.setAttribute("x1", nd.x + dx);
+              ed.el.setAttribute("y1", nd.y + dy);
+            }
+            if (ed.b === nd.id) {
+              ed.el.setAttribute("x2", nd.x + dx);
+              ed.el.setAttribute("y2", nd.y + dy);
+            }
+          });
+        });
+      }, 50);
+    }
+
+    /* ================= FIG 4 · GOVERNOR ================= */
+    var cap3 = document.getElementById("cap3");
+    var CAP3_REST = "— pick a situation —";
+    var activeRuling = null;
+    var govSvg = document.getElementById("govSvg");
+    var edges = ["e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8"].map(
+      function (id) {
+        return document.getElementById(id);
+      },
+    );
+
+    if (!reduce) {
+      edges.forEach(function (l) {
+        var len = Math.hypot(
+          l.x2.baseVal.value - l.x1.baseVal.value,
+          l.y2.baseVal.value - l.y1.baseVal.value,
+        );
+        l.style.strokeDasharray = len;
+        l.style.strokeDashoffset = len;
+      });
+      var io3 = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              edges.forEach(function (l, i) {
+                setTimeout(function () {
+                  l.style.transition =
+                    "stroke-dashoffset .7s cubic-bezier(.16,1,.3,1), stroke .3s ease, stroke-width .3s ease";
+                  l.style.strokeDashoffset = 0;
+                }, i * 120);
+              });
+              io3.disconnect();
+            }
+          });
+        },
+        { threshold: 0.35 },
+      );
+      io3.observe(govSvg);
+    }
+
+    var leafNotes = {
+      "leaf-kind": "kindness — rigor can wait thirty seconds.",
+      "leaf-unc":
+        "uncertainty — one-way doors get a credence first. see the ledger.",
+      "leaf-ind": "individuality — the mean moved, not the truth. see fig. 2.",
+      "leaf-taste":
+        "taste — when nothing else claims jurisdiction, judgment does.",
+      "leaf-priv": "privacy — no traversal. that’s the whole ruling.",
+    };
+    Object.keys(leafNotes).forEach(function (id) {
+      var el = document.getElementById(id);
+      function show() {
+        cap3.textContent = leafNotes[id];
+      }
+      function rest() {
+        if (activeRuling) {
+          cap3.innerHTML = activeRuling;
+        } else {
+          cap3.textContent = CAP3_REST;
+        }
+      }
+      el.addEventListener("mouseenter", show);
+      el.addEventListener("mouseleave", rest);
+      el.addEventListener("focus", show);
+      el.addEventListener("blur", rest);
+      el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          show();
+        }
+      });
+    });
+
+    var dot3 = document.getElementById("dot3");
+    var LEAF_POS = {
+      "leaf-kind": [462, 60],
+      "leaf-unc": [682, 130],
+      "leaf-ind": [870, 210],
+      "leaf-taste": [870, 290],
+      "leaf-priv": [232, 298],
+    };
+    var ROUTES = {
+      irrev: {
+        edges: ["e1", "e4", "e5"],
+        leaf: "leaf-unc",
+        ruling:
+          "an irreversible choice → person? no → undone? no → governs: <em>uncertainty</em>. one-way doors get a credence first — see the ledger.",
+      },
+      agree: {
+        edges: ["e1", "e4", "e6", "e7"],
+        leaf: "leaf-ind",
+        ruling:
+          "everyone suddenly agrees → person? no → undone? yes → everyone doing it? yes → governs: <em>individuality</em>. the mean moved, not the truth — see fig. 2.",
+      },
+      collide: {
+        edges: ["e1", "e4", "e6", "e8"],
+        leaf: "leaf-taste",
+        ruling:
+          "two of my values collide → person? no → undone? yes → everyone doing it? no → governs: <em>taste</em>. the tiebreak is a judgment, not a formula.",
+      },
+      business: {
+        edges: ["e2"],
+        leaf: "leaf-priv",
+        ruling:
+          "is it anyone’s business? → governs: <em>privacy</em>. no traversal. that’s the whole ruling.",
+      },
+    };
+    var routeTimers = [];
+    function clearRoute() {
+      routeTimers.forEach(clearTimeout);
+      routeTimers = [];
+      edges.forEach(function (l) {
+        l.classList.remove("lit");
+      });
+      Object.keys(LEAF_POS).forEach(function (id) {
+        document.getElementById(id).classList.remove("on");
+      });
+      document.querySelectorAll(".chips button").forEach(function (b) {
+        b.setAttribute("aria-pressed", "false");
+      });
+      activeRuling = null;
+      cap3.textContent = CAP3_REST;
+    }
+    document.querySelectorAll(".chips button").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var route = ROUTES[btn.getAttribute("data-route")];
+        clearRoute();
+        btn.setAttribute("aria-pressed", "true");
+        dot3.setAttribute("cx", 50);
+        dot3.setAttribute("cy", 170);
+        var per = reduce ? 0 : 240;
+        route.edges.forEach(function (id, i) {
+          routeTimers.push(
+            setTimeout(function () {
+              document.getElementById(id).classList.add("lit");
+            }, i * per),
+          );
+        });
+        routeTimers.push(
+          setTimeout(function () {
+            var leaf = document.getElementById(route.leaf);
+            leaf.classList.add("on");
+            var pos = LEAF_POS[route.leaf];
+            dot3.setAttribute("cx", pos[0]);
+            dot3.setAttribute("cy", pos[1]);
+            activeRuling = route.ruling;
+            cap3.innerHTML = route.ruling;
+          }, route.edges.length * per),
+        );
+      });
+    });
+
+    /* ================= HERO DRIFT LAYER ================= */
+    if (!reduce) {
+      var driftBalls = [
+        {
+          el: document.getElementById("drift1"),
+          x: 200,
+          y: 150,
+          vx: 1.3,
+          vy: 0.9,
+        },
+        {
+          el: document.getElementById("drift2"),
+          x: 700,
+          y: 520,
+          vx: -1.1,
+          vy: -1.2,
+        },
+      ];
+      var FR = { x0: 28, y0: 26, x1: 872, y1: 612 };
+      setInterval(function () {
+        driftBalls.forEach(function (b) {
+          b.x += b.vx;
+          b.y += b.vy;
+          if (b.x < FR.x0 || b.x > FR.x1) {
+            b.vx *= -1;
+            b.x = Math.max(FR.x0, Math.min(FR.x1, b.x));
+          }
+          if (b.y < FR.y0 || b.y > FR.y1) {
+            b.vy *= -1;
+            b.y = Math.max(FR.y0, Math.min(FR.y1, b.y));
+          }
+          // the unlabeled set repels: thoughts bounce off the record
+          var dx = b.x - offrec.cx,
+            dy = b.y - offrec.cy;
+          var d = Math.hypot(dx, dy);
+          if (d < offrec.r + 4 && d > 0) {
+            var nx = dx / d,
+              ny = dy / d;
+            var dot = b.vx * nx + b.vy * ny;
+            if (dot < 0) {
+              b.vx -= 2 * dot * nx;
+              b.vy -= 2 * dot * ny;
+            }
+            var push = offrec.r + 4;
+            b.x = offrec.cx + nx * push;
+            b.y = offrec.cy + ny * push;
+          }
+          var act = activeAt(b);
+          var tint =
+            act.length === 1
+              ? getComputedStyle(document.getElementById("c-" + act[0].id))
+                  .stroke
+              : "#e9e6de";
+          b.el.setAttribute("fill", tint);
+          b.el.setAttribute("cx", b.x.toFixed(1));
+          b.el.setAttribute("cy", b.y.toFixed(1));
+        });
+      }, 40);
+    } else {
+      document.querySelectorAll("svg.venn .drift").forEach(function (el) {
+        el.setAttribute("opacity", "0");
+      });
+    }
+
+    /* ================= FIG 5 · DIRECTIONALLY CORRECT ================= */
+    var bCanvas = document.getElementById("breakout");
+    var bWrap = bCanvas.parentNode;
+    var bCtx = bCanvas.getContext("2d");
+    var capB = document.getElementById("capB");
+    var bStats = document.getElementById("bStats");
+    var CAPB_REST =
+      "keep the belief in play. the score is an angle, not a number.";
+    var CAPB_DROP =
+      "belief dropped. click or press space to reopen the question.";
+
+    var BW = 860,
+      BH = 430;
+    var SPEED = 5.2,
+      PADW = 110,
+      PADH = 8,
+      PADY = BH - 26;
+    var SIGNAL = [
+      "EVIDENCE",
+      "BASE RATE",
+      "CONTRA",
+      "PRIMARY SRC",
+      "STEELMAN",
+      "SLEEP ON IT",
+      "DATA",
+    ];
+    var NOISE = [
+      "VIBES",
+      "THE FEED",
+      "CONSENSUS",
+      "SUNK COST",
+      "ENGAGEMENT",
+      "HOT TAKE",
+      "CLOUT",
+    ];
+    var COLS = 7,
+      ROWS_B = 3,
+      BRW = 96,
+      BRH = 26,
+      GAPX = 12,
+      GAPY = 12;
+    var GRID_W = COLS * (BRW + GAPX) - GAPX;
+    var GX0 = (BW - GRID_W) / 2,
+      GY0 = 74;
+
+    var bricks = [],
+      padX = BW / 2,
+      ballB = null,
+      waiting = true;
+    var lastPop = performance.now();
+    var updates = 0,
+      tTruth = 0,
+      errDeg = null,
+      capBTimer = null;
+
+    function truthX() {
+      return BW / 2 + Math.sin(tTruth * 0.011) * 120;
+    }
+    var TRUTH_Y = 26;
+
+    function popField() {
+      bricks = [];
+      var labels = [];
+      for (var i = 0; i < 11; i++)
+        labels.push({ t: SIGNAL[i % SIGNAL.length], sig: true });
+      for (var j = 0; j < 10; j++)
+        labels.push({ t: NOISE[j % NOISE.length], sig: false });
+      for (var k = labels.length - 1; k > 0; k--) {
+        var r = Math.floor(Math.random() * (k + 1));
+        var tmp = labels[k];
+        labels[k] = labels[r];
+        labels[r] = tmp;
+      }
+      var idx = 0;
+      for (var row = 0; row < ROWS_B; row++) {
+        for (var col = 0; col < COLS; col++) {
+          bricks.push({
+            x: GX0 + col * (BRW + GAPX),
+            y: GY0 + row * (BRH + GAPY),
+            w: BRW,
+            h: BRH,
+            label: labels[idx].t,
+            sig: labels[idx].sig,
+            alive: true,
+          });
+          idx++;
+        }
+      }
+    }
+    popField();
+
+    function setCapB(msg, hold) {
+      if (capBTimer) {
+        clearTimeout(capBTimer);
+        capBTimer = null;
+      }
+      capB.textContent = msg;
+      if (!hold) {
+        capBTimer = setTimeout(function () {
+          capB.textContent = waiting ? CAPB_DROP : CAPB_REST;
+        }, 1800);
+      }
+    }
+
+    function launch() {
+      waiting = false;
+      var a = -Math.PI / 2 + (Math.random() - 0.5) * 0.7;
+      ballB = {
+        x: padX,
+        y: PADY - 10,
+        vx: Math.cos(a) * SPEED,
+        vy: Math.sin(a) * SPEED,
+      };
+      capB.textContent = CAPB_REST;
+    }
+
+    function norm(a) {
+      while (a > Math.PI) a -= 2 * Math.PI;
+      while (a < -Math.PI) a += 2 * Math.PI;
+      return a;
+    }
+    function nudge(sig) {
+      var bearing = Math.atan2(TRUTH_Y - ballB.y, truthX() - ballB.x);
+      var va = Math.atan2(ballB.vy, ballB.vx);
+      var d = norm(bearing - va);
+      var rot;
+      if (sig) rot = Math.sign(d) * Math.min(Math.abs(d), 0.35);
+      else rot = -Math.sign(d) * 0.28 + (Math.random() - 0.5) * 0.14;
+      var na = va + rot;
+      ballB.vx = Math.cos(na) * SPEED;
+      ballB.vy = Math.sin(na) * SPEED;
+      if (Math.abs(ballB.vy) < 1.6) {
+        ballB.vy = ballB.vy < 0 ? -1.6 : 1.6;
+        var vx2 = Math.sqrt(Math.max(0.5, SPEED * SPEED - ballB.vy * ballB.vy));
+        ballB.vx = ballB.vx < 0 ? -vx2 : vx2;
+      }
+      if (Math.abs(ballB.vx) < 0.9) {
+        ballB.vx =
+          (ballB.vx === 0
+            ? Math.random() < 0.5
+              ? -1
+              : 1
+            : Math.sign(ballB.vx)) * 0.9;
+        var vy2 = Math.sqrt(Math.max(0.5, SPEED * SPEED - ballB.vx * ballB.vx));
+        ballB.vy = ballB.vy < 0 ? -vy2 : vy2;
+      }
+    }
+
+    function stepB() {
+      if (!bVisible) {
+        stopB();
+        return;
+      }
+      tTruth++;
+      if (ballB && !waiting) {
+        ballB.x += ballB.vx;
+        ballB.y += ballB.vy;
+        if (ballB.x < 6) {
+          ballB.x = 6;
+          ballB.vx = Math.abs(ballB.vx);
+        }
+        if (ballB.x > BW - 6) {
+          ballB.x = BW - 6;
+          ballB.vx = -Math.abs(ballB.vx);
+        }
+        if (ballB.y < 6) {
+          ballB.y = 6;
+          ballB.vy = Math.abs(ballB.vy);
+        }
+        // paddle
+        if (
+          ballB.vy > 0 &&
+          ballB.y >= PADY - 6 &&
+          ballB.y <= PADY + PADH + 4 &&
+          ballB.x >= padX - PADW / 2 - 6 &&
+          ballB.x <= padX + PADW / 2 + 6
+        ) {
+          var off = (ballB.x - padX) / (PADW / 2);
+          ballB.vx = off * 3.6;
+          if (Math.abs(ballB.vx) < 1.2) {
+            ballB.vx =
+              (ballB.vx === 0
+                ? Math.random() < 0.5
+                  ? -1
+                  : 1
+                : Math.sign(ballB.vx)) * 1.2;
+          }
+          ballB.vy = -Math.sqrt(
+            Math.max(2.5, SPEED * SPEED - ballB.vx * ballB.vx),
+          );
+        }
+        // drop
+        if (ballB.y > BH + 10) {
+          waiting = true;
+          ballB = null;
+          errDeg = null;
+          capB.textContent = CAPB_DROP;
+        }
+        // bricks
+        if (ballB) {
+          for (var i = 0; i < bricks.length; i++) {
+            var br = bricks[i];
+            if (!br.alive) continue;
+            if (
+              ballB.x > br.x - 5 &&
+              ballB.x < br.x + br.w + 5 &&
+              ballB.y > br.y - 5 &&
+              ballB.y < br.y + br.h + 5
+            ) {
+              br.alive = false;
+              updates++;
+              nudge(br.sig);
+              setCapB(
+                br.label.toLowerCase() +
+                  (br.sig ? " — course corrected." : " — drift."),
+              );
+              break;
+            }
+          }
+          if (
+            bricks.every(function (b) {
+              return !b.alive;
+            })
+          ) {
+            setCapB("cleared. the field repopulates — it always does.", true);
+            lastPop = performance.now();
+            setTimeout(function () {
+              popField();
+              setCapB(CAPB_REST);
+            }, 900);
+          } else if (
+            performance.now() - lastPop > 20000 &&
+            bricks.some(function (b) {
+              return !b.alive;
+            })
+          ) {
+            lastPop = performance.now();
+            popField();
+            setCapB("the field repopulates. it always does.");
+          }
+        }
+        if (ballB) {
+          var bearing = Math.atan2(TRUTH_Y - ballB.y, truthX() - ballB.x);
+          var va = Math.atan2(ballB.vy, ballB.vx);
+          errDeg = Math.round((Math.abs(norm(bearing - va)) * 180) / Math.PI);
+        }
+      }
+      var stat =
+        "error " +
+        (errDeg === null ? "—°" : errDeg + "°") +
+        " · updates " +
+        updates;
+      if (bStats.textContent !== stat) bStats.textContent = stat;
+      drawB();
+    }
+
+    function drawB() {
+      bCtx.clearRect(0, 0, BW, BH);
+      // truth marker
+      var tx = truthX();
+      bCtx.fillStyle = "#e9e6de";
+      bCtx.font = "14px Georgia, serif";
+      bCtx.textAlign = "center";
+      bCtx.fillText("✦", tx, TRUTH_Y + 5);
+      bCtx.fillStyle = "#7c7869";
+      bCtx.font = "9px 'IBM Plex Mono', monospace";
+      bCtx.fillText("truth · approx.", tx, TRUTH_Y + 18);
+      // bricks
+      bricks.forEach(function (br) {
+        if (!br.alive) return;
+        bCtx.strokeStyle = br.sig
+          ? "rgba(127, 176, 105, 0.75)"
+          : "rgba(180, 142, 222, 0.6)";
+        bCtx.strokeRect(br.x + 0.5, br.y + 0.5, br.w, br.h);
+        bCtx.fillStyle = br.sig
+          ? "rgba(127, 176, 105, 0.9)"
+          : "rgba(180, 142, 222, 0.75)";
+        bCtx.font = "9px 'IBM Plex Mono', monospace";
+        bCtx.textAlign = "center";
+        bCtx.fillText(br.label, br.x + br.w / 2, br.y + br.h / 2 + 3);
+      });
+      // guide: faint line ball → truth
+      if (ballB && !waiting) {
+        bCtx.strokeStyle = "rgba(227, 197, 103, 0.16)";
+        bCtx.setLineDash([2, 6]);
+        bCtx.beginPath();
+        bCtx.moveTo(ballB.x, ballB.y);
+        bCtx.lineTo(tx, TRUTH_Y);
+        bCtx.stroke();
+        bCtx.setLineDash([]);
+      }
+      // error readout
+      bCtx.textAlign = "left";
+      bCtx.font = "10.5px 'IBM Plex Mono', monospace";
+      bCtx.fillStyle = errDeg !== null && errDeg <= 25 ? "#e3c567" : "#7c7869";
+      bCtx.fillText(
+        errDeg === null
+          ? "directional error —"
+          : "directional error " +
+              String(errDeg).padStart(3, "0") +
+              "°" +
+              (errDeg <= 25 ? "  · directionally correct" : ""),
+        14,
+        20,
+      );
+      // paddle
+      bCtx.fillStyle = "#e9e6de";
+      bCtx.fillRect(padX - PADW / 2, PADY, PADW, PADH);
+      bCtx.fillStyle = "#7c7869";
+      bCtx.font = "9px 'IBM Plex Mono', monospace";
+      bCtx.textAlign = "center";
+      bCtx.fillText("JUDGMENT", padX, PADY + PADH + 12);
+      // ball
+      if (ballB) {
+        bCtx.fillStyle = "#e07a6b";
+        bCtx.beginPath();
+        bCtx.arc(ballB.x, ballB.y, 4, 0, 7);
+        bCtx.fill();
+      } else if (waiting) {
+        bCtx.fillStyle = "#e07a6b";
+        bCtx.beginPath();
+        bCtx.arc(padX, PADY - 10, 4, 0, 7);
+        bCtx.fill();
+      }
+    }
+
+    function sizeB() {
+      var w = Math.max(640, bWrap.clientWidth || 640);
+      var h = w * (BH / BW);
+      var dpr = window.devicePixelRatio || 1;
+      bCanvas.style.width = w + "px";
+      bCanvas.style.height = h + "px";
+      bCanvas.width = Math.round(w * dpr);
+      bCanvas.height = Math.round(h * dpr);
+      bCtx.setTransform((w * dpr) / BW, 0, 0, (w * dpr) / BW, 0, 0);
+    }
+    sizeB();
+    window.addEventListener("resize", function () {
+      sizeB();
+      drawB();
+    });
+
+    function padFromEvent(evt) {
+      var r = bCanvas.getBoundingClientRect();
+      var x = (evt.clientX - r.left) * (BW / r.width);
+      padX = Math.max(PADW / 2, Math.min(BW - PADW / 2, x));
+    }
+    bCanvas.addEventListener("pointermove", padFromEvent);
+    bCanvas.addEventListener("pointerdown", function (evt) {
+      padFromEvent(evt);
+      if (waiting) launch();
+    });
+    bCanvas.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+        e.preventDefault();
+        padX = Math.max(
+          PADW / 2,
+          Math.min(BW - PADW / 2, padX + (e.key === "ArrowRight" ? 34 : -34)),
+        );
+        if (reduce) drawB();
+      } else if (e.key === " " || e.key === "Enter") {
+        e.preventDefault();
+        if (waiting && !reduce) launch();
+      }
+    });
+
+    var bTimer = null,
+      bVisible = !reduce;
+    function stopB() {
+      if (bTimer !== null) {
+        clearInterval(bTimer);
+        bTimer = null;
+      }
+    }
+    function ensureB() {
+      if (reduce) return;
+      if (bTimer === null && bVisible) bTimer = setInterval(stepB, 30);
+    }
+    var ioB = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          bVisible = e.isIntersecting && !reduce;
+          if (bVisible) ensureB();
+        });
+      },
+      { threshold: 0.15 },
+    );
+    ioB.observe(bCanvas);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        bVisible = false;
+      } else {
+        var r = bCanvas.getBoundingClientRect();
+        bVisible = !reduce && r.bottom > 0 && r.top < innerHeight;
+        ensureB();
+      }
+    });
+    if (reduce) {
+      capB.textContent =
+        "motion off — the rules remain: bricks bend the path; the score is the angle to truth.";
+      errDeg = 17;
+      ballB = { x: BW / 2 - 120, y: 260, vx: 3, vy: -4 };
+      drawB();
+      ballB = null;
+      waiting = true;
+    } else {
+      drawB();
+      ensureB();
+    }
+
+    /* ================= LEDGER ================= */
+    var lnote = document.getElementById("ledgerNote");
+    var LREST = "— hover a proposition —";
+    if (hoverNone) {
+      LREST = "— tap a proposition —";
+      lnote.textContent = LREST;
+      var lsub = document.getElementById("ledgerSub");
+      if (lsub)
+        lsub.textContent =
+          "numbers are commitments to update, not positions to defend. tap for the working.";
+    }
+    document.querySelectorAll("table.ledger tbody tr").forEach(function (tr) {
+      function lshow() {
+        lnote.textContent = tr.getAttribute("data-note");
+      }
+      function lrest() {
+        lnote.textContent = LREST;
+      }
+      tr.addEventListener("mouseenter", lshow);
+      tr.addEventListener("mouseleave", lrest);
+      tr.addEventListener("focus", lshow);
+      tr.addEventListener("blur", lrest);
+      tr.addEventListener("click", lshow);
+    });
+
+    /* ================= TAPE ================= */
+    var rail = document.getElementById("tapeRail");
+    if (!reduce) rail.innerHTML += rail.innerHTML;
+
+    /* ================= REVEALS ================= */
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("in");
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.08 },
+    );
+    document.querySelectorAll(".reveal").forEach(function (el) {
+      io.observe(el);
+    });
+  })();
+</script>

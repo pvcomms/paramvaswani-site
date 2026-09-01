@@ -1,0 +1,1207 @@
+<title>Reading the Figures</title>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+/>
+<style>
+  :root {
+    --ink: #0b0c0e;
+    --paper: #e9e6de;
+    --dim: #96917f;
+    --faint-t: #7c7869;
+    --hair: #26272a;
+    --hair-2: #66635a;
+    --edge: #3a3b3e;
+    --bar: #101216;
+    --c1: #b48ede;
+    --c2: #6fa8dc;
+    --c3: #7fb069;
+    --c4: #e3c567;
+    --c5: #d98aa8;
+    --me: #e07a6b;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  ::selection {
+    background: var(--c4);
+    color: var(--ink);
+  }
+  .col {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 88px;
+  }
+
+  header {
+    padding: 72px 0 0;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  h1 {
+    font-size: 34px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-top: 12px;
+    text-wrap: balance;
+  }
+  .standfirst {
+    color: var(--dim);
+    font-size: 18px;
+    margin-top: 14px;
+    max-width: 600px;
+  }
+  .rule {
+    border: 0;
+    border-top: 1px solid var(--hair);
+    margin: 40px 0 0;
+  }
+
+  /* spine */
+  .spine {
+    margin: 44px 0 0;
+    border: 1.5px solid var(--edge);
+    background: var(--ink);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+  .spine-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    background: var(--bar);
+    border-bottom: 1.5px solid var(--edge);
+  }
+  .spine-bar i {
+    width: 7px;
+    height: 7px;
+    border: 1.2px solid var(--hair-2);
+    display: block;
+  }
+  .spine-bar span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+  }
+  .spine-body {
+    padding: 20px 18px;
+  }
+  ol.chain {
+    list-style: none;
+    counter-reset: c;
+    display: grid;
+    gap: 2px;
+  }
+  ol.chain li {
+    counter-increment: c;
+    display: grid;
+    grid-template-columns: 78px 132px 1fr;
+    gap: 0 14px;
+    padding: 9px 0;
+    border-bottom: 1px dotted var(--hair);
+    align-items: baseline;
+  }
+  ol.chain li:last-child {
+    border-bottom: 0;
+  }
+  ol.chain .n {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+  }
+  ol.chain .v {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  ol.chain .q {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+  li.f1 .v {
+    color: var(--c1);
+  }
+  li.f2 .v {
+    color: var(--c2);
+  }
+  li.f3 .v {
+    color: var(--c3);
+  }
+  li.f4 .v {
+    color: var(--c4);
+  }
+  li.f5 .v {
+    color: var(--c5);
+  }
+
+  section {
+    padding: 56px 0 0;
+  }
+  .fig-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .fig-head .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .fig-head h2 {
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .fig-head .asks {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    margin-left: auto;
+  }
+  #f1 .tag {
+    color: var(--c1);
+  }
+  #f2 .tag {
+    color: var(--c2);
+  }
+  #f3 .tag {
+    color: var(--c3);
+  }
+  #f4 .tag {
+    color: var(--c4);
+  }
+  #f5 .tag {
+    color: var(--c5);
+  }
+  #f6 .tag {
+    color: var(--me);
+  }
+
+  .claim {
+    font-size: 19px;
+    line-height: 1.6;
+    margin: 20px 0 0;
+    padding-left: 16px;
+    border-left: 2px solid var(--hair-2);
+  }
+  p {
+    margin-top: 14px;
+  }
+  p.m {
+    color: var(--dim);
+    font-size: 16px;
+  }
+  dl.parts {
+    margin-top: 20px;
+    display: grid;
+    gap: 0;
+  }
+  dl.parts div {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 0 18px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  dl.parts div:last-child {
+    border-bottom: 0;
+  }
+  dt {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--paper);
+    padding-top: 2px;
+  }
+  dd {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+  dd b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+
+  .motion {
+    margin-top: 20px;
+    padding: 14px 16px;
+    border: 1px solid var(--hair);
+    font-size: 15.5px;
+    color: var(--dim);
+  }
+  .motion .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .motion b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+
+  .cohere-note {
+    margin-top: 18px;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--faint-t);
+    line-height: 1.75;
+  }
+  .cohere-note b {
+    color: var(--dim);
+    font-weight: 400;
+  }
+
+  table.grammar {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 22px;
+  }
+  table.grammar th {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    text-align: left;
+    border-bottom: 1px solid var(--hair-2);
+    padding: 0 10px 8px 0;
+  }
+  table.grammar td {
+    padding: 11px 10px 11px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 15.5px;
+    color: var(--dim);
+    vertical-align: baseline;
+  }
+  table.grammar td:first-child {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--paper);
+    white-space: nowrap;
+  }
+  table.grammar td b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+  .tablewrap {
+    overflow-x: auto;
+  }
+
+  ul.plain {
+    list-style: none;
+    margin-top: 14px;
+  }
+  ul.plain li {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--hair);
+    color: var(--dim);
+    font-size: 16px;
+  }
+  ul.plain li:last-child {
+    border-bottom: 0;
+  }
+  ul.plain b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+
+  .eli5 { margin-top: 40px; }
+  .eli5 div {
+    display: grid;
+    grid-template-columns: 62px 1fr;
+    gap: 0 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--hair);
+    align-items: baseline;
+  }
+  .eli5 div:last-child { border-bottom: 0; }
+  .eli5 .n { font-family: var(--mono); font-size: 11px; color: var(--faint-t); }
+  .eli5 .say { font-size: 17px; color: var(--paper); }
+  .eli5 .say em {
+    color: var(--dim);
+    font-style: normal;
+    display: block;
+    font-size: 14.5px;
+    margin-top: 2px;
+  }
+  .chainfig { margin-top: 26px; overflow-x: auto; }
+  .chainfig svg { display: block; width: 100%; min-width: 620px; height: auto; }
+  .verdict {
+    margin-top: 22px;
+    border: 1.5px solid var(--edge);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+  .verdict-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    background: var(--bar);
+    border-bottom: 1.5px solid var(--edge);
+  }
+  .verdict-bar i { width: 7px; height: 7px; border: 1.2px solid var(--hair-2); display: block; }
+  .verdict-bar span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+  }
+  .verdict-body { padding: 4px 18px 18px; }
+  .aud { padding: 16px 0; border-bottom: 1px solid var(--hair); }
+  .aud:last-child { border-bottom: 0; }
+  .aud .h { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+  .aud .h b {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    font-weight: 400;
+    color: var(--paper);
+  }
+  .aud .badge {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: 1px solid;
+    border-radius: 100px;
+    padding: 2px 9px;
+  }
+  .badge.solid { color: var(--c3); border-color: var(--c3); }
+  .badge.partly { color: var(--c4); border-color: var(--c4); }
+  .badge.stretch { color: var(--me); border-color: var(--me); }
+  .aud p { margin-top: 8px; font-size: 15.5px; color: var(--dim); }
+  .aud p.fix {
+    color: var(--paper);
+    font-size: 15px;
+    padding-left: 14px;
+    border-left: 2px solid var(--hair-2);
+  }
+  .aud p.fix span {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    display: block;
+    margin-bottom: 3px;
+  }
+  footer {
+    margin-top: 64px;
+    padding-top: 22px;
+    border-top: 1px solid var(--hair);
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    line-height: 2;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    ol.chain li {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+    dl.parts div {
+      grid-template-columns: 1fr;
+      gap: 3px;
+    }
+    .fig-head .asks {
+      margin-left: 0;
+      width: 100%;
+    }
+    h1 {
+      font-size: 27px;
+    }
+  }
+</style>
+
+<div class="col">
+  <header>
+    <div class="eyebrow">companion to the site</div>
+    <h1>Reading the Figures</h1>
+    <p class="standfirst">
+      What each diagram claims, what every moving thing means, and why five
+      formal lenses on one person add up to a single argument rather than a pile
+      of visualizations.
+    </p>
+    <hr class="rule" />
+  </header>
+
+  <section id="eli5" style="padding-top: 44px">
+    <div class="fig-head">
+      <span class="tag" style="color: var(--paper)">plainly</span>
+      <h2>The whole thing in five sentences</h2>
+      <span class="asks">no jargon</span>
+    </div>
+
+    <div class="eli5">
+      <div><span class="n">fig. 1</span><span class="say">Here are the five things my head is made of. The interesting stuff isn’t inside any one of them — it’s where two of them touch.<em>Nobody is just “into philosophy.” People are into what philosophy does when it hits something else.</em></span></div>
+      <div><span class="n">fig. 2</span><span class="say">Most people cluster in the middle of anything you measure. I ran too far one way with the machines, then too far the other, and now I stand somewhere I picked.<em>And: if something nudges every choice a tiny bit, no single person can feel it, but the whole crowd slides.</em></span></div>
+      <div><span class="n">fig. 3</span><span class="say">Things shaped me. A couple of them I shaped back.<em>Being influenced isn’t passive — but it isn’t equal either.</em></span></div>
+      <div><span class="n">fig. 4</span><span class="say">When two things I care about disagree, this is who wins — and it depends on the situation.<em>A value that can’t handle a specific case is a slogan.</em></span></div>
+      <div><span class="n">fig. 5</span><span class="say">You never finish being right. You just keep steering while things keep hitting you.<em>So the score is which way you’re pointed, not how much you’ve collected.</em></span></div>
+    </div>
+
+    <div class="chainfig">
+      <svg viewBox="0 0 900 250" role="img" aria-label="A chain of five figures. From left: fig 1 coexist, fig 2 calibrate, fig 3 connect, fig 4 choose, fig 5 stay pointed. Beneath each, a bar shows how well grounded its claim is: fig 1 partly, fig 2 solid, fig 3 was stretched, fig 4 partly, fig 5 partly.">
+        <line x1="60" y1="70" x2="840" y2="70" stroke="#26272a" stroke-width="1" />
+        <g font-family="IBM Plex Mono, monospace">
+          <circle cx="90" cy="70" r="5" fill="#0b0c0e" stroke="#b48ede" stroke-width="1.4" />
+          <text x="90" y="46" text-anchor="middle" font-size="11" letter-spacing="0.1em" fill="#b48ede">COEXIST</text>
+          <text x="90" y="96" text-anchor="middle" font-size="9.5" fill="#7c7869">fig. 1</text>
+          <text x="90" y="120" text-anchor="middle" font-size="10.5" fill="#96917f">what am I</text>
+          <text x="90" y="134" text-anchor="middle" font-size="10.5" fill="#96917f">made of?</text>
+          <rect x="60" y="160" width="60" height="6" fill="#26272a" />
+          <rect x="60" y="160" width="36" height="6" fill="#e3c567" />
+          <text x="90" y="182" text-anchor="middle" font-size="8.5" letter-spacing="0.1em" fill="#e3c567">PARTLY</text>
+
+          <circle cx="278" cy="70" r="5" fill="#0b0c0e" stroke="#6fa8dc" stroke-width="1.4" />
+          <text x="278" y="46" text-anchor="middle" font-size="11" letter-spacing="0.1em" fill="#6fa8dc">CALIBRATE</text>
+          <text x="278" y="96" text-anchor="middle" font-size="9.5" fill="#7c7869">fig. 2</text>
+          <text x="278" y="120" text-anchor="middle" font-size="10.5" fill="#96917f">where does that</text>
+          <text x="278" y="134" text-anchor="middle" font-size="10.5" fill="#96917f">put me?</text>
+          <rect x="248" y="160" width="60" height="6" fill="#26272a" />
+          <rect x="248" y="160" width="58" height="6" fill="#7fb069" />
+          <text x="278" y="182" text-anchor="middle" font-size="8.5" letter-spacing="0.1em" fill="#7fb069">SOLID</text>
+
+          <circle cx="466" cy="70" r="5" fill="#0b0c0e" stroke="#7fb069" stroke-width="1.4" />
+          <text x="466" y="46" text-anchor="middle" font-size="11" letter-spacing="0.1em" fill="#7fb069">CONNECT</text>
+          <text x="466" y="96" text-anchor="middle" font-size="9.5" fill="#7c7869">fig. 3</text>
+          <text x="466" y="120" text-anchor="middle" font-size="10.5" fill="#96917f">what flows</text>
+          <text x="466" y="134" text-anchor="middle" font-size="10.5" fill="#96917f">in and out?</text>
+          <rect x="436" y="160" width="60" height="6" fill="#26272a" />
+          <rect x="436" y="160" width="20" height="6" fill="#e07a6b" />
+          <text x="466" y="182" text-anchor="middle" font-size="8.5" letter-spacing="0.1em" fill="#e07a6b">WAS STRETCHED</text>
+
+          <circle cx="654" cy="70" r="5" fill="#0b0c0e" stroke="#e3c567" stroke-width="1.4" />
+          <text x="654" y="46" text-anchor="middle" font-size="11" letter-spacing="0.1em" fill="#e3c567">CHOOSE</text>
+          <text x="654" y="96" text-anchor="middle" font-size="9.5" fill="#7c7869">fig. 4</text>
+          <text x="654" y="120" text-anchor="middle" font-size="10.5" fill="#96917f">which value</text>
+          <text x="654" y="134" text-anchor="middle" font-size="10.5" fill="#96917f">gets the say?</text>
+          <rect x="624" y="160" width="60" height="6" fill="#26272a" />
+          <rect x="624" y="160" width="33" height="6" fill="#e3c567" />
+          <text x="654" y="182" text-anchor="middle" font-size="8.5" letter-spacing="0.1em" fill="#e3c567">PARTLY</text>
+
+          <circle cx="842" cy="70" r="5" fill="#0b0c0e" stroke="#d98aa8" stroke-width="1.4" />
+          <text x="842" y="46" text-anchor="end" font-size="11" letter-spacing="0.1em" fill="#d98aa8">STAY POINTED</text>
+          <text x="842" y="96" text-anchor="middle" font-size="9.5" fill="#7c7869">fig. 5</text>
+          <text x="842" y="120" text-anchor="middle" font-size="10.5" fill="#96917f">how do I</text>
+          <text x="842" y="134" text-anchor="middle" font-size="10.5" fill="#96917f">keep aiming?</text>
+          <rect x="812" y="160" width="60" height="6" fill="#26272a" />
+          <rect x="812" y="160" width="31" height="6" fill="#e3c567" />
+          <text x="842" y="182" text-anchor="middle" font-size="8.5" letter-spacing="0.1em" fill="#e3c567">PARTLY</text>
+
+          <text x="60" y="222" font-size="10" fill="#7c7869">bars = how much of each claim is load-bearing fact rather than useful picture · audited below</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="spine">
+    <div class="spine-bar">
+      <i></i><i></i><span>the spine — five figures, one sentence</span>
+    </div>
+    <div class="spine-body">
+      <ol class="chain">
+        <li class="f1">
+          <span class="n">fig. 1</span><span class="v">coexist</span
+          ><span class="q"
+            >what am I made of, and what do the parts make when they
+            touch?</span
+          >
+        </li>
+        <li class="f2">
+          <span class="n">fig. 2</span><span class="v">calibrate</span
+          ><span class="q"
+            >how far from everyone else do I stand — and who chose that
+            distance?</span
+          >
+        </li>
+        <li class="f3">
+          <span class="n">fig. 3</span><span class="v">connect</span
+          ><span class="q">what shaped me, and what did I shape back?</span>
+        </li>
+        <li class="f4">
+          <span class="n">fig. 4</span><span class="v">choose</span
+          ><span class="q"
+            >when values collide, which one gets the last word?</span
+          >
+        </li>
+        <li class="f5">
+          <span class="n">fig. 5</span><span class="v">stay pointed</span
+          ><span class="q"
+            >how do I keep a belief aimed at truth while inputs keep hitting
+            it?</span
+          >
+        </li>
+      </ol>
+    </div>
+  </div>
+
+  <p class="claim">
+    Read in order they make one sentence:
+    <em
+      >these things coexist in me; here is where that puts me relative to the
+      mean; here is what flows in and out; here is how I decide; and here is the
+      daily practice of staying aimed.</em
+    >
+    Container, position, relations, decision, practice.
+  </p>
+
+  <!-- ============ FIG 1 ============ -->
+  <section id="f1">
+    <div class="fig-head">
+      <span class="tag">fig. 1</span>
+      <h2>What coexists</h2>
+      <span class="asks">set theory · the container</span>
+    </div>
+
+    <p class="claim">
+      Identity isn’t a list of interests. It’s an overlap structure — and the
+      interesting parts of a person live in the intersections, not the circles.
+    </p>
+
+    <p>
+      Five domains: mind/body, technology, philosophy, society, creation. On
+      their own they’re just topics; a bio could list them. What the diagram
+      argues is that none of the seven things actually worth naming exist inside
+      a single domain. <b>Cognitive architecture</b> only exists where mind
+      meets technology. <b>Phenomenology</b> only where mind meets philosophy.
+      <b>AI alignment</b> where technology meets philosophy.
+      <b>Structural difference</b> where a differently-built mind meets a world
+      built for the default. <b>Power &amp; consent</b> where philosophy meets
+      society. <b>Building your way out</b> where technology meets creation.
+      <b>Making as thinking</b> where creation meets philosophy.
+    </p>
+
+    <p class="m">
+      Every label sits on a region that geometrically exists — verified by
+      scanning the actual pixel areas before anything got named. The diagram
+      never claims a region it doesn’t have. That restraint is the epistemics of
+      the page in miniature: a picture that would rather be incomplete than
+      overstate.
+    </p>
+
+    <dl class="parts">
+      <div>
+        <dt>𝒰 · both / and</dt>
+        <dd>
+          The frame around everything. Both/and isn’t one of the topics — it’s
+          the <b>operator</b> that lets contradictory regions coexist without
+          being resolved. Putting it on the frame instead of at the center is
+          the single most load-bearing decision in the figure.
+        </dd>
+      </div>
+      <div>
+        <dt>the red dot, “me”</dt>
+        <dd>
+          Sits at mind ∩ technology ∩ philosophy — deliberately <b>not</b> at
+          the center of any one circle. The claim: I’m not any of these fields,
+          I’m the point where three of them cross.
+        </dd>
+      </div>
+      <div>
+        <dt>the unlabeled dashed set</dt>
+        <dd>
+          A sixth circle, half outside the frame, no name, no hover fill, not
+          clickable. Its only vocabulary is <b>“off the record.”</b> Withholding
+          built into the information architecture rather than announced in
+          prose.
+        </dd>
+      </div>
+      <div>
+        <dt>lens shading</dt>
+        <dd>
+          Hovering a two-domain region fills <b>the actual overlap shape</b>,
+          not a glow around a word. You see the exact region you’re being told
+          the name of.
+        </dd>
+      </div>
+      <div>
+        <dt>click → filter → enter</dt>
+        <dd>
+          First click dims the rest and holds a card; second click routes to the
+          part of the site that <b>embodies</b> that domain (mind→thoughts.log,
+          technology→fig. 2, philosophy→cohere, society→fig. 3, creation→the
+          work). The diagram is also the navigation, so the taxonomy has to be
+          true or the site breaks.
+        </dd>
+      </div>
+    </dl>
+
+    <div class="motion">
+      <span class="k">what moves, and why</span>
+      <b>The circles draw themselves in at load</b>, staggered over ~2.4s — the
+      identity assembles rather than arriving pre-formed.
+      <b>Bloom on hover</b> is attention: the lit circle gains a glow, the
+      others drop to 12% — thinking about one thing means the rest goes quiet,
+      briefly. <b>Two pale balls drift</b> continuously, taking the color of
+      whatever domain they’re crossing and bouncing off the off-record set:
+      attention wanders on its own schedule, takes on the character of wherever
+      it lands, and doesn’t get into what’s private.
+      <b>The red dot breathes but never travels</b> — the fixed point, alive but
+      not moving. The map is static; the traffic isn’t.
+    </div>
+  </section>
+
+  <!-- ============ FIG 2 ============ -->
+  <section id="f2">
+    <div class="fig-head">
+      <span class="tag">fig. 2</span>
+      <h2>How far from the mean</h2>
+      <span class="asks">statistics · the position</span>
+    </div>
+
+    <p class="claim">
+      Variance is the structure of things, not an error in your model — and
+      individuality isn’t the far tail, it’s choosing your distance from the
+      mean on purpose.
+    </p>
+
+    <p>
+      One axis: share of cognition delegated to machines, none to everything.
+      Three fixed marks tell the overcorrection arc — <b>autumn ’25</b> at the
+      far right (every decision through the machine: efficient, and not entirely
+      mine), <b>spring ’26</b> at the far left (cold turkey: proved the point,
+      paid in speed), and <b>now</b>, a chosen position right of center, revised
+      monthly. The word <em>overcorrection</em> sits over the swing between the
+      tails — the one place on the page the machine-learning register is allowed
+      to surface twice.
+    </p>
+
+    <p class="m">
+      Hovering the bands names them the way a statistician would: the middle is
+      “where most things cluster · base rates matter · the probable”; the tails
+      are “the unexpected · rare events · calibrate for tails.” This is the
+      figure that argues against optimization-as-virtue — the mean is not a
+      target, it’s just where the density is.
+    </p>
+
+    <dl class="parts">
+      <div>
+        <dt>the feed’s thumb</dt>
+        <dd>
+          The slider biases the whole distribution rightward.
+          <b>The curve slides; the three marks stay pinned.</b> That’s the
+          entire power argument in one gesture: the crowd’s center of mass
+          moves, your own history doesn’t, and the gap between them is what a
+          platform does to a population.
+        </dd>
+      </div>
+      <div>
+        <dt>μ fair vs μ actual</dt>
+        <dd>
+          Two mean markers. The first is where the mean sits with no thumb on
+          the scale. The second appears only once you’ve pushed it, labeled
+          <b>“the thumb moved everyone.”</b>
+        </dd>
+      </div>
+      <div>
+        <dt>±1σ, tracking</dt>
+        <dd>
+          The sigma boundaries move with the mean rather than staying fixed —
+          because the reference frame is what shifted, not the numbers.
+        </dd>
+      </div>
+      <div>
+        <dt>the machine (second view)</dt>
+        <dd>
+          The same claim, proven instead of asserted. A Galton board: nine rows
+          of pegs, every peg a left/right branch, balls piling into the curve.
+          <b
+            >The probability tree and the normal distribution are the same
+            object</b
+          >
+          — one seen before, one after. The slider now biases every individual
+          peg.
+        </dd>
+      </div>
+      <div>
+        <dt>the tracked red ball</dt>
+        <dd>
+          One ball in each batch is drawn red and trailed. Watch it and you
+          cannot tell the machine is biased — a single path is pure noise. The
+          bias is only legible in the pile.
+          <b
+            >That’s why individual experience can’t settle a question about a
+            system.</b
+          >
+        </dd>
+      </div>
+    </dl>
+
+    <div class="motion">
+      <span class="k">what moves, and why</span>
+      The curve view has <b>zero latency by design</b> — drag the thumb and the
+      whole distribution slides in real time, because the claim is about a
+      mechanism, and mechanisms should feel immediate. The machine view is the
+      opposite kind of time: balls fall at their own pace and the pile
+      accumulates over a minute or two, because the point is that lawfulness
+      only emerges with n.
+      <b>Two different speeds carrying two different epistemics</b> — instant
+      for the model, slow for the evidence.
+    </div>
+  </section>
+
+  <!-- ============ FIG 3 ============ -->
+  <section id="f3">
+    <div class="fig-head">
+      <span class="tag">fig. 3</span>
+      <h2>The influence graph</h2>
+      <span class="asks">graph theory · the relations</span>
+    </div>
+
+    <p class="claim">
+      Nothing arrives alone, and every edge runs both ways. Neither the
+      passive-consumer story nor the pure-autonomy story survives contact with
+      the actual graph.
+    </p>
+
+    <p>
+      Fig. 1 shows what <em>overlaps</em>; this shows what <em>flows</em>.
+      Eleven nodes around a red center — the feed, the machines, Aeon and
+      Psyche, LessWrong, Kierkegaard, Clark &amp; Chalmers, Whittaker, MUBI,
+      Fleet Foxes, the old ghosts — and the hover captions are written
+      bidirectionally on purpose.
+      <b
+        >“The feed ↔ me: it shaped my taste; my attention paid its rent. Neither
+        of us is innocent.”</b
+      >
+      That sentence is the thesis of the whole figure: influence is a trade, not
+      a transmission.
+    </p>
+
+    <p class="m">
+      Nodes connect to each other, not only to the center — the feed touches the
+      old ghosts and the machines; Kierkegaard touches Clark &amp; Chalmers.
+      Being shaped by something means being shaped by everything it’s connected
+      to. The graph is also where the taste history stays legible without being
+      confessed.
+    </p>
+
+    <div class="motion">
+      <span class="k">what moves, and why</span>
+      The nodes <b>never quite settle</b> — a slow idle wobble, a couple of
+      pixels, never resolving into a fixed arrangement. An influence map that
+      held perfectly still would be claiming the relationships are finished.
+      Hovering a node lights only its own edges:
+      <b
+        >you can trace what one thing touches, but you can’t see the whole graph
+        at once</b
+      >, which is also true of the actual situation.
+    </div>
+  </section>
+
+  <!-- ============ FIG 4 ============ -->
+  <section id="f4">
+    <div class="fig-head">
+      <span class="tag">fig. 4</span>
+      <h2>Precedence</h2>
+      <span class="asks">decision theory · the choice</span>
+    </div>
+
+    <p class="claim">
+      Values don’t rank in the abstract; they rank per situation. A principle
+      you can’t route is a slogan.
+    </p>
+
+    <p>
+      A decision tree that’s actually a values router. Does it touch a person →
+      <b>kindness</b>, and the edge is annotated <em>always</em> — the only
+      “always” on the site. Otherwise: can it be undone? If no →
+      <b>uncertainty</b> (one-way doors get a credence first). If yes, is
+      everyone already doing it? Yes → <b>individuality</b> (the mean moved, not
+      the truth). No → <b>taste</b> (when nothing else claims jurisdiction,
+      judgment does). And a separate short branch,
+      <em>is it anyone’s business?</em> → <b>privacy</b>, marked
+      <em>end of route</em>.
+    </p>
+
+    <p class="m">
+      The situation chips let you call the router on a real case and watch it
+      resolve edge by edge. This is the figure most exposed to rationalist
+      cringe, so two guards: <b>no probabilities anywhere on it</b> — putting p
+      = .8 on “kindness governs” would be self-parody, and numbers live in the
+      ledger instead — and a footnote that undercuts the whole apparatus:
+      <em>deterministic here. messier in production.</em>
+    </p>
+
+    <dl class="parts">
+      <div>
+        <dt>the privacy branch</dt>
+        <dd>
+          The route <b>visibly stops early</b>, short of the tree’s full depth.
+          A value you can watch refuse to traverse. It’s the only structural
+          argument on the page that doesn’t need a sentence.
+        </dd>
+      </div>
+      <div>
+        <dt>the traveling dot</dt>
+        <dd>
+          The same red dot from fig. 1, now walking the tree — identity moving
+          through a decision rather than sitting in a diagram.
+        </dd>
+      </div>
+      <div>
+        <dt>cross-references</dt>
+        <dd>
+          The uncertainty leaf points to the ledger; the individuality leaf
+          points back to fig. 2. <b>The figures cite each other</b>, like a
+          paper.
+        </dd>
+      </div>
+    </dl>
+  </section>
+
+  <!-- ============ FIG 5 ============ -->
+  <section id="f5">
+    <div class="fig-head">
+      <span class="tag">fig. 5</span>
+      <h2>Directionally correct</h2>
+      <span class="asks">dynamics · the practice</span>
+    </div>
+
+    <p class="claim">
+      You don’t arrive at truth. You stay pointed at it while a stream of inputs
+      bends your heading — and the honest score is an angle, not a total.
+    </p>
+
+    <p>
+      A breakout game where the ball is a belief. Green bricks (evidence, base
+      rate, contra, primary source, steelman, sleep on it) bend its path
+      <em>toward</em> a truth marker; violet bricks (vibes, the feed, consensus,
+      sunk cost, engagement, hot take, clout) bend it <em>away</em>. The paddle
+      is labeled <b>judgment</b> — your only control, and it only gets to choose
+      the return angle. The readout is the live angular error between where the
+      belief is heading and where truth sits, turning gold under 25°:
+      <em>directionally correct</em>.
+    </p>
+
+    <dl class="parts">
+      <div>
+        <dt>bricks pass through</dt>
+        <dd>
+          They don’t bounce the ball, they bend it.
+          <b>An input doesn’t block a thought; it redirects one.</b> The physics
+          had to be rewritten to make that true.
+        </dd>
+      </div>
+      <div>
+        <dt>truth · approx.</dt>
+        <dd>
+          The target is labeled approximate <b>and it drifts</b>. Aiming at a
+          moving, uncertain target is the actual condition; a fixed bullseye
+          would be the lie.
+        </dd>
+      </div>
+      <div>
+        <dt>the field repopulates</dt>
+        <dd>
+          Every twenty seconds, cleared or not.
+          <b>The inputs never stop arriving</b> — there’s no state where you’ve
+          processed everything.
+        </dd>
+      </div>
+      <div>
+        <dt>no win screen</dt>
+        <dd>
+          There is no score to maximize and nothing to complete. The only
+          failure is dropping the belief entirely, and the caption for that is
+          <em>“belief dropped. click to reopen the question.”</em>
+        </dd>
+      </div>
+    </dl>
+
+    <div class="motion">
+      <span class="k">what moves, and why</span>
+      This is the one figure that <b>requires you to participate</b> to say
+      anything. Figs. 1–4 can be read; fig. 5 has to be played, badly, for a
+      minute. That’s the argument: epistemics is a motor skill, not a position
+      you hold.
+    </div>
+  </section>
+
+  <!-- ============ THE LAYERS ============ -->
+  <section id="f6">
+    <div class="fig-head">
+      <span class="tag">around the figures</span>
+      <h2>The three layers that hold them</h2>
+      <span class="asks">accountability · time · architecture</span>
+    </div>
+
+    <ul class="plain">
+      <li>
+        <b>The ledger + the tape.</b> Beliefs with numbers and deltas, and a
+        ticker that quotes them like market prices. The tape is the anti-feed
+        joke made structural:
+        <b
+          >the only auto-scrolling thing on the site scrolls commitments you can
+          be wrong about</b
+        >, not virtues. The last row bets against the site itself —
+        <em>this design survives twelve months, p = .35 ▼</em>.
+      </li>
+      <li>
+        <b>thoughts.log.</b> Dated, tagged, tail -f. The figures show a
+        structure; the log shows it changing. Without it the page would claim to
+        be finished.
+      </li>
+      <li>
+        <b>The four rooms + the nav.</b> Create, consume, curate, cohere —
+        <b>verbs</b>. Fig. 1’s domains are nouns: what I’m made of. The verbs
+        are what I do with them. That’s why both survived the redesign, and why
+        the hero’s circles deep-link into verb-named sections: the nouns route
+        into the doing.
+      </li>
+    </ul>
+  </section>
+
+  <!-- ============ HOW THEY COHERE ============ -->
+  <section id="cohere">
+    <div class="fig-head">
+      <span class="tag">the argument</span>
+      <h2>How five diagrams become one claim</h2>
+      <span class="asks">why this isn’t a pile of charts</span>
+    </div>
+
+    <p class="claim">
+      Each figure is a different formalism aimed at the same person, and none of
+      them is sufficient alone. What persists across all five coordinate systems
+      is the thing the site is actually about.
+    </p>
+
+    <p>
+      Set theory can show what coexists but says nothing about degree.
+      Statistics can place you on an axis but flattens you to one number. A
+      graph shows relations but not decisions. A decision tree shows choices but
+      pretends they’re clean. A dynamical system shows the practice but no
+      structure.
+      <b
+        >Run all five and the residue — the red dot that appears in every one —
+        is the argument.</b
+      >
+      A self can be modeled without being reduced, which is the both/and thesis
+      executed rather than stated.
+    </p>
+
+    <div class="tablewrap">
+      <table class="grammar">
+        <thead>
+          <tr>
+            <th>device</th>
+            <th>what it does across every figure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>the red dot</td>
+            <td>
+              Same color, size, and breathing in fig. 1 (identity), fig. 2
+              (position), fig. 4 (walking the tree), fig. 5 (the belief in
+              play). Established once, never explained again.
+              <b>Recurrence does the work silently.</b>
+            </td>
+          </tr>
+          <tr>
+            <td>the caption bar</td>
+            <td>
+              One component under every figure — same mono, same height, same
+              em-dash rest state. Three instruments on one panel, not three
+              illustrations in a row.
+            </td>
+          </tr>
+          <tr>
+            <td>numbering</td>
+            <td>
+              Figures are numbered like a paper because the page is a paper: an
+              argument with evidence, not a portfolio with decoration.
+            </td>
+          </tr>
+          <tr>
+            <td>cross-citation</td>
+            <td>
+              Fig. 2 points forward to fig. 4; fig. 4’s leaves point back to
+              fig. 2 and to the ledger; fig. 3’s rest caption points back to
+              fig. 1. <b>A cycle, not a stack.</b>
+            </td>
+          </tr>
+          <tr>
+            <td>one home per value</td>
+            <td>
+              Nuance lives in 𝒰. Individuality lives in the curve. Uncertainty,
+              kindness, taste and privacy are the tree’s leaves. Both/and is the
+              frame. <b>No value is ever listed as signage</b> — that’s why
+              there’s no wall of virtues anywhere.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="cohere-note">
+      <b>The negative space is also an argument.</b> Nothing on the page
+      autoplays except one breathing dot and two one-time draw-ons. Nothing
+      records what you do — no analytics, no cookies, no stored input, no
+      counter of your behavior. The page cannot learn about you. On a site whose
+      subject is what feeds do to minds, that restraint is the load-bearing
+      claim:
+      <b>the interaction design has to be able to survive its own critique.</b>
+    </p>
+  </section>
+
+  <section id="audit">
+    <div class="fig-head">
+      <span class="tag" style="color: var(--me)">sanity check</span>
+      <h2>Is it actually grounded?</h2>
+      <span class="asks">the honest audit</span>
+    </div>
+
+    <p class="claim">Short answer: one figure is real mathematics, three are honest
+    pictures a viewer will over-read, and one made a claim that was simply false until
+    it got fixed. Here is which is which.</p>
+
+    <div class="verdict">
+      <div class="verdict-bar"><i></i><i></i><span>audit.log — written against my own work</span></div>
+      <div class="verdict-body">
+        <div class="aud">
+          <div class="h"><b>fig. 2 · the distribution</b><span class="badge solid">solid</span></div>
+          <p>The strongest thing on the site, and the only part that would survive a
+          statistician. Binomial paths really do converge to a normal distribution; a
+          per-branch bias really does shift the population mean by <em>n(p−½)</em> ×
+          pitch; a single tracked path really is uninformative about the bias. Checked
+          numerically rather than asserted: at p = .65 the simulated mean landed 53.2px
+          from center against a theoretical 54.</p>
+          <p class="fix"><span>the honest caveat</span>The mechanism is real; the
+          personal axis is illustrative. “Share of cognition delegated to machines” has
+          no units and was never measured. The theorem is true; the three dates on it
+          are a story about a person.</p>
+        </div>
+
+        <div class="aud">
+          <div class="h"><b>fig. 1 · the venn</b><span class="badge partly">partly</span></div>
+          <p>What is real: every named intersection is a genuine field that exists at
+          exactly that overlap, and every label sits on a region confirmed to have real
+          area before it was named. What is <em>not</em> real: five overlapping circles
+          cannot represent all thirty-one possible combinations — a hard geometric
+          limit, not an editorial choice. So the absences are artifacts. Society ∩
+          technology has no region because circles can’t do it, yet a viewer reads that
+          absence as a claim. Circle sizes are decorative too: they encode nothing while
+          looking like they encode magnitude.</p>
+          <p class="fix"><span>what would close it</span>One line under the figure:
+          <em>“five circles can’t show every overlap; the missing ones are geometry, not
+          opinion.”</em> Cheap, and it converts a hidden weakness into a visible
+          epistemic standard.</p>
+        </div>
+
+        <div class="aud">
+          <div class="h"><b>fig. 3 · the influence graph</b><span class="badge stretch">was overclaiming</span></div>
+          <p>The caption said <em>“every edge runs both ways.”</em> That was false, and
+          I should have caught it earlier. Kierkegaard is dead. Clark and Chalmers do
+          not know you exist. MUBI does not change because you watched something. Of
+          eleven edges, exactly two are genuinely bidirectional — <b>the feed</b> (your
+          attention is a real input to a recommender that then changes what it shows you
+          and others) and <b>the machines</b>, weakly. The rest are one-way influence
+          that <em>feels</em> reciprocal because reading someone changes how you read
+          them.</p>
+          <p class="fix"><span>fixed on the site</span>The caption now reads:
+          <em>“most of these run one way. two of them run both — and that difference is
+          the whole story.”</em> The honest version is the sharper argument, because it
+          isolates exactly what makes a feed different from a book.</p>
+        </div>
+
+        <div class="aud">
+          <div class="h"><b>fig. 4 · precedence</b><span class="badge partly">aspiration</span></div>
+          <p>Coherent as a manifesto, not true as a description. Nobody runs a decision
+          tree; you act and then reconstruct the reason. The footnote
+          (<em>“deterministic here, messier in production”</em>) is doing nearly all the
+          honesty work on this figure. And the strongest word on it is the shakiest:
+          <b>“always.”</b> Kindness always outranking rigor is a real ethical position,
+          but it collides with your own principles — dissect the package, impact over
+          intent, question everything — in every case where the kind move is the
+          uninformative one.</p>
+          <p class="fix"><span>worth deciding</span>Either keep “always” and own it as a
+          chosen commitment rather than a derived result, or change that edge to
+          <em>“first”</em> — kindness gets the first word, not necessarily the last. One
+          word, and the tree stops contradicting its neighbours.</p>
+        </div>
+
+        <div class="aud">
+          <div class="h"><b>fig. 5 · directionally correct</b><span class="badge partly">metaphor with a hole</span></div>
+          <p>The dynamics are honest — inputs bend rather than block, the target drifts
+          and says so, the field never empties, there is no win state. But there is a
+          real conceptual hole: <b>the bricks are pre-labeled.</b> Green is signal,
+          violet is noise, and you know which is which before you hit them. In actual
+          epistemics that is precisely what you don’t get. As built, the game is about
+          obeying a known evidence hierarchy, not about discernment.</p>
+          <p class="fix"><span>the fix that would make it true</span>Grey the bricks
+          until impact and reveal signal or noise only after the ball hits — you learn
+          what an input was worth <em>after</em> it has already bent you. That is the
+          real experience, and it would make fig. 5 the second-most honest figure
+          instead of the prettiest.</p>
+        </div>
+
+        <div class="aud">
+          <div class="h"><b>the meta-claim · “five lenses, the residue is the self”</b><span class="badge partly">authored, not discovered</span></div>
+          <p>The defensible core is standard and true: different formalisms capture
+          different structure, and no single model of a person is adequate. The flourish
+          — that what persists across all five coordinate systems <em>is</em> the self —
+          is rhetoric. The red dot recurs in every figure because it was drawn that way,
+          not because reality forced it. The figures cohere because they were built to
+          cohere.</p>
+          <p class="fix"><span>why it still stands</span>Authored coherence is design,
+          not fraud — as long as nobody claims it was found rather than made. The page
+          never says the diagrams were derived from data, and the ledger bets against
+          the design surviving twelve months. That is the right amount of doubt to leave
+          in public.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="cohere-note">
+      <b>Net:</b> the site is honest about being a designed argument rather than a set of
+      measurements, and its one genuinely quantitative claim is the one that was actually
+      verified. Two fixes remain open — the geometry disclaimer and hidden brick types —
+      plus one decision that is yours: whether kindness gets the first word or the last.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      companion to paramvaswani.com (pending) · figures 1–5 and the layers
+      around them<br />
+      set in newsreader &amp; plex mono · august 2026 · 𝒰 remains open
+    </p>
+  </footer>
+</div>

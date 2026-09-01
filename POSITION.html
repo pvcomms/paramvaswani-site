@@ -1,0 +1,719 @@
+<title>What You Study</title>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&display=swap"
+/>
+<style>
+  :root {
+    --ink: #0b0c0e;
+    --paper: #e9e6de;
+    --dim: #96917f;
+    --faint-t: #7c7869;
+    --hair: #26272a;
+    --hair-2: #66635a;
+    --edge: #3a3b3e;
+    --bar: #101216;
+    --yes: #7fb069;
+    --no: #e07a6b;
+    --gold: #e3c567;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.68;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .col {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 24px 88px;
+  }
+
+  header {
+    padding: 72px 0 0;
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  h1 {
+    font-size: 33px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-top: 12px;
+    text-wrap: balance;
+  }
+  .lede {
+    color: var(--dim);
+    font-size: 18px;
+    margin-top: 14px;
+    max-width: 600px;
+  }
+
+  section {
+    padding: 52px 0 0;
+  }
+  h2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--dim);
+    font-weight: 400;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 10px;
+  }
+  .big {
+    font-size: 23px;
+    line-height: 1.5;
+    margin-top: 20px;
+    padding-left: 16px;
+    border-left: 2px solid var(--gold);
+    text-wrap: balance;
+  }
+  p {
+    margin-top: 14px;
+  }
+  p.m {
+    color: var(--dim);
+    font-size: 16px;
+  }
+
+  table.f {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+  }
+  table.f th {
+    font-family: var(--mono);
+    font-weight: 400;
+    font-size: 9.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    text-align: left;
+    border-bottom: 1px solid var(--hair-2);
+    padding: 0 12px 8px 0;
+  }
+  table.f td {
+    padding: 12px 12px 12px 0;
+    border-bottom: 1px solid var(--hair);
+    font-size: 15.5px;
+    color: var(--dim);
+    vertical-align: top;
+  }
+  table.f td:first-child {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--paper);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+  }
+  table.f td b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+  .tw {
+    overflow-x: auto;
+  }
+
+  .claimbox {
+    margin-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 26px;
+  }
+  .claimbox > div {
+    padding-top: 4px;
+  }
+  .claimbox h3 {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 400;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--hair);
+  }
+  .claimbox .y h3 {
+    color: var(--yes);
+  }
+  .claimbox .n h3 {
+    color: var(--no);
+  }
+  .claimbox ul {
+    list-style: none;
+    margin-top: 4px;
+  }
+  .claimbox li {
+    padding: 9px 0;
+    border-bottom: 1px dotted var(--hair);
+    font-size: 15px;
+    color: var(--dim);
+  }
+  .claimbox li:last-child {
+    border-bottom: 0;
+  }
+  .claimbox li b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+
+  .lines {
+    margin-top: 18px;
+  }
+  .lines div {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .lines div:last-child {
+    border-bottom: 0;
+  }
+  .lines .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .lines .v {
+    font-size: 17px;
+    color: var(--paper);
+  }
+
+  .manifesto {
+    margin-top: 20px;
+    border: 1.5px solid var(--edge);
+    box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+  .manifesto-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 12px;
+    background: var(--bar);
+    border-bottom: 1.5px solid var(--edge);
+  }
+  .manifesto-bar i {
+    width: 7px;
+    height: 7px;
+    border: 1.2px solid var(--hair-2);
+    display: block;
+  }
+  .manifesto-bar span {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    color: var(--dim);
+  }
+  ol.m {
+    list-style: none;
+    counter-reset: m;
+    padding: 6px 20px 18px;
+  }
+  ol.m li {
+    counter-increment: m;
+    display: grid;
+    grid-template-columns: 34px 1fr;
+    gap: 0 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  ol.m li:last-child {
+    border-bottom: 0;
+  }
+  ol.m li::before {
+    content: counter(m, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    padding-top: 5px;
+  }
+  ol.m b {
+    font-weight: 400;
+    font-size: 18px;
+  }
+  ol.m span {
+    display: block;
+    color: var(--dim);
+    font-size: 15px;
+    margin-top: 2px;
+  }
+
+  ol.steps {
+    list-style: none;
+    counter-reset: s;
+    margin-top: 18px;
+  }
+  ol.steps li {
+    counter-increment: s;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    gap: 0 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  ol.steps li:last-child {
+    border-bottom: 0;
+  }
+  ol.steps li::before {
+    content: counter(s);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--gold);
+    padding-top: 4px;
+  }
+  ol.steps b {
+    font-weight: 400;
+  }
+  ol.steps .why {
+    display: block;
+    color: var(--dim);
+    font-size: 15px;
+    margin-top: 4px;
+  }
+  ol.steps .when {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--faint-t);
+    margin-left: 8px;
+  }
+
+  .hard {
+    margin-top: 20px;
+    padding: 16px 18px;
+    border: 1px solid var(--no);
+  }
+  .hard .k {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--no);
+    display: block;
+    margin-bottom: 8px;
+  }
+  .hard p {
+    margin-top: 10px;
+    font-size: 16px;
+    color: var(--dim);
+  }
+  .hard p:first-of-type {
+    margin-top: 0;
+  }
+  .hard b {
+    color: var(--paper);
+    font-weight: 400;
+  }
+
+  footer {
+    margin-top: 56px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hair);
+  }
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    line-height: 2;
+    margin: 0;
+  }
+
+  @media (max-width: 620px) {
+    .claimbox {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    h1 {
+      font-size: 26px;
+    }
+    .big {
+      font-size: 19px;
+    }
+  }
+</style>
+
+<div class="col">
+  <header>
+    <div class="eyebrow">positioning · working document</div>
+    <h1>What You Study, in Words Other People Already Use</h1>
+    <p class="lede">
+      A thesis, the real fields it maps to, three lengths of answer for when
+      someone asks, and an honest plan — including what to stop doing.
+    </p>
+  </header>
+
+  <section>
+    <h2>The thesis</h2>
+    <p class="big">
+      I study what machine mediation does to human judgment — and I build
+      interactive instruments that let people <em>feel</em> those mechanisms
+      instead of being told about them.
+    </p>
+    <p class="m">
+      Two halves, and both are load-bearing. The first half is the subject and
+      it is crowded — everyone has takes about attention and AI. The second half
+      is the differentiator, and almost nobody has it: the ability to build a
+      thing where you drag a slider and watch a population’s mean slide out from
+      under you. Lead with the subject; get hired for the method.
+    </p>
+  </section>
+
+  <section>
+    <h2>The fields, honestly named</h2>
+    <div class="tw">
+      <table class="f">
+        <thead>
+          <tr>
+            <th>field</th>
+            <th>what it is · who to cite · why it’s yours</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>postphenomenology</td>
+            <td>
+              <b>The core one.</b> How technologies mediate the human–world
+              relation — not what tools do <em>for</em> us but what they do
+              <em>to</em> the relation itself. Don Ihde, Peter-Paul Verbeek.
+              This is the actual academic name for the thing you kept calling
+              “phenomenology.” Use it and you sound situated instead of
+              searching.
+            </td>
+          </tr>
+          <tr>
+            <td>4E cognition</td>
+            <td>
+              Embodied, embedded, enacted, extended mind. Clark &amp; Chalmers,
+              Andy Clark’s predictive-processing work.
+              <b>The empirical wing of your delegation question</b> — what
+              actually happens to a mind that offloads. You’re already reading
+              here; claim it.
+            </td>
+          </tr>
+          <tr>
+            <td>explorable<br />explanations</td>
+            <td>
+              <b>Your method, and it has a name.</b> Bret Victor’s 2011 essay,
+              Nicky Case, Distill.pub, The Pudding, Our World in Data.
+              Interactive artifacts that teach a mechanism by letting you
+              operate it. Your Galton board with the bias slider is textbook.
+              This is the most under-claimed thing about you.
+            </td>
+          </tr>
+          <tr>
+            <td>media ecology</td>
+            <td>
+              McLuhan, Postman: environments-not-messages. Older, less
+              fashionable, and the direct ancestor of what you mean by “the
+              world changed and our instruments didn’t.”
+            </td>
+          </tr>
+          <tr>
+            <td>political economy<br />of attention</td>
+            <td>
+              Zuboff, Crawford, Wu, Whittaker. The structural half — who profits
+              from the mediation. Use this instead of “intersectionality of
+              capitalist structures,” which means something else and will get
+              you corrected.
+            </td>
+          </tr>
+          <tr>
+            <td>sociotechnical<br />AI safety</td>
+            <td>
+              The non-technical wing of safety: societal impact, epistemic
+              security, information integrity.
+              <b>Distinct from alignment research</b>, and the distinction
+              matters — see the right column.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>What you can claim, and what you can’t (yet)</h2>
+    <div class="claimbox">
+      <div class="y">
+        <h3>defensible today</h3>
+        <ul>
+          <li>
+            <b>Builder</b> — shipped systems, protocols, evals, MCP tooling.
+            Receipts exist.
+          </li>
+          <li>
+            <b>Explorable-explanation author</b> — the figures are real work in
+            a real genre.
+          </li>
+          <li>
+            <b>Essayist on machine mediation</b> — once the essays are actually
+            public.
+          </li>
+          <li>
+            <b>Self-experimenter / n=1 methodologist</b> — the biometric and
+            credence work is genuinely unusual.
+          </li>
+          <li>
+            <b>Well-read amateur</b> in philosophy of mind and phil-of-tech.
+            “Amateur” is not an insult in this lineage; it’s accurate and
+            disarming.
+          </li>
+        </ul>
+      </div>
+      <div class="n">
+        <h3>not yet — don’t say it</h3>
+        <ul>
+          <li>
+            <b>“AI safety researcher.”</b> You did fundamentals, not research.
+            Say “studied AI safety fundamentals” until there’s output.
+          </li>
+          <li>
+            <b>“Philosopher.”</b> No training, no publication. Say you work
+            <em>in</em> philosophy of technology.
+          </li>
+          <li>
+            <b>“Alignment.”</b> Your interest is societal and cognitive, not
+            technical alignment. Claiming it invites one question you can’t
+            answer.
+          </li>
+          <li>
+            <b>Invented terms</b> — “noegraphy” reads as a tell. Coin words only
+            after you’re known, never before.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Say it out loud — three lengths</h2>
+    <div class="lines">
+      <div>
+        <span class="k">at a party · 8 words</span
+        ><span class="v"
+          >“I build toys that show what tech does to thinking.”</span
+        >
+      </div>
+      <div>
+        <span class="k">bio line · 25 words</span
+        ><span class="v"
+          >Param Vaswani builds interactive instruments for thinking clearly
+          under machine mediation — small tools, essays, and self-experiments on
+          what we lose when judgment gets outsourced.</span
+        >
+      </div>
+      <div>
+        <span class="k">application · 60 words</span
+        ><span class="v"
+          >I work at the intersection of philosophy of technology and
+          interactive explanation. My subject is what constant machine mediation
+          does to human judgment — delegation, calibration, and the political
+          economy of attention. My method is building: small instruments that
+          let someone operate a mechanism rather than read a claim about it,
+          plus essays and n=1 experiments that hold themselves to published
+          credences.</span
+        >
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>The manifesto</h2>
+    <div class="manifesto">
+      <div class="manifesto-bar">
+        <i></i><i></i><span>six lines · say these in public</span>
+      </div>
+      <ol class="m">
+        <li>
+          <div>
+            <b>Checkability, not certainty.</b
+            ><span
+              >Cheap intelligence didn’t make the world knowable. It made it
+              verifiable. The goal was never to be sure — it was to never be
+              gaslit.</span
+            >
+          </div>
+        </li>
+        <li>
+          <div>
+            <b>The environment changed; the instruments didn’t.</b
+            ><span
+              >We are running attention hardware built for scarcity inside an
+              economy engineered for abundance. Index for that.</span
+            >
+          </div>
+        </li>
+        <li>
+          <div>
+            <b>Show the mechanism, don’t assert the conclusion.</b
+            ><span
+              >A claim you can operate beats a claim you must accept. If it
+              can’t be built as a toy, it probably isn’t understood.</span
+            >
+          </div>
+        </li>
+        <li>
+          <div>
+            <b>Self-knowledge that changes nothing is decoration.</b
+            ><span
+              >Insight has to reach the calendar, the diet, the decision.
+              Otherwise it’s a personality quiz.</span
+            >
+          </div>
+        </li>
+        <li>
+          <div>
+            <b>Anything you can’t leave, owns you.</b
+            ><span
+              >Exit is a design requirement, not a mood. This applies to
+              platforms, jobs, frameworks, and beliefs.</span
+            >
+          </div>
+        </li>
+        <li>
+          <div>
+            <b>Hold the contradiction; name it when it won’t resolve.</b
+            ><span
+              >Both/and is not indecision. Forcing resolution destroys more
+              information than it creates.</span
+            >
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <h2>What to actually do</h2>
+
+    <div class="hard">
+      <span class="k">the honest part</span>
+      <p>
+        <b>Your constraint is not clarity. It is published work.</b> You have
+        spent roughly a month on positioning — a masthead, a moniker, a surfaces
+        plan, nine versions of one homepage — and today you asked for a
+        manifesto. Meanwhile your public surface is approximately zero: Substack
+        deleted, GitHub deleted, domain unregistered, essays unpublished.
+      </p>
+      <p>
+        The thesis above is good enough. It will not get better by being refined
+        again; it will get better by being <b>tested against readers</b>.
+        Another positioning document is the most comfortable possible way to
+        avoid that test, and you should treat this one as the last.
+      </p>
+    </div>
+
+    <ol class="steps">
+      <li>
+        <div>
+          <b>Register the domain.</b><span class="when">today · 5 min</span
+          ><span class="why"
+            >Nothing downstream works without it, and it has been
+            “register-ASAP” since early August. It’s not a strategy decision,
+            it’s a checkbox blocking six other things.</span
+          >
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Ship three explorables in ninety days.</b
+          ><span class="when">by ~1 dec</span
+          ><span class="why"
+            >Not essays — <em>explorables</em>, because that’s your edge and
+            nobody else in your lane has it. You already have the engines: (a)
+            <b>The Delegation Discount</b> — the Galton bias machine,
+            generalized to judgment atrophy; (b) <b>The Sameness Engine</b> — a
+            recommender sim where you watch a population’s preferences converge
+            on themselves; (c) <b>Calibration Gym</b> — make predictions, get
+            Brier-scored, see your overconfidence by domain. Each is a weekend
+            or two. Each doubles as a portfolio piece and an essay.</span
+          >
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Publish where the readers already are.</b
+          ><span class="when">with each drop</span
+          ><span class="why"
+            >Post to LessWrong and Hacker News, not just your own site. An
+            explorable with real math is one of the few things that reliably
+            travels in those rooms — and those rooms contain the people who hire
+            for the work you want.</span
+          >
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Stop redesigning the site.</b><span class="when">now</span
+          ><span class="why"
+            >It is done. It was done two versions ago. Ship the three fixes in
+            the handoff, deploy, and freeze it until there’s new work to put on
+            it. The site is a container; you are short on contents, not
+            container.</span
+          >
+        </div>
+      </li>
+      <li>
+        <div>
+          <b>Re-decide the credentials, honestly.</b
+          ><span class="when">before dec 15</span
+          ><span class="why"
+            >Columbia J-School at ~$131K unfunded is a poor trade for someone
+            whose differentiator is building interactive artifacts — journalism
+            school teaches reporting, not this, and the industry it credentials
+            you for is contracting. A philosophy PhD is a five-year detour from
+            work you can do now. If you want a credential, the cheap one is
+            three published explorables and a talk. Keep BlueDot; it’s short,
+            relevant, and the deadline is imminent.</span
+          >
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>How you’ll know it worked</h2>
+    <p>
+      Not likes. Three checkable things, on a date:
+      <b>one explorable that a stranger you don’t know reshares</b>;
+      <b>one inbound conversation you didn’t initiate</b>; and
+      <b>one instance of someone else using your framing back at you</b> in
+      their own words. Any one of those is worth more than a fourth positioning
+      pass. If none of the three happens by March, the thesis is wrong or the
+      distribution is wrong — and you’ll be able to tell which, which is the
+      whole point of writing it down now.
+    </p>
+  </section>
+
+  <footer>
+    <p>
+      working document · august 2026 · supersedes the moniker and masthead
+      work<br />
+      the next artifact should be an explorable, not a plan
+    </p>
+  </footer>
+</div>
