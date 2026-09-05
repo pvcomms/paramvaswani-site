@@ -1,0 +1,86 @@
+---
+description: paramvaswani-site — single-file personal site. Format, engine, and content rules.
+globs:
+alwaysApply: true
+---
+
+# paramvaswani-site
+
+Personal site for Param Vaswani. One self-contained file, vanilla JS, no framework,
+no build step, no dependencies. Read `EDITING.md` for the file map and `HANDOFF.md`
+for settled decisions and the ship-gates before changing anything substantive.
+
+## Format — break this and publishing breaks
+
+`index.html`, `figure-legend.html`, and `POSITION.html` are **artifact fragments**:
+`<title>` on line 1, then `<link>`, `<style>`, markup, `<script>`.
+
+**There is deliberately no `<!doctype>`, `<html>`, `<head>`, or `<body>` tag.** The
+publish wrapper adds them; `dev.py` adds the same wrapper locally. Never "fix" this by
+adding them. Verify with `grep -c '<body' index.html` → must be 0.
+
+## Running it
+
+```bash
+./dev.py          # → localhost:4173, live: edit + refresh, no build
+```
+
+Routes: `/` site · `/legend` · `/position` · `/_pages` index.
+There is no npm, no package.json, no bundler. Don't add one.
+
+Use a real browser. Some embedded preview panes suspend `requestAnimationFrame`, which
+makes the Galton machine, drift balls, and breakout look frozen — that's the pane, not a bug.
+
+## Engine rules
+
+- **All animation goes through the hybrid clocks** — `fixedLoop` / `frameLoop`, between the
+  `clocks:begin` / `clocks:end` markers. They render on rAF in real browsers but keep a
+  `setInterval` watchdog so rAF-less documents still tick. Physics steps at a fixed 30 ms so
+  the Node-verified simulations stay valid. Don't call `requestAnimationFrame` or
+  `setInterval` directly for new animation — use the clocks.
+- **Keep every `prefers-reduced-motion` fallback.** Each animated figure has a static state
+  that still communicates its claim. New motion needs one too.
+- No per-frame `getComputedStyle` and no per-event `querySelectorAll` — both were removed
+  for latency. Cache lookups outside the loop.
+
+## Venn geometry (fig. 1) — two sources of truth
+
+Circle positions exist **twice**: as SVG attributes (`cx/cy/r` on `.tint`, `.halo`, `.set`,
+and the `clipPath` defs) and in the JS `sets` array used for hit-testing. Change one, change
+both, or hover detection silently desyncs from what's drawn.
+
+**Only label an intersection that geometrically exists.** Five circles cannot represent all
+31 combinations. Seven regions exist and are labeled. Before adding or moving a label, run
+the region scan in `EDITING.md` and confirm real area.
+
+## Content rules (from the audit — don't regress these)
+
+- **fig. 3 edges:** only `feed ↔ me` and (weakly) `machines ↔ me` are bidirectional. Every
+  other edge is one-way and labeled as such. Do not re-inflate to "every edge runs both ways."
+- **Privacy is a hard limit.** No health, diagnoses, medication, family, or third parties.
+  The society card's existing abstraction is the ceiling. Contact is `hello@paramvaswani.com`
+  only. Three withholding moves, no fourth. No redaction theatrics.
+- **RLHF register: exactly two touches** — "Raised by the algorithm, realigning by hand" and
+  the word "overcorrection" on fig. 2. The acronym never appears.
+
+## Publishing
+
+The live render is a **private Claude artifact**:
+`https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5`
+
+Cursor cannot publish to it — that needs the Artifact tool in Claude Code. Edit here, commit,
+and publish from Claude Code (pass the URL as `url` so it updates in place instead of
+creating a duplicate).
+
+**Do not deploy to a public URL.** Ship-gates in `HANDOFF.md` are unmet — the domain
+`paramvaswani.com` is still unregistered, and fonts need self-hosting before anything public.
+Private commits are fine; public surfaces need Param to say so explicitly.
+
+## Sanity checks after editing
+
+```bash
+python3 -c "import re;s=open('index.html').read();print('div',len(re.findall(r'<div\b',s)),len(re.findall(r'</div>',s)));print('svg',s.count('<svg'),s.count('</svg>'))"
+head -1 index.html && grep -c '<body' index.html   # want <title>… and 0
+```
+
+Then load in a real browser and confirm the console is clean.
