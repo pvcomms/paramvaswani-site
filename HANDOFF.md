@@ -1,6 +1,6 @@
 # paramvaswani-site — handoff
 
-**State as of 2026-09-01, session 359ae23d (v9, label `v9-honest-edges`). Not published publicly.**
+**State as of 2026-09-05 — GOING LIVE at paramv.com.** Deployed to Vercel; DNS cutover pending in Wix.
 Continue in Claude Code. This folder is the working copy; the artifact is the live render.
 
 ## Everything, in one place
@@ -12,7 +12,9 @@ Continue in Claude Code. This folder is the working copy; the artifact is the li
 | **Companion: Reading the Figures** | `figure-legend.html` · https://claude.ai/code/artifact/b57df703-2efe-4d12-96c0-876abdbccd21                 |
 | **Companion: What You Study**      | `POSITION.html` · https://claude.ai/code/artifact/4608ef2a-f8c0-4a1f-a427-500a74b7e048                      |
 | **How to edit**                    | `EDITING.md` — file map, anchors, rules, sanity checks                                                      |
-| **Dev server**                     | `./dev.py` → localhost:4173 (live; edit + refresh, no build)                                                |
+| **Dev server**                     | `./dev.py` → localhost:4173 (edits the sources live, no build)                                              |
+| **Build for deploy**               | `./build.py` → `public/` (generated, gitignored — never edit directly)                                      |
+| **Live site**                      | https://paramvaswani-site.vercel.app → **paramv.com** once DNS cuts over                                   |
 | **Figma reference**                | `reference-figma/` — their App.tsx, content, plan                                                           |
 | **Version control**                | git, initialised, one commit on `main`                                                                      |
 | **Memory**                         | `project_paramvaswani_redesign.md` (v1→v9 decision log) · `project_sensemaking_instruments.md` (the thesis) |
@@ -39,11 +41,11 @@ Paste this to kick off:
 
 **Three open items** (details in Open honesty items below): the fig. 1 geometry disclaimer,
 the fig. 4 "always" → "first" decision (yours), and fig. 5's hidden brick types.
-**Ship-gates before any public URL** are further down — register the domain first.
+**Live deployment** section below has the Vercel details and the DNS records still to set in Wix.
 
 ## What the page is
 
-One file, vanilla JS, Newsreader + IBM Plex Mono (the ONLY outbound request; see ship-gates).
+One file, vanilla JS, Newsreader + IBM Plex Mono **self-hosted from `/fonts/`** — zero third-party requests.
 Single dark theme, deliberately (artifact-design allows committed single-look). All engines run
 on the **hybrid clocks** (`fixedLoop`/`frameLoop`, sept 1 polish pass): rAF-smooth rendering in
 real browsers, `setInterval` watchdog fallback for rAF-less documents, fixed 30 ms physics
@@ -126,15 +128,30 @@ weakly, the machines actually are; captions now mark one-way edges as one-way). 
    rewards obeying a known evidence hierarchy rather than discernment. Fix: grey bricks until
    hit, reveal type on impact. Bigger change; strengthens the thesis.
 
-## Ship-gates before ANY public URL
+## Live deployment
 
-1. **Register paramvaswani.com first** (Spaceship MCP ready; needs Param's explicit go — it's a
-   purchase). hello@ is an interception vector until then (RDAP 404 verified 2026-08-31).
-2. **Self-host fonts** in the Next.js port (next/font). The prototype colophon owns the single
-   Google Fonts request honestly; production should have zero outbound.
-3. Port target: Next.js App Router + Tailwind, deploy over paramvaswani.vercel.app
-   (team pvbuildsfr), then GEO playbook (llms.txt, robots, JSON-LD), keep content in a
-   `content/site.ts`-style file Param can edit.
+| what | value |
+|---|---|
+| Vercel project | `paramvaswani-site` (team `pvbuildsfr`) |
+| Live now | https://paramvaswani-site.vercel.app |
+| Target domain | **paramv.com** (+ www) — added to the project, DNS cutover pending |
+| Registrar / DNS | **Wix** (ns0/ns1.wixdns.net) — NOT Spaceship; no MCP, DNS edits are manual |
+| Build | `./build.py` → `public/` (generated, gitignored). Never edit `public/` directly. |
+| Deploy | `vercel --prod --yes` from the repo root |
+
+**DNS records to set in Wix** (Domains → paramv.com → DNS Records):
+
+- `A` · host `@` · value `76.76.21.21`
+- `CNAME` · host `www` · value `cname.vercel-dns.com`
+
+Remove the existing Wix A records (185.230.63.x) and the www CNAME to wixdns first.
+Vercel issues TLS automatically once DNS resolves. Verify with
+`vercel domains inspect paramv.com` and `dig +short paramv.com`.
+
+**Ship-gates — both now CLEARED:**
+1. ~~Register the domain~~ — paramv.com owned (registered 2026-08-31 via Wix).
+2. ~~Self-host fonts~~ — 5 latin woff2 subsets served from `/fonts/`, Google Fonts removed,
+   colophon updated to claim zero third-party requests (it is now true).
 
 ## Gotchas (hard-won)
 

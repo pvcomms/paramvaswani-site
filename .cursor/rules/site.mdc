@@ -63,18 +63,23 @@ the region scan in `EDITING.md` and confirm real area.
 - **RLHF register: exactly two touches** — "Raised by the algorithm, realigning by hand" and
   the word "overcorrection" on fig. 2. The acronym never appears.
 
-## Publishing
+## Publishing & deploy
 
-The live render is a **private Claude artifact**:
-`https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5`
+**Live site:** Vercel project `paramvaswani-site` (team `pvbuildsfr`) →
+https://paramvaswani-site.vercel.app, and **paramv.com** once DNS cuts over in Wix.
 
-Cursor cannot publish to it — that needs the Artifact tool in Claude Code. Edit here, commit,
-and publish from Claude Code (pass the URL as `url` so it updates in place instead of
-creating a duplicate).
+```bash
+./build.py            # wraps sources into ./public with meta/OG/JSON-LD/robots/llms.txt
+vercel --prod --yes   # deploy
+```
 
-**Do not deploy to a public URL.** Ship-gates in `HANDOFF.md` are unmet — the domain
-`paramvaswani.com` is still unregistered, and fonts need self-hosting before anything public.
-Private commits are fine; public surfaces need Param to say so explicitly.
+`public/` is generated and gitignored — never edit it directly, edit the sources at the root.
+
+The Claude artifact (`https://claude.ai/code/artifact/ab79be5a-60b8-4126-809b-90f0556f70e5`)
+is now a secondary preview; Cursor cannot publish to it (needs the Artifact tool in Claude Code).
+
+Fonts are **self-hosted** in `/fonts/` — do not reintroduce a Google Fonts link. The colophon
+claims zero third-party requests, and that claim must stay true.
 
 ## Sanity checks after editing
 
