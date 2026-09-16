@@ -1,6 +1,12 @@
 # paramvaswani-site — handoff
 
-**State as of 2026-09-05 — GOING LIVE at paramv.com.** Deployed to Vercel; DNS cutover pending in Wix.
+**State as of 2026-09-16 — v10 built, NOT deployable tonight.** Two blockers, both outside the
+code: (1) the Vercel team `pvbuildsfr` has an **overdue balance** — every deploy is refused
+("Your team has an overdue balance") and every `*.vercel.app` host returns **402
+DEPLOYMENT_DISABLED**, including `paramvaswani-site.vercel.app`; (2) **paramv.com still points at
+Wix** (`185.230.63.x`, ns0/ns1.wixdns.net), so the domain 404s. Fix billing at
+https://vercel.com/teams/pvbuildsfr/settings/billing, then `./build.py && vercel --prod --yes`,
+then set the DNS records below in Wix. Nothing else is pending.
 Continue in Claude Code. This folder is the working copy; the artifact is the live render.
 
 ## Everything, in one place
@@ -60,7 +66,52 @@ steps with interpolated canvas rendering (see gotchas + EDITING.md rule 3).
 | fig. 4       | Precedence tree (which value governs when), situation chips, privacy leaf ends early.                                                                                                                                                                                                                                                                                               |
 | fig. 5       | Truth-seeker breakout: pass-through bricks bend the ball toward/away from a drifting "truth · approx." marker; paddle = JUDGMENT; score = live angle (gold ≤25°); field repopulates every 20 s.                                                                                                                                                                                     |
 | thoughts.log | 4 dated tagged entries. `wiring` entry is at Param-approved abstraction.                                                                                                                                                                                                                                                                                                            |
+| fig. 6       | The arbitration: seventeen tasks by cost-of-checking × cost-of-being-wrong, one draggable frontier, his line published at 0.84. Labels auto-solved. |
+| the register | Forty-six builds with kind/state filters that compose a real set expression. |
 | the tape     | Credence ticker (ledger quoted like market prices).                                                                                                                                                                                                                                                                                                                                 |
+
+## v10 (2026-09-16) — the register, the arbitration, the cursor
+
+Param's brief: go through every build, check the venn/set-theory, make it "super dynamic,
+hand-coded, figma-level", present him as philosopher / builder / technologist / commentator,
+and add the interactive pieces for taste-as-distribution and for arbitrating the boundary of
+personal AI use. What changed:
+
+- **fig. 6 · the arbitration** (new, `#arbitration`, markup before THOUGHTS.LOG, JS before
+  REVEALS). Seventeen tasks plotted by *cost of checking* (x) against *cost of being wrong* (y).
+  One draggable frontier `check + cost ≤ t` partitions them; `MINE = 0.84` is published as a
+  dashed ghost line, so the claim can be held against him. Drag the field, use the slider, or
+  focus the line and use arrows (shift = coarse, Home = back to his). The readout is literal
+  set-builder notation; the diff line names exactly which tasks you and he disagree about.
+  Hover/tap a point for its ruling. **Label placement is solved, not hand-nudged** — a penalty
+  search over 14 candidate slots per label, seeded with the axis and zone text boxes, run once
+  at build. Verified: zero label overlaps, zero out-of-bounds, zero label-over-dot collisions.
+- **The register** (`#idxList`, inside `create`). Forty-six builds drawn from
+  `~/Code/claude-archive/SORT-ME.csv` (185 rows). Two filter unions — kind and state —
+  intersected, and the live set expression above the list *is* the query
+  (`S = { systems } ∩ ({ evals } ∪ { protocols }) ∩ { shipped } · |S| = 7 of 46`). Empty
+  intersections print `∅`. Only `postphenom.com` is linked: it was the only one verifiably
+  reachable when this was written, and the note under the list says so.
+- **The venn cursor.** Pointer over fig. 1 runs the same point-in-set test the click handler
+  runs and prints the region you are standing in — `cursor ∈ M ∩ T · cognitive architecture`,
+  `cursor ∈ 𝒰 ∖ (M ∪ T ∪ P ∪ S ∪ C)`, or `cursor ∈ ⟨unlabeled⟩ · the set I don't draw`.
+- **fig. 2 is now "the distribution of taste"** — same real binomial maths, framing moved onto
+  taste as chosen distance from the mean. Captions and the footer figure index updated.
+- **The rail** — a 2px scroll indicator that takes the colour of the room you are in, a
+  `§ create` readout beside the masthead, ink-draw underlines, active nav state.
+- **Marginalia** (`.marg`, ≥1240px). Four gutter notes. One retires **open honesty item #1**:
+  the five-circle geometry disclaimer now sits next to fig. 1.
+- **Essays are honest now.** They were six `href="#"` links that went nowhere; they are
+  unlinked, marked `draft`, and the subhead reads "six written, none published. that is the
+  standing debt." The five curate links now point at real URLs (all verified 200).
+- Source-header comment for anyone who views source. `llms.txt` mentions six figures and the
+  register.
+
+Smoke-tested headless (Playwright): every venn set, both fig. 2 views, the bias slider, a
+precedence chip, the arbitration slider and reset, the register filters, ledger, tape, breakout
+— **zero console errors, zero page errors**. Visual checks were done by rendering with headless
+Chromium (`~/Code/shosai/node_modules` has playwright) because the in-app pane still cannot
+paint — see Gotchas.
 
 ## Decisions that are settled (don't relitigate)
 

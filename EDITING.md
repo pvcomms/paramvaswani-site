@@ -141,3 +141,50 @@ cd ~/Code/paramvaswani-site && git add -A && git commit -m "what changed"
 git diff HEAD~1                      # see last change
 git checkout -- index.html           # discard uncommitted edits
 ```
+
+## v10 additions (2026-09-16)
+
+| what                                  | grep for                        |
+| ------------------------------------- | ------------------------------- |
+| The register rows (46 builds)         | `class="reveal idx-row"`        |
+| Register filter buttons               | `class="idx-filters reveal"`    |
+| Register footnote (shipped ≠ up)      | `class="idx-note reveal"`       |
+| Register filter engine                | `THE REGISTER · SET FILTER`     |
+| fig. 6 tasks, coordinates and rulings | `var TASKS = [`                 |
+| fig. 6 his published line             | `var MINE =`                    |
+| fig. 6 label solver                   | `function layoutLabels()`       |
+| Venn membership cursor                | `function vennReticle()`        |
+| Scroll rail + `§ section` readout     | `THE RAIL`                      |
+| Gutter marginalia                     | `class="marg"`                  |
+| View-source signature                 | first comment block in the file |
+
+**Rules for these:**
+
+1. **A task's coordinates are a claim.** `c` is how expensive the answer is to check, `w` is what
+   it costs to be wrong. Both in 0..1. Their *sum* is the only thing the frontier sees, so the
+   sum ordering is the argument; the position along the diagonal is only to keep the plot
+   readable. If you add or move a task, re-run the collision check before shipping:
+
+   ```js
+   // in the page console
+   const items=[...document.querySelectorAll('#arbItems .item')];
+   const b=items.map(g=>{const t=g.querySelector('text.tl'),x=t.getBBox();
+     return {n:t.textContent,x:x.x,y:x.y,w:x.width,h:x.height};});
+   b.flatMap((p,i)=>b.slice(i+1).filter(q=>p.x<q.x+q.w&&q.x<p.x+p.w&&p.y<q.y+q.h&&q.y<p.y+p.h)
+     .map(q=>p.n+' ⨯ '+q.n));   // must be []
+   ```
+
+2. **`MINE` is a commitment, not a default.** Changing it changes a published claim. If it moves,
+   the marginalia next to fig. 6 and the `maint` ruling ("my line sits just past this one") both
+   need to move with it.
+
+3. **The register is honest about reachability.** Do not add links to hosts you have not just
+   checked. `postphenom.com` is linked because it returned 200; everything else is `.unlinked`
+   on purpose, and the note under the list explains why.
+
+4. **Essays stay unlinked and marked `draft`** until they are actually published somewhere. The
+   subhead states the debt; don't quietly delete it.
+
+5. Visual checks: the in-app browser pane computes layout but never paints. Render with headless
+   Chromium instead — `~/Code/shosai/node_modules` already has playwright; symlink it next to a
+   small `shot.mjs` and screenshot `http://localhost:4173/`.

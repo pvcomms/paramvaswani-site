@@ -91,10 +91,11 @@ LLMS = """# Param Vaswani
 
 ## What's here
 
-- [Home](https://paramv.com/): five interactive figures — a Venn of the domains and their
-  intersections, a distribution with a Galton machine, an influence graph, a values-precedence
-  tree, and a truth-seeking game. Plus essays, projects, principles, a credence ledger, and a
-  running log.
+- [Home](https://paramv.com/): six interactive figures — a Venn of the domains and their
+  intersections, the distribution of taste with the Galton machine that proves it, an influence
+  graph, a values-precedence tree, a truth-seeking game, and an arbitration plot that asks where
+  the line between your judgment and a machine's should fall. Plus essays, a register of
+  forty-six builds, principles, a credence ledger, and a running log.
 - [Reading the Figures](https://paramv.com/legend): what each figure claims, what every
   animation means, how they cohere, and an honest audit of which claims are actually grounded.
 - [What You Study](https://paramv.com/position): thesis, the fields it maps to, and a manifesto.

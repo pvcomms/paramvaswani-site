@@ -1,4 +1,20 @@
 <title>Param Vaswani</title>
+<!--
+  ┌─────────────────────────────────────────────────────────────────────┐
+  │  paramv.com — one file. no framework, no build step, no dependency. │
+  │  vanilla js, hand-written css, two self-hosted typefaces, and six   │
+  │  instruments that each run real arithmetic rather than mime it.     │
+  │                                                                     │
+  │  if you are reading this, you are exactly the kind of person the    │
+  │  site was made for. the figures are honest about what they can and  │
+  │  cannot show — see /legend for the audit, including the parts that  │
+  │  were caught being wrong.                                           │
+  │                                                                     │
+  │  no analytics. no cookies. nothing phones home. the page cannot     │
+  │  learn anything about you, which is the one claim here that is      │
+  │  load-bearing.                                                      │
+  └─────────────────────────────────────────────────────────────────────┘
+-->
 <style>
   @font-face {
     font-family: "IBM Plex Mono";
@@ -1313,11 +1329,589 @@
       align-items: center;
     }
   }
+
+  /* ---------- the register (filterable build index) ---------- */
+  .idx-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 4px 0 12px;
+  }
+  .idx-filters .grp {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+  }
+  .idx-filters .glab {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    color: var(--faint);
+    text-transform: uppercase;
+    padding-right: 2px;
+  }
+  .idx-filters .bar {
+    width: 1px;
+    height: 16px;
+    background: var(--hair);
+    margin: 0 8px;
+  }
+  .fbtn {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+    background: none;
+    border: 1.1px solid var(--hair);
+    padding: 3px 8px;
+    cursor: pointer;
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease,
+      background 0.18s ease,
+      transform 0.12s ease;
+  }
+  .fbtn:hover {
+    color: var(--paper);
+    border-color: var(--hair-2);
+    transform: translateY(-1px);
+  }
+  .fbtn:active {
+    transform: translateY(0);
+  }
+  .fbtn:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .fbtn[aria-pressed="true"] {
+    color: var(--ink);
+    background: var(--c-create);
+    border-color: var(--c-create);
+  }
+  .fbtn.st[aria-pressed="true"] {
+    background: var(--c-cohere);
+    border-color: var(--c-cohere);
+  }
+  .idx-expr {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--dim);
+    padding: 2px 0 14px;
+    border-bottom: 1px dashed var(--hair);
+    margin-bottom: 4px;
+    line-height: 1.7;
+  }
+  .idx-expr b {
+    color: var(--c-create);
+    font-weight: 400;
+  }
+  .idx-expr .card {
+    color: var(--paper);
+  }
+  .idx-row .when {
+    display: inline-flex;
+    gap: 8px;
+    align-items: baseline;
+  }
+  .idx-row .kind {
+    color: var(--faint);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+  }
+  .idx-row .state {
+    font-size: 10.5px;
+    letter-spacing: 0.08em;
+    padding-left: 8px;
+    border-left: 1px solid var(--hair);
+  }
+  .idx-row .s-daily {
+    color: var(--c-create);
+  }
+  .idx-row .s-shipped {
+    color: var(--dim);
+  }
+  .idx-row .s-parked {
+    color: var(--faint-t);
+  }
+  .idx-row .s-unbuilt {
+    color: var(--faint);
+    font-style: italic;
+    padding-right: 2px;
+  }
+  ul.index li.idx-row {
+    padding: 11px 0;
+  }
+  .idx-row .dek {
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .idx-row.off {
+    display: none;
+  }
+  .idx-row.pop {
+    animation: idxpop 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes idxpop {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .idx-empty {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint-t);
+    padding: 18px 0;
+  }
+  .idx-note {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.75;
+    color: var(--faint-t);
+    padding: 14px 0 0;
+    border-top: 1px solid var(--hair);
+    margin-top: 6px;
+  }
+  @media (max-width: 620px) {
+    .idx-filters .bar {
+      display: none;
+    }
+    .idx-filters {
+      gap: 5px;
+    }
+    ul.index li.idx-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 6px;
+    }
+    .idx-row .when {
+      margin-left: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .idx-row.pop {
+      animation: none;
+    }
+  }
+
+  /* ---------- fig 6 · the arbitration ---------- */
+  .arb-sec {
+    padding: 54px 0 10px;
+  }
+  .arb-wrap {
+    position: relative;
+  }
+  svg.arb {
+    display: block;
+    width: 100%;
+    height: auto;
+    touch-action: pan-y;
+    cursor: crosshair;
+  }
+  .arb .ax-line {
+    stroke: var(--hair);
+    stroke-width: 1;
+  }
+  .arb .ax-tick {
+    stroke: var(--hair);
+    stroke-width: 1;
+    stroke-dasharray: 1 5;
+    stroke-linecap: round;
+  }
+  .arb .ax-lab {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    fill: var(--dim);
+    text-transform: uppercase;
+  }
+  .arb .ax-end {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.08em;
+    fill: var(--faint-t);
+  }
+  .arb .zone {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    fill: var(--faint);
+    pointer-events: none;
+  }
+  .arb .frontier {
+    stroke: var(--c-cohere);
+    stroke-width: 1.6;
+    stroke-linecap: round;
+  }
+  .arb .frontier-hit {
+    stroke: transparent;
+    stroke-width: 26;
+    cursor: ns-resize;
+  }
+  .arb .ghost {
+    stroke: var(--paper);
+    stroke-width: 1;
+    stroke-dasharray: 3 5;
+    stroke-linecap: round;
+    opacity: 0.32;
+  }
+  .arb .ghost-lab {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.1em;
+    fill: var(--paper);
+    opacity: 0.42;
+  }
+  .arb .fillD {
+    fill: var(--c-curate);
+    fill-opacity: 0.062;
+    pointer-events: none;
+  }
+  .arb .item circle.pt {
+    stroke-width: 1.3;
+    transition:
+      fill 0.34s ease,
+      stroke 0.34s ease,
+      r 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .arb .item text.tl {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    letter-spacing: 0.04em;
+    fill: var(--faint-t);
+    stroke: var(--ink);
+    stroke-width: 3.2px;
+    stroke-linejoin: round;
+    paint-order: stroke fill;
+    transition:
+      fill 0.34s ease,
+      opacity 0.25s ease;
+    pointer-events: none;
+  }
+  .arb .item {
+    cursor: pointer;
+  }
+  .arb .item:hover circle.pt,
+  .arb .item:focus-visible circle.pt {
+    r: 7;
+  }
+  .arb .item:hover text.tl,
+  .arb .item:focus-visible text.tl {
+    fill: var(--paper);
+  }
+  .arb .item:focus {
+    outline: none;
+  }
+  .arb .item:focus-visible circle.pt {
+    stroke: var(--c-cohere);
+    stroke-width: 2;
+  }
+  .arb .item.kept circle.pt {
+    fill: rgba(224, 122, 107, 0.16);
+    stroke: var(--c-me);
+  }
+  .arb .item.deleg circle.pt {
+    fill: rgba(111, 168, 220, 0.14);
+    stroke: var(--c-curate);
+  }
+  .arb .item.flip circle.pt {
+    r: 8;
+  }
+  .arb-reticle {
+    pointer-events: none;
+  }
+  .arb-reticle line {
+    stroke: var(--c-cohere);
+    stroke-width: 0.7;
+    opacity: 0.4;
+  }
+  .arb-reticle text {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    fill: var(--c-cohere);
+    opacity: 0.75;
+  }
+  .arb-controls {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 14px 2px 2px;
+    border-top: 1px dashed var(--hair);
+    margin-top: 14px;
+  }
+  .arb-controls label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    color: var(--dim);
+    text-transform: uppercase;
+  }
+  .arb-controls input[type="range"] {
+    flex: 1;
+    min-width: 170px;
+    accent-color: var(--c-cohere);
+    height: 18px;
+    cursor: ew-resize;
+  }
+  .arb-set {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--paper);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  .arb-set b {
+    color: var(--c-cohere);
+    font-weight: 400;
+  }
+  .arb-mine {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--dim);
+    background: none;
+    border: 1.2px solid var(--hair-2);
+    padding: 4px 9px;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    transition:
+      transform 0.12s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .arb-mine:hover {
+    color: var(--paper);
+    border-color: var(--c-cohere);
+    transform: translate(-1px, -1px);
+  }
+  .arb-mine:active {
+    transform: translate(1px, 1px);
+  }
+  .arb-mine:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .arb-diff {
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.6;
+    color: var(--dim);
+    padding: 10px 0 0;
+  }
+  .arb-diff em {
+    font-style: normal;
+    color: var(--paper);
+  }
+  @media (max-width: 620px) {
+    .arb .item text.tl {
+      opacity: 0;
+    }
+    .arb .item:hover text.tl,
+    .arb .item:focus-visible text.tl {
+      opacity: 1;
+    }
+    .arb-set {
+      white-space: normal;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .arb .item circle.pt,
+    .arb .item text.tl {
+      transition: none;
+    }
+  }
+  .intro p.beat {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.04em;
+    line-height: 1.8;
+    color: var(--faint-t);
+    border-left: 1.5px solid var(--hair-2);
+    padding-left: 14px;
+    margin-top: 22px;
+  }
+  /* ---------- the venn cursor: a live membership test ---------- */
+  .vret line {
+    stroke: var(--paper);
+    stroke-width: 0.6;
+    opacity: 0.18;
+  }
+  .vret circle {
+    fill: none;
+    stroke: var(--paper);
+    stroke-width: 0.9;
+    opacity: 0.32;
+  }
+  text.vread {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    fill: var(--faint-t);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  text.vread.on {
+    opacity: 1;
+  }
+  text.vread tspan.nm {
+    fill: var(--dim);
+  }
+  svg.venn {
+    cursor: crosshair;
+  }
+  @media (hover: none) {
+    text.vread,
+    .vret {
+      display: none !important;
+    }
+  }
+  /* ---------- the rail: where you are, in one pixel ---------- */
+  .prog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+  .prog i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--c-me);
+    transition:
+      width 0.12s linear,
+      background 0.5s ease;
+  }
+  .brand .where {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    text-transform: none;
+    padding-left: 14px;
+    opacity: 0;
+    transition:
+      opacity 0.4s ease,
+      color 0.4s ease;
+  }
+  .brand .where.on {
+    opacity: 1;
+  }
+  nav a.here {
+    color: var(--paper);
+  }
+  nav a.here::after {
+    content: "";
+  }
+  /* ink-draw underline — grows from the left, like a pen */
+  nav a,
+  .t a,
+  .capbar a,
+  .figindex a {
+    position: relative;
+  }
+  nav a::before,
+  .figindex a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  nav a:hover::before,
+  nav a.here::before,
+  .figindex a:hover::before {
+    transform: scaleX(1);
+  }
+  @media (max-width: 560px) {
+    .brand .where {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .prog i {
+      transition: none;
+    }
+    nav a::before,
+    .figindex a::before {
+      transition: none;
+    }
+  }
+  /* ---------- marginalia: notes in the gutter, the way a notebook has them ---------- */
+  .hero,
+  .galton-sec,
+  .arb-sec,
+  #create,
+  .log-sec {
+    position: relative;
+  }
+  .marg {
+    display: none;
+  }
+  @media (min-width: 1240px) {
+    .marg {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: -184px;
+      width: 152px;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      line-height: 1.75;
+      color: var(--faint);
+      text-align: right;
+      border-right: 1px solid var(--hair);
+      padding-right: 14px;
+      opacity: 0.001;
+      transform: translateY(8px);
+      transition:
+        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .marg.seen {
+      opacity: 1;
+      transform: none;
+    }
+    .marg b {
+      color: var(--faint-t);
+      font-weight: 400;
+      display: block;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 9.5px;
+      padding-bottom: 5px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marg {
+      transition: none;
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
 </style>
 
 <div class="wrap" id="top">
+  <div class="prog" id="prog" aria-hidden="true"><i id="progBar"></i></div>
   <header>
-    <h1 class="brand">Param Vaswani</h1>
+    <h1 class="brand">
+      Param Vaswani<span class="where" id="where" aria-hidden="true"></span>
+    </h1>
     <nav>
       <a href="#create" data-c="create">create</a>
       <a href="#consume" data-c="consume">consume</a>
@@ -1329,6 +1923,11 @@
 
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
+    <aside class="marg">
+      <b>note</b>five circles cannot show all thirty-one combinations. the
+      overlaps that aren&#8217;t here are geometry, not claims &#8212; and the
+      circle sizes measure nothing.
+    </aside>
     <div class="figlabel">fig. 1 · what coexists</div>
     <svg
       class="venn"
@@ -1691,6 +2290,14 @@
       <text class="melbl" x="444" y="330" font-size="14" fill="#e07a6b">
         me
       </text>
+
+      <!-- the cursor is a membership test. it reads the region you are in. -->
+      <g class="vret" id="vRet" style="display: none" aria-hidden="true">
+        <line id="vRetV" x1="0" y1="16" x2="0" y2="622" />
+        <line id="vRetH" x1="18" y1="0" x2="882" y2="0" />
+        <circle id="vRetC" cx="0" cy="0" r="9" />
+      </g>
+      <text class="vread" id="vRead" x="48" y="80">cursor ∉ 𝒰</text>
     </svg>
     <div class="vennpanel" id="cap1" aria-live="polite"></div>
   </div>
@@ -1700,15 +2307,21 @@
   <!-- ============ INTRO ============ -->
   <div class="intro reveal">
     <p>
-      I’m Param. I run the experiments on myself and file the reports — small
-      systems, and essays about what constant machine mediation does to a mind.
+      I’m Param. I read philosophy, build systems, and file reports on what the
+      machines are doing to the rest of us — beginning, unavoidably, with me.
+      Small instruments, one subject, error bars left in.
     </p>
     <p>Raised by the algorithm, realigning by hand.</p>
     <p class="mut">
-      A diet of Aeon and LessWrong, in unequal measure. Studying the philosophy
-      of mind after a year of building with the machines. Vegan. Lived all over
-      the world; only ever really lived online. Bangalore, briefly — then
-      westward.
+      A diet of Aeon and LessWrong, in unequal measure. Studying philosophy of
+      mind after a year spent building with the machines — subject and
+      journalist at once, which is a conflict of interest I would rather
+      declare than resolve. Vegan. Lived all over the world; only ever really
+      lived online. Bangalore, briefly — then westward.
+    </p>
+    <p class="beat">
+      the beat: machine mediation → human judgment. the method: build the
+      instrument, then stand in front of it.
     </p>
   </div>
 </div>
@@ -1716,10 +2329,16 @@
 <!-- ============ FIG 2 · GALTON ============ -->
 <div class="colwide">
   <div class="galton-sec reveal" id="distribution">
-    <div class="figlabel">fig. 2 · the galton machine</div>
+    <aside class="marg">
+      <b>note</b>the horizontal axis is real. the vertical one has no units
+      &#8212; it isn&#8217;t measuring you, it&#8217;s counting how many of us
+      landed there.
+    </aside>
+    <div class="figlabel">fig. 2 · the distribution of taste</div>
     <div class="figdek">
-      the curve everyone forms, and the peg machine that generates it — toggle
-      between the result and the proof.
+      taste is distance from the mean, chosen on purpose. the curve is
+      everyone; the thumb is the feed; the machine underneath is the proof that
+      the curve is not a metaphor.
     </div>
     <div class="panel">
       <div class="panel-bar">
@@ -2091,6 +2710,10 @@
 <div class="col">
   <!-- ============ CREATE ============ -->
   <section id="create">
+    <aside class="marg">
+      <b>note</b>most of these took a single night. that is the finding, not
+      the flex &#8212; it is the exact thing the essays are about.
+    </aside>
     <div class="sec-head reveal">
       <span class="tick"></span>
       <h2>create</h2>
@@ -2098,136 +2721,438 @@
     </div>
 
     <div class="sub reveal">essays</div>
+    <div class="subnote reveal">
+      six written, none published. that is the standing debt, and it is the
+      only number on this site i am not proud of.
+    </div>
     <ul class="index">
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Taste Is Security</a></span>
+          <span class="t"><span class="unlinked">Taste Is Security</span></span>
           <span class="dek"
             >When everything can be generated, discernment is the last thing you
             can’t.</span
           >
         </div>
-        <span class="when">aug 2026</span>
+        <span class="when">aug 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">The Delegation Discount</a></span>
+          <span class="t"><span class="unlinked">The Delegation Discount</span></span>
           <span class="dek"
             >What you save in effort you pay back in judgment, at compound
             interest.</span
           >
         </div>
-        <span class="when">jul 2026</span>
+        <span class="when">jul 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Fieldwork, Not a Gap</a></span>
+          <span class="t"><span class="unlinked">Fieldwork, Not a Gap</span></span>
           <span class="dek"
             >A year inside the machines, as both subject and journalist.</span
           >
         </div>
-        <span class="when">jun 2026</span>
+        <span class="when">jun 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Anxiety Is Information</a></span>
+          <span class="t"><span class="unlinked">Anxiety Is Information</span></span>
           <span class="dek"
             >Kierkegaard, wearables, and reading your own signal without
             flinching.</span
           >
         </div>
-        <span class="when">may 2026</span>
+        <span class="when">may 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">The Sameness Engine</a></span>
+          <span class="t"><span class="unlinked">The Sameness Engine</span></span>
           <span class="dek"
             >Every feed optimizes toward the same person. Notes on wanting your
             own desires.</span
           >
         </div>
-        <span class="when">apr 2026</span>
+        <span class="when">apr 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Keep the Exit</a></span>
+          <span class="t"><span class="unlinked">Keep the Exit</span></span>
           <span class="dek"
             >You don’t have to leave the platform. You have to be able to.</span
           >
         </div>
-        <span class="when">mar 2026</span>
+        <span class="when">mar 2026<span class="state s-unbuilt" style="padding-left:8px;border-left:1px solid var(--hair)">draft</span></span>
       </li>
     </ul>
 
     <div class="sub reveal">systems</div>
     <div class="subnote reveal">
-      some built for use, some for the joy of the rabbit hole.
+      forty-six of them, built mostly at night, mostly alone, mostly with a
+      machine at the other end of the keyboard. some for use, some for the joy
+      of the rabbit hole. the register is the evidence in the argument below —
+      this is what a year of building <em>with</em> them actually looks like.
     </div>
-    <ul class="index">
-      <li class="reveal">
+    <div class="idx-filters reveal" role="group" aria-label="filter the register">
+      <span class="grp">
+        <span class="glab">kind</span>
+        <button class="fbtn" type="button" data-v="apps" aria-pressed="false">apps</button>
+        <button class="fbtn" type="button" data-v="tools" aria-pressed="false">tools</button>
+        <button class="fbtn" type="button" data-v="agents" aria-pressed="false">agents</button>
+        <button class="fbtn" type="button" data-v="protocols" aria-pressed="false">protocols</button>
+        <button class="fbtn" type="button" data-v="evals" aria-pressed="false">evals</button>
+        <button class="fbtn" type="button" data-v="sites" aria-pressed="false">sites</button>
+        <button class="fbtn" type="button" data-v="objects" aria-pressed="false">objects</button>
+      </span>
+      <span class="bar" aria-hidden="true"></span>
+      <span class="grp">
+        <span class="glab">state</span>
+        <button class="fbtn st" type="button" data-v="daily" aria-pressed="false">daily</button>
+        <button class="fbtn st" type="button" data-v="shipped" aria-pressed="false">shipped</button>
+        <button class="fbtn st" type="button" data-v="parked" aria-pressed="false">parked</button>
+        <button class="fbtn st" type="button" data-v="unbuilt" aria-pressed="false">unbuilt</button>
+      </span>
+      <span class="bar" aria-hidden="true"></span>
+      <button class="fbtn" type="button" id="idxClear">clear</button>
+    </div>
+    <div class="idx-expr" id="idxExpr" aria-live="polite">
+      S = { systems } &#183; <span class="card">|S| = 46</span> of 46
+    </div>
+    <ul class="index" id="idxList">
+      <li class="reveal idx-row" data-kind="protocols" data-state="shipped">
         <div class="li-body">
-          <span class="t"><a href="#">Keep</a></span>
-          <span class="dek"
-            >Prediction markets on your own biometrics. Break your word, fund a
-            charity.</span
-          >
+          <span class="t"><span class="unlinked">BONP</span></span>
+          <span class="dek">Biometric Oracle Network Protocol — a spec, a signed-envelope SDK, three adapters, and a dispute procedure.</span>
         </div>
+        <span class="when"><span class="kind">protocol</span><span class="state s-shipped">shipped</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="protocols" data-state="shipped">
         <div class="li-body">
-          <span class="t"><a href="#">BONP</a></span>
-          <span class="dek"
-            >An open protocol for verifying biometric claims with oracle
-            quorums.</span
-          >
+          <span class="t"><span class="unlinked">CMCHP</span></span>
+          <span class="dek">A wire format for handing a half-finished task from one model to a rival. Schema, benchmark, paper.</span>
         </div>
+        <span class="when"><span class="kind">protocol</span><span class="state s-shipped">shipped</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="protocols" data-state="unbuilt">
         <div class="li-body">
-          <span class="t"><a href="#">mcp-red-team</a></span>
-          <span class="dek"
-            >An adversarial scanner for MCP servers. Eight attack
-            categories.</span
-          >
+          <span class="t"><span class="unlinked">Vaani</span></span>
+          <span class="dek">A protocol, still only a sketch. Filed here because unbuilt things belong in the register too.</span>
         </div>
+        <span class="when"><span class="kind">protocol</span><span class="state s-unbuilt">unbuilt</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
         <div class="li-body">
-          <span class="t"><a href="#">CMCHP</a></span>
-          <span class="dek"
-            >A protocol and benchmark for handing context between rival
-            models.</span
-          >
+          <span class="t"><span class="unlinked">mcp-tool-selection-eval</span></span>
+          <span class="dek">Seven models, 665 runs, a seventy-eight-tool menu: does the right tool still get picked as the menu grows?</span>
         </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-shipped">shipped</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
         <div class="li-body">
-          <span class="t"><a href="#">Pickless</a></span>
-          <span class="dek"
-            >An agent that picks one dish and orders it. The menu never
-            opens.</span
-          >
+          <span class="t"><span class="unlinked">biometric-json-eval</span></span>
+          <span class="dek">Twenty-nine adversarial settlement cases. A two-model quorum drops the dangerous-error rate to about zero.</span>
         </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-shipped">shipped</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
         <div class="li-body">
-          <span class="t"><span class="unlinked">shosai 書斎</span></span>
-          <span class="dek"
-            >A morning dashboard that replaced five newsletters and three
-            feeds.</span
-          >
+          <span class="t"><span class="unlinked">yt-tldr-eval</span></span>
+          <span class="dek">Forty videos, four summarisers, one judge. Only the unflattering finding survived contact with the data.</span>
         </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-shipped">shipped</span></span>
       </li>
-      <li class="reveal">
+      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
         <div class="li-body">
-          <span class="t"><a href="#">Claude Code Playbook</a></span>
-          <span class="dek"
-            >MCP servers, skills, hooks, and evals — the tooling, in the
-            open.</span
-          >
+          <span class="t"><span class="unlinked">voice-preservation-eval</span></span>
+          <span class="dek">Rewrite a paragraph N times and measure the exact iteration where the voice leaks out.</span>
         </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">claude-code-hook-eval</span></span>
+          <span class="dek">Wall-clock saved per automation — measured, rather than assumed.</span>
+        </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="evals" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">eval-this</span></span>
+          <span class="dek">One prompt, five models, a scored table. The house bake-off.</span>
+        </div>
+        <span class="when"><span class="kind">eval</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">whoop-mcp</span></span>
+          <span class="dek">Eleven tools over a wearable&#8217;s API. Published.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">vercel-mcp</span></span>
+          <span class="dek">Sixteen tools over the Vercel REST API.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">spaceship-mcp</span></span>
+          <span class="dek">Fourteen tools for domains and DNS, so I stop clicking through dashboards.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">claude-code-hooks-mcp</span></span>
+          <span class="dek">Read-only introspection: an agent that can see its own hooks.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">pickless-mcp</span></span>
+          <span class="dek">A taste profile, exposed as four tools any agent can call.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">mcp-red-team</span></span>
+          <span class="dek">An adversarial scanner for MCP servers — injection, tool confusion, exfiltration chains. Eight categories.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">shosai &#26360;&#25889;</span></span>
+          <span class="dek">A morning dashboard that replaced five newsletters and three feeds. Local only, on purpose.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">yomu &#35501;&#12416;</span></span>
+          <span class="dek">A newsletter reader over IMAP. The mail never leaves the machine.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="agents" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">life-os</span></span>
+          <span class="dek">Seven scheduled agents running the day&#8217;s admin without being asked twice.</span>
+        </div>
+        <span class="when"><span class="kind">agent</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="agents" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">cohere</span></span>
+          <span class="dek">Reads the week&#8217;s inputs and drafts the connections between them. I make the one judgment left.</span>
+        </div>
+        <span class="when"><span class="kind">agent</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">compaction predictor</span></span>
+          <span class="dek">A hook that watches a conversation&#8217;s token trajectory and warns before the context dies.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">biometric-inference-proxy</span></span>
+          <span class="dek">Recovery score in, inference parameters out. The machine gets more careful on the days I should.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="agents" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">inbox-triage</span></span>
+          <span class="dek">Every thirty minutes, a small model sorted the inbox. Decommissioned with the thing it fed.</span>
+        </div>
+        <span class="when"><span class="kind">agent</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">session-save</span></span>
+          <span class="dek">An end-of-session protocol: commit, deploy, log, remember. Written once, run hundreds of times.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">param-voice</span></span>
+          <span class="dek">A voice corpus and playbook — so the machine can imitate me, and so I can catch it when it does.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">taste</span></span>
+          <span class="dek">An anti-slop frontend framework. Opinions, shipped as a dependency.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Keep</span></span>
+          <span class="dek">Commitment markets on your own biometrics. Break your word, fund a charity.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Pickless</span></span>
+          <span class="dek">An agent that picks one dish and orders it. The menu never opens.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">param-os</span></span>
+          <span class="dek">Calendar, mail, tasks and notes on one screen, so that none of them get to be an app.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Board of Directors</span></span>
+          <span class="dek">A council of voices for hard calls. Demoted to a personal tool the day the market maths failed.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Build Yourself</span></span>
+          <span class="dek">A self-improvement OS, three versions deep. Parked the week the focus rule bit.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">arxiv-digest</span></span>
+          <span class="dek">Paste a paper, get the version of it that is about your own stack.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">think-forward-reverse</span></span>
+          <span class="dek">Plan forward from where you are, backward from where you want to be, and read the gap.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">bayesian-trainer</span></span>
+          <span class="dek">Drill priors and updates until the arithmetic stops feeling like a trick.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">typemaster</span></span>
+          <span class="dek">Fifteen lessons of ten-finger typing, because I never learned properly.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">wasm-labs</span></span>
+          <span class="dek">Native code in the browser, as a gallery of small proofs.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="apps" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">maj-companion</span></span>
+          <span class="dek">A mah jongg companion: card parser, hand matcher, Charleston advice. Waiting on photographs.</span>
+        </div>
+        <span class="when"><span class="kind">app</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="sites" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Wired Different</span></span>
+          <span class="dek">A course on building with machines when your attention will not cooperate. Landing up, nothing sold.</span>
+        </div>
+        <span class="when"><span class="kind">site</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="objects" data-state="parked">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">doordrop</span></span>
+          <span class="dek">An ESP32 and a small screen by the door. Half a pipeline and one box of parts.</span>
+        </div>
+        <span class="when"><span class="kind">objects</span><span class="state s-parked">parked</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="objects" data-state="unbuilt">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">the pill box</span></span>
+          <span class="dek">A pair of dead headphones becomes a carry case. Teardown verified; nothing ordered.</span>
+        </div>
+        <span class="when"><span class="kind">objects</span><span class="state s-unbuilt">unbuilt</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="sites" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><a href="https://postphenom.com" rel="noopener">postphenom.com</a></span>
+          <span class="dek">The Center for Applied Postphenomenology. First-person accounts of mediation, collected under a fixed protocol.</span>
+        </div>
+        <span class="when"><span class="kind">site</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="sites" data-state="unbuilt">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Cohort Study</span></span>
+          <span class="dek">Findings and panels instead of posts and followers. A publication with a method attached.</span>
+        </div>
+        <span class="when"><span class="kind">site</span><span class="state s-unbuilt">unbuilt</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">Claude Code Playbook</span></span>
+          <span class="dek">Four MCP servers, eleven skills, fifteen hooks, five evals &#8212; the tooling, in the open.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">claude-archive</span></span>
+          <span class="dek">The Everything Index: 1,022 sessions catalogued. This list is drawn from it.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-daily">daily</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">the statistics course</span></span>
+          <span class="dek">Fourteen lessons on the half of statistics I had skipped &#8212; then turned on my own evals.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">llm-week</span></span>
+          <span class="dek">A week of open models on local hardware, with a bake-off script to settle the arguments.</span>
+        </div>
+        <span class="when"><span class="kind">tool</span><span class="state s-shipped">shipped</span></span>
+      </li>
+      <li class="reveal idx-row" data-kind="sites" data-state="daily">
+        <div class="li-body">
+          <span class="t"><span class="unlinked">this site</span></span>
+          <span class="dek">Six instruments and an argument. Built in the open; the essays were not.</span>
+        </div>
+        <span class="when"><span class="kind">site</span><span class="state s-daily">daily</span></span>
       </li>
     </ul>
+    <div class="idx-empty" id="idxEmpty" style="display: none">
+      &#8709; &#8212; that intersection is empty. every set here has a
+      shape; not every pair of them meets.
+    </div>
+    <div class="idx-note reveal">
+      shipped &#8800; up. several of these are unreachable on purpose, and a
+      few are down because a domain lapsed &#8212; the register is a record of
+      work, not a status page.<br />
+      the full archive runs to 185 rows across 1,022 sessions; this is the half
+      worth naming.
+    </div>
   </section>
 
   <!-- ============ CONSUME ============ -->
@@ -2328,7 +3253,7 @@
       <li class="reveal">
         <div class="li-body">
           <span class="t"
-            ><a href="#"
+            ><a href="https://signal.org/blog/" rel="noopener"
               >Meredith Whittaker, on Signal and surveillance</a
             ></span
           >
@@ -2340,7 +3265,9 @@
       <li class="reveal">
         <div class="li-body">
           <span class="t"
-            ><a href="#">Zvi Mowshowitz, Don’t Worry About the Vase</a></span
+            ><a href="https://thezvi.substack.com/" rel="noopener"
+              >Zvi Mowshowitz, Don’t Worry About the Vase</a
+            ></span
           >
           <span class="dek"
             >The highest signal-to-noise ratio in AI commentary.</span
@@ -2349,13 +3276,21 @@
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Emily Sundberg, Feed Me</a></span>
+          <span class="t"
+            ><a href="https://www.feedmedearly.com/" rel="noopener"
+              >Emily Sundberg, Feed Me</a
+            ></span
+          >
           <span class="dek">Proof that taste is a reporting beat.</span>
         </div>
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">Andy Clark, in Aeon</a></span>
+          <span class="t"
+            ><a href="https://aeon.co/users/andy-clark" rel="noopener"
+              >Andy Clark, in Aeon</a
+            ></span
+          >
           <span class="dek"
             >Where the mind ends and the world begins — the question under all
             my questions.</span
@@ -2364,7 +3299,11 @@
       </li>
       <li class="reveal">
         <div class="li-body">
-          <span class="t"><a href="#">MUBI Notebook</a></span>
+          <span class="t"
+            ><a href="https://mubi.com/en/notebook" rel="noopener"
+              >MUBI Notebook</a
+            ></span
+          >
           <span class="dek"
             >Film writing that assumes you can sit still for two hours.</span
           >
@@ -2711,6 +3650,138 @@
   </div>
 </div>
 
+<!-- ============ FIG 6 · THE ARBITRATION ============ -->
+<div class="colwide">
+  <div class="arb-sec reveal" id="arbitration">
+    <aside class="marg">
+      <b>note</b>my line is a number, published, so it can be held against me
+      later. that is the only reason to publish one.
+    </aside>
+    <div class="figlabel">fig. 6 &#183; the arbitration</div>
+    <div class="figdek">
+      where the line falls, task by task. one rule sets it:
+      <em>delegate what is cheap to check.</em> move the line and watch the
+      set change.
+    </div>
+    <div class="panel">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt">arbitration.sim &#8212; the boundary is one number</span>
+        <span class="sp"></span>
+        <button
+          class="minb"
+          data-p="p-arb"
+          aria-expanded="true"
+          aria-label="collapse panel"
+        >
+          &#8211;
+        </button>
+        <button
+          class="fakex"
+          title="nothing really closes"
+          aria-label="close, which minimizes"
+        >
+          &#215;
+        </button>
+      </div>
+      <div class="panel-body" id="p-arb">
+        <div class="arb-wrap">
+          <svg
+            class="arb"
+            id="arbSvg"
+            viewBox="0 0 860 424"
+            role="group"
+            aria-label="A scatter plot of seventeen tasks. The horizontal axis is how expensive the task is to check; the vertical axis is how much it costs to be wrong. A movable diagonal line divides them: everything below the line is delegated to a machine, everything above it is kept. A dashed ghost line marks where the author draws his own."
+          >
+            <!-- delegated region fill, redrawn by script -->
+            <path class="fillD" id="arbFill" d="" />
+
+            <!-- axes -->
+            <line class="ax-line" x1="96" y1="372" x2="800" y2="372" />
+            <line class="ax-line" x1="96" y1="372" x2="96" y2="40" />
+            <line class="ax-tick" x1="96" y1="208" x2="800" y2="208" />
+            <line class="ax-tick" x1="448" y1="372" x2="448" y2="40" />
+
+            <text class="ax-lab" x="96" y="400">cost of checking it &#8594;</text>
+            <text class="ax-end" x="800" y="400" text-anchor="end">
+              can&#8217;t be checked
+            </text>
+            <text
+              class="ax-lab"
+              x="0"
+              y="0"
+              transform="translate(78,372) rotate(-90)"
+            >
+              cost of being wrong &#8594;
+            </text>
+
+            <text class="zone" x="792" y="60" text-anchor="end">
+              unverifiable &#183; expensive &#183; mine
+            </text>
+
+            <!-- the frontier -->
+            <line class="ghost" id="arbGhost" x1="0" y1="0" x2="0" y2="0" />
+            <text class="ghost-lab" id="arbGhostLab" x="0" y="0">my line</text>
+            <line class="frontier" id="arbLine" x1="0" y1="0" x2="0" y2="0" />
+            <line
+              class="frontier-hit"
+              id="arbHit"
+              x1="0"
+              y1="0"
+              x2="0"
+              y2="0"
+              tabindex="0"
+              role="slider"
+              aria-label="the delegation line"
+              aria-valuemin="20"
+              aria-valuemax="196"
+              aria-valuenow="88"
+              aria-valuetext="0.88"
+            />
+
+            <g id="arbItems"></g>
+            <g class="arb-reticle" id="arbRet" style="display: none">
+              <line id="arbRetV" x1="0" y1="40" x2="0" y2="372" />
+              <line id="arbRetH" x1="96" y1="0" x2="800" y2="0" />
+              <text id="arbRetT" x="0" y="0">&#183;</text>
+            </g>
+          </svg>
+        </div>
+        <div class="arb-controls">
+          <label for="arbRange">the line</label>
+          <input
+            id="arbRange"
+            type="range"
+            min="10"
+            max="180"
+            step="1"
+            value="84"
+            aria-label="move the delegation line"
+          />
+          <span class="arb-set" id="arbSet"
+            >D = { x : check + cost &#8804; <b>0.84</b> } &#183; |D| = <b>8</b>/17</span
+          >
+          <button class="arb-mine" id="arbMine" type="button">
+            show me yours
+          </button>
+        </div>
+        <div class="arb-diff" id="arbDiff">
+          your line sits where mine does.
+        </div>
+      </div>
+    </div>
+    <div class="capbar" id="capArb" aria-live="polite">
+      hover a task for the ruling. drag the gold line, or use the slider.
+    </div>
+    <div class="fignote">
+      the coordinates are the claim, not the line. argue with a task&#8217;s
+      position &#8212; where the line goes after that is taste.<br />
+      <a href="#cohere">fig. 4</a> decides which value gets the last word. this
+      one decides who does the work.
+    </div>
+  </div>
+</div>
+
 <!-- ============ THOUGHTS.LOG ============ -->
 <div class="colwide">
   <div class="log-sec reveal" id="log">
@@ -2831,10 +3902,11 @@
     </div>
     <div class="figindex reveal">
       <a href="#top">fig. 1 · what coexists</a>
-      <a href="#distribution">fig. 2 · how far from the mean</a>
+      <a href="#distribution">fig. 2 · the distribution of taste</a>
       <a href="#influences">fig. 3 · the influence graph</a>
       <a href="#cohere">fig. 4 · precedence</a>
       <a href="#truthseeker">fig. 5 · directionally correct</a>
+      <a href="#arbitration">fig. 6 · the arbitration</a>
     </div>
     <div class="colophon reveal">
       hand-built · no analytics, no cookies, nothing sold · some sets aren’t
@@ -3339,6 +4411,98 @@
       });
     }
 
+    /* ----- the venn cursor: membership, computed live -----
+       not a decoration. it runs the same point-in-set test the click
+       handler runs, and prints the region you are actually standing in. */
+    (function vennReticle() {
+      if (!svg || hoverNone) return;
+      var vRet = document.getElementById("vRet"),
+        vRead = document.getElementById("vRead"),
+        vV = document.getElementById("vRetV"),
+        vH = document.getElementById("vRetH"),
+        vC = document.getElementById("vRetC");
+      if (!vRet || !vRead) return;
+      var OFFREC = { cx: 820, cy: 580, r: 76 };
+      var last = "";
+      function regionAt(x, y) {
+        var inside = sets.filter(function (s) {
+          var dx = x - s.cx,
+            dy = y - s.cy;
+          return dx * dx + dy * dy <= s.r * s.r;
+        });
+        var offdx = x - OFFREC.cx,
+          offdy = y - OFFREC.cy;
+        var off = offdx * offdx + offdy * offdy <= OFFREC.r * OFFREC.r;
+        return { inside: inside, off: off };
+      }
+      function readout(x, y) {
+        var r = regionAt(x, y);
+        if (r.off)
+          return {
+            f: "cursor ∈ ⟨unlabeled⟩",
+            n: "the set I don’t draw",
+            plain: "offrec",
+          };
+        if (!r.inside.length)
+          return { f: "cursor ∈ 𝒰 ∖ (M ∪ T ∪ P ∪ S ∪ C)", n: "", plain: "u" };
+        var letters = r.inside
+          .map(function (s) {
+            return s.letter;
+          })
+          .sort()
+          .join(" ∩ ");
+        var name = "";
+        if (r.inside.length === 2) {
+          var key = r.inside
+            .map(function (s) {
+              return s.id;
+            })
+            .sort()
+            .join(",");
+          var p = PAIRS[key];
+          if (p) name = p.name;
+        } else if (r.inside.length === 1) {
+          name = r.inside[0].label;
+        } else if (letters === "M ∩ P ∩ T") {
+          name = "where the dot is";
+        }
+        return { f: "cursor ∈ " + letters, n: name, plain: letters };
+      }
+      svg.addEventListener("pointermove", function (ev) {
+        var box = svg.getBoundingClientRect();
+        if (!box.width) return;
+        var x = ((ev.clientX - box.left) / box.width) * 900;
+        var y = ((ev.clientY - box.top) / box.height) * 640;
+        vRet.style.display = "";
+        vRead.classList.add("on");
+        vV.setAttribute("x1", x);
+        vV.setAttribute("x2", x);
+        vH.setAttribute("y1", y);
+        vH.setAttribute("y2", y);
+        vC.setAttribute("cx", x);
+        vC.setAttribute("cy", y);
+        var o = readout(x, y);
+        if (o.plain === last) return;
+        last = o.plain;
+        vRead.textContent = "";
+        vRead.appendChild(document.createTextNode(o.f));
+        if (o.n) {
+          var t = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "tspan",
+          );
+          t.setAttribute("class", "nm");
+          t.textContent = "  ·  " + o.n;
+          vRead.appendChild(t);
+        }
+      });
+      svg.addEventListener("pointerleave", function () {
+        vRet.style.display = "none";
+        vRead.classList.remove("on");
+        last = "";
+      });
+    })();
+
     /* ================= FIG 2 · GALTON ================= */
     var canvas = document.getElementById("galton");
     var wrap = canvas.parentNode;
@@ -3379,12 +4543,12 @@
     var CAP2_FAIR =
       'every path is random. the pile is lawful.&#160;·&#160;<a href="#cohere">how i act from here → fig. 4</a>';
     var CAP2_BIAS =
-      "a thumb on every branch. no single ball feels it — the mean moves anyway.";
+      "a thumb on every branch. no single ball feels it — the mean moves anyway. that is what a recommender is.";
     var CAP2_FULL = "n = 600. enough to see it. reset to run it again.";
     var CAP2_CURVE_FAIR =
-      'most things cluster. variance is the structure, not the error.&#160;·&#160;<a href="#cohere">how i act from here → fig. 4</a>';
+      'most taste clusters — that is what a mean is. the distance out is the part you choose.&#160;·&#160;<a href="#cohere">how i act from here → fig. 4</a>';
     var CAP2_CURVE_BIAS =
-      "the whole curve slid. my three marks didn’t move — the crowd did.";
+      "the whole curve slid and nobody in it felt a thing. my three marks didn’t move — the population did.";
     var view2 = "curve";
     function setCap() {
       if (view2 === "curve") {
@@ -4778,6 +5942,702 @@
     var rail = document.getElementById("tapeRail");
     if (!reduce) rail.innerHTML += rail.innerHTML;
 
+
+    /* ================= THE REGISTER · SET FILTER =================
+       Two unions, intersected. The expression above the list is not
+       decoration — it is the query that produced the rows below it. */
+    var idxList = document.getElementById("idxList");
+    if (idxList) {
+      var idxRows = Array.prototype.slice.call(
+        idxList.querySelectorAll(".idx-row"),
+      );
+      var kinds = [],
+        states = [];
+      var idxExpr = document.getElementById("idxExpr");
+      var idxEmpty = document.getElementById("idxEmpty");
+
+      function setExpr() {
+        var parts = ["{ systems }"];
+        if (kinds.length)
+          parts.push(
+            kinds.length === 1
+              ? "{ " + kinds[0] + " }"
+              : "(" +
+                  kinds
+                    .map(function (k) {
+                      return "{ " + k + " }";
+                    })
+                    .join(" ∪ ") +
+                  ")",
+          );
+        if (states.length)
+          parts.push(
+            states.length === 1
+              ? "{ " + states[0] + " }"
+              : "(" +
+                  states
+                    .map(function (s) {
+                      return "{ " + s + " }";
+                    })
+                    .join(" ∪ ") +
+                  ")",
+          );
+        return parts.join(" ∩ ");
+      }
+
+      function applyIdx(animate) {
+        var n = 0;
+        idxRows.forEach(function (li) {
+          var k = li.getAttribute("data-kind");
+          var s = li.getAttribute("data-state");
+          var on =
+            (!kinds.length || kinds.indexOf(k) > -1) &&
+            (!states.length || states.indexOf(s) > -1);
+          var was = !li.classList.contains("off");
+          li.classList.toggle("off", !on);
+          if (on) {
+            n++;
+            if (animate && !was && !reduce) {
+              li.classList.remove("pop");
+              void li.offsetWidth;
+              li.style.animationDelay = Math.min(n * 18, 260) + "ms";
+              li.classList.add("pop");
+            }
+          }
+        });
+        idxExpr.innerHTML =
+          "S = " +
+          setExpr()
+            .replace(/\{ ([a-z]+) \}/g, '{ <b>$1</b> }')
+            .replace("{ <b>systems</b> }", "{ systems }") +
+          ' &#183; <span class="card">|S| = ' +
+          n +
+          "</span> of " +
+          idxRows.length;
+        idxEmpty.style.display = n ? "none" : "";
+      }
+
+      document.querySelectorAll(".fbtn").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var v = b.getAttribute("data-v");
+          var arr = b.classList.contains("st") ? states : kinds;
+          var i = arr.indexOf(v);
+          if (i > -1) arr.splice(i, 1);
+          else arr.push(v);
+          b.setAttribute("aria-pressed", i > -1 ? "false" : "true");
+          applyIdx(true);
+        });
+      });
+      var idxClear = document.getElementById("idxClear");
+      idxClear.addEventListener("click", function () {
+        kinds = [];
+        states = [];
+        document.querySelectorAll(".fbtn").forEach(function (b) {
+          b.setAttribute("aria-pressed", "false");
+        });
+        applyIdx(true);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && (kinds.length || states.length)) {
+          var t = document.activeElement;
+          if (t && t.classList && t.classList.contains("fbtn")) idxClear.click();
+        }
+      });
+      applyIdx(false);
+    }
+
+    /* ================= FIG 6 · THE ARBITRATION =================
+       One rule, one degree of freedom. Each task carries two claims:
+       how expensive it is to check the machine's answer (c), and how
+       much it costs to be wrong (w). The frontier is c + w = t. Move
+       t and the delegated set D changes. MINE is a published number,
+       which means it can be disagreed with — that is the point. */
+    var arbSvg = document.getElementById("arbSvg");
+    if (arbSvg) {
+      var AX0 = 96,
+        AX1 = 792,
+        AY0 = 48,
+        AY1 = 372;
+      var MINE = 0.84;
+      var TASKS = [
+        {
+          id: "sched",
+          t: "forms and invoices",
+          c: 0.093,
+          w: 0.067,
+          r: "No judgment in it anywhere, and if it goes wrong you find out the same day.",
+        },
+        {
+          id: "boiler",
+          t: "boilerplate config",
+          c: 0.053,
+          w: 0.187,
+          r: "It either runs or it doesn’t. The check is free, so the work is free to give away.",
+        },
+        {
+          id: "recall",
+          t: "a fact I half-remember",
+          c: 0.255,
+          w: 0.045,
+          r: "One search confirms it. Delegate and verify — which is not the same as trust.",
+        },
+        {
+          id: "throw",
+          t: "code I’ll throw away",
+          c: 0.151,
+          w: 0.209,
+          r: "Cheapest check there is: it worked tonight, and then it was gone.",
+        },
+        {
+          id: "debug",
+          t: "a bug with a test",
+          c: 0.053,
+          w: 0.387,
+          r: "The test is the oracle. Machines are strongest exactly where the answer can be graded without me.",
+        },
+        {
+          id: "summ",
+          t: "a paper I won’t cite",
+          c: 0.364,
+          w: 0.156,
+          r: "If it turns out to matter, I read it properly. Most of them never do.",
+        },
+        {
+          id: "transl",
+          t: "translating a phrase",
+          c: 0.204,
+          w: 0.396,
+          r: "Checkable in a minute by anyone who speaks it. The failure mode is embarrassment, not damage.",
+        },
+        {
+          id: "maint",
+          t: "code I’ll maintain",
+          c: 0.468,
+          w: 0.312,
+          r: "Every line I didn’t understand, I pay for later, with interest. My line sits just past this one — narrowly — and this site is the evidence.",
+        },
+        {
+          id: "draft1",
+          t: "the first draft",
+          c: 0.216,
+          w: 0.684,
+          r: "Cheap to throw away, expensive to be seduced by. A machine’s draft hands you its structure before you have found your own.",
+        },
+        {
+          id: "diag",
+          t: "what my own data means",
+          c: 0.706,
+          w: 0.274,
+          r: "The number is real. The story about the number is mine, and no model holds enough context to write it.",
+        },
+        {
+          id: "read",
+          t: "what to read next",
+          c: 0.37,
+          w: 0.73,
+          r: "The diet sets the prior for everything downstream. Recommendation is how taste quietly dies.",
+        },
+        {
+          id: "name",
+          t: "naming a thing",
+          c: 0.766,
+          w: 0.454,
+          r: "You can’t check a name for two years. By then it is the name.",
+        },
+        {
+          id: "lastpass",
+          t: "the last pass",
+          c: 0.47,
+          w: 0.85,
+          r: "The final five percent is the whole voice. Nothing checks it but me, out loud.",
+        },
+        {
+          id: "view",
+          t: "forming a view",
+          c: 0.884,
+          w: 0.536,
+          r: "A borrowed conclusion feels exactly like an earned one from the inside. That is the entire danger.",
+        },
+        {
+          id: "love",
+          t: "a note to someone I love",
+          c: 0.58,
+          w: 0.92,
+          r: "If it needed checking, it was already the wrong note.",
+        },
+        {
+          id: "move",
+          t: "where to live",
+          c: 0.84,
+          w: 0.74,
+          r: "Nobody can verify this but the person who has to live inside the answer.",
+        },
+        {
+          id: "workchoice",
+          t: "which work is worth doing",
+          c: 0.762,
+          w: 0.898,
+          r: "Automate the work; never the choice of which work is worth doing.",
+        },
+      ];
+      var arbT = MINE;
+      var arbItems = document.getElementById("arbItems");
+      var arbLine = document.getElementById("arbLine");
+      var arbHit = document.getElementById("arbHit");
+      var arbGhost = document.getElementById("arbGhost");
+      var arbGhostLab = document.getElementById("arbGhostLab");
+      var arbFill = document.getElementById("arbFill");
+      var arbRange = document.getElementById("arbRange");
+      var arbSet = document.getElementById("arbSet");
+      var arbDiff = document.getElementById("arbDiff");
+      var arbMineBtn = document.getElementById("arbMine");
+      var capArb = document.getElementById("capArb");
+      var CAP_ARB = hoverNone
+        ? "tap a task for the ruling. drag the gold line, or use the slider."
+        : "hover a task for the ruling. drag the gold line, or use the slider.";
+      var NS = "http://www.w3.org/2000/svg";
+
+      function ax(c) {
+        return AX0 + c * (AX1 - AX0);
+      }
+      function ay(w) {
+        return AY1 - w * (AY1 - AY0);
+      }
+      function endpoints(t) {
+        /* the segment of c + w = t inside the unit square */
+        if (t <= 1) return [[t, 0], [0, t]];
+        return [[1, t - 1], [t - 1, 1]];
+      }
+      function regionPath(t) {
+        var p;
+        if (t <= 1) p = [[0, 0], [t, 0], [0, t]];
+        else p = [[0, 0], [1, 0], [1, t - 1], [t - 1, 1], [0, 1]];
+        return (
+          "M" +
+          p
+            .map(function (q) {
+              return ax(q[0]).toFixed(1) + " " + ay(q[1]).toFixed(1);
+            })
+            .join("L") +
+          "Z"
+        );
+      }
+
+      /* --- build the points --- */
+      var nodes = TASKS.map(function (d, i) {
+        var g = document.createElementNS(NS, "g");
+        g.setAttribute("class", "item");
+        g.setAttribute("tabindex", "0");
+        g.setAttribute("role", "img");
+        var x = ax(d.c),
+          y = ay(d.w);
+        var c = document.createElementNS(NS, "circle");
+        c.setAttribute("class", "pt");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", "5");
+        var tx = document.createElementNS(NS, "text");
+        tx.setAttribute("class", "tl");
+        var left = x > 560;
+        tx.setAttribute("x", left ? x - 11 : x + 11);
+        tx.setAttribute("text-anchor", left ? "end" : "start");
+        tx.setAttribute("y", y + (d.dy || 3.5));
+        tx.textContent = d.t;
+        g.appendChild(c);
+        g.appendChild(tx);
+        arbItems.appendChild(g);
+        function show() {
+          capArb.innerHTML =
+            '<em>' +
+            d.t +
+            "</em> &#183; " +
+            d.r +
+            ' <span style="color:var(--faint-t)">[check ' +
+            d.c.toFixed(2) +
+            " &#183; wrong " +
+            d.w.toFixed(2) +
+            "]</span>";
+        }
+        function hide() {
+          capArb.textContent = CAP_ARB;
+        }
+        g.addEventListener("mouseenter", show);
+        g.addEventListener("mouseleave", hide);
+        g.addEventListener("focus", show);
+        g.addEventListener("blur", hide);
+        g.addEventListener("click", function (ev) {
+          show();
+          ev.stopPropagation();
+        });
+        g.addEventListener("keydown", function (ev) {
+          if (ev.key === "Enter" || ev.key === " ") {
+            show();
+            ev.preventDefault();
+          }
+        });
+        return { d: d, g: g, sum: d.c + d.w, deleg: null };
+      });
+
+      /* --- label de-collision: try placements until one is clear ---
+         labels are wide and the cloud is dense in the top right, so the
+         positions are solved, not hand-nudged. runs once, on build. */
+      (function layoutLabels() {
+        var dots = nodes.map(function (n) {
+          var c = n.g.querySelector("circle.pt");
+          return {
+            x: parseFloat(c.getAttribute("cx")),
+            y: parseFloat(c.getAttribute("cy")),
+          };
+        });
+        var placed = [];
+        /* the zone captions and axis labels are furniture: reserve them
+           first so a task label never lands on top of one. */
+        Array.prototype.forEach.call(
+          arbSvg.querySelectorAll(".zone, .ax-lab, .ax-end, .ghost-lab"),
+          function (el) {
+            try {
+              var b = el.getBBox();
+              if (b.width)
+                placed.push({
+                  x0: b.x - 2,
+                  x1: b.x + b.width + 2,
+                  y0: b.y - 1,
+                  y1: b.y + b.height + 1,
+                });
+            } catch (e) {}
+          },
+        );
+        var CAND = [
+          [1, 3.5],
+          [-1, 3.5],
+          [1, -9],
+          [-1, -9],
+          [1, 14],
+          [-1, 14],
+          [1, -20],
+          [-1, -20],
+          [1, 25],
+          [-1, 25],
+          [1, -31],
+          [-1, -31],
+          [1, 36],
+          [-1, 36],
+        ];
+        /* penalty, not a boolean: if nothing is clean we still want the
+           least-bad slot rather than whichever one happened to be last. */
+        function cost(b) {
+          var pen = 0;
+          if (b.x0 < 100) pen += (100 - b.x0) * 30;
+          if (b.x1 > 852) pen += (b.x1 - 852) * 30;
+          if (b.y0 < 34) pen += (34 - b.y0) * 30;
+          if (b.y1 > 380) pen += (b.y1 - 380) * 30;
+          for (var i = 0; i < placed.length; i++) {
+            var p = placed[i];
+            var ox = Math.min(b.x1 + 4, p.x1) - Math.max(b.x0 - 4, p.x0);
+            var oy = Math.min(b.y1 + 2, p.y1) - Math.max(b.y0 - 2, p.y0);
+            if (ox > 0 && oy > 0) pen += ox * oy;
+          }
+          for (var j = 0; j < dots.length; j++) {
+            var d = dots[j];
+            if (
+              d.x > b.x0 - 7 &&
+              d.x < b.x1 + 7 &&
+              d.y > b.y0 - 7 &&
+              d.y < b.y1 + 7
+            )
+              pen += 900;
+          }
+          return pen;
+        }
+        /* place the crowded top-right first — it has the fewest options */
+        nodes
+          .slice()
+          .sort(function (a, b) {
+            return b.sum - a.sum;
+          })
+          .forEach(function (n) {
+            var tx = n.g.querySelector("text.tl");
+            var c = n.g.querySelector("circle.pt");
+            var cx = parseFloat(c.getAttribute("cx")),
+              cy = parseFloat(c.getAttribute("cy"));
+            var w = 0;
+            try {
+              w = tx.getComputedTextLength();
+            } catch (e) {}
+            if (!w) w = tx.textContent.length * 5.5;
+            var chosen = null,
+              box = null,
+              best = Infinity;
+            for (var i = 0; i < CAND.length; i++) {
+              var side = CAND[i][0],
+                dy = CAND[i][1];
+              var x = cx + side * 11;
+              var b = {
+                x0: side > 0 ? x : x - w,
+                x1: side > 0 ? x + w : x,
+                y0: cy + dy - 9,
+                y1: cy + dy + 3,
+              };
+              var pen = cost(b) + Math.abs(dy) * 0.6;
+              if (pen < best) {
+                best = pen;
+                chosen = [side, dy, x];
+                box = b;
+              }
+              if (best === 0) break;
+            }
+            tx.setAttribute("x", chosen[2]);
+            tx.setAttribute("y", cy + chosen[1]);
+            tx.setAttribute("text-anchor", chosen[0] > 0 ? "start" : "end");
+            placed.push(box);
+          });
+      })();
+
+      function fmt(t) {
+        return t.toFixed(2);
+      }
+      function renderArb(t, animate) {
+        arbT = t;
+        var e = endpoints(t);
+        var x1 = ax(e[0][0]),
+          y1 = ay(e[0][1]),
+          x2 = ax(e[1][0]),
+          y2 = ay(e[1][1]);
+        [arbLine, arbHit].forEach(function (l) {
+          l.setAttribute("x1", x1);
+          l.setAttribute("y1", y1);
+          l.setAttribute("x2", x2);
+          l.setAttribute("y2", y2);
+        });
+        arbFill.setAttribute("d", regionPath(t));
+        var n = 0;
+        nodes.forEach(function (nd) {
+          var deleg = nd.sum <= t + 1e-9;
+          if (deleg) n++;
+          if (nd.deleg !== deleg) {
+            nd.deleg = deleg;
+            nd.g.setAttribute("class", "item " + (deleg ? "deleg" : "kept"));
+            nd.g.setAttribute(
+              "aria-label",
+              nd.d.t + " — " + (deleg ? "delegated" : "kept"),
+            );
+            if (animate && !reduce) {
+              nd.g.classList.add("flip");
+              setTimeout(function () {
+                nd.g.classList.remove("flip");
+              }, 260);
+            }
+          }
+        });
+        arbSet.innerHTML =
+          "D = { x : check + cost &#8804; <b>" +
+          fmt(t) +
+          "</b> } &#183; |D| = <b>" +
+          n +
+          "</b>/" +
+          nodes.length;
+        arbHit.setAttribute("aria-valuenow", Math.round(t * 100));
+        arbHit.setAttribute("aria-valuetext", fmt(t));
+        if (arbRange.value !== String(Math.round(t * 100)))
+          arbRange.value = Math.round(t * 100);
+
+        /* the disagreement */
+        var moreMine = [],
+          moreYours = [];
+        nodes.forEach(function (nd) {
+          var mine = nd.sum <= MINE + 1e-9;
+          var yours = nd.sum <= t + 1e-9;
+          if (yours && !mine) moreYours.push(nd.d.t);
+          if (mine && !yours) moreMine.push(nd.d.t);
+        });
+        if (!moreYours.length && !moreMine.length) {
+          arbDiff.innerHTML =
+            "your line and mine cut the same set. <em>" +
+            n +
+            "</em> of " +
+            nodes.length +
+            " go to the machine.";
+        } else if (moreYours.length) {
+          arbDiff.innerHTML =
+            "you hand over <em>" +
+            moreYours.length +
+            "</em> that I keep: " +
+            moreYours.join(" &#183; ") +
+            ".";
+        } else {
+          arbDiff.innerHTML =
+            "you keep <em>" +
+            moreMine.length +
+            "</em> that I hand over: " +
+            moreMine.join(" &#183; ") +
+            ".";
+        }
+      }
+
+      /* --- the ghost: where mine falls --- */
+      (function ghost() {
+        var e = endpoints(MINE);
+        arbGhost.setAttribute("x1", ax(e[0][0]));
+        arbGhost.setAttribute("y1", ay(e[0][1]));
+        arbGhost.setAttribute("x2", ax(e[1][0]));
+        arbGhost.setAttribute("y2", ay(e[1][1]));
+        arbGhostLab.setAttribute("x", ax(e[0][0]) + 8);
+        arbGhostLab.setAttribute("y", ay(e[0][1]) - 8);
+      })();
+
+      /* --- input: drag anywhere in the field, slider, keyboard --- */
+      function tFromEvent(ev) {
+        var r = arbSvg.getBoundingClientRect();
+        if (!r.width) return null;
+        var vx = ((ev.clientX - r.left) / r.width) * 860;
+        var vy = ((ev.clientY - r.top) / r.height) * 424;
+        var c = (vx - AX0) / (AX1 - AX0);
+        var w = (AY1 - vy) / (AY1 - AY0);
+        return Math.max(0.1, Math.min(1.8, c + w));
+      }
+      var dragging = false;
+      arbSvg.addEventListener("pointerdown", function (ev) {
+        if (ev.target.closest && ev.target.closest(".item")) return;
+        var t = tFromEvent(ev);
+        if (t === null) return;
+        dragging = true;
+        if (arbSvg.setPointerCapture) {
+          try {
+            arbSvg.setPointerCapture(ev.pointerId);
+          } catch (e) {}
+        }
+        renderArb(t, true);
+        ev.preventDefault();
+      });
+      arbSvg.addEventListener("pointermove", function (ev) {
+        var r = arbSvg.getBoundingClientRect();
+        if (r.width) {
+          var vx = ((ev.clientX - r.left) / r.width) * 860;
+          var vy = ((ev.clientY - r.top) / r.height) * 424;
+          if (vx > AX0 - 4 && vx < AX1 + 4 && vy > AY0 - 8 && vy < AY1 + 4) {
+            var ret = document.getElementById("arbRet");
+            ret.style.display = "";
+            document.getElementById("arbRetV").setAttribute("x1", vx);
+            document.getElementById("arbRetV").setAttribute("x2", vx);
+            document.getElementById("arbRetH").setAttribute("y1", vy);
+            document.getElementById("arbRetH").setAttribute("y2", vy);
+            var rt = document.getElementById("arbRetT");
+            var cc = (vx - AX0) / (AX1 - AX0),
+              ww = (AY1 - vy) / (AY1 - AY0);
+            rt.setAttribute("x", Math.min(vx + 8, 700));
+            rt.setAttribute("y", Math.max(vy - 8, AY0 + 10));
+            rt.textContent =
+              "check " +
+              cc.toFixed(2) +
+              " · wrong " +
+              ww.toFixed(2) +
+              " · Σ " +
+              (cc + ww).toFixed(2);
+          } else {
+            document.getElementById("arbRet").style.display = "none";
+          }
+        }
+        if (!dragging) return;
+        var t = tFromEvent(ev);
+        if (t !== null) renderArb(t, true);
+      });
+      ["pointerup", "pointercancel", "pointerleave"].forEach(function (k) {
+        arbSvg.addEventListener(k, function () {
+          dragging = false;
+          if (k === "pointerleave")
+            document.getElementById("arbRet").style.display = "none";
+        });
+      });
+      arbRange.addEventListener("input", function () {
+        renderArb(parseInt(arbRange.value, 10) / 100, true);
+      });
+      arbHit.addEventListener("keydown", function (ev) {
+        var step = ev.shiftKey ? 0.1 : 0.02;
+        if (ev.key === "ArrowRight" || ev.key === "ArrowUp") {
+          renderArb(Math.min(1.8, arbT + step), true);
+          ev.preventDefault();
+        } else if (ev.key === "ArrowLeft" || ev.key === "ArrowDown") {
+          renderArb(Math.max(0.1, arbT - step), true);
+          ev.preventDefault();
+        } else if (ev.key === "Home") {
+          renderArb(MINE, true);
+          ev.preventDefault();
+        }
+      });
+      arbMineBtn.addEventListener("click", function () {
+        renderArb(MINE, true);
+        capArb.innerHTML =
+          "<em>my line: 0.84.</em> it lands just past “code I’ll maintain” — which is exactly what this site was.";
+      });
+
+      capArb.textContent = CAP_ARB;
+      renderArb(MINE, false);
+    }
+
+    /* ================= THE RAIL =================
+       scroll position as a set: which room you are standing in, and
+       how far through the house. one pixel of chrome, no library. */
+    (function rail() {
+      var bar = document.getElementById("progBar");
+      var where = document.getElementById("where");
+      var navs = Array.prototype.slice.call(
+        document.querySelectorAll("nav a[data-c]"),
+      );
+      var COLORS = {
+        create: "var(--c-create)",
+        consume: "var(--c-consume)",
+        curate: "var(--c-curate)",
+        cohere: "var(--c-cohere)",
+      };
+      var marks = navs
+        .map(function (a) {
+          var id = a.getAttribute("href").slice(1);
+          var el = document.getElementById(id);
+          return el ? { a: a, el: el, id: id } : null;
+        })
+        .filter(Boolean);
+      var ticking = false,
+        cur = "";
+      function paint() {
+        ticking = false;
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var pct = max > 0 ? Math.min(1, Math.max(0, h.scrollTop / max)) : 0;
+        bar.style.width = (pct * 100).toFixed(2) + "%";
+        var probe = h.scrollTop + h.clientHeight * 0.35;
+        var active = "";
+        marks.forEach(function (m) {
+          if (m.el.offsetTop <= probe) active = m.id;
+        });
+        if (active === cur) return;
+        cur = active;
+        marks.forEach(function (m) {
+          m.a.classList.toggle("here", m.id === active);
+        });
+        if (active) {
+          bar.style.background = COLORS[active] || "var(--c-me)";
+          where.textContent = "§ " + active;
+          where.classList.add("on");
+          where.style.color = COLORS[active] || "";
+        } else {
+          bar.style.background = "var(--c-me)";
+          where.classList.remove("on");
+        }
+      }
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (ticking) return;
+          ticking = true;
+          if (typeof requestAnimationFrame === "function")
+            requestAnimationFrame(paint);
+          else setTimeout(paint, 60);
+        },
+        { passive: true },
+      );
+      paint();
+    })();
+
     /* ================= REVEALS ================= */
     var io = new IntersectionObserver(
       function (entries) {
@@ -4792,6 +6652,20 @@
     );
     document.querySelectorAll(".reveal").forEach(function (el) {
       io.observe(el);
+    });
+    var ioM = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add("seen");
+            ioM.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.3, rootMargin: "0px 0px -8% 0px" },
+    );
+    document.querySelectorAll(".marg").forEach(function (el) {
+      ioM.observe(el);
     });
   })();
 </script>
