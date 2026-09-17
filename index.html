@@ -77,8 +77,8 @@
     --ink: #0b0c0e;
     --paper: #e9e6de;
     --dim: #96917f;
-    --faint: #4a4a44;
-    --faint-t: #7c7869;
+    --faint: #807c6c;
+    --faint-t: #8c8777;
     --hair-2: #66635a;
     --hair: #26272a;
     --edge: #3a3b3e;
@@ -315,6 +315,10 @@
   /* ---------- fig 1 · venn ---------- */
   .hero {
     padding: 18px 0 8px;
+    border-radius: 20px;
+    box-shadow:
+      0 0 40px -12px color-mix(in srgb, var(--c-consume) 45%, transparent),
+      0 0 90px -20px color-mix(in srgb, var(--c-consume) 30%, transparent);
   }
   .hero .figlabel {
     padding-bottom: 6px;
@@ -1967,7 +1971,8 @@
         height="606"
         rx="26"
         fill="none"
-        stroke="#3a3b3e"
+        stroke="var(--c-consume)"
+        stroke-opacity="0.4"
         stroke-width="1"
         stroke-dasharray="1 6"
         stroke-linecap="round"
