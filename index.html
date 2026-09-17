@@ -4020,6 +4020,7 @@
     /* ================= FIG 1 · VENN ================= */
     var svg = document.querySelector("svg.venn");
     var cap1 = document.getElementById("cap1");
+    var vennPointer = null; // live cursor, in the 900×640 venn space — the dust motes feel it
     var sets = [
       {
         id: "mindbody",
@@ -4207,7 +4208,7 @@
         el.style.strokeWidth = lit ? 2.6 : 1.4;
         el.setAttribute("filter", lit ? "url(#bloom)" : "");
         document.getElementById("t-" + c.id).style.fillOpacity = lit
-          ? 0.055
+          ? 0.11
           : 0.01;
         var lbl = document.getElementById("l-" + c.id);
         lbl.style.opacity = Math.max(op, 0.2);
@@ -4481,6 +4482,7 @@
         vH.setAttribute("y2", y);
         vC.setAttribute("cx", x);
         vC.setAttribute("cy", y);
+        vennPointer = { x: x, y: y };
         var o = readout(x, y);
         if (o.plain === last) return;
         last = o.plain;
@@ -4500,6 +4502,7 @@
         vRet.style.display = "none";
         vRead.classList.remove("on");
         last = "";
+        vennPointer = null;
       });
     })();
 
@@ -5452,6 +5455,30 @@
             var push = offrec.r + 4;
             b.x = offrec.cx + nx * push;
             b.y = offrec.cy + ny * push;
+          }
+          // the cursor stirs the field: a mote drifts clear of it, then settles
+          if (vennPointer) {
+            var cdx = b.x - vennPointer.x,
+              cdy = b.y - vennPointer.y;
+            var cd = Math.max(Math.hypot(cdx, cdy), 4);
+            var REACH = 100;
+            if (cd < REACH) {
+              var press = (1 - cd / REACH) * 220;
+              b.vx += (cdx / cd) * press * dt;
+              b.vy += (cdy / cd) * press * dt;
+            }
+          }
+          var spd = Math.hypot(b.vx, b.vy),
+            MAXSPD = 130,
+            BASESPD = 34;
+          if (spd > MAXSPD) {
+            b.vx *= MAXSPD / spd;
+            b.vy *= MAXSPD / spd;
+          } else if (spd > BASESPD) {
+            var settle = Math.pow(0.055, dt);
+            var k = (BASESPD + (spd - BASESPD) * settle) / spd;
+            b.vx *= k;
+            b.vy *= k;
           }
           var act = activeAt(b);
           b.el.setAttribute(
