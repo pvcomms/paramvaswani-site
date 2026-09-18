@@ -1,12 +1,16 @@
 # paramvaswani-site — handoff
 
-**State as of 2026-09-16 — v10 built, NOT deployable tonight.** Two blockers, both outside the
-code: (1) the Vercel team `pvbuildsfr` has an **overdue balance** — every deploy is refused
-("Your team has an overdue balance") and every `*.vercel.app` host returns **402
-DEPLOYMENT_DISABLED**, including `paramvaswani-site.vercel.app`; (2) **paramv.com still points at
-Wix** (`185.230.63.x`, ns0/ns1.wixdns.net), so the domain 404s. Fix billing at
-https://vercel.com/teams/pvbuildsfr/settings/billing, then `./build.py && vercel --prod --yes`,
-then set the DNS records below in Wix. Nothing else is pending.
+**State as of 2026-09-19 — v10 is LIVE at https://paramv.com.** Both blockers in the previous
+version of this note are resolved and the text below them is kept only as history.
+
+- The Vercel migration completed: everything is on team `postphenom-3269`. The old team
+  `pvbuildsfr` is abandoned and its 402s are no longer relevant to this repo.
+- paramv.com resolves. DNS is at **Wix**, apex `A @ 76.76.21.21` (the legacy Vercel IP — it
+  works; Vercel now recommends `216.150.1.1`, so read the value from the domain's `/config`
+  endpoint if the record is ever rebuilt).
+
+Deploy is `./build.py && vercel --prod --yes`, in that order, always.
+
 Continue in Claude Code. This folder is the working copy; the artifact is the live render.
 
 ## Everything, in one place
