@@ -1,8 +1,11 @@
 ---
 title: Pin the Figma sources for every screen
-status: next
+status: draft
 created: 2026-09-19
 ---
+
+> **Blocked on Param: the Figma URLs exist only in his account, nowhere on disk. An agent
+cannot do this one. Promote to `next` once the pins are pasted in.**
 
 # 001 — Pin the Figma sources for every screen
 
