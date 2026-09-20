@@ -1,6 +1,6 @@
 # Agents
 
-Constellation-wide rules: `~/Code/cfap/AGENTS.md`. Read it once, then this.
+Constellation-wide rules: `~/Code/spine/AGENTS.md`. Read it once, then this.
 
 **This repo is `paramv.com`.** The similarly-named `~/Code/paramvaswani` is a separate
 broadsheet experiment that serves nothing — do not confuse them, and do not edit it thinking

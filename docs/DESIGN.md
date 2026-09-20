@@ -1,13 +1,13 @@
 # Design
 
-Grammar and bans: `~/Code/cfap/docs/DESIGN-SYSTEM.md`. Machine-readable values:
-`~/Code/cfap/docs/tokens.json` under `surfaces.paramv`. This file is what is specific to
+Grammar and bans: `~/work/capp/spine/docs/DESIGN-SYSTEM.md`. Machine-readable values:
+`~/work/capp/spine/docs/tokens.json` under `surfaces.paramv`. This file is what is specific to
 this site.
 
 ## Tokens
 
 Defined in the `:root` block at the top of `index.html`, which is the source of truth. The
-cfap mirror exists for agents and must be updated alongside any change here.
+CAPP mirror exists for agents and must be updated alongside any change here.
 
 | Token                   | Value                 | Use                               |
 | ----------------------- | --------------------- | --------------------------------- |

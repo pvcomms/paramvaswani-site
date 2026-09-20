@@ -43,11 +43,11 @@ project rather than a token swap.
 `AGENTS.md` said "do not deploy publicly — the domain is unregistered and fonts aren't
 self-hosted" while the site was live at paramv.com with self-hosted fonts. `HANDOFF.md` still
 led with the resolved `pvbuildsfr` billing block. Both corrected. This is the failure mode
-`~/Code/cfap` exists to stop: hand-written claims drifting from the system while still
+`~/work/capp/spine` exists to stop: hand-written claims drifting from the system while still
 reading as authoritative.
 
 ---
 
 **2026-09-19 — Doc set adopted.**
-Repo joined the `cfap` constellation standard. `EDITING.md` and `HANDOFF.md` are kept — they
+Repo joined the `CAPP` constellation standard. `EDITING.md` and `HANDOFF.md` are kept — they
 are good and specific — with `AGENTS.md` pointing at them.
