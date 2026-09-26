@@ -1,0 +1,728 @@
+<title>Media Taste</title>
+<!--
+  paramv.com/taste — media taste, by form.
+  artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
+  eleven sets. every one of them is empty on purpose until entries are added by hand.
+
+  to add an entry, find the form's <ul class="entries"> and drop in one <li>:
+
+    <li class="reveal">
+      <span class="t">Title</span>
+      <span class="dek">one line on why it is here</span>
+      <span class="when">year</span>
+    </li>
+
+  then change that form's notation from "= ∅" to "= { … }" (or leave it, it is only a label)
+  and delete the <p class="blank"> line beneath the list.
+-->
+<style>
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-300-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-300.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-400.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: italic;
+    font-weight: 300 400;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin.woff2") format("woff2");
+  }
+
+  :root {
+    --ink: #0b0c0e;
+    --paper: #e9e6de;
+    --dim: #96917f;
+    --faint: #807c6c;
+    --faint-t: #8c8777;
+    --hair-2: #66635a;
+    --hair: #26272a;
+    --edge: #3a3b3e;
+    --panel-bar: #101216;
+    --c-create: #7fb069;
+    --c-consume: #b48ede;
+    --c-curate: #6fa8dc;
+    --c-cohere: #e3c567;
+    --c-me: #e07a6b;
+    --c-creation: #d98aa8;
+    --accent: var(--c-consume);
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--ink);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- rail ---------- */
+  .prog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+  .prog i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.12s linear;
+  }
+
+  /* ---------- masthead (same grammar as the home page) ---------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0 0;
+    gap: 16px 28px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .brand a {
+    transition: color 0.18s ease;
+  }
+  .brand a:hover {
+    color: var(--accent);
+  }
+  .brand a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .brand .where {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--faint);
+    text-transform: none;
+    padding-left: 14px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .brand .where.on {
+    opacity: 1;
+    color: var(--accent);
+  }
+  nav.site {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  nav.site a {
+    position: relative;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    transition: color 0.18s ease;
+  }
+  nav.site a:hover,
+  nav.site a.here {
+    color: var(--paper);
+  }
+  nav.site a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  nav.site .sep {
+    width: 1px;
+    height: 10px;
+    background: var(--hair-2);
+    align-self: center;
+  }
+  /* ink-draw underline — grows from the left, like a pen */
+  nav.site a::before,
+  .tabs a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  nav.site a:hover::before,
+  nav.site a.here::before,
+  .tabs a:hover::before,
+  .tabs a.here::before {
+    transform: scaleX(1);
+  }
+
+  /* ---------- page head ---------- */
+  .head {
+    padding: 84px 0 0;
+    max-width: 680px;
+  }
+  .figlabel {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+  }
+  .head h1 {
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    margin-top: 14px;
+    text-wrap: balance;
+  }
+  .head .figdek {
+    color: var(--dim);
+    font-style: italic;
+    font-size: 17px;
+    margin-top: 12px;
+  }
+  .head .notation {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.9;
+    color: var(--faint-t);
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hair);
+  }
+  .head .notation b {
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  /* ---------- the sub-tabs: one strip, eleven forms ---------- */
+  .tabs {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    margin-top: 44px;
+    padding: 14px 0 12px;
+    background: var(--ink);
+    border-bottom: 1px solid var(--hair);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+  }
+  .tabs a {
+    position: relative;
+    flex: 0 0 auto;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    white-space: nowrap;
+    transition: color 0.18s ease;
+  }
+  .tabs a i {
+    font-style: normal;
+    font-size: 9.5px;
+    color: var(--faint-t);
+    padding-right: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tabs a:hover,
+  .tabs a.here {
+    color: var(--paper);
+  }
+  .tabs a.here i {
+    color: var(--accent);
+  }
+  .tabs a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+
+  /* ---------- one form ---------- */
+  .cat {
+    padding: 64px 0 0;
+    scroll-margin-top: 112px; /* clears the sticky strip at its two-line height */
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+  }
+  .sec-head .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .sec-head h2 {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .sec-head .notation {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint-t);
+    margin-left: auto;
+    text-align: right;
+  }
+  .entries {
+    list-style: none;
+  }
+  .entries li {
+    display: flex;
+    align-items: baseline;
+    gap: 6px 18px;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .entries .t {
+    font-size: 17px;
+    font-weight: 400;
+  }
+  .entries .dek {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+  .entries .when {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint-t);
+    margin-left: auto;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .blank {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
+    padding: 22px 0 26px;
+    border-bottom: 1px dashed var(--hair);
+  }
+  .blank b {
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--faint);
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 120px;
+    padding: 36px 0 88px;
+    border-top: 1px solid var(--hair);
+  }
+  .contact {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .contact a {
+    color: var(--dim);
+    border-bottom: 1px solid var(--hair);
+    transition: color 0.18s ease;
+  }
+  .contact a:hover {
+    color: var(--paper);
+  }
+  .contact a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .colophon {
+    margin-top: 26px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    line-height: 2;
+  }
+
+  /* ---------- reveals ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 760px) {
+    .head {
+      padding-top: 56px;
+    }
+    .tabs {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .tabs::-webkit-scrollbar {
+      display: none;
+    }
+    .head h1 {
+      font-size: 32px;
+    }
+    .cat {
+      padding-top: 52px;
+    }
+    .sec-head .notation {
+      display: none;
+    }
+    .entries .when {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .brand .where {
+      display: none;
+    }
+    nav.site {
+      gap: 14px;
+    }
+    nav.site .sep {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .prog i,
+    nav.site a::before,
+    .tabs a::before {
+      transition: none;
+    }
+  }
+</style>
+
+<div class="wrap" id="top">
+  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+  <header>
+    <h1 class="brand">
+      <a href="/">Param Vaswani</a
+      ><span class="where" id="where" aria-hidden="true"></span>
+    </h1>
+    <nav class="site" aria-label="site">
+      <a href="/#create">create</a>
+      <a href="/#consume">consume</a>
+      <a href="/#curate">curate</a>
+      <a href="/#cohere">cohere</a>
+      <a href="/#contact">contact</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="/taste" class="here" aria-current="page">taste</a>
+      <a href="/curriculum">curriculum</a>
+    </nav>
+  </header>
+
+  <section class="head">
+    <div class="figlabel">page · taste</div>
+    <h1>Media Taste</h1>
+    <p class="figdek">
+      what i rate, by form. eleven sets, kept by hand. all of them are empty
+      until they aren&#8217;t.
+    </p>
+    <div class="notation">
+      <b>taste</b> = film ∪ live ∪ tv ∪ music ∪ concertos ∪ orchestra ∪ poem ∪
+      fiction ∪ non-fiction ∪ concepts ∪ influences
+    </div>
+  </section>
+
+  <nav class="tabs" id="tabs" aria-label="forms">
+    <a href="#film"><i>01</i>film</a>
+    <a href="#live"><i>02</i>live performance</a>
+    <a href="#tv"><i>03</i>tv</a>
+    <a href="#music"><i>04</i>music</a>
+    <a href="#concertos"><i>05</i>concertos</a>
+    <a href="#orchestra"><i>06</i>orchestra</a>
+    <a href="#poem"><i>07</i>poem</a>
+    <a href="#fiction"><i>08</i>fiction</a>
+    <a href="#non-fiction"><i>09</i>non-fiction</a>
+    <a href="#concepts"><i>10</i>research concepts</a>
+    <a href="#influences"><i>11</i>influences</a>
+  </nav>
+
+  <section class="cat" id="film">
+    <div class="sec-head reveal">
+      <span class="num">01</span>
+      <h2>film</h2>
+      <span class="notation">film = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="live">
+    <div class="sec-head reveal">
+      <span class="num">02</span>
+      <h2>live performance</h2>
+      <span class="notation">live = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="tv">
+    <div class="sec-head reveal">
+      <span class="num">03</span>
+      <h2>tv</h2>
+      <span class="notation">tv = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="music">
+    <div class="sec-head reveal">
+      <span class="num">04</span>
+      <h2>music</h2>
+      <span class="notation">music = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="concertos">
+    <div class="sec-head reveal">
+      <span class="num">05</span>
+      <h2>concertos</h2>
+      <span class="notation">concertos = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="orchestra">
+    <div class="sec-head reveal">
+      <span class="num">06</span>
+      <h2>orchestra</h2>
+      <span class="notation">orchestra = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="poem">
+    <div class="sec-head reveal">
+      <span class="num">07</span>
+      <h2>poem</h2>
+      <span class="notation">poem = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="fiction">
+    <div class="sec-head reveal">
+      <span class="num">08</span>
+      <h2>fiction</h2>
+      <span class="notation">fiction = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="non-fiction">
+    <div class="sec-head reveal">
+      <span class="num">09</span>
+      <h2>non-fiction</h2>
+      <span class="notation">non-fiction = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="concepts">
+    <div class="sec-head reveal">
+      <span class="num">10</span>
+      <h2>research concepts</h2>
+      <span class="notation">concepts = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <section class="cat" id="influences">
+    <div class="sec-head reveal">
+      <span class="num">11</span>
+      <h2>influences</h2>
+      <span class="notation">influences = ∅</span>
+    </div>
+    <ul class="entries"></ul>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <footer>
+    <div class="contact reveal">
+      <a href="/">← the site</a>
+      <a href="mailto:hello@paramv.com">hello@paramv.com</a>
+    </div>
+    <div class="colophon reveal">
+      hand-built · no analytics, no cookies, nothing sold · set in newsreader
+      &amp; plex mono, self-hosted — no third-party requests
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ---- the rail: which form you are standing in, how far through the list ---- */
+    (function rail() {
+      var bar = document.getElementById("progBar");
+      var where = document.getElementById("where");
+      var strip = document.getElementById("tabs");
+      var tabs = Array.prototype.slice.call(strip.querySelectorAll("a"));
+      var marks = tabs
+        .map(function (a) {
+          var id = a.getAttribute("href").slice(1);
+          var el = document.getElementById(id);
+          return el
+            ? { a: a, el: el, id: id, name: a.textContent.replace(/^\d+/, "") }
+            : null;
+        })
+        .filter(Boolean);
+      var ticking = false,
+        cur = "";
+      function paint() {
+        ticking = false;
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var pct = max > 0 ? Math.min(1, Math.max(0, h.scrollTop / max)) : 0;
+        bar.style.width = (pct * 100).toFixed(2) + "%";
+        /* the form you are in = the last heading that has passed under the strip;
+           at the very bottom the last form wins, even if it never reaches the probe */
+        var probe = h.scrollTop + strip.offsetHeight + 40;
+        var active = null;
+        marks.forEach(function (m) {
+          if (m.el.offsetTop <= probe) active = m;
+        });
+        if (max > 0 && h.scrollTop >= max - 2) active = marks[marks.length - 1];
+        var id = active ? active.id : "";
+        if (id === cur) return;
+        cur = id;
+        marks.forEach(function (m) {
+          m.a.classList.toggle("here", m === active);
+        });
+        if (active) {
+          where.textContent = "§ " + active.name;
+          where.classList.add("on");
+          if (active.a.scrollIntoView)
+            active.a.scrollIntoView({ block: "nearest", inline: "nearest" });
+        } else {
+          where.classList.remove("on");
+        }
+      }
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (ticking) return;
+          ticking = true;
+          if (typeof requestAnimationFrame === "function")
+            requestAnimationFrame(paint);
+          else setTimeout(paint, 60);
+        },
+        { passive: true },
+      );
+      paint();
+    })();
+
+    /* ---- reveals ---- */
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        io.observe(el);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("in");
+      });
+    }
+  })();
+</script>

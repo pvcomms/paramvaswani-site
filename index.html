@@ -183,6 +183,12 @@
   nav a[data-c="cohere"]:hover {
     border-color: var(--c-cohere);
   }
+  nav .sep {
+    width: 1px;
+    height: 10px;
+    background: var(--hair-2);
+    align-self: center;
+  }
 
   /* ---------- shared figure grammar ---------- */
   .figlabel {
@@ -1846,6 +1852,9 @@
     .brand .where {
       display: none;
     }
+    nav .sep {
+      display: none;
+    }
   }
   @media (prefers-reduced-motion: reduce) {
     .prog i {
@@ -1922,6 +1931,9 @@
       <a href="#curate" data-c="curate">curate</a>
       <a href="#cohere" data-c="cohere">cohere</a>
       <a href="#contact">contact</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="/taste">taste</a>
+      <a href="/curriculum">curriculum</a>
     </nav>
   </header>
 

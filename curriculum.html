@@ -1,0 +1,521 @@
+<title>Learning Curriculum</title>
+<!--
+  paramv.com/curriculum — the current personal learning curriculum.
+  artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
+  empty on purpose until the syllabus is written in by hand.
+
+  to add a line, drop one <li> into <ol class="syllabus">:
+
+    <li class="reveal">
+      <span class="t">What is being learned</span>
+      <span class="dek">why now, and what it is in service of</span>
+      <span class="when">status · source</span>
+    </li>
+
+  then set the "revised" date in the head, change the notation from "= ∅",
+  and delete the <p class="blank"> line beneath the list.
+-->
+<style>
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: italic;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-300-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-300.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-400.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: italic;
+    font-weight: 300 400;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin.woff2") format("woff2");
+  }
+
+  :root {
+    --ink: #0b0c0e;
+    --paper: #e9e6de;
+    --dim: #96917f;
+    --faint: #807c6c;
+    --faint-t: #8c8777;
+    --hair-2: #66635a;
+    --hair: #26272a;
+    --edge: #3a3b3e;
+    --panel-bar: #101216;
+    --c-create: #7fb069;
+    --c-consume: #b48ede;
+    --c-curate: #6fa8dc;
+    --c-cohere: #e3c567;
+    --c-me: #e07a6b;
+    --c-creation: #d98aa8;
+    --accent: var(--c-cohere);
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--ink);
+  }
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- rail ---------- */
+  .prog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+  }
+  .prog i {
+    display: block;
+    height: 100%;
+    width: 0;
+    background: var(--accent);
+    transition: width 0.12s linear;
+  }
+
+  /* ---------- masthead (same grammar as the home page) ---------- */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 28px 0 0;
+    gap: 16px 28px;
+    flex-wrap: wrap;
+  }
+  .brand {
+    font-family: var(--mono);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .brand a {
+    transition: color 0.18s ease;
+  }
+  .brand a:hover {
+    color: var(--accent);
+  }
+  .brand a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  nav.site {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: baseline;
+  }
+  nav.site a {
+    position: relative;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    transition: color 0.18s ease;
+  }
+  nav.site a:hover,
+  nav.site a.here {
+    color: var(--paper);
+  }
+  nav.site a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  nav.site .sep {
+    width: 1px;
+    height: 10px;
+    background: var(--hair-2);
+    align-self: center;
+  }
+  /* ink-draw underline — grows from the left, like a pen */
+  nav.site a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  nav.site a:hover::before,
+  nav.site a.here::before {
+    transform: scaleX(1);
+  }
+
+  /* ---------- page head ---------- */
+  .head {
+    padding: 84px 0 0;
+    max-width: 680px;
+  }
+  .figlabel {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+  }
+  .head h1 {
+    font-size: 40px;
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    line-height: 1.12;
+    margin-top: 14px;
+    text-wrap: balance;
+  }
+  .head .figdek {
+    color: var(--dim);
+    font-style: italic;
+    font-size: 17px;
+    margin-top: 12px;
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--faint-t);
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hair);
+  }
+  .meta b {
+    font-weight: 400;
+    color: var(--dim);
+    padding-right: 8px;
+  }
+  .meta .live {
+    color: var(--accent);
+  }
+
+  /* ---------- the syllabus ---------- */
+  .body {
+    padding: 72px 0 0;
+  }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    border-bottom: 1px solid var(--hair);
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+  }
+  .sec-head .tick {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid var(--accent);
+    align-self: center;
+  }
+  .sec-head h2 {
+    font-size: 26px;
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+  .sec-head .notation {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--faint-t);
+    margin-left: auto;
+    text-align: right;
+  }
+  .syllabus {
+    list-style: none;
+    counter-reset: line;
+  }
+  .syllabus li {
+    display: flex;
+    align-items: baseline;
+    gap: 6px 18px;
+    flex-wrap: wrap;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--hair);
+    counter-increment: line;
+  }
+  .syllabus li::before {
+    content: counter(line, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .syllabus .t {
+    font-size: 17px;
+    font-weight: 400;
+  }
+  .syllabus .dek {
+    color: var(--dim);
+    font-size: 15.5px;
+  }
+  .syllabus .when {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--faint-t);
+    margin-left: auto;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .blank {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
+    padding: 22px 0 26px;
+    border-bottom: 1px dashed var(--hair);
+  }
+  .blank b {
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--faint);
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    margin-top: 120px;
+    padding: 36px 0 88px;
+    border-top: 1px solid var(--hair);
+  }
+  .contact {
+    display: flex;
+    gap: 26px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 12.5px;
+  }
+  .contact a {
+    color: var(--dim);
+    border-bottom: 1px solid var(--hair);
+    transition: color 0.18s ease;
+  }
+  .contact a:hover {
+    color: var(--paper);
+  }
+  .contact a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
+  .colophon {
+    margin-top: 26px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    line-height: 2;
+  }
+
+  /* ---------- reveals ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 760px) {
+    .head {
+      padding-top: 56px;
+    }
+    .head h1 {
+      font-size: 32px;
+    }
+    .body {
+      padding-top: 56px;
+    }
+    .sec-head .notation {
+      display: none;
+    }
+    .syllabus .when {
+      display: none;
+    }
+  }
+  @media (max-width: 560px) {
+    nav.site {
+      gap: 14px;
+    }
+    nav.site .sep {
+      display: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .prog i,
+    nav.site a::before {
+      transition: none;
+    }
+  }
+</style>
+
+<div class="wrap" id="top">
+  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
+  <header>
+    <h1 class="brand"><a href="/">Param Vaswani</a></h1>
+    <nav class="site" aria-label="site">
+      <a href="/#create">create</a>
+      <a href="/#consume">consume</a>
+      <a href="/#curate">curate</a>
+      <a href="/#cohere">cohere</a>
+      <a href="/#contact">contact</a>
+      <span class="sep" aria-hidden="true"></span>
+      <a href="/taste">taste</a>
+      <a href="/curriculum" class="here" aria-current="page">curriculum</a>
+    </nav>
+  </header>
+
+  <section class="head">
+    <div class="figlabel">page · curriculum</div>
+    <h1>Learning Curriculum</h1>
+    <p class="figdek">
+      what i am teaching myself right now, in what order, and in service of
+      what. revised by hand, not by feed.
+    </p>
+    <div class="meta">
+      <span><b>status</b><span class="live">current</span></span>
+      <span><b>revised</b><time id="revised">—</time></span>
+      <span><b>lines</b>0</span>
+    </div>
+  </section>
+
+  <section class="body" id="syllabus">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>the syllabus</h2>
+      <span class="notation">curriculum = ∅</span>
+    </div>
+    <ol class="syllabus"></ol>
+    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+  </section>
+
+  <footer>
+    <div class="contact reveal">
+      <a href="/">← the site</a>
+      <a href="mailto:hello@paramv.com">hello@paramv.com</a>
+    </div>
+    <div class="colophon reveal">
+      hand-built · no analytics, no cookies, nothing sold · set in newsreader
+      &amp; plex mono, self-hosted — no third-party requests
+    </div>
+  </footer>
+</div>
+
+<script>
+  (function () {
+    "use strict";
+
+    /* ---- the rail: how far through the page ---- */
+    (function rail() {
+      var bar = document.getElementById("progBar");
+      var ticking = false;
+      function paint() {
+        ticking = false;
+        var h = document.documentElement;
+        var max = h.scrollHeight - h.clientHeight;
+        var pct = max > 0 ? Math.min(1, Math.max(0, h.scrollTop / max)) : 0;
+        bar.style.width = (pct * 100).toFixed(2) + "%";
+      }
+      window.addEventListener(
+        "scroll",
+        function () {
+          if (ticking) return;
+          ticking = true;
+          if (typeof requestAnimationFrame === "function")
+            requestAnimationFrame(paint);
+          else setTimeout(paint, 60);
+        },
+        { passive: true },
+      );
+      paint();
+    })();
+
+    /* ---- reveals ---- */
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("in");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.08 },
+      );
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        io.observe(el);
+      });
+    } else {
+      document.querySelectorAll(".reveal").forEach(function (el) {
+        el.classList.add("in");
+      });
+    }
+  })();
+</script>

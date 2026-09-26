@@ -22,7 +22,7 @@ vercel --prod --yes           # deploys public/. run build.py FIRST or you ship 
 
 ## The format rule — break this and publishing breaks
 
-`index.html`, `figure-legend.html` and `POSITION.html` are **artifact fragments**: `<title>`
+`index.html`, `figure-legend.html`, `POSITION.html`, `taste.html` and `curriculum.html` are **artifact fragments**: `<title>`
 on line 1, then `<link>`, `<style>`, markup, `<script>`. There is deliberately **no**
 `<!doctype>`, `<html>`, `<head>` or `<body>` tag. `build.py` and `dev.py` add the wrapper.
 Never "fix" this by adding them.
@@ -34,7 +34,7 @@ grep -c '<body' index.html    # must be 0
 ## Invariants
 
 **`public/` is generated.** Editing it directly is always wrong, and the edit is lost on the
-next build. The sources are the three fragment files.
+next build. The sources are the five fragment files.
 
 **Fonts are self-hosted.** Newsreader and IBM Plex Mono as `.woff2` in `fonts/`, copied to
 `public/fonts/` by the build, cached immutable by `vercel.json`. Never add a Google Fonts

@@ -28,6 +28,10 @@ PAGES = {
     "/figure-legend.html": "figure-legend.html",
     "/position": "POSITION.html",
     "/POSITION.html": "POSITION.html",
+    "/taste": "taste.html",
+    "/taste.html": "taste.html",
+    "/curriculum": "curriculum.html",
+    "/curriculum.html": "curriculum.html",
 }
 
 INDEX_PAGE = """<!doctype html><html><head><meta charset='utf-8'>
@@ -38,6 +42,8 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/">/ &mdash; the site (index.html)</a>
 <a href="/legend">/legend &mdash; Reading the Figures</a>
 <a href="/position">/position &mdash; What You Study</a>
+<a href="/taste">/taste &mdash; Media Taste</a>
+<a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
 </body></html>"""
 
 
@@ -75,6 +81,8 @@ with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("  site     http://localhost:%d/" % PORT)
     print("  legend   http://localhost:%d/legend" % PORT)
     print("  position http://localhost:%d/position" % PORT)
+    print("  taste    http://localhost:%d/taste" % PORT)
+    print("  curric.  http://localhost:%d/curriculum" % PORT)
     print("  all      http://localhost:%d/_pages" % PORT)
     print("\n  edit the .html files directly - just refresh. ctrl-c to stop.\n")
     httpd.serve_forever()

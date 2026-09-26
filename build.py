@@ -99,6 +99,9 @@ LLMS = """# Param Vaswani
 - [Reading the Figures](https://paramv.com/legend): what each figure claims, what every
   animation means, how they cohere, and an honest audit of which claims are actually grounded.
 - [What You Study](https://paramv.com/position): thesis, the fields it maps to, and a manifesto.
+- [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
+  music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences.
+- [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
 
 ## Fields
 
@@ -128,6 +131,12 @@ def main():
         ("POSITION.html", "position.html", "What You Study — " + NAME,
          "The thesis, the fields it maps to, three lengths of answer, a manifesto, and a plan.",
          "/position", ""),
+        ("taste.html", "taste.html", "Media Taste — " + NAME,
+         "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
+         "poem, fiction, non-fiction, research concepts, influences.", "/taste", ""),
+        ("curriculum.html", "curriculum.html", "Learning Curriculum — " + NAME,
+         "The current personal learning curriculum: what is being learned, in what order, "
+         "and in service of what.", "/curriculum", ""),
     ]
     for src, dst, title, desc, path, ld in pages:
         frag = (ROOT / src).read_text(encoding="utf-8")
@@ -139,7 +148,7 @@ def main():
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
-    (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position"]), encoding="utf-8")
+    (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum"]), encoding="utf-8")
     print(f"  fonts/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
