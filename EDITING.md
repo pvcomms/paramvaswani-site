@@ -42,7 +42,6 @@ Line numbers drift as you edit — grep the anchor text instead. Anchors are sta
 | Principles                     | `ol class="principles"`           | 2068  |
 | Currently                      | `ul class="current"`              | 2124  |
 | thoughts.log entries           | `============ THOUGHTS.LOG`       | 2204  |
-| Ticker tape                    | `============ THE TAPE`           | 2287  |
 | Footer / contact / colophon    | `<footer id="contact"`            | 2312  |
 
 ### Figure content (text lives in JS objects, not markup)
@@ -61,10 +60,10 @@ Line numbers drift as you edit — grep the anchor text instead. Anchors are sta
 
 Markup: FIG 1 VENN 1276 · INTRO 1368 · FIG 2 GALTON 1384 · FOUR ROOMS 1482 · CREATE 1582 ·
 CONSUME 1723 · FIG 3 GRAPH 1761 · CURATE 1810 · COHERE 1866 · FIG 5 BREAKOUT 2143 ·
-THOUGHTS.LOG 2204 · TAPE 2287
+THOUGHTS.LOG 2204
 
 JavaScript: PANELS 2345 · FIG 1 VENN 2363 · FIG 2 GALTON 2583 · FIG 3 GRAPH 3088 ·
-FIG 4 GOVERNOR 3267 · HERO DRIFT 3419 · FIG 5 BREAKOUT 3483 · LEDGER 3893 · TAPE 3918 ·
+FIG 4 GOVERNOR 3267 · HERO DRIFT 3419 · FIG 5 BREAKOUT 3483 · LEDGER 3893 ·
 REVEALS 3922
 
 ## Rules that will bite you if you break them

@@ -72,7 +72,6 @@ steps with interpolated canvas rendering (see gotchas + EDITING.md rule 3).
 | thoughts.log | 4 dated tagged entries. `wiring` entry is at Param-approved abstraction.                                                                                                                                                                                                                                                                                                            |
 | fig. 6       | The arbitration: seventeen tasks by cost-of-checking × cost-of-being-wrong, one draggable frontier, his line published at 0.84. Labels auto-solved. |
 | the register | Forty-six builds with kind/state filters that compose a real set expression. |
-| the tape     | Credence ticker (ledger quoted like market prices).                                                                                                                                                                                                                                                                                                                                 |
 
 ## v10 (2026-09-16) — the register, the arbitration, the cursor
 
@@ -141,7 +140,8 @@ paint — see Gotchas.
   diagnoses, no third parties, contact = hello@paramvaswani.com only.
 - Withholding moves stay at three (off-record set, privacy leaf, colophon clause). No redaction
   theatrics. "fleet foxes ∧ yung lean" + "old ghosts" line = the full music-past dose (two nods).
-- Cut and staying cut: values ticker-of-virtues (tape quotes the ledger instead), scroll-linked
+- Cut and staying cut: values ticker-of-virtues, the credence tape above the footer (removed
+  28 Sep 2026 at Param's request — the ledger carries the credences alone), scroll-linked
   traveling dot, westward tree (lives as 2 ledger rows), reader-dot/localStorage gadgets.
 
 ## What this is (and isn't) — the north star

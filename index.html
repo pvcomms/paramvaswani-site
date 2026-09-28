@@ -1174,60 +1174,6 @@
     color: var(--dim);
   }
 
-  /* ---------- the tape ---------- */
-  .tape {
-    margin-top: 96px;
-    border-top: 1.5px solid var(--edge);
-    border-bottom: 1.5px solid var(--edge);
-    background: var(--panel-bar);
-    overflow: hidden;
-  }
-  .tape-rail {
-    display: flex;
-    white-space: nowrap;
-    width: max-content;
-    animation: tape 44s linear infinite;
-    padding: 9px 0;
-    will-change: transform;
-  }
-  .tape:hover .tape-rail {
-    animation-play-state: paused;
-  }
-  @keyframes tape {
-    to {
-      transform: translateX(-50%);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .tape {
-      overflow-x: auto;
-    }
-    .tape-rail {
-      animation: none;
-      width: auto;
-    }
-  }
-  .tape .q {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    color: var(--dim);
-    padding: 0 1.6em;
-  }
-  .tape .q b {
-    color: var(--c-cohere);
-    font-weight: 400;
-  }
-  .tape .q .up {
-    color: var(--c-me);
-  }
-  .tape .q .dn {
-    color: var(--faint-t);
-  }
-  .tape .q .sep {
-    color: var(--faint);
-  }
-
   /* footer */
   footer {
     padding: 64px 0 64px;
@@ -4283,30 +4229,6 @@
   </div>
 </div>
 
-<!-- ============ THE TAPE ============ -->
-<div
-  class="tape"
-  role="marquee"
-  aria-label="a ticker tape of current credences, quoted like market prices"
->
-  <div class="tape-rail" id="tapeRail">
-    <span class="q">WESTWARD ’27 <b>.85</b> <span class="up">▲</span></span
-    ><span class="q sep">···</span>
-    <span class="q">BROOKLYN | MOVE <b>.65</b> —</span
-    ><span class="q sep">···</span>
-    <span class="q"
-      >JUDGMENT ATROPHY ’31 <b>.70</b> <span class="up">▲</span></span
-    ><span class="q sep">···</span>
-    <span class="q">GEN Z = SIGNAL <b>.75</b> <span class="up">▲</span></span
-    ><span class="q sep">···</span>
-    <span class="q">VEGAN @ 40 <b>.93</b> —</span><span class="q sep">···</span>
-    <span class="q"
-      >THIS DESIGN, 12 MO <b>.35</b> <span class="dn">▼</span></span
-    ><span class="q sep">···</span> <span class="q">𝒰 REMAINS OPEN</span
-    ><span class="q sep">···</span>
-  </div>
-</div>
-
 <div class="col">
   <footer id="contact">
     <div class="contact reveal">
@@ -4330,8 +4252,8 @@
       hand-built · no analytics, no cookies, nothing sold · some sets aren’t
       drawn<br />
       the essays are written without machines; the site was built with them.<br />
-      the tape quotes the ledger, not the market · set in newsreader &amp; plex
-      mono, self-hosted — no third-party requests<br />
+      set in newsreader &amp; plex mono, self-hosted — no third-party
+      requests<br />
       bangalore → westward, 2026 · 𝒰 remains open
     </div>
   </footer>
@@ -6382,10 +6304,6 @@
       tr.addEventListener("blur", lrest);
       tr.addEventListener("click", lshow);
     });
-
-    /* ================= TAPE ================= */
-    var rail = document.getElementById("tapeRail");
-    if (!reduce) rail.innerHTML += rail.innerHTML;
 
     /* ================= THE REGISTER · SET FILTER =================
        Two unions, intersected. The expression above the list is not
