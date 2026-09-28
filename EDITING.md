@@ -103,8 +103,9 @@ REVEALS 3922
    still communicates its claim. Don't add motion without one.
 
 5. **Privacy rules are hard limits.** No health, family, diagnoses, meds, third parties, or
-   anything beyond the abstraction level already in the society card. Contact stays
-   `hello@paramvaswani.com` only. Three withholding moves, no fourth.
+   anything beyond the abstraction level already in the society card. Contact is
+   `pvcomms (at) pm dot me` only, written that way everywhere — never a raw address or
+   `mailto:`. Three withholding moves, no fourth.
 
 ## Sanity checks after editing
 
