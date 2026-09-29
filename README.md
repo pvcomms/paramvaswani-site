@@ -1,7 +1,7 @@
 # paramv.com
 
 The personal site. One file, no framework, no dependencies, no build tooling beyond a Python
-script that wraps five HTML fragments into documents.
+script that wraps nine HTML fragments into documents.
 
 Live at **[paramv.com](https://paramv.com)**.
 
@@ -16,7 +16,7 @@ operate rather than only read. The figures are the substance: a Galton machine, 
 the six-mode wheel. They are small instruments, and using one is meant to produce the feeling
 the surrounding paragraph is claiming.
 
-Five pages, five files:
+Nine pages, nine files:
 
 | File                 | Page                                            |
 | -------------------- | ----------------------------------------------- |
@@ -25,10 +25,14 @@ Five pages, five files:
 | `POSITION.html`      | What You Study — the positioning statement      |
 | `taste.html`         | Media Taste — eleven forms, kept by hand        |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
+| `work.html`          | Work — empty until written in by hand           |
+| `principles.html`    | Principles — empty until written in by hand     |
+| `ontology.html`      | Ontology — empty until written in by hand       |
+| `systems.html`       | Systems — empty until written in by hand        |
 
 ## How it is built
 
-The five files are **artifact fragments** — `<title>` on line one, no doctype, no `<html>`,
+The nine files are **artifact fragments** — `<title>` on line one, no doctype, no `<html>`,
 no `<head>`, no `<body>`. `build.py` wraps each in a real document with meta, Open Graph and
 JSON-LD, copies the fonts, and writes `public/`. `dev.py` applies the same wrapper live so
 what you see locally is what ships.

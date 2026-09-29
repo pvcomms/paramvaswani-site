@@ -32,6 +32,14 @@ PAGES = {
     "/taste.html": "taste.html",
     "/curriculum": "curriculum.html",
     "/curriculum.html": "curriculum.html",
+    "/work": "work.html",
+    "/work.html": "work.html",
+    "/principles": "principles.html",
+    "/principles.html": "principles.html",
+    "/ontology": "ontology.html",
+    "/ontology.html": "ontology.html",
+    "/systems": "systems.html",
+    "/systems.html": "systems.html",
 }
 
 INDEX_PAGE = """<!doctype html><html><head><meta charset='utf-8'>
@@ -44,6 +52,10 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/position">/position &mdash; What You Study</a>
 <a href="/taste">/taste &mdash; Media Taste</a>
 <a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
+<a href="/work">/work &mdash; Work</a>
+<a href="/principles">/principles &mdash; Principles</a>
+<a href="/ontology">/ontology &mdash; Ontology</a>
+<a href="/systems">/systems &mdash; Systems</a>
 </body></html>"""
 
 
@@ -83,6 +95,7 @@ with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("  position http://localhost:%d/position" % PORT)
     print("  taste    http://localhost:%d/taste" % PORT)
     print("  curric.  http://localhost:%d/curriculum" % PORT)
+    print("  pages    http://localhost:%d/_pages  (work · principles · ontology · systems)" % PORT)
     print("  all      http://localhost:%d/_pages" % PORT)
     print("\n  edit the .html files directly - just refresh. ctrl-c to stop.\n")
     httpd.serve_forever()

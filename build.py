@@ -102,6 +102,9 @@ LLMS = """# Param Vaswani
 - [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
   music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
+- [Work](https://paramv.com/work) · [Principles](https://paramv.com/principles) ·
+  [Ontology](https://paramv.com/ontology) · [Systems](https://paramv.com/systems): four more
+  pages, each kept by hand.
 
 ## Fields
 
@@ -137,6 +140,14 @@ def main():
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + NAME,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
+        ("work.html", "work.html", "Work — " + NAME,
+         "What Param has made, and what each thing was for.", "/work", ""),
+        ("principles.html", "principles.html", "Principles — " + NAME,
+         "The rules Param actually runs on, in the order they win.", "/principles", ""),
+        ("ontology.html", "ontology.html", "Ontology — " + NAME,
+         "What Param takes to exist, and where the categories are cut.", "/ontology", ""),
+        ("systems.html", "systems.html", "Systems — " + NAME,
+         "The running things: what they do, what they cost, what they are for.", "/systems", ""),
     ]
     for src, dst, title, desc, path, ld in pages:
         frag = (ROOT / src).read_text(encoding="utf-8")
@@ -149,7 +160,8 @@ def main():
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
-    (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum"]), encoding="utf-8")
+    (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum",
+                                    "/work", "/principles", "/ontology", "/systems"]), encoding="utf-8")
     print(f"  fonts/ vendor/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":

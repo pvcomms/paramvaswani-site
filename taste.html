@@ -166,9 +166,12 @@
   }
   nav.site {
     display: flex;
-    gap: 20px;
+    gap: 6px 20px;
     flex-wrap: wrap;
+    justify-content: flex-end;
     align-items: baseline;
+    flex: 1 1 0; /* share the brand's row; the rows wrap inside, not under it */
+    min-width: 0;
   }
   nav.site a {
     position: relative;
@@ -186,11 +189,10 @@
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
   }
+  /* the pages sit on their own row beneath the rooms */
   nav.site .sep {
-    width: 1px;
-    height: 10px;
-    background: var(--hair-2);
-    align-self: center;
+    flex-basis: 100%;
+    height: 0;
   }
   /* ink-draw underline — grows from the left, like a pen */
   nav.site a::before,
@@ -421,6 +423,13 @@
   }
 
   @media (max-width: 760px) {
+    nav.site {
+      flex-basis: 100%;
+      justify-content: flex-start;
+    }
+    nav.site .sep {
+      display: none;
+    }
     .head {
       padding-top: 56px;
     }
@@ -452,9 +461,6 @@
     }
     nav.site {
       gap: 14px;
-    }
-    nav.site .sep {
-      display: none;
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -490,6 +496,10 @@
       <span class="sep" aria-hidden="true"></span>
       <a href="/taste" class="here" aria-current="page">taste</a>
       <a href="/curriculum">curriculum</a>
+      <a href="/work">work</a>
+      <a href="/principles">principles</a>
+      <a href="/ontology">ontology</a>
+      <a href="/systems">systems</a>
     </nav>
   </header>
 

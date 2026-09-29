@@ -1,19 +1,18 @@
-<title>Learning Curriculum</title>
+<title>Work</title>
 <!--
-  paramv.com/curriculum — the current personal learning curriculum.
+  paramv.com/work — the work — what was made and what it was for.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until the syllabus is written in by hand.
+  empty on purpose until it is written in by hand.
 
-  to add a line, drop one <li> into <ol class="syllabus">:
+  to add a line, drop one <li> into <ol class="lines">:
 
     <li class="reveal">
-      <span class="t">What is being learned</span>
-      <span class="dek">why now, and what it is in service of</span>
-      <span class="when">status · source</span>
+      <span class="t">Title</span>
+      <span class="dek">one line on why it is here</span>
+      <span class="when">year · status</span>
     </li>
 
-  then set the "revised" date in the head, change the notation from "= ∅",
-  and delete the <p class="blank"> line beneath the list.
+  then change the notation from "= ∅" and delete the <p class="blank"> line beneath the list.
 -->
 <style>
   @font-face {
@@ -68,7 +67,7 @@
     --c-cohere: #e3c567;
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
-    --accent: var(--c-cohere);
+    --accent: var(--c-create);
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
   }
@@ -245,7 +244,7 @@
     color: var(--accent);
   }
 
-  /* ---------- the syllabus ---------- */
+  /* ---------- the work ---------- */
   .body {
     padding: 72px 0 0;
   }
@@ -276,11 +275,11 @@
     margin-left: auto;
     text-align: right;
   }
-  .syllabus {
+  .lines {
     list-style: none;
     counter-reset: line;
   }
-  .syllabus li {
+  .lines li {
     display: flex;
     align-items: baseline;
     gap: 6px 18px;
@@ -289,7 +288,7 @@
     border-bottom: 1px solid var(--hair);
     counter-increment: line;
   }
-  .syllabus li::before {
+  .lines li::before {
     content: counter(line, decimal-leading-zero);
     font-family: var(--mono);
     font-size: 11px;
@@ -297,15 +296,15 @@
     color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
-  .syllabus .t {
+  .lines .t {
     font-size: 17px;
     font-weight: 400;
   }
-  .syllabus .dek {
+  .lines .dek {
     color: var(--dim);
     font-size: 15.5px;
   }
-  .syllabus .when {
+  .lines .when {
     font-family: var(--mono);
     font-size: 11.5px;
     color: var(--faint-t);
@@ -399,7 +398,7 @@
     .sec-head .notation {
       display: none;
     }
-    .syllabus .when {
+    .lines .when {
       display: none;
     }
   }
@@ -436,8 +435,8 @@
       <a href="/#contact">contact</a>
       <span class="sep" aria-hidden="true"></span>
       <a href="/taste">taste</a>
-      <a href="/curriculum" class="here" aria-current="page">curriculum</a>
-      <a href="/work">work</a>
+      <a href="/curriculum">curriculum</a>
+      <a href="/work" class="here" aria-current="page">work</a>
       <a href="/principles">principles</a>
       <a href="/ontology">ontology</a>
       <a href="/systems">systems</a>
@@ -445,26 +444,18 @@
   </header>
 
   <section class="head">
-    <div class="figlabel">page · curriculum</div>
-    <h1>Learning Curriculum</h1>
-    <p class="figdek">
-      what i am teaching myself right now, in what order, and in service of
-      what. revised by hand, not by feed.
-    </p>
-    <div class="meta">
-      <span><b>status</b><span class="live">current</span></span>
-      <span><b>revised</b><time id="revised">—</time></span>
-      <span><b>lines</b>0</span>
-    </div>
+    <div class="figlabel">page · work</div>
+    <h1>Work</h1>
+    <p class="figdek">what i have made, and what each thing was for.</p>
   </section>
 
-  <section class="body" id="syllabus">
+  <section class="body" id="lines">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
-      <h2>the syllabus</h2>
-      <span class="notation">curriculum = ∅</span>
+      <h2>the work</h2>
+      <span class="notation">work = ∅</span>
     </div>
-    <ol class="syllabus"></ol>
+    <ol class="lines"></ol>
     <p class="blank reveal"><b>∅</b>nothing here yet</p>
   </section>
 
