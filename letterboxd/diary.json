@@ -1,0 +1,89 @@
+{
+  "user": "critiquealmass",
+  "entries": [
+    {
+      "id": "letterboxd-watch-1511507449",
+      "title": "The Outrun",
+      "year": "2024",
+      "rating": 4.0,
+      "liked": true,
+      "rewatch": false,
+      "watched": "2026-09-26",
+      "link": "https://letterboxd.com/critiquealmass/film/the-outrun/",
+      "slug": "the-outrun",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/7/0/4/1/5/5/704155-the-outrun-0-600-0-900-crop.jpg?v=5727e4a6cc",
+      "review": "",
+      "poster": "the-outrun.jpg"
+    },
+    {
+      "id": "letterboxd-watch-1308186322",
+      "title": "Good Time",
+      "year": "2017",
+      "rating": 5.0,
+      "liked": true,
+      "rewatch": false,
+      "watched": "2026-05-08",
+      "link": "https://letterboxd.com/critiquealmass/film/good-time/",
+      "slug": "good-time",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/3/6/2/3/6/2/362362-good-time-0-600-0-900-crop.jpg?v=f7b17715d2",
+      "review": "",
+      "poster": "good-time.jpg"
+    },
+    {
+      "id": "letterboxd-watch-1308185925",
+      "title": "The Devil Wears Prada 2",
+      "year": "2026",
+      "rating": 2.0,
+      "liked": false,
+      "rewatch": false,
+      "watched": "2026-05-08",
+      "link": "https://letterboxd.com/critiquealmass/film/the-devil-wears-prada-2/",
+      "slug": "the-devil-wears-prada-2",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/1/1/9/5/5/8/6/1195586-the-devil-wears-prada-2-0-600-0-900-crop.jpg?v=0d955add69",
+      "review": "",
+      "poster": "the-devil-wears-prada-2.jpg"
+    },
+    {
+      "id": "letterboxd-watch-1308185786",
+      "title": "The Devil Wears Prada",
+      "year": "2006",
+      "rating": 4.0,
+      "liked": false,
+      "rewatch": false,
+      "watched": "2026-05-08",
+      "link": "https://letterboxd.com/critiquealmass/film/the-devil-wears-prada/",
+      "slug": "the-devil-wears-prada",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/5/1/7/1/2/51712-the-devil-wears-prada-0-600-0-900-crop.jpg?v=65a9cdb330",
+      "review": "",
+      "poster": "the-devil-wears-prada.jpg"
+    },
+    {
+      "id": "letterboxd-watch-1308185679",
+      "title": "Bugonia",
+      "year": "2025",
+      "rating": 3.0,
+      "liked": false,
+      "rewatch": false,
+      "watched": "2026-05-08",
+      "link": "https://letterboxd.com/critiquealmass/film/bugonia/",
+      "slug": "bugonia",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/6/2/5/4/0/0/625400-bugonia-0-600-0-900-crop.jpg?v=4c6649150e",
+      "review": "",
+      "poster": "bugonia.jpg"
+    },
+    {
+      "id": "letterboxd-watch-1280474012",
+      "title": "Saltburn",
+      "year": "2023",
+      "rating": 5.0,
+      "liked": true,
+      "rewatch": false,
+      "watched": "2024-04-14",
+      "link": "https://letterboxd.com/critiquealmass/film/saltburn/",
+      "slug": "saltburn",
+      "poster_src": "https://a.ltrbxd.com/resized/film-poster/8/3/5/7/7/4/835774-saltburn-0-600-0-900-crop.jpg?v=b58cbd3b08",
+      "review": "",
+      "poster": "saltburn.jpg"
+    }
+  ]
+}

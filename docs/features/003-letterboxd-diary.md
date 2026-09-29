@@ -1,6 +1,6 @@
 ---
 title: Show the Letterboxd diary in the film section of /taste
-status: building
+status: shipped
 created: 2026-09-30
 ---
 
@@ -52,8 +52,7 @@ that was then deleted.
 
 ## Blocked
 
-The account is not connected: `user` is empty because the username was not known. Set it,
-run the acceptance commands, then deploy.
+Connected to critiquealmass on 2026-09-30.
 
 ## Out of scope
 
