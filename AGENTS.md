@@ -48,6 +48,13 @@ link or any CDN reference.
 from `/vendor/`. It is not a third-party script in the sense above; do not replace it with a
 CDN link.
 
+**The load gate is deliberate.** Every fragment carries, right after its first `</style>`, a
+second small `<style>` + inline `<script>` + `<div class="gate">`: an ALTCHA widget that
+auto-solves a proof-of-work on load (static challenge in the `challenge` attribute, no server)
+before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fails open on
+error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
+The block is identical in all five fragments — change it in all five or none.
+
 **The figures are the argument.** They are interactive instruments a reader operates, not
 decoration. A change that makes one prettier and less operable is a regression.
 
