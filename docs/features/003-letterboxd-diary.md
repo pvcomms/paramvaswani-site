@@ -20,10 +20,17 @@ honest about the gap between the two without anyone having to retype a log.
   watched. Above it, the ratings across those N as ten half-star bars. Pointing at a bar dims
   every film outside that bin; pressing it holds the filter. Nothing is ranked or recommended.
 
+Favourites (added 2026-09-30): above the diary, the four films pinned on the profile, drawn
+poster-first in a row of four like Letterboxd shows them. Letterboxd serves profile pages behind
+a bot check, so the build cannot read them; they are typed into `favourites` in
+`letterboxd/config.json` as `"Title (Year)"`. Posters come from the diary feed when the film is
+in it, otherwise from the film's Wikipedia summary. An empty list renders nothing.
+
 ## Network
 
 The build fetches `https://letterboxd.com/<user>/rss/` and 150×225 posters from
-`a.ltrbxd.com`. Readers fetch nothing from either host: posters are copied into `public/` and
+`a.ltrbxd.com`, plus Wikipedia's page-summary API and `upload.wikimedia.org` for favourite
+posters not in the diary. Readers fetch nothing from either host: posters are copied into `public/` and
 served first-party, so the colophon's "no third-party requests" stays true. Links out to
 letterboxd.com are plain links.
 

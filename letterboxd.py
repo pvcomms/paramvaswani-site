@@ -8,12 +8,20 @@ Letterboxd -> the film section of /taste.
 Readers never talk to Letterboxd. The feed and the posters are fetched here, at build time, and
 shipped as first-party files, so /taste keeps its "no third-party requests" promise.
 
-letterboxd/config.json is the only thing to edit: {"user": "<letterboxd username>", "show": 24}.
+letterboxd/config.json is the only thing to edit:
+
+    {"user": "<letterboxd username>", "show": 24,
+     "favourites": ["Good Time (2017)", "Saltburn (2023)", ...]}
+
+favourites are the four pinned on the profile. Letterboxd serves profile pages behind a bot
+check, so they cannot be read automatically; they are typed here in the order they are pinned.
+A favourite can also be {"title": ..., "year": ..., "slug": ...} when the letterboxd url slug
+is not simply the title. Posters come from the diary when the film is in it, else Wikipedia.
 An empty user means the section renders nothing and the page looks exactly as it did before.
 diary.json and posters/ are written by this script and committed, so a build with no network
 still ships the last good copy.
 """
-import html, json, pathlib, re, sys, urllib.request
+import html, json, pathlib, re, sys, urllib.parse, urllib.request
 import xml.etree.ElementTree as ET
 
 ROOT = pathlib.Path(__file__).parent
@@ -31,7 +39,21 @@ def config():
         c = json.loads(CONFIG.read_text(encoding="utf-8"))
     except (OSError, ValueError):
         c = {}
-    return {"user": str(c.get("user") or "").strip().strip("/"), "show": int(c.get("show") or 24)}
+    favs = []
+    for f in c.get("favourites") or []:
+        if isinstance(f, str):
+            m = re.match(r"^(.*?)\s*\((\d{4})\)\s*$", f)
+            f = {"title": m.group(1), "year": m.group(2)} if m else {"title": f.strip()}
+        if isinstance(f, dict) and f.get("title"):
+            favs.append({"title": str(f["title"]).strip(), "year": str(f.get("year") or ""),
+                         "slug": str(f.get("slug") or "") or slugify(f["title"])})
+    return {"user": str(c.get("user") or "").strip().strip("/"), "show": int(c.get("show") or 24),
+            "favourites": favs[:4]}
+
+
+def slugify(title):
+    t = re.sub(r"['\u2019.]", "", str(title).lower())
+    return re.sub(r"[^a-z0-9]+", "-", t).strip("-")
 
 
 def get(url, timeout=12):
@@ -90,9 +112,26 @@ def parse(xml_bytes):
     return out
 
 
-def small(poster_url):
-    # the feed hands out 600x900; the page draws them at 46px wide, so ask for 150x225
-    return re.sub(r"-0-\d+-0-\d+-crop", "-0-150-0-225-crop", poster_url)
+def small(poster_url, w=150, h=225):
+    # the feed hands out 600x900; diary rows draw them at 46px wide, favourites at ~160
+    return re.sub(r"-0-\d+-0-\d+-crop", f"-0-{w}-0-{h}-crop", poster_url)
+
+
+def wiki_poster(title, year):
+    """A film's poster from its Wikipedia summary, or '' when no page for the film is found."""
+    tries = ([f"{title} ({year} film)"] if year else []) + [f"{title} (film)", title]
+    for t in tries:
+        url = "https://en.wikipedia.org/api/rest_v1/page/summary/" + urllib.parse.quote(t.replace(" ", "_"))
+        try:
+            d = json.loads(get(url))
+        except Exception:
+            continue
+        if "film" not in (d.get("description") or "").lower():
+            continue
+        img = (d.get("thumbnail") or {}).get("source") or (d.get("originalimage") or {}).get("source")
+        if img:
+            return img
+    return ""
 
 
 def sync(verbose=True):
@@ -122,12 +161,35 @@ def sync(verbose=True):
                 continue
         e["poster"] = name
         keep.add(name)
-    for f in POSTERS.glob("*.jpg"):
+    favs = []
+    for fav in c["favourites"]:
+        fav = dict(fav, poster="")
+        stem = "fav-" + re.sub(r"[^a-z0-9-]", "", fav["slug"])
+        f = next(iter(sorted(POSTERS.glob(stem + ".*"))), None)
+        if f is None:
+            src = next((small(e["poster_src"], 300, 450) for e in entries
+                        if e["poster_src"] and (e["slug"] == fav["slug"] or
+                        (e["title"].lower() == fav["title"].lower() and
+                         (not fav["year"] or e["year"] == fav["year"])))), "")
+            src = src or wiki_poster(fav["title"], fav["year"])
+            ext = ".png" if urllib.parse.urlsplit(src).path.lower().endswith(".png") else ".jpg"
+            try:
+                if src:
+                    (POSTERS / (stem + ext)).write_bytes(get(src))
+                    f = POSTERS / (stem + ext)
+            except Exception:
+                f = None
+        if f is not None and f.exists():
+            fav["poster"] = f.name
+            keep.add(f.name)
+        favs.append(fav)
+    for f in POSTERS.glob("*.*"):
         if f.name not in keep:
             f.unlink()
-    DIARY.write_text(json.dumps({"user": c["user"], "entries": entries}, indent=2,
-                                ensure_ascii=False) + "\n", encoding="utf-8")
-    say(f"  letterboxd: {len(entries)} diary entries from /{c['user']}, {len(keep)} posters")
+    DIARY.write_text(json.dumps({"user": c["user"], "favourites": favs, "entries": entries},
+                                indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    say(f"  letterboxd: {len(entries)} diary entries from /{c['user']}, {len(favs)} favourites, "
+        f"{len(keep)} posters")
     return True
 
 
@@ -157,10 +219,36 @@ def render():
     if not c["user"] or data.get("user") != c["user"]:
         return ""
     shown = data.get("entries", [])[: c["show"]]
-    if not shown:
+    favs = data.get("favourites", [])
+    if not shown and not favs:
         return ""
     esc = html.escape
     user = esc(c["user"])
+
+    fav_html = ""
+    if favs:
+        cells = []
+        for i, f in enumerate(favs):
+            img = (f'<img src="/letterboxd/posters/{esc(f["poster"])}" alt="" width="150" height="225" '
+                   f'loading="lazy" decoding="async">' if f.get("poster") else "")
+            cells.append(
+                f'<li class="reveal" style="--i:{i}"><a class="lb-fav-link" '
+                f'href="https://letterboxd.com/film/{esc(f["slug"])}/" rel="noopener">'
+                f'<span class="lb-fav-poster" aria-hidden="true">{img}</span>'
+                f'<span class="t">{esc(f["title"])}</span>'
+                f'<span class="lb-year">{esc(f.get("year", ""))}</span></a></li>'
+            )
+        fav_html = f"""
+      <div class="lb-favs">
+        <div class="lb-head reveal">
+          <span class="lb-label">favourites</span>
+          <span class="lb-src">the four pinned on
+            <a href="https://letterboxd.com/{user}/" rel="noopener">letterboxd/{user}</a></span>
+        </div>
+        <ol class="lb-fav-row">{"".join(cells)}</ol>
+      </div>"""
+    if not shown:
+        return f'\n    <div class="lb" id="lb">{fav_html}\n    </div>\n    '
 
     # ratings across what is shown, half-star bins ½ .. 5
     bins = [0] * 10
@@ -204,7 +292,7 @@ def render():
         )
 
     return f"""
-    <div class="lb" id="lb">
+    <div class="lb" id="lb">{fav_html}
       <div class="lb-head reveal">
         <span class="lb-label">diary</span>
         <span class="lb-src">the last {len(shown)} logged on

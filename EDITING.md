@@ -196,7 +196,8 @@ git checkout -- index.html           # discard uncommitted edits
 ## Letterboxd diary on /taste (2026-09-30)
 
 The film section of `taste.html` carries a diary pulled from Letterboxd. To connect or change
-the account, edit `letterboxd/config.json` (`user`, and `show` for how many to list), then:
+the account, edit `letterboxd/config.json` (`user`, `show` for how many to list, and
+`favourites`, the four pinned films as `"Title (Year)"` in profile order), then:
 
 ```bash
 ./letterboxd.py      # refresh letterboxd/diary.json + posters/
