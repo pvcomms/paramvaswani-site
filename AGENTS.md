@@ -55,6 +55,10 @@ before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fa
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
 The block is identical in every page fragment (nine as of Sep 29) — change it everywhere or nowhere.
 
+**Letterboxd is a build-time input.** `letterboxd.py` fetches the diary feed and posters when
+`build.py` runs and they ship as first-party files under `/letterboxd/`. Never add a client-side
+fetch or embed to letterboxd.com. Spec: `docs/features/003-letterboxd-diary.md`.
+
 **The figures are the argument.** They are interactive instruments a reader operates, not
 decoration. A change that makes one prettier and less operable is a regression.
 

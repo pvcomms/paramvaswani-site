@@ -192,3 +192,17 @@ git checkout -- index.html           # discard uncommitted edits
 5. Visual checks: the in-app browser pane computes layout but never paints. Render with headless
    Chromium instead — `~/Code/shosai/node_modules` already has playwright; symlink it next to a
    small `shot.mjs` and screenshot `http://localhost:4173/`.
+
+## Letterboxd diary on /taste (2026-09-30)
+
+The film section of `taste.html` carries a diary pulled from Letterboxd. To connect or change
+the account, edit `letterboxd/config.json` (`user`, and `show` for how many to list), then:
+
+```bash
+./letterboxd.py      # refresh letterboxd/diary.json + posters/
+./dev.py             # check /taste#film
+./build.py           # also refreshes, then renders into public/taste.html
+```
+
+Never type between the `letterboxd:begin` / `letterboxd:end` markers in `taste.html`; the
+build overwrites it. Spec: `docs/features/003-letterboxd-diary.md`.

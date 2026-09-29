@@ -51,3 +51,13 @@ reading as authoritative.
 **2026-09-19 — Doc set adopted.**
 Repo joined the `CAPP` constellation standard. `EDITING.md` and `HANDOFF.md` are kept — they
 are good and specific — with `AGENTS.md` pointing at them.
+
+---
+
+**2026-09-30 — Letterboxd is fetched at build time, never by the reader.**
+The film diary on /taste comes from the public RSS feed, pulled by `letterboxd.py` during
+`./build.py`, with posters downloaded and served from `/letterboxd/posters/`. A client-side
+embed would have been simpler and would have made every reader's browser call Letterboxd,
+which breaks the no-third-party-requests rule. The cost is freshness: the diary updates when
+the site is built. `diary.json` and `posters/` are committed so an offline build still ships
+the last good copy.

@@ -7,6 +7,7 @@ This wraps it in a real HTML document with meta, OG, JSON-LD, and copies fonts.
 Source of truth stays index.html; ./public is generated — never edit it directly.
 """
 import re, shutil, pathlib, html
+import letterboxd
 
 ROOT = pathlib.Path(__file__).parent
 PUB = ROOT / "public"
@@ -149,20 +150,25 @@ def main():
         ("systems.html", "systems.html", "Systems — " + NAME,
          "The running things: what they do, what they cost, what they are for.", "/systems", ""),
     ]
+    letterboxd.sync()
     for src, dst, title, desc, path, ld in pages:
         frag = (ROOT / src).read_text(encoding="utf-8")
+        if src == "taste.html":
+            frag = letterboxd.inject(frag)
         (PUB / dst).write_text(wrap(frag, title=title, desc=desc, path=path, jsonld=ld),
                                encoding="utf-8")
         print(f"  {src:<20} -> public/{dst}")
 
     shutil.copytree(ROOT / "fonts", PUB / "fonts")
     shutil.copytree(ROOT / "vendor", PUB / "vendor")
+    if (ROOT / "letterboxd" / "posters").is_dir():
+        shutil.copytree(ROOT / "letterboxd" / "posters", PUB / "letterboxd" / "posters")
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum",
                                     "/work", "/principles", "/ontology", "/systems"]), encoding="utf-8")
-    print(f"  fonts/ vendor/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
+    print(f"  fonts/ vendor/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
     main()

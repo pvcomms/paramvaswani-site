@@ -14,6 +14,10 @@
 
   then change that form's notation from "= ∅" to "= { … }" (or leave it, it is only a label)
   and delete the <p class="blank"> line beneath the list.
+
+  film also carries a letterboxd diary between the letterboxd:begin/end markers. that space is
+  filled at build time (and by dev.py) from letterboxd/diary.json — never type into it. to connect
+  or change the account, set "user" in letterboxd/config.json and run ./letterboxd.py.
 -->
 <style>
   @font-face {
@@ -373,6 +377,198 @@
     color: var(--faint);
   }
 
+  /* ---------- film · the letterboxd diary ---------- */
+  .cat:has(.lb) .blank {
+    display: none;
+  }
+  .lb {
+    margin-top: 28px;
+  }
+  .lb-head {
+    display: flex;
+    align-items: baseline;
+    gap: 6px 14px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
+  }
+  .lb-label {
+    color: var(--accent);
+    letter-spacing: 0.16em;
+  }
+  .lb-src a {
+    color: var(--dim);
+    border-bottom: 1px solid var(--hair);
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .lb-src a:hover {
+    color: var(--paper);
+    border-color: var(--hair-2);
+  }
+  .lb-src a:focus-visible,
+  .lb-link:focus-visible,
+  .lb-bar:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+
+  /* the distribution: ten half-star bins, one bar each */
+  .lb-dist {
+    margin-top: 20px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--hair);
+  }
+  .lb-bars {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 4px;
+    height: 72px;
+    max-width: 360px;
+  }
+  .lb-bar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: stretch;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--faint-t);
+    font: inherit;
+    cursor: pointer;
+  }
+  .lb-bar[disabled] {
+    cursor: default;
+  }
+  .lb-bar i {
+    display: block;
+    height: 60px;
+    background: var(--hair-2);
+    transform: scaleY(max(var(--h), 0.03));
+    transform-origin: bottom;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease;
+  }
+  .lb-dist:not(.in) .lb-bar i {
+    transform: scaleY(0.03);
+  }
+  .lb-bar span {
+    height: 12px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    line-height: 12px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+  .lb-bar:not([disabled]):hover i,
+  .lb-bar[aria-pressed="true"] i {
+    background: var(--accent);
+  }
+  .lb-bar[aria-pressed="true"] span {
+    color: var(--accent);
+  }
+  .lb-axis {
+    display: flex;
+    justify-content: space-between;
+    max-width: 360px;
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 9.5px;
+    color: var(--faint-t);
+  }
+  .lb-read {
+    margin-top: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+  }
+
+  /* the rows keep the page's entry grammar, with a poster in the margin */
+  .lb-list li {
+    padding: 0;
+    transition: opacity 0.3s ease;
+  }
+  .lb-list.filtering li.off {
+    opacity: 0.18;
+  }
+  .lb-link {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    width: 100%;
+    padding: 14px 0;
+  }
+  .lb-poster {
+    flex: 0 0 46px;
+    height: 69px;
+    background: var(--panel-bar);
+    outline: 1px solid var(--hair);
+    outline-offset: -1px;
+    overflow: hidden;
+  }
+  .lb-poster img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.7);
+    transition: filter 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .lb-link:hover .lb-poster img,
+  .lb-link:focus-visible .lb-poster img {
+    filter: none;
+    transform: scale(1.06);
+  }
+  .lb-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+  .lb-link .t {
+    transition: color 0.18s ease;
+  }
+  .lb-link:hover .t {
+    color: var(--accent);
+  }
+  .lb-year {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--faint-t);
+    padding-left: 4px;
+  }
+  .lb-meta {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--c-cohere);
+    letter-spacing: 0.04em;
+  }
+  .lb-like {
+    color: var(--c-me);
+  }
+  .lb-re {
+    color: var(--faint-t);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+  .lb-link .dek {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-width: 58ch;
+  }
+  .lb-link .when {
+    padding-top: 4px;
+  }
+
   /* ---------- footer ---------- */
   footer {
     margin-top: 120px;
@@ -454,6 +650,10 @@
     .entries .when {
       display: none;
     }
+    .lb-bars,
+    .lb-axis {
+      max-width: none;
+    }
   }
   @media (max-width: 560px) {
     .brand .where {
@@ -474,7 +674,10 @@
     }
     .prog i,
     nav.site a::before,
-    .tabs a::before {
+    .tabs a::before,
+    .lb-bar i,
+    .lb-poster img,
+    .lb-list li {
       transition: none;
     }
   }
@@ -599,6 +802,8 @@
     </div>
     <ul class="entries"></ul>
     <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <!-- letterboxd:begin · generated from letterboxd/diary.json, edits here are overwritten -->
+    <!-- letterboxd:end -->
   </section>
 
   <section class="cat" id="live">
@@ -780,6 +985,54 @@
         { passive: true },
       );
       paint();
+    })();
+
+    /* ---- film diary: hover a rating bin to find those films, press to hold it ---- */
+    (function diary() {
+      var dist = document.querySelector(".lb-dist");
+      var list = document.getElementById("lbList");
+      var read = document.getElementById("lbRead");
+      if (!dist || !list || !read) return;
+      var bars = Array.prototype.slice.call(dist.querySelectorAll(".lb-bar"));
+      var rows = Array.prototype.slice.call(list.querySelectorAll(".lb-row"));
+      var idle = read.textContent;
+      var held = null;
+      function stars(r) {
+        var n = parseFloat(r);
+        return new Array(Math.floor(n) + 1).join("\u2605") + (n % 1 ? "\u00bd" : "");
+      }
+      function show(r) {
+        if (r === null) {
+          list.classList.remove("filtering");
+          rows.forEach(function (li) { li.classList.remove("off"); });
+          read.textContent = idle;
+          return;
+        }
+        var n = 0;
+        rows.forEach(function (li) {
+          var on = li.getAttribute("data-r") === r;
+          li.classList.toggle("off", !on);
+          if (on) n++;
+        });
+        list.classList.add("filtering");
+        read.textContent = stars(r) + " \u00b7 " + n + (n === 1 ? " film" : " films") +
+          (held === r ? " \u00b7 held, press again to let go" : "");
+      }
+      bars.forEach(function (b) {
+        var r = b.getAttribute("data-r");
+        b.addEventListener("mouseenter", function () { if (!b.disabled) show(r); });
+        b.addEventListener("mouseleave", function () { show(held); });
+        b.addEventListener("focus", function () { if (!b.disabled) show(r); });
+        b.addEventListener("blur", function () { show(held); });
+        b.addEventListener("click", function () {
+          held = held === r ? null : r;
+          bars.forEach(function (x) {
+            x.setAttribute("aria-pressed", String(x.getAttribute("data-r") === held));
+          });
+          show(held === null ? r : held);
+          if (held === null) read.textContent = idle;
+        });
+      });
     })();
 
     /* ---- reveals ---- */

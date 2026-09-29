@@ -10,6 +10,7 @@ every request, so you edit the file, hit refresh, and see the change. No build s
     ./dev.py 8080       -> different port
 """
 import http.server, socketserver, sys, os, pathlib
+import letterboxd
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 4173
 ROOT = pathlib.Path(__file__).parent.resolve()
@@ -70,7 +71,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             f = ROOT / PAGES[path]
             if not f.exists():
                 return self.send_error(404, PAGES[path] + " not found")
-            body = SHELL_HEAD + f.read_text(encoding="utf-8") + SHELL_FOOT
+            frag = f.read_text(encoding="utf-8")
+            if PAGES[path] == "taste.html":
+                frag = letterboxd.inject(frag)  # renders the committed diary; ./letterboxd.py refreshes it
+            body = SHELL_HEAD + frag + SHELL_FOOT
             return self._send(body.encode("utf-8"), "text/html")
 
         return super().do_GET()
