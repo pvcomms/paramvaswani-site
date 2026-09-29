@@ -105,7 +105,11 @@ REVEALS 3922
 5. **Privacy rules are hard limits.** No health, family, diagnoses, meds, third parties, or
    anything beyond the abstraction level already in the society card. Contact is
    `pvcomms (at) pm dot me` only, written that way everywhere — never a raw address or
-   `mailto:`. Three withholding moves, no fourth.
+   `mailto:` in source. The one exception is the footer, where ALTCHA holds the address
+   AES-encrypted in `data-obfuscated` and a proof-of-work in the reader's browser turns it
+   into a mailto link on click. Regenerate the payload with
+   `npx altcha-lib obfuscate "mailto:<address>"` if the address ever changes. Three
+   withholding moves, no fourth.
 
 ## Sanity checks after editing
 

@@ -1200,6 +1200,49 @@
     outline: 1px solid var(--c-cohere);
     outline-offset: 2px;
   }
+  /* footer email: altcha obfuscation — a proof-of-work stands between scrapers and the address */
+  .contact altcha-widget {
+    display: inline;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    --altcha-color-base: var(--ink);
+    --altcha-color-base-content: var(--paper);
+    --altcha-color-neutral: var(--hair-2);
+    --altcha-color-neutral-content: var(--dim);
+    --altcha-color-primary: var(--c-cohere);
+    --altcha-color-primary-content: var(--ink);
+    --altcha-color-success: var(--c-cohere);
+    --altcha-color-success-content: var(--ink);
+    --altcha-border-color: var(--hair-2);
+    --altcha-border-width: 1px;
+    --altcha-border-radius: 2px;
+    --altcha-checkbox-border-color: var(--hair-2);
+    --altcha-checkbox-border-radius: 2px;
+    --altcha-checkbox-size: 16px;
+    --altcha-spinner-color: var(--c-cohere);
+    --altcha-max-width: 280px;
+    --altcha-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+  .contact .reveal-mail {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: var(--dim);
+    border-bottom: 1px dashed var(--hair-2);
+    cursor: pointer;
+    transition: color 0.18s ease, border-color 0.18s ease;
+  }
+  .contact .reveal-mail:hover {
+    color: var(--paper);
+    border-bottom-color: var(--dim);
+  }
+  .contact .reveal-mail:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
   .figindex {
     margin-top: 30px;
     display: flex;
@@ -4235,7 +4278,15 @@
 <div class="col">
   <footer id="contact">
     <div class="contact reveal">
-      <span>pvcomms (at) pm dot me</span>
+      <altcha-widget
+        data-obfuscated="eyJwYXJhbWV0ZXJzIjp7ImFsZ29yaXRobSI6IlBCS0RGMi9TSEEtMjU2IiwiY29zdCI6NTAwMCwia2V5TGVuZ3RoIjozMiwia2V5UHJlZml4IjoiM2UyODljNDE3ODVhYWJiZTYwZGFmMTU1Y2MxMWVmNzQiLCJub25jZSI6ImQ0NTI3MDYzYmJhYTViNGM1MzQwN2IxNTJhMmFjOTgxIiwic2FsdCI6IjM2ZmY2NDI5MmY0ZWUyYThkMGI2OWMwOTdhNmFiZjk5In0sImNpcGhlciI6eyJpdiI6IjUyZDNlYjZjMzhhZWQ5ZDUyZDUxNDBlZiIsImRhdGEiOiI4ZjFkNzc5ZWY5ZTI1NTdlNzM2NTliMjY4YjYxN2JmZjMzNzYwNTE1MjUzYmI3MzBhZmM3ZmI3OWI0ZTM0ZmYzNGE2NzcxYWEifX0="
+        display="floating"
+        configuration='{"hideLogo":true,"hideFooter":true,"floatingPlacement":"top"}'
+      >
+        <button type="button" class="reveal-mail" title="solve a small proof-of-work to reveal the address">
+          pvcomms (at) pm dot me
+        </button>
+      </altcha-widget>
       <a href="https://www.linkedin.com/in/paramvaswani"
         >linkedin / paramvaswani</a
       >
@@ -4262,6 +4313,8 @@
   </footer>
 </div>
 
+<script src="/vendor/altcha/altcha-obfuscation.min.js" defer></script>
+<script src="/vendor/altcha/altcha.min.js" defer></script>
 <script>
   (function () {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

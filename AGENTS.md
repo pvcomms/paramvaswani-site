@@ -43,6 +43,11 @@ link or any CDN reference.
 **No analytics, no third-party scripts, no trackers.** `vercel.json` sets
 `interest-cohort=()` along with the other headers. Keep them.
 
+**`vendor/` is first-party.** The ALTCHA widget that guards the footer email lives in
+`vendor/altcha/` (MIT, copied verbatim, workers inlined, no outbound requests) and is served
+from `/vendor/`. It is not a third-party script in the sense above; do not replace it with a
+CDN link.
+
 **The figures are the argument.** They are interactive instruments a reader operates, not
 decoration. A change that makes one prettier and less operable is a regression.
 

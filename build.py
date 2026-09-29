@@ -145,11 +145,12 @@ def main():
         print(f"  {src:<20} -> public/{dst}")
 
     shutil.copytree(ROOT / "fonts", PUB / "fonts")
+    shutil.copytree(ROOT / "vendor", PUB / "vendor")
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum"]), encoding="utf-8")
-    print(f"  fonts/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
+    print(f"  fonts/ vendor/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
     main()
