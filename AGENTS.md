@@ -53,7 +53,7 @@ second small `<style>` + inline `<script>` + `<div class="gate">`: an ALTCHA wid
 auto-solves a proof-of-work on load (static challenge in the `challenge` attribute, no server)
 before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fails open on
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
-The block is identical in all five fragments — change it in all five or none.
+The block is identical in every page fragment (nine as of Sep 29) — change it everywhere or nowhere.
 
 **The figures are the argument.** They are interactive instruments a reader operates, not
 decoration. A change that makes one prettier and less operable is a regression.
