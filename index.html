@@ -189,6 +189,17 @@
   .about .bar {
     color: var(--faint);
   }
+  .about p {
+    margin: 0;
+    text-wrap: balance;
+  }
+  .about p + p {
+    margin-top: 4px;
+  }
+  .about .motto {
+    color: var(--paper);
+    margin-bottom: 2px;
+  }
 
   /* ---------- shared figure grammar ---------- */
   .figlabel {
@@ -1999,7 +2010,11 @@
       <a href="/systems">systems</a>
     </nav>
   </header>
-  <p class="about"><span class="g">intentional, examined, aligned&nbsp;life</span><span class="bar"> | </span><span class="g">fully&nbsp;remote</span><span class="bar"> | </span><span class="g">attention&nbsp;guarder + neurophile + ex&#8209;product&nbsp;builder + psych&nbsp;undergrad + strategy&nbsp;master&#8217;s</span></p>
+  <div class="about">
+    <p class="motto">human opted out of your loop</p>
+    <p><span class="g">ex&nbsp;ai agent product&nbsp;person&nbsp;<span class="bar">|</span></span> <span class="g">neurophilosophy and social&nbsp;theory&nbsp;nerd&nbsp;<span class="bar">|</span></span> <span class="g">fully nomadic: berlin till oct&nbsp;19</span></p>
+    <p><span class="g">learning by building, writing, labbing on&nbsp;self&nbsp;<span class="bar">+</span></span> <span class="g">curate my attention&nbsp;inputs&nbsp;<span class="bar">+</span></span> <span class="g">systemise my time&nbsp;spent&nbsp;<span class="bar">+</span></span> <span class="g">structure my overthinking</span></p>
+  </div>
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
     <aside class="marg">
