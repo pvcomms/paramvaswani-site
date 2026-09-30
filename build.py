@@ -7,6 +7,7 @@ This wraps it in a real HTML document with meta, OG, JSON-LD, and copies fonts.
 Source of truth stays index.html; ./public is generated — never edit it directly.
 """
 import re, shutil, pathlib, html
+import letterboxd
 
 ROOT = pathlib.Path(__file__).parent
 PUB = ROOT / "public"
@@ -94,6 +95,9 @@ LLMS = """# Param Vaswani
 
 - [Home](https://paramv.com/): the site drawn as a Venn — five domains inside the universal set,
   contact as the dashed set off the record.
+- [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
+  music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
+  quotes, aphorisms, neology & etymology.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
 - [About](https://paramv.com/about): what he does now, what he did before, his credentials.
 - [Work](https://paramv.com/work): what he has made, and what it was for.
@@ -123,6 +127,10 @@ def main():
 
     pages = [
         ("index.html", "index.html", TAB, DESC, "/", PERSON_LD),
+        ("taste.html", "taste.html", "Media Taste — " + TAB,
+         "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
+         "poem, fiction, non-fiction, research concepts, influences, quotes, aphorisms, "
+         "neology & etymology.", "/taste", ""),
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
@@ -138,8 +146,11 @@ def main():
          "Tools for structured overthinking, so the thinking ends in something done.",
          "/systems/cognitive-scaffolding", ""),
     ]
+    letterboxd.sync()
     for src, dst, title, desc, path, ld in pages:
         frag = (ROOT / src).read_text(encoding="utf-8")
+        if src == "taste.html":
+            frag = letterboxd.inject(frag)
         (PUB / dst).parent.mkdir(parents=True, exist_ok=True)
         (PUB / dst).write_text(wrap(frag, title=title, desc=desc, path=path, jsonld=ld),
                                encoding="utf-8")
@@ -147,13 +158,15 @@ def main():
 
     shutil.copytree(ROOT / "fonts", PUB / "fonts")
     shutil.copytree(ROOT / "vendor", PUB / "vendor")
+    if (ROOT / "letterboxd" / "posters").is_dir():
+        shutil.copytree(ROOT / "letterboxd" / "posters", PUB / "letterboxd" / "posters")
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
-    (PUB / "sitemap.xml").write_text(sitemap(["/", "/curriculum",
+    (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
                                     "/about", "/work",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
-    print(f"  fonts/ vendor/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
+    print(f"  fonts/ vendor/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
     main()

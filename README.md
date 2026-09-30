@@ -19,14 +19,15 @@ Seven pages, seven files:
 | File                 | Page                                            |
 | -------------------- | ----------------------------------------------- |
 | `index.html`         | the site, drawn as a Venn                       |
+| `taste.html`         | Media Taste — eleven forms, kept by hand        |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
 | `about.html`         | About — now, before, credentials                |
 | `work.html`          | Work                                            |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |
 
-`/taste`, `/principles`, `/ontology` and `/systems` (with `/systems/how-i-work` and
+`/principles`, `/ontology` and `/systems` (with `/systems/how-i-work` and
 `/systems/environment`) were removed on 2026-09-30; their sources are in git history (`git show
-3809feb:taste.html`). `/systems/cognitive-scaffolding` stays, with no page above it.
+3809feb:principles.html`). `/taste` was removed the same day and restored on Param's word. `/systems/cognitive-scaffolding` stays, with no page above it.
 
 ## How it is built
 
