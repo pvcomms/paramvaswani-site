@@ -18,13 +18,16 @@ Seven pages, seven files:
 
 | File                 | Page                                            |
 | -------------------- | ----------------------------------------------- |
-| `index.html`         | the site                                        |
-| `taste.html`         | Media Taste — eleven forms, kept by hand        |
+| `index.html`         | the site, drawn as a Venn                       |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
-| `work.html`          | Work — empty until written in by hand           |
-| `principles.html`    | Principles — empty until written in by hand     |
-| `ontology.html`      | Ontology — empty until written in by hand       |
-| `systems.html`       | Systems — empty until written in by hand        |
+| `about.html`         | About — now, before, credentials                |
+| `work.html`          | Work                                            |
+| `systems.html`       | Systems                                         |
+| `how-i-work.html`    | /systems/how-i-work                             |
+| `environment.html`   | /systems/environment                            |
+
+`/taste`, `/principles` and `/ontology` were removed on 2026-09-30; their sources are in git
+history (`git show 3809feb:taste.html`).
 
 ## How it is built
 

@@ -888,11 +888,8 @@
     <nav>
       <a href="#contact">contact</a>
       <a href="/about">about</a>
-      <a href="/taste">taste</a>
       <a href="/curriculum">curriculum</a>
       <a href="/work">work</a>
-      <a href="/principles">principles</a>
-      <a href="/ontology">ontology</a>
       <a href="/systems">systems</a>
     </nav>
   </header>
@@ -912,7 +909,7 @@
       class="venn"
       viewBox="0 0 900 640"
       role="group"
-      aria-label="A Venn diagram of the site. Five pages — curriculum, systems, principles, taste, work — inside the universal set, labeled ontology. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
+      aria-label="A Venn diagram of the site. Five domains — curriculum, systems, principles, taste, work — inside the universal set, labeled ontology. Curriculum, systems and work have pages. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
     >
       <defs>
         <clipPath id="uclip">
@@ -952,7 +949,7 @@
         stroke-dasharray="1 6"
         stroke-linecap="round"
       />
-      <a class="u-link" href="/ontology"><text class="u-label" x="48" y="58" font-size="13">𝒰 · ontology</text></a>
+      <text class="u-label" x="48" y="58" font-size="13">𝒰 · ontology</text>
 
       <circle
         class="offrec"
@@ -1434,8 +1431,6 @@
         color: "#7fb069",
         letter: "P",
         label: "principles",
-        dest: "/principles",
-        destName: "principles",
       },
       {
         id: "society",
@@ -1445,8 +1440,6 @@
         color: "#e3c567",
         letter: "T",
         label: "taste",
-        dest: "/taste",
-        destName: "taste",
       },
       {
         id: "creation",
@@ -1551,7 +1544,7 @@
     function panelRest() {
       cap1.innerHTML =
         '<div class="vp-k">𝒰 · ontology</div>' +
-        '<div class="vp-desc">Five pages; the red dot sits where curriculum, systems and principles meet. Hover to read — click to filter, click again to go there. The frame is the ontology; the dashed set, off the record, is contact.</div>';
+        '<div class="vp-desc">Five domains; the red dot sits where curriculum, systems and principles meet. Hover to read — click to filter; curriculum, systems and work open their pages on a second click. The frame is the ontology; the dashed set, off the record, is contact.</div>';
       cap1.style.borderColor = "var(--hair)";
     }
     function paint() {
@@ -1673,7 +1666,7 @@
         var c2 = byId(effId);
         var hint =
           fltSet === effId
-            ? "click again → " + c2.destName + " · esc to clear"
+            ? (c2.destName ? "click again → " + c2.destName + " · " : "") + "esc to clear"
             : "click to filter";
         cap1.innerHTML =
           '<div class="vp-k" style="color:' +

@@ -22,7 +22,7 @@ vercel --prod --yes           # deploys public/. run build.py FIRST or you ship 
 
 ## The format rule — break this and publishing breaks
 
-`index.html`, `taste.html`, `curriculum.html`, `work.html`, `principles.html`, `ontology.html` and `systems.html` are **artifact fragments**: `<title>`
+`index.html`, `curriculum.html`, `about.html`, `work.html`, `systems.html`, `how-i-work.html` and `environment.html` are **artifact fragments**: `<title>`
 on line 1, then `<link>`, `<style>`, markup, `<script>`. There is deliberately **no**
 `<!doctype>`, `<html>`, `<head>` or `<body>` tag. `build.py` and `dev.py` add the wrapper.
 Never "fix" this by adding them.
@@ -61,9 +61,10 @@ before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fa
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
 The block is identical in every page fragment (seven hand-kept + one generated as of Sep 30) — change it everywhere or nowhere; after changing it, regenerate cognitive-scaffolding.html.
 
-**Letterboxd is a build-time input.** `letterboxd.py` fetches the diary feed and posters when
-`build.py` runs and they ship as first-party files under `/letterboxd/`. Never add a client-side
-fetch or embed to letterboxd.com. Spec: `docs/features/003-letterboxd-diary.md`.
+**Letterboxd is dormant.** `/taste` was removed on 2026-09-30, and `build.py` no longer calls
+`letterboxd.py`; the module and `letterboxd/` stay for when the page returns (`git show
+3809feb:taste.html`). Never add a client-side fetch or embed to letterboxd.com. Spec:
+`docs/features/003-letterboxd-diary.md`.
 
 **The figures are not here any more.** The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Don't rebuild them on paramv.com. **Except fig. 1, the venn, which came back to the home page the same day on Param's word** — it lives in both places now; its technology and society circles lead to figs. 2 and 3 on postphenom.com.
 
