@@ -296,6 +296,20 @@
     font-size: 17px;
     font-weight: 400;
   }
+  .syllabus .t a {
+    border-bottom: 1px solid var(--hair-2);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .syllabus .t a:hover {
+    color: var(--accent);
+    border-color: currentColor;
+  }
+  .syllabus .t a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
   .syllabus .dek {
     color: var(--dim);
     font-size: 15.5px;
@@ -501,19 +515,61 @@
     </p>
     <div class="meta">
       <span><b>status</b><span class="live">current</span></span>
-      <span><b>revised</b><time id="revised">—</time></span>
-      <span><b>lines</b>0</span>
+      <span><b>revised</b><time id="revised" datetime="2026-09-30">30 sep 2026</time></span>
+      <span><b>lines</b>10</span>
     </div>
   </section>
 
   <section class="body" id="syllabus">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
-      <h2>the syllabus</h2>
-      <span class="notation">curriculum = ∅</span>
+      <h2>current</h2>
+      <span class="notation">|current| = 2</span>
     </div>
-    <ol class="syllabus"></ol>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <ol class="syllabus">
+      <li class="reveal">
+        <span class="t"><a href="https://continuingstudies.stanford.edu/courses/liberal-arts-and-sciences/the-meaning-of-life-kierkegaard-nietzsche-and-more/20261_PHI-91">The Meaning of Life: Kierkegaard, Nietzsche, and More</a></span>
+        <span class="when">fall 2026 · stanford continuing studies</span>
+      </li>
+      <li class="reveal">
+        <span class="t"><a href="https://online.stanford.edu/courses/soe-xetech0001-ethics-technology-public-policy-practitioners">Ethics, Technology + Public Policy for Practitioners</a></span>
+        <span class="when">fall 2026 · stanford online</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="body" id="own">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>own curriculum</h2>
+      <span class="notation">|own| = 8</span>
+    </div>
+    <ol class="syllabus">
+      <li class="reveal">
+        <span class="t">Formal Logic</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Propositional Logic</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Bayesian Reasoning</span>
+      </li>
+      <li class="reveal">
+        <span class="t">German</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Statistics</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Philosophy of Mind</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Python</span>
+      </li>
+      <li class="reveal">
+        <span class="t">ML &amp; PyTorch</span>
+      </li>
+    </ol>
   </section>
 
   <footer>
