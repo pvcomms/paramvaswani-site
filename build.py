@@ -149,7 +149,7 @@ def main():
         ("ontology.html", "ontology.html", "Ontology — " + TAB,
          "What Param takes to exist, and where the categories are cut.", "/ontology", ""),
         ("systems.html", "systems.html", "Systems — " + TAB,
-         "The running things: what they do, what they cost, what they are for.", "/systems", ""),
+         "Mapping my territory, so I know the brain I have, so I can get to the brain I'd like.", "/systems", ""),
     ]
     letterboxd.sync()
     for src, dst, title, desc, path, ld in pages:
