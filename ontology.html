@@ -2,17 +2,22 @@
 <!--
   paramv.com/ontology — the ontology — what is taken to exist, and where the cuts fall.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until it is written in by hand.
 
-  to add a line, drop one <li> into <ol class="lines">:
+  the page is one figure: a tree of claims, each coloured by how firmly the cut is held.
+    held      — load-bearing; the rest of the site assumes it
+    provisional — held, with a number attached; expected to move
+    suspect   — held loosely; the place the ontology is most likely wrong
 
-    <li class="reveal">
-      <span class="t">Title</span>
-      <span class="dek">one line on why it is here</span>
-      <span class="when">year · status</span>
+  to add a claim, drop one <li> into the right <ol class="kids"> (or the top-level <ol class="tree">):
+
+    <li class="node held" tabindex="0" data-why="the working — one or two lines shown in the caption on hover">
+      <span class="n">1c</span>
+      <span class="claim">The claim, as a sentence that can be wrong.</span>
+      <ol class="kids"> … children, same shape … </ol>
     </li>
 
-  then change the notation from "= ∅" and delete the <p class="blank"> line beneath the list.
+  classes: held · provisional · suspect. numbering is by hand (1, 1a, 1b, i, ii) so it reads like a proof.
+  the count in the section head is computed from the tree, so nothing else needs updating.
 -->
 <style>
   @font-face {
@@ -254,7 +259,7 @@
     gap: 14px;
     border-bottom: 1px solid var(--hair);
     padding-bottom: 12px;
-    margin-bottom: 8px;
+    margin-bottom: 28px;
   }
   .sec-head .tick {
     width: 10px;
@@ -274,59 +279,222 @@
     color: var(--faint-t);
     margin-left: auto;
     text-align: right;
-  }
-  .lines {
-    list-style: none;
-    counter-reset: line;
-  }
-  .lines li {
-    display: flex;
-    align-items: baseline;
-    gap: 6px 18px;
-    flex-wrap: wrap;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--hair);
-    counter-increment: line;
-  }
-  .lines li::before {
-    content: counter(line, decimal-leading-zero);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
     font-variant-numeric: tabular-nums;
   }
-  .lines .t {
-    font-size: 17px;
-    font-weight: 400;
+  .figlabel + .figdek {
+    margin-top: 8px;
   }
-  .lines .dek {
+  .body .figdek {
     color: var(--dim);
-    font-size: 15.5px;
+    font-style: italic;
+    font-size: 16px;
+    max-width: 620px;
+    margin-bottom: 26px;
   }
-  .lines .when {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--faint-t);
-    margin-left: auto;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
+
+  /* the figure frame — same panel grammar as the home page's instruments */
+  .panel {
+    border: 1px solid var(--edge);
+    border-radius: 6px;
+    background: var(--panel-bar);
+    overflow: hidden;
   }
-  .blank {
+  .panel-bar {
     display: flex;
-    align-items: baseline;
-    gap: 14px;
+    align-items: center;
+    gap: 12px;
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--hair);
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.06em;
     color: var(--faint-t);
-    padding: 22px 0 26px;
-    border-bottom: 1px dashed var(--hair);
   }
-  .blank b {
+  .panel-bar .dots {
+    display: inline-flex;
+    gap: 5px;
+  }
+  .panel-bar .dots i {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1px solid var(--hair-2);
+  }
+  .panel-body {
+    padding: 22px 22px 18px;
+  }
+
+  /* the tree */
+  .tree,
+  .kids {
+    list-style: none;
+  }
+  .kids {
+    position: relative;
+    margin-top: 10px;
+    padding-left: 34px;
+  }
+  /* the trunk: a hairline dropping from the parent's number */
+  .kids::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: -6px;
+    bottom: 22px;
+    width: 1px;
+    background: var(--hair-2);
+    opacity: 0.7;
+  }
+  .node {
+    position: relative;
+    --st: var(--c-create);
+  }
+  .node + .node {
+    margin-top: 10px;
+  }
+  /* the branch: a stub from the trunk into the box */
+  .kids > .node::before {
+    content: "";
+    position: absolute;
+    left: -22px;
+    top: 22px;
+    width: 22px;
+    height: 1px;
+    background: var(--hair-2);
+    opacity: 0.7;
+  }
+  .node.provisional {
+    --st: var(--c-cohere);
+  }
+  .node.suspect {
+    --st: var(--c-me);
+  }
+  .node.root {
+    --st: var(--c-curate);
+  }
+  .box {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 12px 16px 12px 14px;
+    border: 1px solid color-mix(in srgb, var(--st) 55%, transparent);
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--st) 12%, transparent);
+    cursor: default;
+    transition:
+      background 0.22s ease,
+      border-color 0.22s ease,
+      transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .node:hover > .box,
+  .node:focus-visible > .box {
+    background: color-mix(in srgb, var(--st) 20%, transparent);
+    border-color: color-mix(in srgb, var(--st) 85%, transparent);
+    transform: translateX(2px);
+  }
+  .node:focus-visible {
+    outline: none;
+  }
+  .node:focus-visible > .box {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .node .n {
+    flex: 0 0 auto;
+    min-width: 22px;
+    font-family: var(--mono);
+    font-size: 11.5px;
     font-weight: 400;
-    font-size: 15px;
-    color: var(--faint);
+    letter-spacing: 0.06em;
+    color: var(--st);
+    font-variant-numeric: tabular-nums;
+  }
+  .node .claim {
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--paper);
+    text-wrap: pretty;
+  }
+  .node.root .claim {
+    font-weight: 400;
+    font-size: 17px;
+  }
+  .node.root > .box {
+    padding: 14px 18px;
+  }
+  .root > .kids {
+    padding-left: 22px;
+  }
+  .root > .kids::before {
+    left: 8px;
+  }
+  .root > .kids > .node::before {
+    left: -14px;
+    width: 14px;
+  }
+  .kids .kids .claim {
+    font-size: 15.5px;
+  }
+
+  /* the caption: the working, shown for whichever claim is under the cursor */
+  .cap {
+    min-height: 3.2em;
+    margin-top: 18px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--hair);
+    font-family: var(--mono);
+    font-size: 12px;
+    line-height: 1.75;
+    color: var(--dim);
+  }
+  .cap .k {
+    color: var(--faint-t);
+    padding-right: 10px;
+  }
+
+  /* the legend */
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 26px;
+    margin-top: 22px;
+    padding-top: 14px;
+    border-top: 1px solid var(--hair);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
+  }
+  .legend span {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .legend i {
+    width: 14px;
+    height: 10px;
+    border-radius: 2px;
+    border: 1px solid color-mix(in srgb, var(--st) 60%, transparent);
+    background: color-mix(in srgb, var(--st) 14%, transparent);
+  }
+  .legend .held { --st: var(--c-create); }
+  .legend .provisional { --st: var(--c-cohere); }
+  .legend .suspect { --st: var(--c-me); }
+  .legend .fig {
+    margin-left: auto;
+    color: var(--dim);
+    font-style: italic;
+    font-family: var(--serif);
+    font-size: 14px;
+    letter-spacing: 0;
+  }
+
+  .audit {
+    margin-top: 14px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
   }
 
   /* ---------- footer ---------- */
@@ -398,8 +566,40 @@
     .sec-head .notation {
       display: none;
     }
-    .lines .when {
-      display: none;
+    .panel-body {
+      padding: 16px 12px 14px;
+    }
+    .kids {
+      padding-left: 22px;
+    }
+    .kids::before {
+      left: 8px;
+    }
+    .kids > .node::before {
+      left: -14px;
+      width: 14px;
+    }
+    .root > .kids {
+      padding-left: 16px;
+    }
+    .root > .kids::before {
+      left: 6px;
+    }
+    .root > .kids > .node::before {
+      left: -10px;
+      width: 10px;
+    }
+    .box {
+      gap: 10px;
+      padding: 10px 12px 10px 11px;
+    }
+    .node .claim,
+    .kids .kids .claim {
+      font-size: 15px;
+    }
+    .legend .fig {
+      margin-left: 0;
+      flex-basis: 100%;
     }
   }
   @media (max-width: 560px) {
@@ -417,7 +617,8 @@
       transition: none;
     }
     .prog i,
-    nav.site a::before {
+    nav.site a::before,
+    .box {
       transition: none;
     }
   }
@@ -510,14 +711,133 @@
     <p class="figdek">what i take to exist, and where the categories are cut.</p>
   </section>
 
-  <section class="body" id="lines">
+  <section class="body" id="tree">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
       <h2>the ontology</h2>
-      <span class="notation">ontology = ∅</span>
+      <span class="notation" id="count">|ontology| = —</span>
     </div>
-    <ol class="lines"></ol>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <div class="figlabel reveal">fig. 1 · the inventory, as a tree of claims</div>
+    <p class="figdek reveal">
+      each box is a thing i take to exist, or a cut i take to be real. the colour is
+      how hard the box would be to remove. hover for the working.
+    </p>
+
+    <div class="panel reveal">
+      <div class="panel-bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i></span>
+        <span class="pt">ontology.tree — what exists, and how firmly</span>
+      </div>
+      <div class="panel-body">
+        <ol class="tree">
+          <li class="node root" tabindex="0" data-why="the root is a question because an ontology that starts from an answer is a creed. everything beneath it is falsifiable in principle, and the colours say how much i would bet.">
+            <div class="box"><span class="n">?</span><span class="claim">What is there, and where do the cuts fall?</span></div>
+            <ol class="kids">
+
+              <li class="node held" tabindex="0" data-why="the one dataset nobody else can collect. n = 1, error bars left in — but it is data, and most of what is on this site is downstream of it.">
+                <div class="box"><span class="n">1</span><span class="claim">Minds exist, and can be read from the inside.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="phenomenology is an evidence class, not a mood. the instrument is the subject; the report is still a report.">
+                    <div class="box"><span class="n">1a</span><span class="claim">First-person experience is evidence — one subject, error bars left in.</span></div>
+                  </li>
+                  <li class="node provisional" tabindex="0" data-why="difference in wiring, not a deficit in it. held at about .8; the diagnostic categories are the part i trust least.">
+                    <div class="box"><span class="n">1b</span><span class="claim">Neurodivergence is a difference in wiring, not a deficit.</span></div>
+                    <ol class="kids">
+                      <li class="node provisional" tabindex="0" data-why="the same hypervigilance is scattered by a feed or promoted to discernment by scaffolding. same hardware, changed sign. observed in one subject so far.">
+                        <div class="box"><span class="n">i</span><span class="claim">Attention has a sign, and the environment sets it.</span></div>
+                      </li>
+                      <li class="node suspect" tabindex="0" data-why="kierkegaard: the dizziness of freedom. the feed manufactures the dizziness and sells the cure. .75 on the ledger, and the place a clinician would push back first.">
+                        <div class="box"><span class="n">ii</span><span class="claim">Anxiety is readiness misread, not a disorder.</span></div>
+                      </li>
+                    </ol>
+                  </li>
+                </ol>
+              </li>
+
+              <li class="node held" tabindex="0" data-why="not a special case of computation. the faculty that decides which computation is worth running — and the last thing to outsource.">
+                <div class="box"><span class="n">2</span><span class="claim">Judgment is a faculty of its own, distinct from computation.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="the mean moved, not the truth. taste is the distance from the mean, chosen on purpose — see fig. 2 on the home page.">
+                    <div class="box"><span class="n">2a</span><span class="claim">Taste exists: distance from the mean, chosen on purpose.</span></div>
+                  </li>
+                  <li class="node held" tabindex="0" data-why="the discernment line. scatter, triage and scaffolding can be handed over; the choice of what is worth doing cannot, without becoming someone else's.">
+                    <div class="box"><span class="n">2b</span><span class="claim">Cognition splits into logistics and judgment; only the first is delegable.</span></div>
+                  </li>
+                  <li class="node provisional" tabindex="0" data-why="the tax on understanding you pay when you hand thinking to a system: the output arrives, the comprehension doesn't. a competence claim, not a well-being claim. .70 on the ledger, self-measured.">
+                    <div class="box"><span class="n">2c</span><span class="claim">The delegation discount is real: the artifact arrives, the comprehension doesn't.</span></div>
+                  </li>
+                </ol>
+              </li>
+
+              <li class="node held" tabindex="0" data-why="the post-phenomenological premise. a machine between a person and the world is not a pipe; it shapes what shows up and what counts as showing up.">
+                <div class="box"><span class="n">3</span><span class="claim">Mediation is constitutive, not neutral.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="the instruments that feel like plain glass are the ones to question first. this applies to the frameworks used to question them.">
+                    <div class="box"><span class="n">3a</span><span class="claim">Every instrument carries assumptions, especially the ones that feel transparent.</span></div>
+                  </li>
+                  <li class="node provisional" tabindex="0" data-why="writing externalised storage, search externalised retrieval, generation externalises the constitutive layer. the gradient is the answer to plato's objection in the phaedrus; whether the last step is different in kind is the open question.">
+                    <div class="box"><span class="n">3b</span><span class="claim">Externalisation runs on a gradient: storage, then retrieval, then generation.</span></div>
+                  </li>
+                  <li class="node suspect" tabindex="0" data-why="the tool learns your taste as it atrophies, and the loop closes. recent, unmeasured, and the claim most likely to be either the thesis or the overreach.">
+                    <div class="box"><span class="n">3c</span><span class="claim">The personalisation loop closes on the faculty it feeds from.</span></div>
+                  </li>
+                </ol>
+              </li>
+
+              <li class="node held" tabindex="0" data-why="exit is a property of the system, not a feature of the account. a system you cannot leave is a different kind of thing from one you can, whatever the two look like.">
+                <div class="box"><span class="n">4</span><span class="claim">Systems divide by whether you can leave them.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="the second principle. it is on this page because it is a claim about what kind of thing a platform is, before it is a rule about how to treat one.">
+                    <div class="box"><span class="n">4a</span><span class="claim">Any system you cannot leave owns you.</span></div>
+                  </li>
+                  <li class="node provisional" tabindex="0" data-why="the tools to build your way out are made in the same place the power concentrates. both/and, not either/or — but the ratio is not something i can measure yet.">
+                    <div class="box"><span class="n">4b</span><span class="claim">Power and the tools to leave it concentrate in the same place.</span></div>
+                  </li>
+                </ol>
+              </li>
+
+              <li class="node held" tabindex="0" data-why="a belief is a number with a direction of update attached. vibes are the same object with the number left off — worse bookkeeping, not a different thing.">
+                <div class="box"><span class="n">5</span><span class="claim">Beliefs are credences: numbers that commit you to update.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="the ledger on the home page is the instrument. last audit august 2026.">
+                    <div class="box"><span class="n">5a</span><span class="claim">A credence is a commitment to update, not a position to defend.</span></div>
+                  </li>
+                  <li class="node provisional" tabindex="0" data-why="two things held at once are a real object, not an error waiting to be resolved. builds with ai ∧ suspicious of ai: the conflict of interest is declared, not dissolved.">
+                    <div class="box"><span class="n">5b</span><span class="claim">A held contradiction is an object, not a bug.</span></div>
+                  </li>
+                </ol>
+              </li>
+
+              <li class="node held" tabindex="0" data-why="an ontology is also a list of what it refuses. these three are refused on purpose, and the refusals are load-bearing.">
+                <div class="box"><span class="n">6</span><span class="claim">Some things are cut out on purpose.</span></div>
+                <ol class="kids">
+                  <li class="node held" tabindex="0" data-why="impact over intent, in both directions — including when i am the one who meant well. intent is a fact about the actor, not a currency the world accepts.">
+                    <div class="box"><span class="n">6a</span><span class="claim">Intent is not a currency.</span></div>
+                  </li>
+                  <li class="node held" tabindex="0" data-why="follows from 3. the feed is an instrument with an owner, and the owner's ledger has one column.">
+                    <div class="box"><span class="n">6b</span><span class="claim">There is no neutral pipe.</span></div>
+                  </li>
+                  <li class="node held" tabindex="0" data-why="the curve on the home page is everyone; the thumb is the feed. where most people landed is a fact about the distribution, not about the truth.">
+                    <div class="box"><span class="n">6c</span><span class="claim">The mean is a location, not a verdict.</span></div>
+                  </li>
+                </ol>
+              </li>
+
+            </ol>
+          </li>
+        </ol>
+
+        <div class="cap" id="cap" aria-live="polite"><span class="k">—</span>hover a claim for the working</div>
+
+        <div class="legend">
+          <span class="held"><i aria-hidden="true"></i>held — load-bearing</span>
+          <span class="provisional"><i aria-hidden="true"></i>provisional — has a number</span>
+          <span class="suspect"><i aria-hidden="true"></i>suspect — most likely wrong here</span>
+          <span class="fig">fig. 1 — the ontology, coloured by how firmly each cut is held</span>
+        </div>
+      </div>
+    </div>
+    <div class="audit reveal">last audit: september 2026 · the numbers cited are on the home page ledger.</div>
   </section>
 
   <footer>
@@ -559,6 +879,49 @@
         { passive: true },
       );
       paint();
+    })();
+
+    /* ---- the tree: count, and the working under the cursor ---- */
+    (function tree() {
+      var nodes = document.querySelectorAll("#tree .node:not(.root)");
+      var count = document.getElementById("count");
+      if (count) count.textContent = "|ontology| = " + nodes.length;
+      var cap = document.getElementById("cap");
+      if (!cap) return;
+      var REST = cap.innerHTML;
+      var pinned = null;
+      function show(el) {
+        var n = el.querySelector(":scope > .box > .n");
+        var why = el.getAttribute("data-why") || "";
+        cap.textContent = "";
+        var k = document.createElement("span");
+        k.className = "k";
+        k.textContent = n ? n.textContent : "—";
+        cap.appendChild(k);
+        cap.appendChild(document.createTextNode(why));
+      }
+      function rest() {
+        if (pinned) show(pinned);
+        else cap.innerHTML = REST;
+      }
+      document.querySelectorAll("#tree .node").forEach(function (el) {
+        el.addEventListener("mouseenter", function () { show(el); });
+        el.addEventListener("mouseleave", rest);
+        el.addEventListener("focus", function () { show(el); });
+        el.addEventListener("blur", rest);
+        el.addEventListener("click", function (e) {
+          e.stopPropagation();
+          pinned = pinned === el ? null : el;
+          if (pinned) show(pinned); else rest();
+        });
+        el.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            pinned = pinned === el ? null : el;
+            if (pinned) show(pinned); else rest();
+          }
+        });
+      });
     })();
 
     /* ---- reveals ---- */
