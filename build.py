@@ -93,14 +93,8 @@ LLMS = """# Param Vaswani
 
 ## What's here
 
-- [Home](https://paramv.com/): six interactive figures — a Venn of the domains and their
-  intersections, the distribution of taste with the Galton machine that proves it, an influence
-  graph, a values-precedence tree, a truth-seeking game, and an arbitration plot that asks where
-  the line between your judgment and a machine's should fall. Plus essays, a register of
-  forty-six builds, principles, a credence ledger, and a running log.
-- [Reading the Figures](https://paramv.com/legend): what each figure claims, what every
-  animation means, how they cohere, and an honest audit of which claims are actually grounded.
-- [What You Study](https://paramv.com/position): thesis, the fields it maps to, and a manifesto.
+- [Home](https://paramv.com/): essays, a register of forty-six builds, principles, standing
+  contradictions, a credence ledger, and a running log.
 - [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
   music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
   quotes, aphorisms, neology & etymology.
@@ -131,12 +125,6 @@ def main():
 
     pages = [
         ("index.html", "index.html", TAB, DESC, "/", PERSON_LD),
-        ("figure-legend.html", "legend.html", "Reading the Figures — " + TAB,
-         "What each figure on the site claims, what every animation means, and an honest audit "
-         "of which claims are grounded.", "/legend", ""),
-        ("POSITION.html", "position.html", "What You Study — " + TAB,
-         "The thesis, the fields it maps to, three lengths of answer, a manifesto, and a plan.",
-         "/position", ""),
         ("taste.html", "taste.html", "Media Taste — " + TAB,
          "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
          "poem, fiction, non-fiction, research concepts, influences, quotes, aphorisms, "
@@ -170,7 +158,7 @@ def main():
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
-    (PUB / "sitemap.xml").write_text(sitemap(["/", "/legend", "/position", "/taste", "/curriculum",
+    (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
                                     "/work", "/principles", "/ontology", "/systems"]), encoding="utf-8")
     print(f"  fonts/ vendor/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 

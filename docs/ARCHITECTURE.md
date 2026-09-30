@@ -15,8 +15,8 @@ fly so local and production render the same thing.
 ```
 paramvaswani-site/
   index.html           the site. CSS top, markup middle, vanilla JS bottom. ~3,940 lines
-  figure-legend.html   "Reading the Figures" — how each instrument works
-  POSITION.html        "What You Study" — the positioning statement
+  taste.html · curriculum.html · work.html · principles.html · ontology.html · systems.html
+                       the six subpages, same fragment format
   build.py             fragments → public/. wrapper, meta, OG, JSON-LD, fonts
   dev.py               localhost:4173, same wrapper, no build
   vercel.json          cleanUrls, security headers, immutable font caching
@@ -31,8 +31,8 @@ paramvaswani-site/
 
 ```
 index.html          ┐
-figure-legend.html  ├──▶ build.py ──▶ public/{index,legend,position}.html
-POSITION.html       ┘        │              + llms.txt, robots.txt, sitemap.xml
+taste.html …        ├──▶ build.py ──▶ public/{index,taste,…}.html
+systems.html        ┘        │              + llms.txt, robots.txt, sitemap.xml
                              └──▶ public/fonts/   (copied)
                                        │
                                   vercel --prod
@@ -44,12 +44,7 @@ return 0.
 
 ## The figures
 
-The interactive instruments in `index.html` are the argument, not illustration. Each is
-vanilla JS driving a canvas or SVG, keyed to the six-mode colour wheel in `docs/DESIGN.md`.
-They are documented for readers in `figure-legend.html`, which is the thing to update when a
-figure's behaviour changes.
-
-Animation frames are suspended by embedded preview panes. Check them in a real browser.
+The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. The home page keeps the rooms, the ledger, the register and the log.
 
 ## Invariants
 

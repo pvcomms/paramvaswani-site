@@ -61,3 +61,11 @@ embed would have been simpler and would have made every reader's browser call Le
 which breaks the no-third-party-requests rule. The cost is freshness: the diary updates when
 the site is built. `diary.json` and `posters/` are committed so an offline build still ships
 the last good copy.
+
+---
+
+**2026-09-30 — The figures moved to the Center.**
+The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Param's call: the instruments belong to the institution, the personal site keeps the
+person. They moved as they were (same dark look, same code); fig. 1's two circles that lead to
+rooms still on paramv.com (thoughts.log, create) link back here. No redirects from the old
+paramv.com URLs, by his choice.

@@ -1,7 +1,7 @@
 # paramv.com
 
 The personal site. One file, no framework, no dependencies, no build tooling beyond a Python
-script that wraps nine HTML fragments into documents.
+script that wraps seven HTML fragments into documents.
 
 Live at **[paramv.com](https://paramv.com)**.
 
@@ -11,18 +11,14 @@ Live at **[paramv.com](https://paramv.com)**.
 
 ## What it is
 
-An argument about what machine mediation does to human judgment, made in a form the reader can
-operate rather than only read. The figures are the substance: a Galton machine, drift balls,
-the six-mode wheel. They are small instruments, and using one is meant to produce the feeling
-the surrounding paragraph is claiming.
+The personal site: essays, a register of builds, principles, a ledger, a running log, and the
+pages below. The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`.
 
-Nine pages, nine files:
+Seven pages, seven files:
 
 | File                 | Page                                            |
 | -------------------- | ----------------------------------------------- |
 | `index.html`         | the site                                        |
-| `figure-legend.html` | Reading the Figures — how each instrument works |
-| `POSITION.html`      | What You Study — the positioning statement      |
 | `taste.html`         | Media Taste — eleven forms, kept by hand        |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
 | `work.html`          | Work — empty until written in by hand           |
@@ -32,7 +28,7 @@ Nine pages, nine files:
 
 ## How it is built
 
-The nine files are **artifact fragments** — `<title>` on line one, no doctype, no `<html>`,
+The seven files are **artifact fragments** — `<title>` on line one, no doctype, no `<html>`,
 no `<head>`, no `<body>`. `build.py` wraps each in a real document with meta, Open Graph and
 JSON-LD, copies the fonts, and writes `public/`. `dev.py` applies the same wrapper live so
 what you see locally is what ships.

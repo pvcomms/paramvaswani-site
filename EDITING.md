@@ -15,12 +15,11 @@ cd ~/Code/paramvaswani-site && ./dev.py
 ```
 
 - site → http://localhost:4173/
-- legend → http://localhost:4173/legend
-- positioning → http://localhost:4173/position
 
-Edit any `.html`, save, hit refresh. That's the whole loop. **Use a real browser** — the
-in-app browser pane suspends animation frames, so the Galton machine, the drift balls, and
-the breakout will all look frozen there (see Gotchas in HANDOFF.md).
+Edit any `.html`, save, hit refresh. That's the whole loop.
+
+> The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. The figure sections and line anchors below describe that code as it was here; the
+> same blocks now live in `figures.html` there.
 
 ## Where things live in index.html
 

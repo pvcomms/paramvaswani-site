@@ -22,7 +22,7 @@ vercel --prod --yes           # deploys public/. run build.py FIRST or you ship 
 
 ## The format rule — break this and publishing breaks
 
-`index.html`, `figure-legend.html`, `POSITION.html`, `taste.html`, `curriculum.html`, `work.html`, `principles.html`, `ontology.html` and `systems.html` are **artifact fragments**: `<title>`
+`index.html`, `taste.html`, `curriculum.html`, `work.html`, `principles.html`, `ontology.html` and `systems.html` are **artifact fragments**: `<title>`
 on line 1, then `<link>`, `<style>`, markup, `<script>`. There is deliberately **no**
 `<!doctype>`, `<html>`, `<head>` or `<body>` tag. `build.py` and `dev.py` add the wrapper.
 Never "fix" this by adding them.
@@ -34,7 +34,7 @@ grep -c '<body' index.html    # must be 0
 ## Invariants
 
 **`public/` is generated.** Editing it directly is always wrong, and the edit is lost on the
-next build. The sources are the nine fragment files.
+next build. The sources are the seven fragment files.
 
 **Fonts are self-hosted.** Newsreader and IBM Plex Mono as `.woff2` in `fonts/`, copied to
 `public/fonts/` by the build, cached immutable by `vercel.json`. Never add a Google Fonts
@@ -53,19 +53,15 @@ second small `<style>` + inline `<script>` + `<div class="gate">`: an ALTCHA wid
 auto-solves a proof-of-work on load (static challenge in the `challenge` attribute, no server)
 before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fails open on
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
-The block is identical in every page fragment (nine as of Sep 29) — change it everywhere or nowhere.
+The block is identical in every page fragment (seven as of Sep 30) — change it everywhere or nowhere.
 
 **Letterboxd is a build-time input.** `letterboxd.py` fetches the diary feed and posters when
 `build.py` runs and they ship as first-party files under `/letterboxd/`. Never add a client-side
 fetch or embed to letterboxd.com. Spec: `docs/features/003-letterboxd-diary.md`.
 
-**The figures are the argument.** They are interactive instruments a reader operates, not
-decoration. A change that makes one prettier and less operable is a regression.
+**The figures are not here any more.** The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Don't rebuild them on paramv.com.
 
 ## Traps
-
-**Use a real browser to check the figures.** An embedded preview pane suspends animation
-frames, so the Galton machine and the drift balls look broken when they are fine.
 
 **`./build.py` before every deploy.** Deploying without it ships the previous `public/`. This
 is the single most likely way to publish a stale site.

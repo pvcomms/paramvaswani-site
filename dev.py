@@ -25,10 +25,6 @@ SHELL_FOOT = "\n</body></html>"
 PAGES = {
     "/": "index.html",
     "/index.html": "index.html",
-    "/legend": "figure-legend.html",
-    "/figure-legend.html": "figure-legend.html",
-    "/position": "POSITION.html",
-    "/POSITION.html": "POSITION.html",
     "/taste": "taste.html",
     "/taste.html": "taste.html",
     "/curriculum": "curriculum.html",
@@ -49,8 +45,6 @@ a{color:#e3c567;display:block;padding:10px 0;font-family:ui-monospace,Menlo,mono
 h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <h1>paramvaswani-site &mdash; dev</h1>
 <a href="/">/ &mdash; the site (index.html)</a>
-<a href="/legend">/legend &mdash; Reading the Figures</a>
-<a href="/position">/position &mdash; What You Study</a>
 <a href="/taste">/taste &mdash; Media Taste</a>
 <a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
 <a href="/work">/work &mdash; Work</a>
@@ -95,8 +89,6 @@ os.chdir(ROOT)
 socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("  site     http://localhost:%d/" % PORT)
-    print("  legend   http://localhost:%d/legend" % PORT)
-    print("  position http://localhost:%d/position" % PORT)
     print("  taste    http://localhost:%d/taste" % PORT)
     print("  curric.  http://localhost:%d/curriculum" % PORT)
     print("  pages    http://localhost:%d/_pages  (work · principles · ontology · systems)" % PORT)
