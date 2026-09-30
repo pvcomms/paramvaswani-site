@@ -15,8 +15,10 @@ letterboxd/config.json is the only thing to edit:
 
 favourites are the four pinned on the profile. Letterboxd serves profile pages behind a bot
 check, so they cannot be read automatically; they are typed here in the order they are pinned.
-A favourite can also be {"title": ..., "year": ..., "slug": ...} when the letterboxd url slug
-is not simply the title. Posters come from the diary when the film is in it, else Wikipedia.
+A favourite can also be {"title": ..., "year": ..., "slug": ..., "poster": <image url>} when the
+letterboxd url slug is not simply the title (Wikidata property P6127 has the real one) or a
+specific poster is wanted. Otherwise posters come from the diary when the film is in it, else
+Wikipedia. A poster already on disk is kept: delete letterboxd/posters/fav-<slug>.* to refetch.
 An empty user means the section renders nothing and the page looks exactly as it did before.
 diary.json and posters/ are written by this script and committed, so a build with no network
 still ships the last good copy.
@@ -46,7 +48,8 @@ def config():
             f = {"title": m.group(1), "year": m.group(2)} if m else {"title": f.strip()}
         if isinstance(f, dict) and f.get("title"):
             favs.append({"title": str(f["title"]).strip(), "year": str(f.get("year") or ""),
-                         "slug": str(f.get("slug") or "") or slugify(f["title"])})
+                         "slug": str(f.get("slug") or "") or slugify(f["title"]),
+                         "poster_src": str(f.get("poster") or "")})
     return {"user": str(c.get("user") or "").strip().strip("/"), "show": int(c.get("show") or 24),
             "favourites": favs[:4]}
 
@@ -167,7 +170,7 @@ def sync(verbose=True):
         stem = "fav-" + re.sub(r"[^a-z0-9-]", "", fav["slug"])
         f = next(iter(sorted(POSTERS.glob(stem + ".*"))), None)
         if f is None:
-            src = next((small(e["poster_src"], 300, 450) for e in entries
+            src = fav.pop("poster_src") or next((small(e["poster_src"], 300, 450) for e in entries
                         if e["poster_src"] and (e["slug"] == fav["slug"] or
                         (e["title"].lower() == fav["title"].lower() and
                          (not fav["year"] or e["year"] == fav["year"])))), "")
@@ -179,6 +182,7 @@ def sync(verbose=True):
                     f = POSTERS / (stem + ext)
             except Exception:
                 f = None
+        fav.pop("poster_src", None)
         if f is not None and f.exists():
             fav["poster"] = f.name
             keep.add(f.name)

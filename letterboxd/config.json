@@ -1,5 +1,30 @@
 {
   "user": "critiquealmass",
   "show": 24,
-  "favourites": []
+  "favourites": [
+    {
+      "title": "Control",
+      "year": "2007",
+      "slug": "control-2007",
+      "poster": "https://image.tmdb.org/t/p/w342/jOJiaOhwrDdwqTRZvZOhbndqHGp.jpg"
+    },
+    {
+      "title": "Lost in Translation",
+      "year": "2003",
+      "slug": "lost-in-translation",
+      "poster": "https://image.tmdb.org/t/p/w342/3jCLmYDIIiSMPujbwygNpqdpM8N.jpg"
+    },
+    {
+      "title": "Reprise",
+      "year": "2006",
+      "slug": "reprise",
+      "poster": "https://image.tmdb.org/t/p/w342/9GdptmzKh5Sx1KFiABJeUEt9eS.jpg"
+    },
+    {
+      "title": "TÁR",
+      "year": "2022",
+      "slug": "tar-2022",
+      "poster": "https://image.tmdb.org/t/p/w342/dRVAlaU0vbG6hMf2K45NSiIyoUe.jpg"
+    }
+  ]
 }

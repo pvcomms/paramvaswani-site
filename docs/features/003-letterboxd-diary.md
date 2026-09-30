@@ -24,13 +24,16 @@ Favourites (added 2026-09-30): above the diary, the four films pinned on the pro
 poster-first in a row of four like Letterboxd shows them. Letterboxd serves profile pages behind
 a bot check, so the build cannot read them; they are typed into `favourites` in
 `letterboxd/config.json` as `"Title (Year)"`. Posters come from the diary feed when the film is
-in it, otherwise from the film's Wikipedia summary. An empty list renders nothing.
+in it, otherwise from the film's Wikipedia summary, unless a favourite names its own `poster`
+URL. An empty list renders nothing. Current four, set 2026-09-30: Control, Lost in Translation,
+Reprise, TÁR. Slugs checked against Wikidata P6127 (Control is `control-2007`).
 
 ## Network
 
 The build fetches `https://letterboxd.com/<user>/rss/` and 150×225 posters from
 `a.ltrbxd.com`, plus Wikipedia's page-summary API and `upload.wikimedia.org` for favourite
-posters not in the diary. Readers fetch nothing from either host: posters are copied into `public/` and
+posters not in the diary, or any image URL given as a favourite's `poster` (the current four
+use `image.tmdb.org`). Readers fetch nothing from either host: posters are copied into `public/` and
 served first-party, so the colophon's "no third-party requests" stays true. Links out to
 letterboxd.com are plain links.
 
