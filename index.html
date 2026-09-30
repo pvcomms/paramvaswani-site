@@ -172,23 +172,6 @@
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
   }
-  nav a[data-c="create"]:hover {
-    border-color: var(--c-create);
-  }
-  nav a[data-c="consume"]:hover {
-    border-color: var(--c-consume);
-  }
-  nav a[data-c="curate"]:hover {
-    border-color: var(--c-curate);
-  }
-  nav a[data-c="cohere"]:hover {
-    border-color: var(--c-cohere);
-  }
-  /* the pages sit on their own row beneath the rooms */
-  nav .sep {
-    flex-basis: 100%;
-    height: 0;
-  }
 
   /* ---------- shared figure grammar ---------- */
   .figlabel {
@@ -1858,9 +1841,6 @@
     nav {
       justify-content: flex-start;
     }
-    nav .sep {
-      display: none;
-    }
   }
   @media (prefers-reduced-motion: reduce) {
     .prog i {
@@ -1990,15 +1970,10 @@
   <div class="prog" id="prog" aria-hidden="true"><i id="progBar"></i></div>
   <header>
     <h1 class="brand">
-      Param Vaswani<span class="where" id="where" aria-hidden="true"></span>
+      Param V<span class="where" id="where" aria-hidden="true"></span>
     </h1>
     <nav>
-      <a href="#create" data-c="create">create</a>
-      <a href="#consume" data-c="consume">consume</a>
-      <a href="#curate" data-c="curate">curate</a>
-      <a href="#cohere" data-c="cohere">cohere</a>
       <a href="#contact">contact</a>
-      <span class="sep" aria-hidden="true"></span>
       <a href="/taste">taste</a>
       <a href="/curriculum">curriculum</a>
       <a href="/work">work</a>
@@ -7098,20 +7073,16 @@
     (function rail() {
       var bar = document.getElementById("progBar");
       var where = document.getElementById("where");
-      var navs = Array.prototype.slice.call(
-        document.querySelectorAll("nav a[data-c]"),
-      );
       var COLORS = {
         create: "var(--c-create)",
         consume: "var(--c-consume)",
         curate: "var(--c-curate)",
         cohere: "var(--c-cohere)",
       };
-      var marks = navs
-        .map(function (a) {
-          var id = a.getAttribute("href").slice(1);
+      var marks = Object.keys(COLORS)
+        .map(function (id) {
           var el = document.getElementById(id);
-          return el ? { a: a, el: el, id: id } : null;
+          return el ? { el: el, id: id } : null;
         })
         .filter(Boolean);
       var ticking = false,
@@ -7129,9 +7100,6 @@
         });
         if (active === cur) return;
         cur = active;
-        marks.forEach(function (m) {
-          m.a.classList.toggle("here", m.id === active);
-        });
         if (active) {
           bar.style.background = COLORS[active] || "var(--c-me)";
           where.textContent = "§ " + active;
