@@ -77,3 +77,16 @@ Hours after the move, Param wanted fig. 1 back on the home page. It was restored
 pre-move commit (markup, its script module, the hero drift layer, the clock helpers, its CSS)
 and stays on postphenom.com too. Two of its circles now lead off-site: technology → fig. 2 and
 society → fig. 3 at postphenom.com/figures.
+
+---
+
+**2026-09-30 — The home page is the venn, and the venn is the site.**
+Param: only the venn on the home page, everything below it gone, the venn reflecting the
+nav. Intro, rooms, create/consume/curate/cohere, ledger, register and log came off (their
+script modules and CSS with them); the footer keeps the address, which `contact` points at.
+The five sets are now pages — mind/body → curriculum, technology → systems, philosophy →
+principles, society → taste, creation → work — with the ids unchanged so geometry and pairs
+hold. 𝒰 is the ontology (its label links there); the dashed unlabeled set is contact. The
+seven overlaps were renamed for what each pair shares: cognitive scaffolding, influences, the
+examined life, ai policy, how i work, discernment, lab of self. Click once to filter, again
+to open the page. postphenom.com keeps the original domains version.

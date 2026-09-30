@@ -93,8 +93,8 @@ LLMS = """# Param Vaswani
 
 ## What's here
 
-- [Home](https://paramv.com/): essays, a register of forty-six builds, principles, standing
-  contradictions, a credence ledger, and a running log.
+- [Home](https://paramv.com/): the site drawn as a Venn — curriculum, systems, principles, taste
+  and work inside the universal set (ontology), contact as the dashed set off the record.
 - [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
   music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
   quotes, aphorisms, neology & etymology.

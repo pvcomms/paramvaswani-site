@@ -129,11 +129,6 @@
     margin: 0 auto;
     padding: 0 24px;
   }
-  .colwide {
-    max-width: 820px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
 
   /* ---------- masthead ---------- */
   header {
@@ -234,28 +229,6 @@
     border-bottom: 1.5px solid var(--edge);
     user-select: none;
   }
-  .panel-bar .dots {
-    display: flex;
-    gap: 5px;
-  }
-  .panel-bar .dots i {
-    width: 7px;
-    height: 7px;
-    border: 1.2px solid var(--hair-2);
-    display: block;
-  }
-  .panel-bar .pt {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.12em;
-    color: var(--dim);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  .panel-bar .sp {
-    flex: 1;
-  }
   .panel-bar button {
     font: inherit;
     color: var(--dim);
@@ -283,12 +256,6 @@
   .panel-bar button:focus-visible {
     outline: 1px solid var(--c-cohere);
     outline-offset: 2px;
-  }
-  .panel-body {
-    padding: 18px;
-  }
-  .panel[data-min="1"] .panel-body {
-    display: none;
   }
 
   /* ---------- fig 1 · venn ---------- */
@@ -336,6 +303,19 @@
     font-weight: 300;
     fill: var(--paper);
     pointer-events: none;
+  }
+  svg.venn .u-link text {
+    pointer-events: auto;
+    cursor: pointer;
+    transition: fill 0.18s ease;
+  }
+  svg.venn .u-link:hover text,
+  svg.venn .u-link:focus-visible text {
+    fill: var(--paper);
+  }
+  svg.venn .u-link:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
   }
   svg.venn .u-label {
     font-family: var(--mono);
@@ -461,21 +441,6 @@
     }
   }
 
-  /* ---------- intro ---------- */
-  .intro {
-    padding: 64px 0 8px;
-  }
-  .intro p {
-    font-size: 19px;
-    line-height: 1.7;
-  }
-  .intro p + p {
-    margin-top: 1.05em;
-  }
-  .intro .mut {
-    color: var(--dim);
-  }
-
   /* ---------- fig 2 · galton ---------- */
   svg#smooth {
     display: block;
@@ -484,105 +449,9 @@
     height: auto;
   }
 
-  /* ---------- four rooms ---------- */
-  .rooms {
-    padding: 88px 0 8px;
-  }
-  .rooms-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-    margin-top: 18px;
-  }
-  .room .panel-bar .rdot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    border: 1px solid;
-  }
-  .room[data-c="create"] .rdot {
-    border-color: var(--c-create);
-  }
-  .room[data-c="consume"] .rdot {
-    border-color: var(--c-consume);
-  }
-  .room[data-c="curate"] .rdot {
-    border-color: var(--c-curate);
-  }
-  .room[data-c="cohere"] .rdot {
-    border-color: var(--c-cohere);
-  }
-  .room .panel-body p {
-    font-size: 16px;
-    color: var(--dim);
-    line-height: 1.7;
-  }
-  .room .panel-body p b {
-    color: var(--paper);
-    font-weight: 400;
-  }
-  .room .enter {
-    display: inline-block;
-    margin-top: 12px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--faint-t);
-    border-bottom: 1px solid var(--hair);
-    transition:
-      color 0.18s ease,
-      border-color 0.18s ease;
-  }
-  .room[data-c="create"] .enter:hover {
-    color: var(--c-create);
-    border-color: var(--c-create);
-  }
-  .room[data-c="consume"] .enter:hover {
-    color: var(--c-consume);
-    border-color: var(--c-consume);
-  }
-  .room[data-c="curate"] .enter:hover {
-    color: var(--c-curate);
-    border-color: var(--c-curate);
-  }
-  .room[data-c="cohere"] .enter:hover {
-    color: var(--c-cohere);
-    border-color: var(--c-cohere);
-  }
-  .room .enter:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
-  }
-
   /* ---------- sections ---------- */
   section {
     padding: 88px 0 8px;
-  }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 12px;
-    margin-bottom: 8px;
-  }
-  .sec-head .tick {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid;
-  }
-  .sec-head h2 {
-    font-size: 26px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-  .sec-head .notation {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--faint-t);
-    margin-left: auto;
-    text-align: right;
   }
   #create .tick {
     border-color: var(--c-create);
@@ -596,45 +465,13 @@
   #cohere .tick {
     border-color: var(--c-cohere);
   }
-
-  .sub {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin: 40px 0 4px;
-  }
-  .subnote {
-    color: var(--dim);
-    font-style: italic;
-    font-size: 15.5px;
-    margin: 2px 0 6px;
-  }
-  ul.index {
-    list-style: none;
-  }
-  ul.index li {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--hair);
-  }
-  ul.index li:last-child {
-    border-bottom: 0;
-  }
-  .t a,
-  .t .unlinked {
+  .t a {
     font-size: 17px;
     font-weight: 400;
     border-bottom: 1px solid var(--faint);
     transition:
       color 0.18s ease,
       border-color 0.18s ease;
-  }
-  .t .unlinked {
-    border-bottom: none;
   }
   .t a:focus-visible {
     outline: 1px solid var(--c-cohere);
@@ -655,24 +492,6 @@
   #cohere .t a:hover {
     color: var(--c-cohere);
     border-color: var(--c-cohere);
-  }
-  .dek {
-    color: var(--dim);
-    font-size: 15.5px;
-  }
-  .when {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--faint-t);
-    margin-left: auto;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .li-body {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
   }
 
   .now {
@@ -706,90 +525,6 @@
     font-size: 14px;
   }
 
-  /* both/and */
-  .pairs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0 40px;
-    margin-top: 6px;
-  }
-  .pairs div {
-    font-family: var(--mono);
-    font-size: 13.5px;
-    padding: 11px 0;
-    border-bottom: 1px solid var(--hair);
-  }
-  .pairs .and {
-    color: var(--c-me);
-    padding: 0 8px;
-  }
-
-  /* ledger */
-  table.ledger {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 6px;
-  }
-  table.ledger th {
-    font-family: var(--mono);
-    font-weight: 400;
-    font-size: 10.5px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--faint-t);
-    text-align: left;
-    border-bottom: 1px solid var(--faint);
-    padding: 0 8px 8px 0;
-  }
-  table.ledger th.num,
-  table.ledger td.num {
-    text-align: right;
-    padding-right: 0;
-  }
-  table.ledger td {
-    padding: 12px 8px 12px 0;
-    border-bottom: 1px solid var(--hair);
-    font-size: 17px;
-    vertical-align: baseline;
-  }
-  table.ledger td.num {
-    font-family: var(--mono);
-    font-size: 13.5px;
-    color: var(--c-cohere);
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }
-  table.ledger .tr-up {
-    color: var(--c-me);
-  }
-  table.ledger .tr-dn {
-    color: var(--dim);
-  }
-  table.ledger tbody tr {
-    transition: background 0.25s ease;
-  }
-  table.ledger tbody tr:hover {
-    background: #101216;
-  }
-  table.ledger tbody tr:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: -1px;
-  }
-  .ledger-note {
-    font-family: var(--mono);
-    font-size: 12.5px;
-    color: var(--dim);
-    min-height: 3em;
-    padding-top: 12px;
-    line-height: 1.7;
-  }
-  .ledger-foot {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--faint-t);
-    margin-top: 4px;
-  }
-
   /* principles */
   ol.principles {
     list-style: none;
@@ -816,79 +551,6 @@
   }
   ol.principles b {
     font-weight: 500;
-  }
-  ol.principles .why {
-    color: var(--dim);
-    font-size: 15.5px;
-  }
-
-  /* currently */
-  ul.current {
-    list-style: none;
-  }
-  ul.current li {
-    padding: 11px 0;
-    border-bottom: 1px solid var(--hair);
-    display: flex;
-    gap: 12px;
-    align-items: baseline;
-    flex-wrap: wrap;
-  }
-  ul.current li:last-child {
-    border-bottom: 0;
-  }
-  ul.current .c-note {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--faint-t);
-    margin-left: auto;
-    white-space: nowrap;
-  }
-
-  /* ---------- thoughts.log ---------- */
-  .log-sec {
-    padding: 88px 0 8px;
-  }
-  .log-sec .panel {
-    margin-top: 14px;
-  }
-  .log-entry {
-    display: grid;
-    grid-template-columns: 110px 1fr;
-    gap: 0 18px;
-    padding: 16px 4px;
-    border-bottom: 1px dotted var(--hair);
-  }
-  .log-entry:last-child {
-    border-bottom: 0;
-  }
-  .log-meta {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--faint-t);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    font-variant-numeric: tabular-nums;
-  }
-  .log-tag {
-    font-family: var(--mono);
-    font-size: 9.5px;
-    letter-spacing: 0.08em;
-    border: 1px solid var(--hair);
-    border-radius: 100px;
-    padding: 2px 8px;
-    color: var(--dim);
-    align-self: flex-start;
-    white-space: nowrap;
-  }
-  .log-body {
-    font-size: 16.5px;
-    color: var(--paper);
-    line-height: 1.7;
-  }
-  .log-body .m {
-    color: var(--dim);
   }
 
   /* footer */
@@ -985,220 +647,12 @@
     .now {
       grid-template-columns: 1fr;
     }
-    .pairs {
-      grid-template-columns: 1fr;
-    }
-    .rooms-grid {
-      grid-template-columns: 1fr;
-    }
     header {
       flex-direction: column;
       gap: 12px;
     }
-    .sec-head .notation {
-      display: none;
-    }
-    .when {
-      display: none;
-    }
-    ul.current .c-note {
-      display: none;
-    }
-    table.ledger td:nth-child(3),
-    table.ledger th:nth-child(3) {
-      display: none;
-    }
-    .log-entry {
-      grid-template-columns: 1fr;
-      gap: 8px;
-    }
-    .log-meta {
-      flex-direction: row;
-      align-items: center;
-    }
   }
 
-  /* ---------- the register (filterable build index) ---------- */
-  .idx-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-    padding: 4px 0 12px;
-  }
-  .idx-filters .grp {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-  }
-  .idx-filters .glab {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    color: var(--faint);
-    text-transform: uppercase;
-    padding-right: 2px;
-  }
-  .idx-filters .bar {
-    width: 1px;
-    height: 16px;
-    background: var(--hair);
-    margin: 0 8px;
-  }
-  .fbtn {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--dim);
-    background: none;
-    border: 1.1px solid var(--hair);
-    padding: 3px 8px;
-    cursor: pointer;
-    transition:
-      color 0.18s ease,
-      border-color 0.18s ease,
-      background 0.18s ease,
-      transform 0.12s ease;
-  }
-  .fbtn:hover {
-    color: var(--paper);
-    border-color: var(--hair-2);
-    transform: translateY(-1px);
-  }
-  .fbtn:active {
-    transform: translateY(0);
-  }
-  .fbtn:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 2px;
-  }
-  .fbtn[aria-pressed="true"] {
-    color: var(--ink);
-    background: var(--c-create);
-    border-color: var(--c-create);
-  }
-  .fbtn.st[aria-pressed="true"] {
-    background: var(--c-cohere);
-    border-color: var(--c-cohere);
-  }
-  .idx-expr {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--dim);
-    padding: 2px 0 14px;
-    border-bottom: 1px dashed var(--hair);
-    margin-bottom: 4px;
-    line-height: 1.7;
-  }
-  .idx-expr b {
-    color: var(--c-create);
-    font-weight: 400;
-  }
-  .idx-expr .card {
-    color: var(--paper);
-  }
-  .idx-row .when {
-    display: inline-flex;
-    gap: 8px;
-    align-items: baseline;
-  }
-  .idx-row .kind {
-    color: var(--faint);
-    font-size: 10.5px;
-    letter-spacing: 0.1em;
-  }
-  .idx-row .state {
-    font-size: 10.5px;
-    letter-spacing: 0.08em;
-    padding-left: 8px;
-    border-left: 1px solid var(--hair);
-  }
-  .idx-row .s-daily {
-    color: var(--c-create);
-  }
-  .idx-row .s-shipped {
-    color: var(--dim);
-  }
-  .idx-row .s-parked {
-    color: var(--faint-t);
-  }
-  .idx-row .s-unbuilt {
-    color: var(--faint);
-    font-style: italic;
-    padding-right: 2px;
-  }
-  ul.index li.idx-row {
-    padding: 11px 0;
-  }
-  .idx-row .dek {
-    font-size: 15px;
-    line-height: 1.55;
-  }
-  .idx-row.off {
-    display: none;
-  }
-  .idx-row.pop {
-    animation: idxpop 0.36s cubic-bezier(0.16, 1, 0.3, 1) both;
-  }
-  @keyframes idxpop {
-    from {
-      opacity: 0;
-      transform: translateY(6px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
-  }
-  .idx-empty {
-    font-family: var(--mono);
-    font-size: 12px;
-    color: var(--faint-t);
-    padding: 18px 0;
-  }
-  .idx-note {
-    font-family: var(--mono);
-    font-size: 11px;
-    line-height: 1.75;
-    color: var(--faint-t);
-    padding: 14px 0 0;
-    border-top: 1px solid var(--hair);
-    margin-top: 6px;
-  }
-  @media (max-width: 620px) {
-    .idx-filters .bar {
-      display: none;
-    }
-    .idx-filters {
-      gap: 5px;
-    }
-    ul.index li.idx-row {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 6px;
-    }
-    .idx-row .when {
-      margin-left: 0;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .idx-row.pop {
-      animation: none;
-    }
-  }
-
-  /* ---------- fig 6 · the arbitration ---------- */
-  .intro p.beat {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    letter-spacing: 0.04em;
-    line-height: 1.8;
-    color: var(--faint-t);
-    border-left: 1.5px solid var(--hair-2);
-    padding-left: 14px;
-    margin-top: 22px;
-  }
   /* ---------- the venn cursor: a live membership test ---------- */
   .vret line {
     stroke: var(--paper);
@@ -1315,8 +769,7 @@
   }
   /* ---------- marginalia: notes in the gutter, the way a notebook has them ---------- */
   .hero,
-  #create,
-  .log-sec {
+  #create {
     position: relative;
   }
   .marg {
@@ -1458,7 +911,7 @@
       class="venn"
       viewBox="0 0 900 640"
       role="group"
-      aria-label="A Venn diagram of five domains — mind/body, technology, philosophy, society, creation — inside the universal set, labeled both/and, nuance. Named intersections: cognitive architecture, structural difference, phenomenology, AI alignment, building your way out, power and consent. A red dot marks the point where mind, technology, and philosophy meet. One set is unlabeled and drawn partly outside the frame. Click a domain to filter; click again to visit its part of the site."
+      aria-label="A Venn diagram of the site. Five pages — curriculum, systems, principles, taste, work — inside the universal set, labeled ontology. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
     >
       <defs>
         <clipPath id="uclip">
@@ -1498,7 +951,7 @@
         stroke-dasharray="1 6"
         stroke-linecap="round"
       />
-      <text class="u-label" x="48" y="58" font-size="13">𝒰 · both / and</text>
+      <a class="u-link" href="/ontology"><text class="u-label" x="48" y="58" font-size="13">𝒰 · ontology</text></a>
 
       <circle
         class="offrec"
@@ -1509,7 +962,7 @@
         clip-path="url(#uclip)"
         tabindex="0"
         role="img"
-        aria-label="an unlabeled set, partly outside the frame"
+        aria-label="contact — off the record, partly outside the frame"
       />
 
       <circle
@@ -1647,7 +1100,7 @@
         stroke="#b48ede"
         tabindex="0"
         role="link"
-        aria-label="mind / body — a nervous system I am still learning to read"
+        aria-label="curriculum — what I am teaching myself right now"
       />
       <circle
         class="set"
@@ -1659,7 +1112,7 @@
         stroke="#6fa8dc"
         tabindex="0"
         role="link"
-        aria-label="technology — understood in order to be seen through"
+        aria-label="systems — the running things"
       />
       <circle
         class="set"
@@ -1671,7 +1124,7 @@
         stroke="#7fb069"
         tabindex="0"
         role="link"
-        aria-label="philosophy — epistemology for its own sake"
+        aria-label="principles — the rules I run on"
       />
       <circle
         class="set"
@@ -1683,7 +1136,7 @@
         stroke="#e3c567"
         tabindex="0"
         role="link"
-        aria-label="society — power, consent, and collective dynamics"
+        aria-label="taste — what I rate, by form"
       />
       <circle
         class="set"
@@ -1695,7 +1148,7 @@
         stroke="#d98aa8"
         tabindex="0"
         role="link"
-        aria-label="creation — curiosity-guided projects"
+        aria-label="work — what I have made"
       />
 
       <text
@@ -1706,7 +1159,7 @@
         text-anchor="middle"
         fill="#b48ede"
       >
-        MIND / BODY
+        CURRICULUM
       </text>
       <text
         class="dlabel"
@@ -1716,7 +1169,7 @@
         text-anchor="middle"
         fill="#6fa8dc"
       >
-        TECHNOLOGY
+        SYSTEMS
       </text>
       <text
         class="dlabel"
@@ -1726,7 +1179,7 @@
         text-anchor="middle"
         fill="#7fb069"
       >
-        PHILOSOPHY
+        PRINCIPLES
       </text>
       <text
         class="dlabel"
@@ -1736,7 +1189,7 @@
         text-anchor="middle"
         fill="#e3c567"
       >
-        SOCIETY
+        TASTE
       </text>
       <text
         class="dlabel"
@@ -1746,50 +1199,50 @@
         text-anchor="middle"
         fill="#d98aa8"
       >
-        CREATION
+        WORK
       </text>
 
       <g class="xg" data-pair="mindbody,tech">
         <text class="xname" x="430" y="225" text-anchor="middle">
-          cognitive architecture
+          cognitive scaffolding
         </text>
-        <text class="xform" x="430" y="239" text-anchor="middle">M ∩ T</text>
+        <text class="xform" x="430" y="239" text-anchor="middle">C ∩ S</text>
       </g>
       <g class="xg" data-pair="mindbody,society">
         <text class="xname" x="221" y="358" text-anchor="middle">
-          structural difference
+          influences
         </text>
-        <text class="xform" x="221" y="372" text-anchor="middle">M ∩ S</text>
+        <text class="xform" x="221" y="372" text-anchor="middle">C ∩ T</text>
       </g>
       <g class="xg" data-pair="mindbody,philosophy">
         <text class="xname" x="352" y="380" text-anchor="middle">
-          phenomenology
+          the examined life
         </text>
-        <text class="xform" x="352" y="394" text-anchor="middle">M ∩ P</text>
+        <text class="xform" x="352" y="394" text-anchor="middle">C ∩ P</text>
       </g>
       <g class="xg" data-pair="philosophy,tech">
         <text class="xname" x="512" y="380" text-anchor="middle">
-          ai alignment
+          ai policy
         </text>
-        <text class="xform" x="512" y="394" text-anchor="middle">T ∩ P</text>
+        <text class="xform" x="512" y="394" text-anchor="middle">S ∩ P</text>
       </g>
       <g class="xg" data-pair="creation,tech">
         <text class="xname" x="637" y="362" text-anchor="middle">
-          building your way out
+          how i work
         </text>
-        <text class="xform" x="637" y="376" text-anchor="middle">T ∩ C</text>
+        <text class="xform" x="637" y="376" text-anchor="middle">S ∩ W</text>
       </g>
       <g class="xg" data-pair="philosophy,society">
         <text class="xname" x="286" y="470" text-anchor="middle">
-          power &amp; consent
+          discernment
         </text>
-        <text class="xform" x="286" y="484" text-anchor="middle">S ∩ P</text>
+        <text class="xform" x="286" y="484" text-anchor="middle">T ∩ P</text>
       </g>
       <g class="xg" data-pair="creation,philosophy">
         <text class="xname" x="571" y="463" text-anchor="middle">
-          making as thinking
+          lab of self
         </text>
-        <text class="xform" x="571" y="477" text-anchor="middle">P ∩ C</text>
+        <text class="xform" x="571" y="477" text-anchor="middle">P ∩ W</text>
       </g>
 
       <circle
@@ -1826,1326 +1279,6 @@
       <text class="vread" id="vRead" x="48" y="80">cursor ∉ 𝒰</text>
     </svg>
     <div class="vennpanel" id="cap1" aria-live="polite"></div>
-  </div>
-</div>
-
-<div class="col">
-  <!-- ============ INTRO ============ -->
-  <div class="intro reveal">
-    <p>
-      I’m Param. I read philosophy, build systems, and file reports on what the
-      machines are doing to the rest of us — beginning, unavoidably, with me.
-      Small instruments, one subject, error bars left in.
-    </p>
-    <p>Raised by the algorithm, realigning by hand.</p>
-    <p class="mut">
-      A diet of Aeon and LessWrong, in unequal measure. Studying philosophy of
-      mind after a year spent building with the machines — subject and
-      journalist at once, which is a conflict of interest I would rather declare
-      than resolve. Vegan. Lived all over the world; only ever really lived
-      online. Bangalore, briefly — then westward.
-    </p>
-    <p class="beat">
-      the beat: machine mediation → human judgment. the method: build the
-      instrument, then stand in front of it.
-    </p>
-  </div>
-</div>
-
-<div class="colwide">
-  <!-- ============ FOUR ROOMS ============ -->
-  <div class="rooms reveal" id="rooms">
-    <div class="figlabel">the four rooms · one house</div>
-    <div class="rooms-grid">
-      <div class="panel room" data-c="create">
-        <div class="panel-bar">
-          <span class="rdot"></span><span class="pt">create/</span
-          ><span class="sp"></span>
-          <button
-            class="minb"
-            data-p="p-create"
-            aria-expanded="true"
-            aria-label="collapse panel"
-          >
-            –
-          </button>
-        </div>
-        <div class="panel-body" id="p-create">
-          <p>
-            <b>Making is thinking.</b> Output forces a precision that reading,
-            talking, and planning never quite demand — even when the thing made
-            is imperfect. Especially then.
-          </p>
-          <a class="enter" href="#create">enter →</a>
-        </div>
-      </div>
-      <div class="panel room" data-c="consume">
-        <div class="panel-bar">
-          <span class="rdot"></span><span class="pt">consume/</span
-          ><span class="sp"></span>
-          <button
-            class="minb"
-            data-p="p-consume"
-            aria-expanded="true"
-            aria-label="collapse panel"
-          >
-            –
-          </button>
-        </div>
-        <div class="panel-body" id="p-consume">
-          <p>
-            <b>Reading widely isn’t the goal; models that predict are.</b>
-            Otherwise it’s a larger pile of interesting things you once
-            encountered.
-          </p>
-          <a class="enter" href="#consume">enter →</a>
-        </div>
-      </div>
-      <div class="panel room" data-c="curate">
-        <div class="panel-bar">
-          <span class="rdot"></span><span class="pt">curate/</span
-          ><span class="sp"></span>
-          <button
-            class="minb"
-            data-p="p-curate"
-            aria-expanded="true"
-            aria-label="collapse panel"
-          >
-            –
-          </button>
-        </div>
-        <div class="panel-body" id="p-curate">
-          <p>
-            <b>Attention is the scarce resource.</b> The diet sets the prior you
-            bring to everything else. What you refuse to attend to matters as
-            much as what you keep.
-          </p>
-          <a class="enter" href="#curate">enter →</a>
-        </div>
-      </div>
-      <div class="panel room" data-c="cohere">
-        <div class="panel-bar">
-          <span class="rdot"></span><span class="pt">cohere/</span
-          ><span class="sp"></span>
-          <button
-            class="minb"
-            data-p="p-cohere"
-            aria-expanded="true"
-            aria-label="collapse panel"
-          >
-            –
-          </button>
-        </div>
-        <div class="panel-body" id="p-cohere">
-          <p>
-            <b
-              >The views should fit together — or the contradictions should be
-              named.</b
-            >
-            Invisible incoherence is rot. A named contradiction is sometimes
-            just honesty.
-          </p>
-          <a class="enter" href="#cohere">enter →</a>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="col">
-  <!-- ============ CREATE ============ -->
-  <section id="create">
-    <aside class="marg">
-      <b>note</b>most of these took a single night. that is the finding, not the
-      flex &#8212; it is the exact thing the essays are about.
-    </aside>
-    <div class="sec-head reveal">
-      <span class="tick"></span>
-      <h2>create</h2>
-      <span class="notation">create = { essays } ∪ { systems }</span>
-    </div>
-
-    <div class="sub reveal">essays</div>
-    <div class="subnote reveal">
-      six written, none published. that is the standing debt, and it is the only
-      number on this site i am not proud of.
-    </div>
-    <ul class="index">
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Taste Is Security</span></span>
-          <span class="dek"
-            >When everything can be generated, discernment is the last thing you
-            can’t.</span
-          >
-        </div>
-        <span class="when"
-          >aug 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">The Delegation Discount</span></span
-          >
-          <span class="dek"
-            >What you save in effort you pay back in judgment, at compound
-            interest.</span
-          >
-        </div>
-        <span class="when"
-          >jul 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">Fieldwork, Not a Gap</span></span
-          >
-          <span class="dek"
-            >A year inside the machines, as both subject and journalist.</span
-          >
-        </div>
-        <span class="when"
-          >jun 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">Anxiety Is Information</span></span
-          >
-          <span class="dek"
-            >Kierkegaard, wearables, and reading your own signal without
-            flinching.</span
-          >
-        </div>
-        <span class="when"
-          >may 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">The Sameness Engine</span></span
-          >
-          <span class="dek"
-            >Every feed optimizes toward the same person. Notes on wanting your
-            own desires.</span
-          >
-        </div>
-        <span class="when"
-          >apr 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Keep the Exit</span></span>
-          <span class="dek"
-            >You don’t have to leave the platform. You have to be able to.</span
-          >
-        </div>
-        <span class="when"
-          >mar 2026<span
-            class="state s-unbuilt"
-            style="padding-left: 8px; border-left: 1px solid var(--hair)"
-            >draft</span
-          ></span
-        >
-      </li>
-    </ul>
-
-    <div class="sub reveal">systems</div>
-    <div class="subnote reveal">
-      forty-six of them, built mostly at night, mostly alone, mostly with a
-      machine at the other end of the keyboard. some for use, some for the joy
-      of the rabbit hole. the register is the evidence in the argument below —
-      this is what a year of building <em>with</em> them actually looks like.
-    </div>
-    <div
-      class="idx-filters reveal"
-      role="group"
-      aria-label="filter the register"
-    >
-      <span class="grp">
-        <span class="glab">kind</span>
-        <button class="fbtn" type="button" data-v="apps" aria-pressed="false">
-          apps
-        </button>
-        <button class="fbtn" type="button" data-v="tools" aria-pressed="false">
-          tools
-        </button>
-        <button class="fbtn" type="button" data-v="agents" aria-pressed="false">
-          agents
-        </button>
-        <button
-          class="fbtn"
-          type="button"
-          data-v="protocols"
-          aria-pressed="false"
-        >
-          protocols
-        </button>
-        <button class="fbtn" type="button" data-v="evals" aria-pressed="false">
-          evals
-        </button>
-        <button class="fbtn" type="button" data-v="sites" aria-pressed="false">
-          sites
-        </button>
-        <button
-          class="fbtn"
-          type="button"
-          data-v="objects"
-          aria-pressed="false"
-        >
-          objects
-        </button>
-      </span>
-      <span class="bar" aria-hidden="true"></span>
-      <span class="grp">
-        <span class="glab">state</span>
-        <button
-          class="fbtn st"
-          type="button"
-          data-v="daily"
-          aria-pressed="false"
-        >
-          daily
-        </button>
-        <button
-          class="fbtn st"
-          type="button"
-          data-v="shipped"
-          aria-pressed="false"
-        >
-          shipped
-        </button>
-        <button
-          class="fbtn st"
-          type="button"
-          data-v="parked"
-          aria-pressed="false"
-        >
-          parked
-        </button>
-        <button
-          class="fbtn st"
-          type="button"
-          data-v="unbuilt"
-          aria-pressed="false"
-        >
-          unbuilt
-        </button>
-      </span>
-      <span class="bar" aria-hidden="true"></span>
-      <button class="fbtn" type="button" id="idxClear">clear</button>
-    </div>
-    <div class="idx-expr" id="idxExpr" aria-live="polite">
-      S = { systems } &#183; <span class="card">|S| = 46</span> of 46
-    </div>
-    <ul class="index" id="idxList">
-      <li class="reveal idx-row" data-kind="protocols" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">BONP</span></span>
-          <span class="dek"
-            >Biometric Oracle Network Protocol — a spec, a signed-envelope SDK,
-            three adapters, and a dispute procedure.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">protocol</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="protocols" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">CMCHP</span></span>
-          <span class="dek"
-            >A wire format for handing a half-finished task from one model to a
-            rival. Schema, benchmark, paper.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">protocol</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="protocols" data-state="unbuilt">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Vaani</span></span>
-          <span class="dek"
-            >A protocol, still only a sketch. Filed here because unbuilt things
-            belong in the register too.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">protocol</span
-          ><span class="state s-unbuilt">unbuilt</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">mcp-tool-selection-eval</span></span
-          >
-          <span class="dek"
-            >Seven models, 665 runs, a seventy-eight-tool menu: does the right
-            tool still get picked as the menu grows?</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">biometric-json-eval</span></span
-          >
-          <span class="dek"
-            >Twenty-nine adversarial settlement cases. A two-model quorum drops
-            the dangerous-error rate to about zero.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">yt-tldr-eval</span></span>
-          <span class="dek"
-            >Forty videos, four summarisers, one judge. Only the unflattering
-            finding survived contact with the data.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">voice-preservation-eval</span></span
-          >
-          <span class="dek"
-            >Rewrite a paragraph N times and measure the exact iteration where
-            the voice leaks out.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">claude-code-hook-eval</span></span
-          >
-          <span class="dek"
-            >Wall-clock saved per automation — measured, rather than
-            assumed.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="evals" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">eval-this</span></span>
-          <span class="dek"
-            >One prompt, five models, a scored table. The house bake-off.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">eval</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">whoop-mcp</span></span>
-          <span class="dek"
-            >Eleven tools over a wearable&#8217;s API. Published.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">vercel-mcp</span></span>
-          <span class="dek">Sixteen tools over the Vercel REST API.</span>
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">spaceship-mcp</span></span>
-          <span class="dek"
-            >Fourteen tools for domains and DNS, so I stop clicking through
-            dashboards.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">claude-code-hooks-mcp</span></span
-          >
-          <span class="dek"
-            >Read-only introspection: an agent that can see its own hooks.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">pickless-mcp</span></span>
-          <span class="dek"
-            >A taste profile, exposed as four tools any agent can call.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">mcp-red-team</span></span>
-          <span class="dek"
-            >An adversarial scanner for MCP servers — injection, tool confusion,
-            exfiltration chains. Eight categories.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="daily">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">shosai &#26360;&#25889;</span></span
-          >
-          <span class="dek"
-            >A morning dashboard that replaced five newsletters and three feeds.
-            Local only, on purpose.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="daily">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">yomu &#35501;&#12416;</span></span
-          >
-          <span class="dek"
-            >A newsletter reader over IMAP. The mail never leaves the
-            machine.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="agents" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">life-os</span></span>
-          <span class="dek"
-            >Seven scheduled agents running the day&#8217;s admin without being
-            asked twice.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">agent</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="agents" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">cohere</span></span>
-          <span class="dek"
-            >Reads the week&#8217;s inputs and drafts the connections between
-            them. I make the one judgment left.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">agent</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="daily">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">compaction predictor</span></span
-          >
-          <span class="dek"
-            >A hook that watches a conversation&#8217;s token trajectory and
-            warns before the context dies.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">biometric-inference-proxy</span></span
-          >
-          <span class="dek"
-            >Recovery score in, inference parameters out. The machine gets more
-            careful on the days I should.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="agents" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">inbox-triage</span></span>
-          <span class="dek"
-            >Every thirty minutes, a small model sorted the inbox.
-            Decommissioned with the thing it fed.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">agent</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">session-save</span></span>
-          <span class="dek"
-            >An end-of-session protocol: commit, deploy, log, remember. Written
-            once, run hundreds of times.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">param-voice</span></span>
-          <span class="dek"
-            >A voice corpus and playbook — so the machine can imitate me, and so
-            I can catch it when it does.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">taste</span></span>
-          <span class="dek"
-            >An anti-slop frontend framework. Opinions, shipped as a
-            dependency.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Keep</span></span>
-          <span class="dek"
-            >Commitment markets on your own biometrics. Break your word, fund a
-            charity.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Pickless</span></span>
-          <span class="dek"
-            >An agent that picks one dish and orders it. The menu never
-            opens.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">param-os</span></span>
-          <span class="dek"
-            >Calendar, mail, tasks and notes on one screen, so that none of them
-            get to be an app.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="parked">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">Board of Directors</span></span
-          >
-          <span class="dek"
-            >A council of voices for hard calls. Demoted to a personal tool the
-            day the market maths failed.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Build Yourself</span></span>
-          <span class="dek"
-            >A self-improvement OS, three versions deep. Parked the week the
-            focus rule bit.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">arxiv-digest</span></span>
-          <span class="dek"
-            >Paste a paper, get the version of it that is about your own
-            stack.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">think-forward-reverse</span></span
-          >
-          <span class="dek"
-            >Plan forward from where you are, backward from where you want to
-            be, and read the gap.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">bayesian-trainer</span></span>
-          <span class="dek"
-            >Drill priors and updates until the arithmetic stops feeling like a
-            trick.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">typemaster</span></span>
-          <span class="dek"
-            >Fifteen lessons of ten-finger typing, because I never learned
-            properly.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">wasm-labs</span></span>
-          <span class="dek"
-            >Native code in the browser, as a gallery of small proofs.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="apps" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">maj-companion</span></span>
-          <span class="dek"
-            >A mah jongg companion: card parser, hand matcher, Charleston
-            advice. Waiting on photographs.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">app</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="sites" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Wired Different</span></span>
-          <span class="dek"
-            >A course on building with machines when your attention will not
-            cooperate. Landing up, nothing sold.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">site</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="objects" data-state="parked">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">doordrop</span></span>
-          <span class="dek"
-            >An ESP32 and a small screen by the door. Half a pipeline and one
-            box of parts.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">objects</span
-          ><span class="state s-parked">parked</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="objects" data-state="unbuilt">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">the pill box</span></span>
-          <span class="dek"
-            >A pair of dead headphones becomes a carry case. Teardown verified;
-            nothing ordered.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">objects</span
-          ><span class="state s-unbuilt">unbuilt</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="sites" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://postphenom.com" rel="noopener"
-              >postphenom.com</a
-            ></span
-          >
-          <span class="dek"
-            >The Center for Applied Postphenomenology. First-person accounts of
-            mediation, collected under a fixed protocol.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">site</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="sites" data-state="unbuilt">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">Cohort Study</span></span>
-          <span class="dek"
-            >Findings and panels instead of posts and followers. A publication
-            with a method attached.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">site</span
-          ><span class="state s-unbuilt">unbuilt</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">Claude Code Playbook</span></span
-          >
-          <span class="dek"
-            >Four MCP servers, eleven skills, fifteen hooks, five evals &#8212;
-            the tooling, in the open.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">claude-archive</span></span>
-          <span class="dek"
-            >The Everything Index: 1,022 sessions catalogued. This list is drawn
-            from it.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"
-            ><span class="unlinked">the statistics course</span></span
-          >
-          <span class="dek"
-            >Fourteen lessons on the half of statistics I had skipped &#8212;
-            then turned on my own evals.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="tools" data-state="shipped">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">llm-week</span></span>
-          <span class="dek"
-            >A week of open models on local hardware, with a bake-off script to
-            settle the arguments.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">tool</span
-          ><span class="state s-shipped">shipped</span></span
-        >
-      </li>
-      <li class="reveal idx-row" data-kind="sites" data-state="daily">
-        <div class="li-body">
-          <span class="t"><span class="unlinked">this site</span></span>
-          <span class="dek"
-            >Six instruments and an argument. Built in the open; the essays were
-            not.</span
-          >
-        </div>
-        <span class="when"
-          ><span class="kind">site</span
-          ><span class="state s-daily">daily</span></span
-        >
-      </li>
-    </ul>
-    <div class="idx-empty" id="idxEmpty" style="display: none">
-      &#8709; &#8212; that intersection is empty. every set here has a shape;
-      not every pair of them meets.
-    </div>
-    <div class="idx-note reveal">
-      shipped &#8800; up. several of these are unreachable on purpose, and a few
-      are down because a domain lapsed &#8212; the register is a record of work,
-      not a status page.<br />
-      the full archive runs to 185 rows across 1,022 sessions; this is the half
-      worth naming.
-    </div>
-  </section>
-
-  <!-- ============ CONSUME ============ -->
-  <section id="consume">
-    <div class="sec-head reveal">
-      <span class="tick"></span>
-      <h2>consume</h2>
-      <span class="notation">what goes in decides what comes out</span>
-    </div>
-    <div class="now reveal">
-      <div>
-        <h3>reading</h3>
-        <ul>
-          <li>Clark &amp; Chalmers, <em>The Extended Mind</em></li>
-          <li>Aeon &amp; Psyche, most mornings</li>
-          <li>LessWrong, with a raised eyebrow</li>
-          <li>80,000 Hours, selectively</li>
-        </ul>
-      </div>
-      <div>
-        <h3>watching</h3>
-        <ul>
-          <li>Slow cinema on MUBI</li>
-          <li>Anything Joachim Trier</li>
-          <li class="d">no shorts. deleted the apps.</li>
-        </ul>
-      </div>
-      <div>
-        <h3>listening</h3>
-        <ul>
-          <li>Fleet Foxes · Wilco</li>
-          <li>Vampire Weekend · Bon Iver</li>
-          <li>Phoebe Bridgers</li>
-          <li class="d">and the old ghosts — Peep, Lean — for the record.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</div>
-
-<div class="col">
-  <!-- ============ CURATE ============ -->
-  <section id="curate">
-    <div class="sec-head reveal">
-      <span class="tick"></span>
-      <h2>curate</h2>
-      <span class="notation">kept, cut, passed on</span>
-    </div>
-    <ul class="index">
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://signal.org/blog/" rel="noopener"
-              >Meredith Whittaker, on Signal and surveillance</a
-            ></span
-          >
-          <span class="dek"
-            >The opt-out argument made flesh. Watch every talk she gives.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://thezvi.substack.com/" rel="noopener"
-              >Zvi Mowshowitz, Don’t Worry About the Vase</a
-            ></span
-          >
-          <span class="dek"
-            >The highest signal-to-noise ratio in AI commentary.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://www.feedmedearly.com/" rel="noopener"
-              >Emily Sundberg, Feed Me</a
-            ></span
-          >
-          <span class="dek">Proof that taste is a reporting beat.</span>
-        </div>
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://aeon.co/users/andy-clark" rel="noopener"
-              >Andy Clark, in Aeon</a
-            ></span
-          >
-          <span class="dek"
-            >Where the mind ends and the world begins — the question under all
-            my questions.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div class="li-body">
-          <span class="t"
-            ><a href="https://mubi.com/en/notebook" rel="noopener"
-              >MUBI Notebook</a
-            ></span
-          >
-          <span class="dek"
-            >Film writing that assumes you can sit still for two hours.</span
-          >
-        </div>
-      </li>
-    </ul>
-  </section>
-
-  <!-- ============ COHERE ============ -->
-  <section id="cohere">
-    <div class="sec-head reveal">
-      <span class="tick"></span>
-      <h2>cohere</h2>
-      <span class="notation">making it hang together</span>
-    </div>
-
-    <!-- standing contradictions -->
-    <div class="sub reveal">standing contradictions</div>
-    <div class="subnote reveal">held open on purpose.</div>
-    <div class="pairs reveal">
-      <div>builds with AI <span class="and">∧</span> suspicious of AI</div>
-      <div>loves systems <span class="and">∧</span> distrusts platforms</div>
-      <div>fleet foxes <span class="and">∧</span> yung lean</div>
-      <div>craves order <span class="and">∧</span> trains for uncertainty</div>
-      <div>online since forever <span class="and">∧</span> keeps the exit</div>
-    </div>
-
-    <!-- ledger -->
-    <div class="sub reveal">the ledger</div>
-    <div class="subnote reveal" id="ledgerSub">
-      numbers are commitments to update, not positions to defend. hover for the
-      working.
-    </div>
-    <table class="ledger reveal">
-      <thead>
-        <tr>
-          <th>proposition</th>
-          <th class="num">p</th>
-          <th class="num">Δ</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          tabindex="0"
-          data-note="visa math and courage math, both improving."
-        >
-          <td>I move westward by spring ’27</td>
-          <td class="num">.85</td>
-          <td class="num"><span class="tr-up">▲</span></td>
-        </tr>
-        <tr
-          tabindex="0"
-          data-note="conditional on moving. brooklyn for the walking and the writing; sf for proximity — which is also the argument against."
-        >
-          <td>…to Brooklyn, given that I move</td>
-          <td class="num">.65</td>
-          <td class="num">—</td>
-        </tr>
-        <tr
-          tabindex="0"
-          data-note="the delegation discount, self-measured. the systems above exist to catch it early."
-        >
-          <td>Heavy LLM use atrophies unaided judgment (in me, by 2031)</td>
-          <td class="num">.70</td>
-          <td class="num"><span class="tr-up">▲</span></td>
-        </tr>
-        <tr
-          tabindex="0"
-          data-note="kierkegaard called anxiety the dizziness of freedom. the feed manufactures the dizziness, then sells the cure."
-        >
-          <td>Gen Z anxiety is signal, not disorder</td>
-          <td class="num">.75</td>
-          <td class="num"><span class="tr-up">▲</span></td>
-        </tr>
-        <tr tabindex="0" data-note="the easiest belief I hold.">
-          <td>I’ll still be vegan at 40</td>
-          <td class="num">.93</td>
-          <td class="num">—</td>
-        </tr>
-        <tr tabindex="0" data-note="settles august 2027.">
-          <td>This design survives twelve months</td>
-          <td class="num">.35</td>
-          <td class="num"><span class="tr-dn">▼</span></td>
-        </tr>
-      </tbody>
-    </table>
-    <div class="ledger-note" id="ledgerNote" aria-live="polite">
-      — hover a proposition —
-    </div>
-    <div class="ledger-foot">last audit: august 2026.</div>
-
-    <!-- principles -->
-    <div class="sub reveal">principles</div>
-    <ol class="principles">
-      <li class="reveal">
-        <div>
-          <b>Dissect the package.</b
-          ><span class="why">
-            What is said, how it’s sold, what actually arrives — three different
-            things.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <b>Keep the exit.</b
-          ><span class="why"> Any system you cannot leave owns you.</span>
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <b>Judgment is the last thing to outsource.</b
-          ><span class="why">
-            Automate the work; never the choice of which work is worth
-            doing.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <b>Question the frameworks you question with.</b
-          ><span class="why">
-            Every instrument has assumptions baked in — especially the ones that
-            feel like plain glass.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <b>Impact over intent</b
-          ><span class="why">
-            — in both directions, including when I’m the one who meant
-            well.</span
-          >
-        </div>
-      </li>
-      <li class="reveal">
-        <div>
-          <b>Credences, not vibes.</b
-          ><span class="why">
-            Numbers keep me honest about what I actually believe. See the
-            ledger.</span
-          >
-        </div>
-      </li>
-    </ol>
-
-    <!-- currently -->
-    <div class="sub reveal">currently</div>
-    <ul class="current">
-      <li class="reveal">
-        <span>Philosophy of mind, read properly.</span
-        ><span class="c-note">clark, chalmers, the extended-mind fight</span>
-      </li>
-      <li class="reveal">
-        <span
-          >Stanford, from afar: Tech Ethics &amp; Policy · Applied
-          Presence.</span
-        ><span class="c-note">a foot in the old world</span>
-      </li>
-      <li class="reveal">
-        <span>Practicing: organizing — people, not files.</span
-        ><span class="c-note">does not come naturally</span>
-      </li>
-    </ul>
-  </section>
-</div>
-
-<!-- ============ THOUGHTS.LOG ============ -->
-<div class="colwide">
-  <div class="log-sec reveal" id="log">
-    <div class="figlabel">running commentary</div>
-    <div class="panel">
-      <div class="panel-bar">
-        <span class="dots" aria-hidden="true"><i></i><i></i></span>
-        <span class="pt">thoughts.log — tail -f</span>
-        <span class="sp"></span>
-        <button
-          class="minb"
-          data-p="p-log"
-          aria-expanded="true"
-          aria-label="collapse panel"
-        >
-          –
-        </button>
-        <button
-          class="fakex"
-          title="nothing really closes"
-          aria-label="close, which minimizes"
-        >
-          ×
-        </button>
-      </div>
-      <div class="panel-body" id="p-log">
-        <div class="log-entry">
-          <div class="log-meta">
-            <span>aug 2026</span><span class="log-tag">both / and</span>
-          </div>
-          <div class="log-body">
-            I overcorrected with the machine — every hour planned, every note
-            processed, every decision routed through it. Then cold turkey. Both
-            were positions the pendulum picked, not me. The right relationship
-            keeps shifting; that’s probably the honest answer.
-          </div>
-        </div>
-        <div class="log-entry">
-          <div class="log-meta">
-            <span>aug 2026</span><span class="log-tag">wiring</span>
-          </div>
-          <div class="log-body">
-            The vocabulary preceded the clarity. Getting language for how my
-            nervous system actually runs wasn’t pathologising — it was finally
-            being able to describe myself to myself.
-            <span class="m"
-              >A neurodivergent mind in a neurotypical world is a translation
-              job, and I finally have the dictionary.</span
-            >
-          </div>
-        </div>
-        <div class="log-entry">
-          <div class="log-meta">
-            <span>aug 2026</span><span class="log-tag">power / tech</span>
-          </div>
-          <div class="log-body">
-            The algorithm gave me language, community, intellectual access. It
-            also flattened things, extracted attention, made ambient
-            dissociation feel normal.
-            <span class="m"
-              >Genetics plus environment — and the environment was built by a
-              business model nobody consented to.</span
-            >
-          </div>
-        </div>
-        <div class="log-entry">
-          <div class="log-meta">
-            <span>jul 2026</span><span class="log-tag">epistemics</span>
-          </div>
-          <div class="log-body">
-            Life isn’t optimisation toward a maximum; it’s variance around a
-            mean. Calibrate for the tails — expect them.
-            <span class="m"
-              >Individuality is distance from the mean, chosen on purpose.</span
-            >
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -3276,10 +1409,10 @@
         cy: 255,
         r: 178,
         color: "#b48ede",
-        letter: "M",
-        label: "mind / body",
-        dest: "log",
-        destName: "thoughts.log",
+        letter: "C",
+        label: "curriculum",
+        dest: "/curriculum",
+        destName: "curriculum",
       },
       {
         id: "tech",
@@ -3287,10 +1420,10 @@
         cy: 255,
         r: 178,
         color: "#6fa8dc",
-        letter: "T",
-        label: "technology",
-        dest: "https://postphenom.com/figures#distribution",
-        destName: "fig. 2, the machine, on postphenom.com",
+        letter: "S",
+        label: "systems",
+        dest: "/systems",
+        destName: "systems",
       },
       {
         id: "philosophy",
@@ -3299,9 +1432,9 @@
         r: 152,
         color: "#7fb069",
         letter: "P",
-        label: "philosophy",
-        dest: "cohere",
-        destName: "cohere — contradictions, ledger, principles",
+        label: "principles",
+        dest: "/principles",
+        destName: "principles",
       },
       {
         id: "society",
@@ -3309,10 +1442,10 @@
         cy: 420,
         r: 115,
         color: "#e3c567",
-        letter: "S",
-        label: "society",
-        dest: "https://postphenom.com/figures#influences",
-        destName: "fig. 3, the influence graph, on postphenom.com",
+        letter: "T",
+        label: "taste",
+        dest: "/taste",
+        destName: "taste",
       },
       {
         id: "creation",
@@ -3320,59 +1453,58 @@
         cy: 430,
         r: 112,
         color: "#d98aa8",
-        letter: "C",
-        label: "creation",
-        dest: "create",
-        destName: "create — essays &amp; systems",
+        letter: "W",
+        label: "work",
+        dest: "/work",
+        destName: "work",
       },
     ];
     var offrec = { cx: 820, cy: 580, r: 76 };
     var SET_COPY = {
       mindbody:
-        "A nervous system I’m still learning to read. Neurodivergence as signal, not deficit. Interoception, pattern recognition, obsession and compulsion as data. I finally have language for how I’m wired — it changed everything.",
-      tech: "A year spent speedrunning ML fundamentals and AI safety from first principles — not to serve it, to understand it and see through it. Power concentrates here. So do the tools to build your way out. Both/and.",
-      philosophy:
-        "Epistemology for its own sake. Truth-seeking not instrumentalised by profit or performance. Frameworks to evaluate claims, name my own patterns, and calibrate toward clarity rather than comfort.",
+        "What I’m teaching myself right now. Two Stanford courses this fall — Kierkegaard and the meaning of life; ethics, technology and public policy — and a syllabus of my own: formal and propositional logic, Bayesian reasoning, German, statistics, philosophy of mind.",
+      tech: "The running things: cognitive scaffolding, an AI policy, how I work. Mapping my territory, so I know the brain I have, so I can get to the brain I’d like.",
+      philosophy: "The rules I actually run on, in the order they win.",
       society:
-        "Social contracts are breaking in real time. Coercive structures leave marks. Raised by the algorithm, shaped by insight — all of it informing how I read power, consent, and collective dynamics.",
+        "What I rate, by form: film, live performance, tv, music, books, concepts, influences, quotes, aphorisms, words. Kept by hand.",
       creation:
-        "Curiosity-guided projects. Novelty and whimsy are legitimate values. A sliver of fuck-the-establishment, a sliver of use-the-tools-to-build-your-own-thing. A foot in the old world, always making.",
+        "What I’ve made, and what it was for: Cohort Study, a live dataset of how feels and vibes steer Gen Z decisions; Niwa; Kiku; the lab of self.",
     };
     var PAIRS = {
       "mindbody,tech": {
-        name: "cognitive architecture",
-        form: "M ∩ T",
-        line: "how the wiring runs, studied with the machines’ own tools.",
+        name: "cognitive scaffolding",
+        form: "C ∩ S",
+        line: "what I learn, held up by what I run.",
       },
       "mindbody,society": {
-        name: "structural difference",
-        form: "M ∩ S",
-        line: "a mind built differently, in a world built for the default.",
+        name: "influences",
+        form: "C ∩ T",
+        line: "the people who taught me without a syllabus.",
       },
       "mindbody,philosophy": {
-        name: "phenomenology",
-        form: "M ∩ P",
-        line: "what experience is like from inside — the data only I can collect.",
+        name: "the examined life",
+        form: "C ∩ P",
+        line: "study that ends in how to live, not in a grade.",
       },
       "philosophy,tech": {
-        name: "ai alignment",
-        form: "T ∩ P",
-        line: "getting the powerful thing to want what we’d endorse. the century’s homework.",
+        name: "ai policy",
+        form: "S ∩ P",
+        line: "what I let the machines do, decided before I need to.",
       },
       "creation,tech": {
-        name: "building your way out",
-        form: "T ∩ C",
-        line: "the tools of the platform, turned toward the exit.",
+        name: "how i work",
+        form: "S ∩ W",
+        line: "the tools I build are the tools I run on.",
       },
       "philosophy,society": {
-        name: "power &amp; consent",
-        form: "S ∩ P",
-        line: "who decides, who’s asked, who’s merely enrolled.",
+        name: "discernment",
+        form: "T ∩ P",
+        line: "taste is a principle you can’t write down.",
       },
       "creation,philosophy": {
-        name: "making as thinking",
-        form: "P ∩ C",
-        line: "the essay and the system are the same move — output as proof of thought.",
+        name: "lab of self",
+        form: "P ∩ W",
+        line: "n = 1, error bars left in.",
       },
     };
     function toLocal(evt) {
@@ -3417,8 +1549,8 @@
       fltSet = null;
     function panelRest() {
       cap1.innerHTML =
-        '<div class="vp-k">𝒰 · both / and</div>' +
-        '<div class="vp-desc">Five domains; the red dot sits where mind, technology, and philosophy meet. Hover to read — click to filter, click again to visit that part of the site.</div>';
+        '<div class="vp-k">𝒰 · ontology</div>' +
+        '<div class="vp-desc">Five pages; the red dot sits where curriculum, systems and principles meet. Hover to read — click to filter, click again to go there. The frame is the ontology; the dashed set, off the record, is contact.</div>';
       cap1.style.borderColor = "var(--hair)";
     }
     function paint() {
@@ -3485,7 +1617,7 @@
 
       if (hovOff) {
         cap1.innerHTML =
-          '<div class="vp-k">∁ · unlabeled</div><div class="vp-name">off the record.</div>';
+          '<div class="vp-k">∁ · contact</div><div class="vp-name">off the record. click to reach me.</div>';
         cap1.style.borderColor = "var(--faint)";
       } else if (hovSets.length >= 3) {
         var ids = hovSets.map(function (x) {
@@ -3498,7 +1630,7 @@
           hovSets.length === 3;
         if (isMe) {
           cap1.innerHTML =
-            '<div class="vp-k">M ∩ T ∩ P</div>' +
+            '<div class="vp-k">C ∩ S ∩ P</div>' +
             '<div class="vp-name">me</div>' +
             '<div class="vp-desc">the one point in all three drawn. the rest is off the frame.</div>';
           cap1.style.borderColor = "var(--c-me)";
@@ -3573,7 +1705,7 @@
       paint();
     });
     function enterSet(c) {
-      if (/^https?:/.test(c.dest)) {
+      if (/^(https?:|\/)/.test(c.dest)) {
         location.href = c.dest;
         return;
       }
@@ -3591,6 +1723,7 @@
         fltSet = null;
         hovOff = inCircle(p, offrec);
         paint();
+        if (hovOff) enterSet({ dest: "contact" });
         return;
       }
       var chosen = nearest(act, p);
@@ -3637,6 +1770,12 @@
     offEl.addEventListener("blur", function () {
       hovOff = false;
       paint();
+    });
+    offEl.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        enterSet({ dest: "contact" });
+      }
     });
 
     /* draw-on at load: circumference sweep, staggered */
@@ -3692,12 +1831,12 @@
         var r = regionAt(x, y);
         if (r.off)
           return {
-            f: "cursor ∈ ⟨unlabeled⟩",
-            n: "the set I don’t draw",
+            f: "cursor ∈ ∁",
+            n: "contact, off the record",
             plain: "offrec",
           };
         if (!r.inside.length)
-          return { f: "cursor ∈ 𝒰 ∖ (M ∪ T ∪ P ∪ S ∪ C)", n: "", plain: "u" };
+          return { f: "cursor ∈ 𝒰 ∖ (C ∪ S ∪ P ∪ T ∪ W)", n: "ontology", plain: "u" };
         var letters = r.inside
           .map(function (s) {
             return s.letter;
@@ -3716,7 +1855,7 @@
           if (p) name = p.name;
         } else if (r.inside.length === 1) {
           name = r.inside[0].label;
-        } else if (letters === "M ∩ P ∩ T") {
+        } else if (letters === "C ∩ P ∩ S") {
           name = "where the dot is";
         }
         return { f: "cursor ∈ " + letters, n: name, plain: letters };
@@ -3872,135 +2011,6 @@
       document.querySelectorAll("svg.venn .drift").forEach(function (el) {
         el.setAttribute("opacity", "0");
       });
-    }
-
-    /* ================= LEDGER ================= */
-    var lnote = document.getElementById("ledgerNote");
-    var LREST = "— hover a proposition —";
-    if (hoverNone) {
-      LREST = "— tap a proposition —";
-      lnote.textContent = LREST;
-      var lsub = document.getElementById("ledgerSub");
-      if (lsub)
-        lsub.textContent =
-          "numbers are commitments to update, not positions to defend. tap for the working.";
-    }
-    document.querySelectorAll("table.ledger tbody tr").forEach(function (tr) {
-      function lshow() {
-        lnote.textContent = tr.getAttribute("data-note");
-      }
-      function lrest() {
-        lnote.textContent = LREST;
-      }
-      tr.addEventListener("mouseenter", lshow);
-      tr.addEventListener("mouseleave", lrest);
-      tr.addEventListener("focus", lshow);
-      tr.addEventListener("blur", lrest);
-      tr.addEventListener("click", lshow);
-    });
-
-    /* ================= THE REGISTER · SET FILTER =================
-       Two unions, intersected. The expression above the list is not
-       decoration — it is the query that produced the rows below it. */
-    var idxList = document.getElementById("idxList");
-    if (idxList) {
-      var idxRows = Array.prototype.slice.call(
-        idxList.querySelectorAll(".idx-row"),
-      );
-      var kinds = [],
-        states = [];
-      var idxExpr = document.getElementById("idxExpr");
-      var idxEmpty = document.getElementById("idxEmpty");
-
-      function setExpr() {
-        var parts = ["{ systems }"];
-        if (kinds.length)
-          parts.push(
-            kinds.length === 1
-              ? "{ " + kinds[0] + " }"
-              : "(" +
-                  kinds
-                    .map(function (k) {
-                      return "{ " + k + " }";
-                    })
-                    .join(" ∪ ") +
-                  ")",
-          );
-        if (states.length)
-          parts.push(
-            states.length === 1
-              ? "{ " + states[0] + " }"
-              : "(" +
-                  states
-                    .map(function (s) {
-                      return "{ " + s + " }";
-                    })
-                    .join(" ∪ ") +
-                  ")",
-          );
-        return parts.join(" ∩ ");
-      }
-
-      function applyIdx(animate) {
-        var n = 0;
-        idxRows.forEach(function (li) {
-          var k = li.getAttribute("data-kind");
-          var s = li.getAttribute("data-state");
-          var on =
-            (!kinds.length || kinds.indexOf(k) > -1) &&
-            (!states.length || states.indexOf(s) > -1);
-          var was = !li.classList.contains("off");
-          li.classList.toggle("off", !on);
-          if (on) {
-            n++;
-            if (animate && !was && !reduce) {
-              li.classList.remove("pop");
-              void li.offsetWidth;
-              li.style.animationDelay = Math.min(n * 18, 260) + "ms";
-              li.classList.add("pop");
-            }
-          }
-        });
-        idxExpr.innerHTML =
-          "S = " +
-          setExpr()
-            .replace(/\{ ([a-z]+) \}/g, "{ <b>$1</b> }")
-            .replace("{ <b>systems</b> }", "{ systems }") +
-          ' &#183; <span class="card">|S| = ' +
-          n +
-          "</span> of " +
-          idxRows.length;
-        idxEmpty.style.display = n ? "none" : "";
-      }
-
-      document.querySelectorAll(".fbtn").forEach(function (b) {
-        b.addEventListener("click", function () {
-          var v = b.getAttribute("data-v");
-          var arr = b.classList.contains("st") ? states : kinds;
-          var i = arr.indexOf(v);
-          if (i > -1) arr.splice(i, 1);
-          else arr.push(v);
-          b.setAttribute("aria-pressed", i > -1 ? "false" : "true");
-          applyIdx(true);
-        });
-      });
-      var idxClear = document.getElementById("idxClear");
-      idxClear.addEventListener("click", function () {
-        kinds = [];
-        states = [];
-        document.querySelectorAll(".fbtn").forEach(function (b) {
-          b.setAttribute("aria-pressed", "false");
-        });
-        applyIdx(true);
-      });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape" && (kinds.length || states.length)) {
-          var t = document.activeElement;
-          if (t && t.classList && t.classList.contains("fbtn"))
-            idxClear.click();
-        }
-      });
-      applyIdx(false);
     }
 
     /* ================= THE RAIL =================
