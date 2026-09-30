@@ -69,3 +69,11 @@ The six figures, "Reading the Figures" and "What You Study" moved to the Center 
 person. They moved as they were (same dark look, same code); fig. 1's two circles that lead to
 rooms still on paramv.com (thoughts.log, create) link back here. No redirects from the old
 paramv.com URLs, by his choice.
+
+---
+
+**2026-09-30 — The venn came back.**
+Hours after the move, Param wanted fig. 1 back on the home page. It was restored from the
+pre-move commit (markup, its script module, the hero drift layer, the clock helpers, its CSS)
+and stays on postphenom.com too. Two of its circles now lead off-site: technology → fig. 2 and
+society → fig. 3 at postphenom.com/figures.

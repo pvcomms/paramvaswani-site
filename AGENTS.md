@@ -59,7 +59,7 @@ The block is identical in every page fragment (seven as of Sep 30) — change it
 `build.py` runs and they ship as first-party files under `/letterboxd/`. Never add a client-side
 fetch or embed to letterboxd.com. Spec: `docs/features/003-letterboxd-diary.md`.
 
-**The figures are not here any more.** The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Don't rebuild them on paramv.com.
+**The figures are not here any more.** The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Don't rebuild them on paramv.com. **Except fig. 1, the venn, which came back to the home page the same day on Param's word** — it lives in both places now; its technology and society circles lead to figs. 2 and 3 on postphenom.com.
 
 ## Traps
 
