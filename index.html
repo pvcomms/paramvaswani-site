@@ -173,6 +173,23 @@
     outline-offset: 3px;
   }
 
+  /* who, in one line, under the masthead */
+  .about {
+    margin: 10px 0 28px;
+    font-family: var(--mono);
+    font-size: 11px;
+    line-height: 1.7;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+  }
+  /* each group wraps as a unit, so a line never ends mid-thought */
+  .about .g {
+    display: inline-block;
+  }
+  .about .bar {
+    color: var(--faint);
+  }
+
   /* ---------- shared figure grammar ---------- */
   .figlabel {
     font-family: var(--mono);
@@ -1982,7 +1999,7 @@
       <a href="/systems">systems</a>
     </nav>
   </header>
-
+  <p class="about"><span class="g">intentional, examined, aligned&nbsp;life</span><span class="bar"> | </span><span class="g">fully&nbsp;remote</span><span class="bar"> | </span><span class="g">attention&nbsp;guarder + neurophile + ex&#8209;product&nbsp;builder + psych&nbsp;undergrad + strategy&nbsp;master&#8217;s</span></p>
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
     <aside class="marg">
