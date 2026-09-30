@@ -73,6 +73,20 @@
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
     --accent: var(--c-me);
+    /* fig. 1 is a light inset — its own small palette, matching the boxes it was drawn from */
+    --fig-paper: #f6f4ee;
+    --fig-ink: #1d1e21;
+    --fig-mute: #5f5c55;
+    --fig-line: #9a978e;
+    --fig-edge: #cfcbc0;
+    --held-fill: #d8ead0;
+    --held-line: #5f9a4c;
+    --prov-fill: #fbefc2;
+    --prov-line: #d1a324;
+    --sus-fill: #f5d0cc;
+    --sus-line: #c9463b;
+    --root-fill: #d3e0f6;
+    --root-line: #4b78c4;
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
   }
@@ -98,6 +112,10 @@
   ::selection {
     background: var(--accent);
     color: var(--ink);
+  }
+  .panel-body ::selection {
+    background: var(--fig-ink);
+    color: var(--fig-paper);
   }
   a {
     color: inherit;
@@ -322,6 +340,8 @@
   }
   .panel-body {
     padding: 22px 22px 18px;
+    background: var(--fig-paper);
+    color: var(--fig-ink);
   }
 
   /* the tree */
@@ -342,12 +362,12 @@
     top: -6px;
     bottom: 22px;
     width: 1px;
-    background: var(--hair-2);
-    opacity: 0.7;
+    background: var(--fig-line);
   }
   .node {
     position: relative;
-    --st: var(--c-create);
+    --fill: var(--held-fill);
+    --line: var(--held-line);
   }
   .node + .node {
     margin-top: 10px;
@@ -360,63 +380,66 @@
     top: 22px;
     width: 22px;
     height: 1px;
-    background: var(--hair-2);
-    opacity: 0.7;
+    background: var(--fig-line);
   }
   .node.provisional {
-    --st: var(--c-cohere);
+    --fill: var(--prov-fill);
+    --line: var(--prov-line);
   }
   .node.suspect {
-    --st: var(--c-me);
+    --fill: var(--sus-fill);
+    --line: var(--sus-line);
   }
   .node.root {
-    --st: var(--c-curate);
+    --fill: var(--root-fill);
+    --line: var(--root-line);
   }
   .box {
     display: flex;
     align-items: baseline;
     gap: 14px;
-    padding: 12px 16px 12px 14px;
-    border: 1px solid color-mix(in srgb, var(--st) 55%, transparent);
-    border-radius: 4px;
-    background: color-mix(in srgb, var(--st) 12%, transparent);
+    padding: 10px 14px 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--fill);
+    color: var(--fig-ink);
     cursor: default;
     transition:
-      background 0.22s ease,
-      border-color 0.22s ease,
+      box-shadow 0.22s ease,
       transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .node:hover > .box,
   .node:focus-visible > .box {
-    background: color-mix(in srgb, var(--st) 20%, transparent);
-    border-color: color-mix(in srgb, var(--st) 85%, transparent);
+    box-shadow: 0 1px 0 var(--line), 0 2px 10px color-mix(in srgb, var(--line) 22%, transparent);
     transform: translateX(2px);
   }
   .node:focus-visible {
     outline: none;
   }
   .node:focus-visible > .box {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
+    outline: 2px solid var(--line);
+    outline-offset: 2px;
   }
   .node .n {
     flex: 0 0 auto;
-    min-width: 22px;
+    min-width: 20px;
     font-family: var(--mono);
-    font-size: 11.5px;
+    font-size: 12px;
     font-weight: 400;
-    letter-spacing: 0.06em;
-    color: var(--st);
+    letter-spacing: 0.04em;
+    color: var(--fig-ink);
     font-variant-numeric: tabular-nums;
+    /* the figure sets its numerals bold; plex mono ships in 300/400 here, so weight comes from the stroke */
+    -webkit-text-stroke: 0.35px var(--fig-ink);
   }
   .node .claim {
     font-size: 16px;
-    line-height: 1.5;
-    color: var(--paper);
+    line-height: 1.45;
+    color: var(--fig-ink);
     text-wrap: pretty;
   }
   .node.root .claim {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 17px;
   }
   .node.root > .box {
@@ -441,14 +464,14 @@
     min-height: 3.2em;
     margin-top: 18px;
     padding-top: 14px;
-    border-top: 1px dashed var(--hair);
+    border-top: 1px dashed var(--fig-edge);
     font-family: var(--mono);
     font-size: 12px;
     line-height: 1.75;
-    color: var(--dim);
+    color: var(--fig-mute);
   }
   .cap .k {
-    color: var(--faint-t);
+    color: var(--fig-line);
     padding-right: 10px;
   }
 
@@ -459,11 +482,11 @@
     gap: 10px 26px;
     margin-top: 22px;
     padding-top: 14px;
-    border-top: 1px solid var(--hair);
+    border-top: 1px solid var(--fig-edge);
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.06em;
-    color: var(--faint-t);
+    color: var(--fig-mute);
   }
   .legend span {
     display: inline-flex;
@@ -471,18 +494,18 @@
     gap: 9px;
   }
   .legend i {
-    width: 14px;
-    height: 10px;
-    border-radius: 2px;
-    border: 1px solid color-mix(in srgb, var(--st) 60%, transparent);
-    background: color-mix(in srgb, var(--st) 14%, transparent);
+    width: 16px;
+    height: 11px;
+    border-radius: 3px;
+    border: 1px solid var(--line);
+    background: var(--fill);
   }
-  .legend .held { --st: var(--c-create); }
-  .legend .provisional { --st: var(--c-cohere); }
-  .legend .suspect { --st: var(--c-me); }
+  .legend .held { --fill: var(--held-fill); --line: var(--held-line); }
+  .legend .provisional { --fill: var(--prov-fill); --line: var(--prov-line); }
+  .legend .suspect { --fill: var(--sus-fill); --line: var(--sus-line); }
   .legend .fig {
     margin-left: auto;
-    color: var(--dim);
+    color: var(--fig-mute);
     font-style: italic;
     font-family: var(--serif);
     font-size: 14px;
