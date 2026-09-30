@@ -1,18 +1,11 @@
-<title>Systems</title>
+<title>Why I Design My Environment</title>
 <!--
-  paramv.com/systems — the systems — the running things and what they are for.
+  paramv.com/systems/environment — why I design my environment.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until it is written in by hand.
-
-  to add a line, drop one <li> into <ol class="lines">:
-
-    <li class="reveal">
-      <span class="t">Title</span>
-      <span class="dek">one line on why it is here</span>
-      <span class="when">year · status</span>
-    </li>
-
-  then change the notation from "= ∅" and delete the <p class="blank"> line beneath the list.
+  source: Param's own document "Why I design my environment.rtf", 30 sep 2026 (its first line,
+  "Environmental Engineering:", is the dek). words are his; only clear typos are fixed: "iced" ->
+  "lived", "unctuously" -> "unconsciously", "delineating" -> "delineate", "that built for" ->
+  "that are built for", "receive" -> "received", "ANDI" -> "AND", "stat" -> "state".
 -->
 <style>
   @font-face {
@@ -67,7 +60,7 @@
     --c-cohere: #e3c567;
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
-    --accent: var(--c-creation);
+    --accent: var(--c-create);
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
   }
@@ -239,7 +232,7 @@
     color: var(--accent);
   }
 
-  /* ---------- the systems ---------- */
+  /* ---------- the work ---------- */
   .body {
     padding: 72px 0 0;
   }
@@ -303,9 +296,61 @@
     color: var(--accent);
     border-bottom-color: var(--accent);
   }
+  .lines .t a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .body + .body {
+    padding-top: 56px;
+  }
+  .prose p {
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-top: 18px;
+  }
+  .prose p:first-child {
+    margin-top: 0;
+  }
+  .prose strong {
+    font-weight: 500;
+  }
+  .phase {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+    margin: 44px 0 6px;
+  }
+  .phase + .lines,
+  .phase + p {
+    margin-top: 0;
+  }
+  /* a line here is a sentence, not a title: keep it beside its number and hang the wrap under it */
+  .lines .t {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .close {
+    margin-top: 32px;
+  }
+  .close p {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+  .close p:first-child {
+    margin-top: 0;
+  }
   .lines .dek {
     color: var(--dim);
     font-size: 15.5px;
+  }
+  /* a second line under a row, flush with the title (counter 15.4px + 18px gap) */
+  .lines .dek.sub {
+    flex-basis: 100%;
+    padding-left: 33.4px;
   }
   .lines .when {
     font-family: var(--mono);
@@ -502,37 +547,23 @@
 
   <section class="head">
     <div class="figlabel">page · systems</div>
-    <h1>Systems</h1>
-    <p class="figdek">mapping my territory, so i know the brain i have, so i can get to the brain i&#8217;d like.</p>
+    <h1>Why I Design My Environment</h1>
+    <p class="figdek">environmental engineering.</p>
+    <div class="meta"><span><b>revised</b><time datetime="2026-09-30">30 sep 2026</time></span></div>
   </section>
 
-  <section class="body" id="lines">
-    <div class="sec-head reveal">
-      <span class="tick" aria-hidden="true"></span>
-      <h2>the systems</h2>
-      <span class="notation">systems = cognitive scaffolding ∪ ai policy ∪ how i work ∪ environment</span>
-    </div>
-    <ol class="lines">
-      <li class="reveal">
-        <span class="t"><a href="/systems/cognitive-scaffolding">Cognitive Scaffolding</a></span>
-        <span class="dek">tools for structured overthinking: a fenced run that ends in an intervention, not a conclusion.</span>
-        <span class="when">2026 · live</span>
-      </li>
-      <li class="reveal">
-        <span class="t">AI Policy</span>
-      </li>
-      <li class="reveal">
-        <span class="t"><a href="/systems/how-i-work">How I Work</a></span>
-      </li>
-      <li class="reveal">
-        <span class="t"><a href="/systems/environment">Why I Design My Environment</a></span>
-      </li>
-    </ol>
+  <section class="body prose" id="why">
+    <p class="reveal">I decide that “my attention” is scarce and that there is an entire structural system attempting to capture, monetize, influence, redirect my attention to align with goals that aren’t “my goals that I’ve decided, in alignment with my value”.</p>
+    <p class="reveal">Very simplistically and rather intuitively, I found that where I direct my attention shapes my awareness &amp; my awareness influences my perception which in turn shapes “how I see the world” &amp; since I am the “center of my universe” aka I can only experience the world as myself, my “lived experience” or “subjective lived experience” or “embodied experience” defines how I see the world because of unconscious projection mediating all experience. I noticed that when I spend a lot of time working out, I end up unconsciously “checking out / comparing” other peoples’ physique / “muscle group I worked out this week” and that unconsciously + through conditioning of scarcity mindset / competitive human tendency activation, etc. it would shape my temporal sense of self worth which upon reflection is preposterous in the vein of “I am not defined by how I look” for example but the brain isn’t able to delineate this in the moment and makes the “simple association and labelling” which, if one has some level of insecurity / trauma and intrusive thoughts can be very harmful, destabilizing, and disorienting.</p>
+    <p class="reveal">Anyways, for my own mental health and sanity and because I have accepted that perhaps I can create systems and intervention stacks to mitigate the destabilizing impacts of my “how I’m wired” into affecting my daily functioning, I cannot at a base level, change “how I’m wired” and so to operate in a world that is not built for brains like mine, and where success is measured by KPIs that are built for neurotypical minds, I must create systems that bridge this neurodivergent-neurotypical gap as the first step to living, working, and thriving in a world that is structurally and systematically maladaptive to my wiring.</p>
+    <p class="reveal">I also realized that masking, when I was doing it for years, it was an “unknown unknown” but now, having received the clarity of a diagnosis as well as medication AND with a hyperawareness of my tendency to recursively loop guilt, shame, and self-loathing and how easily (in such a moment) it becomes for me to socially withdraw / isolate or turn to maladaptive addictive substances, the masking may provide short-term rewards but end up causing medium-long term derailment from alignment, discoherence, fragmented sense of self, and augmentation of all that I consider immoral and toxic.</p>
+    <p class="reveal">Anyways, long story short, it is not conducive to my bodymind to live in a constant activated / hyper vigilant / excessively conscientious state and so I have had to engineer systems that I adhere to, to mitigate adverse outcomes.</p>
   </section>
+
 
   <footer>
     <div class="contact reveal">
-      <a href="/">← the site</a>
+      <a href="/systems">← systems</a>
       <span>pvcomms (at) pm dot me</span>
     </div>
     <div class="colophon reveal">

@@ -1,18 +1,11 @@
-<title>Systems</title>
+<title>How I Work</title>
 <!--
-  paramv.com/systems — the systems — the running things and what they are for.
+  paramv.com/systems/how-i-work — the setting, the structure and the daily cycle around work.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until it is written in by hand.
-
-  to add a line, drop one <li> into <ol class="lines">:
-
-    <li class="reveal">
-      <span class="t">Title</span>
-      <span class="dek">one line on why it is here</span>
-      <span class="when">year · status</span>
-    </li>
-
-  then change the notation from "= ∅" and delete the <p class="blank"> line beneath the list.
+  source: Param's own document "How I work.rtf", 30 sep 2026. words are his; only clear typos are
+  fixed (dysfunction, gauge, perceived, "MX Master 3S", "iPad Pro", a closing parenthesis, ",:" -> ",”")
+  and the unfilled "(with this band LINK)" placeholder is dropped. "truth fax" is left as he wrote it.
+  "Copenhagen last month, Berlin this month" goes stale: the revised date above is what anchors it.
 -->
 <style>
   @font-face {
@@ -67,7 +60,7 @@
     --c-cohere: #e3c567;
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
-    --accent: var(--c-creation);
+    --accent: var(--c-create);
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
   }
@@ -239,7 +232,7 @@
     color: var(--accent);
   }
 
-  /* ---------- the systems ---------- */
+  /* ---------- the work ---------- */
   .body {
     padding: 72px 0 0;
   }
@@ -303,9 +296,61 @@
     color: var(--accent);
     border-bottom-color: var(--accent);
   }
+  .lines .t a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .body + .body {
+    padding-top: 56px;
+  }
+  .prose p {
+    max-width: 640px;
+    font-size: 18px;
+    line-height: 1.7;
+    margin-top: 18px;
+  }
+  .prose p:first-child {
+    margin-top: 0;
+  }
+  .prose strong {
+    font-weight: 500;
+  }
+  .phase {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+    margin: 44px 0 6px;
+  }
+  .phase + .lines,
+  .phase + p {
+    margin-top: 0;
+  }
+  /* a line here is a sentence, not a title: keep it beside its number and hang the wrap under it */
+  .lines .t {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+  .close {
+    margin-top: 32px;
+  }
+  .close p {
+    font-size: 17px;
+    margin-top: 10px;
+  }
+  .close p:first-child {
+    margin-top: 0;
+  }
   .lines .dek {
     color: var(--dim);
     font-size: 15.5px;
+  }
+  /* a second line under a row, flush with the title (counter 15.4px + 18px gap) */
+  .lines .dek.sub {
+    flex-basis: 100%;
+    padding-left: 33.4px;
   }
   .lines .when {
     font-family: var(--mono);
@@ -502,37 +547,148 @@
 
   <section class="head">
     <div class="figlabel">page · systems</div>
-    <h1>Systems</h1>
-    <p class="figdek">mapping my territory, so i know the brain i have, so i can get to the brain i&#8217;d like.</p>
+    <h1>How I Work</h1>
+    <div class="meta"><span><b>revised</b><time datetime="2026-09-30">30 sep 2026</time></span></div>
   </section>
 
-  <section class="body" id="lines">
+  <section class="body prose" id="setting">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
-      <h2>the systems</h2>
-      <span class="notation">systems = cognitive scaffolding ∪ ai policy ∪ how i work ∪ environment</span>
+      <h2>the setting</h2>
+    </div>
+    <p class="reveal">I usually pick an Airbnb / Serviced Apartment in a residential suburb of a big city (Copenhagen last month, Berlin this month).</p>
+    <p class="reveal">I look for a kitchen + balcony + work setup + fast wifi (which I check online before) + ability to receive packages (mostly cables / specific shampoo type of stuff so my personal care / body / mind systems can endure regardless of geography &amp; I can travel light).</p>
+    <p class="reveal">I unpack and “make myself at home immediately” + identify a cafe + walk path (and build familiarity with the route).</p>
+  </section>
+
+  <section class="body prose" id="structure">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>the structure</h2>
+    </div>
+    <p class="reveal">With my mental illnesses &amp; just horrible to manage ADHD, I struggle with severe executive dysfunction &amp; intellectualized rumination so I try to create systems + stakes + consequences as well as clear and defined purpose + goals + long-term coherence.</p>
+    <p class="reveal">I’ve found work-life balance level of compartmentalization insanely difficult and instead use outcome KPIs + external “real-person” audits to prevent subject-object bias &amp; yield objective evaluation.</p>
+    <p class="reveal">Instead, I operate in bursts of days to weeks long bursts of goal oriented obsession and alternate work / play swathes of time centered around a clearly defined purpose + KPI (that indexes for my compulsion towards perfectionism by letting me accept that “I’m done” when I’m 80 percent satisfied).</p>
+    <p class="reveal">I tend to spend a lot of my attention &amp; focus on overthinking, feeling non-realistic and non-embodied anxiety, low self-worth &amp; self-hatred compulsive loops that manifest as Recursive guilt &amp; shame. And as much as I am able to step-away and gauge the inherent irrationality and non utility of such thought patterns, I find this to be my biggest obstacle.</p>
+    <p class="reveal">So, I’ve had to create systems that make it near impossible to view these as “mere thoughts,” as “brain tricks,” and as “UnTruths.”</p>
+    <p class="reveal">Highly meticulous self-created structure is the solution I’ve found + extensive intentional “Digital Environment Engineering”.</p>
+    <p class="reveal">To my brain, the illusion of control or ostensible control FEELS the SAME as control, so here I try to hold the “truth fax” / “implications” / “self-deception” as loosely as possible and gauge system tweaks / “is it working” on outcome / actual “threading the needle” KPI review every 10 days.</p>
+  </section>
+
+  <section class="body" id="cycle">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>work phase system</h2>
+      <span class="notation">|cycle| = 10 days</span>
+    </div>
+    <h3 class="phase reveal">pre-work</h3>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">Loop Earplugs + ANC Sonos Ace or Dyson</span>
+      </li>
+      <li class="reveal">
+        <span class="t">15 minutes of Sun + replies w a custom news podcast + a bit of movement</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Warm lighting + “seeing the sun” or some semblance of “the sun seeing me” + mini white noises machine cooking</span>
+      </li>
+      <li class="reveal">
+        <span class="t">AM 100mg caffeine + 100mg L-Theanine + Vit B12 + Vit D</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Unload + Brush + Wash night goo off face</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Vegan Yogurt + Blueberries + Granola with Lonely Island Playlist &amp; “Dopa” Site Loop (The Guardian + Vox + The Economist + HackerNews + BBC + Aeon + Psyche + The Verge + Marginal Revolution + TechCrunch) - 15 minute timer</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Wash, Dry &amp; Restock Yogurt Dish (“Circular Method” attempt)</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Concerta + Beta Blocker</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Head to “work”</span>
+      </li>
+    </ol>
+    <h3 class="phase reveal">while working</h3>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">I keep next to me: Green Tea Unsweetened + Sparkling Water 200/500ml + Still Water 1000ml + electrolyte sachet</span>
+      </li>
+      <li class="reveal">
+        <span class="t">A3 Size “Art Book” + iPad Pro 11 inch with Apple Pencil Pro + MacBook Pro M4 + wireless keyboard (I go thru em; Logitech “multi connect” preferred but using apple one rn) + Logitech MX Master 3S</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Mac Studio M3 Ultra 96GB 1TB + 1TB SSD + Yubi NFC Passkey (+ spare) on my wrist + 2 Thunderbolt Cables + 1 HDMI Cable</span>
+      </li>
+      <li class="reveal">
+        <span class="t">TV Screen (if I’m lucky, my apartment / room will have one) else connected to iPad Pro or I buy a monitor if I end up cribbing</span>
+      </li>
+    </ol>
+    <h3 class="phase reveal">snack for blood sugar / when “peckish” or hangry</h3>
+    <p class="reveal">“lentil salad” / “hummus” / sourdough crackers / plum / nectarine / hazelnuts / walnuts</p>
+    <h3 class="phase reveal">anxiety breaking</h3>
+    <p class="reveal">5 minute meditation / hype song / 50 push ups / rationalization of perceived threat to establish safety</p>
+    <h3 class="phase reveal">post-work</h3>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">Walk around the block + custom podcast recapping my day’s inputs + “placing” them in my “knowledge base / memory palace” - 15 min</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Wash &amp; chop &amp; lightly sauté to al dente veggie variety (broccoli, cauliflower, asparagus, bell peppers (colors!), squash, zucchini, etc.) + half an avocado AND half a heirloom tomato, usually over arugula + rocket + baby spinach w Vampire Weekend / HAIM / Bon Iver / Sharon Van Etten Concert</span>
+      </li>
+      <li class="reveal">
+        <span class="t">To a “relax chair” (never same one I inhabit during “work”) for media consumption: TED Talk / Big Think Video / Less Wrong Reading / Substack Reading / Audiobook w Kombucha (or lately it’s been effervescent prebiotic + probiotic tabs)</span>
+      </li>
+      <li class="reveal">
+        <span class="t">2x weekly: MUBI / Apple TV Store Purchased Film (that I decide in advance) w Kombucha (or lately it’s been effervescent prebiotic + probiotic tabs)</span>
+      </li>
+    </ol>
+    <h3 class="phase reveal">head to bed</h3>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">Magnesium + SSRI + Clonidine</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Conan / DarkNet Diaries / “light” podcast with Therabody Legs &amp; Therabody Goggles</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Melatonin</span>
+      </li>
+    </ol>
+    <div class="close">
+    <p class="reveal">9 hours minimum (non negotiable).</p>
+    <p class="reveal">REPEAT.</p>
+      <p class="reveal">1 day <strong>off</strong> every 10 days of cycle as a “Recovery Day” for groceries + laundry + deep clean + logistics planning + TV watch.</p>
+    </div>
+  </section>
+
+  <section class="body" id="change">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>what i’d like to change</h2>
     </div>
     <ol class="lines">
       <li class="reveal">
-        <span class="t"><a href="/systems/cognitive-scaffolding">Cognitive Scaffolding</a></span>
-        <span class="dek">tools for structured overthinking: a fenced run that ends in an intervention, not a conclusion.</span>
-        <span class="when">2026 · live</span>
+        <span class="t">I’d like to “go out” more</span>
       </li>
       <li class="reveal">
-        <span class="t">AI Policy</span>
+        <span class="t">Need to add more socializing</span>
       </li>
       <li class="reveal">
-        <span class="t"><a href="/systems/how-i-work">How I Work</a></span>
+        <span class="t">Add a run / workout 3x weekly &amp; actually adhere</span>
       </li>
       <li class="reveal">
-        <span class="t"><a href="/systems/environment">Why I Design My Environment</a></span>
+        <span class="t">I realized that “context or theme switching” taxes my brain quite a bit so I would like to pick a theme and center all my media consumption around that theme for specific periods of time</span>
       </li>
     </ol>
   </section>
 
+
   <footer>
     <div class="contact reveal">
-      <a href="/">← the site</a>
+      <a href="/systems">← systems</a>
       <span>pvcomms (at) pm dot me</span>
     </div>
     <div class="colophon reveal">

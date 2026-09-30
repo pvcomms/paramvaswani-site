@@ -40,6 +40,8 @@ PAGES = {
     "/systems": "systems.html",
     "/systems.html": "systems.html",
     "/systems/cognitive-scaffolding": "cognitive-scaffolding.html",
+    "/systems/how-i-work": "how-i-work.html",
+    "/systems/environment": "environment.html",
 }
 
 INDEX_PAGE = """<!doctype html><html><head><meta charset='utf-8'>
@@ -56,6 +58,8 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/ontology">/ontology &mdash; Ontology</a>
 <a href="/systems">/systems &mdash; Systems</a>
 <a href="/systems/cognitive-scaffolding">/systems/cognitive-scaffolding &mdash; Cognitive Scaffolding (generated)</a>
+<a href="/systems/how-i-work">/systems/how-i-work &mdash; How I Work</a>
+<a href="/systems/environment">/systems/environment &mdash; Why I Design My Environment</a>
 </body></html>"""
 
 
