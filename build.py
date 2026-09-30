@@ -102,7 +102,8 @@ LLMS = """# Param Vaswani
   animation means, how they cohere, and an honest audit of which claims are actually grounded.
 - [What You Study](https://paramv.com/position): thesis, the fields it maps to, and a manifesto.
 - [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
-  music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences.
+  music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
+  quotes, aphorisms, neology & etymology.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
 - [Work](https://paramv.com/work) · [Principles](https://paramv.com/principles) ·
   [Ontology](https://paramv.com/ontology) · [Systems](https://paramv.com/systems): four more
@@ -138,7 +139,8 @@ def main():
          "/position", ""),
         ("taste.html", "taste.html", "Media Taste — " + TAB,
          "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
-         "poem, fiction, non-fiction, research concepts, influences.", "/taste", ""),
+         "poem, fiction, non-fiction, research concepts, influences, quotes, aphorisms, "
+         "neology & etymology.", "/taste", ""),
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
