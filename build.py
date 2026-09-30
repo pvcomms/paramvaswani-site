@@ -143,7 +143,8 @@ def main():
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
         ("work.html", "work.html", "Work — " + TAB,
-         "What Param has made, and what each thing was for.", "/work", ""),
+         "Learning by building, writing, labbing on self + curate my attention inputs + "
+         "systemise my time spent + structure my overthinking.", "/work", ""),
         ("principles.html", "principles.html", "Principles — " + TAB,
          "The rules Param actually runs on, in the order they win.", "/principles", ""),
         ("ontology.html", "ontology.html", "Ontology — " + TAB,
