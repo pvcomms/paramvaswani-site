@@ -23,11 +23,12 @@ Seven pages, seven files:
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
 | `about.html`         | About — now, before, credentials                |
 | `work.html`          | Work                                            |
+| `principles.html`    | Principles — the rules I run on, in the order they win |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |
 
-`/principles`, `/ontology` and `/systems` (with `/systems/how-i-work` and
+`/ontology` and `/systems` (with `/systems/how-i-work` and
 `/systems/environment`) were removed on 2026-09-30; their sources are in git history (`git show
-3809feb:principles.html`). `/taste` was removed the same day and restored on Param's word. `/systems/cognitive-scaffolding` stays, with no page above it.
+3809feb:ontology.html`). `/taste` and `/principles` were removed the same day and restored on Param's word. `/systems/cognitive-scaffolding` stays, with no page above it.
 
 ## How it is built
 

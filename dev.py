@@ -33,6 +33,8 @@ PAGES = {
     "/about.html": "about.html",
     "/work": "work.html",
     "/work.html": "work.html",
+    "/principles": "principles.html",
+    "/principles.html": "principles.html",
     "/systems/cognitive-scaffolding": "cognitive-scaffolding.html",
 }
 
@@ -46,6 +48,7 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
 <a href="/about">/about &mdash; About</a>
 <a href="/work">/work &mdash; Work</a>
+<a href="/principles">/principles &mdash; Principles</a>
 <a href="/systems/cognitive-scaffolding">/systems/cognitive-scaffolding &mdash; Cognitive Scaffolding (generated)</a>
 </body></html>"""
 
@@ -87,7 +90,7 @@ with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("  site     http://localhost:%d/" % PORT)
     print("  taste    http://localhost:%d/taste" % PORT)
     print("  curric.  http://localhost:%d/curriculum" % PORT)
-    print("  pages    http://localhost:%d/_pages  (about · work)" % PORT)
+    print("  pages    http://localhost:%d/_pages  (about · work · principles)" % PORT)
     print("  all      http://localhost:%d/_pages" % PORT)
     print("\n  edit the .html files directly - just refresh. ctrl-c to stop.\n")
     httpd.serve_forever()
