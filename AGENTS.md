@@ -22,7 +22,7 @@ vercel --prod --yes           # deploys public/. run build.py FIRST or you ship 
 
 ## The format rule — break this and publishing breaks
 
-`index.html`, `curriculum.html`, `about.html`, `work.html`, `systems.html`, `how-i-work.html` and `environment.html` are **artifact fragments**: `<title>`
+`index.html`, `curriculum.html`, `about.html` and `work.html` are **artifact fragments**: `<title>`
 on line 1, then `<link>`, `<style>`, markup, `<script>`. There is deliberately **no**
 `<!doctype>`, `<html>`, `<head>` or `<body>` tag. `build.py` and `dev.py` add the wrapper.
 Never "fix" this by adding them.
@@ -38,7 +38,7 @@ next build. The sources are the seven fragment files, plus `cognitive-scaffoldin
 
 **`cognitive-scaffolding.html` is generated, not hand-edited.** It comes from
 `~/personal/tools/apps/cognitive-scaffolding` (`./build.py --site ~/personal/site`), which
-copies the load-gate block out of `systems.html` when it runs. It is served at
+copies the load-gate block out of `work.html` when it runs. It is served at
 `/systems/cognitive-scaffolding`. To change the page, edit that repo and regenerate, then run
 `./build.py` here.
 

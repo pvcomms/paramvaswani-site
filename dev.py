@@ -30,11 +30,7 @@ PAGES = {
     "/about.html": "about.html",
     "/work": "work.html",
     "/work.html": "work.html",
-    "/systems": "systems.html",
-    "/systems.html": "systems.html",
     "/systems/cognitive-scaffolding": "cognitive-scaffolding.html",
-    "/systems/how-i-work": "how-i-work.html",
-    "/systems/environment": "environment.html",
 }
 
 INDEX_PAGE = """<!doctype html><html><head><meta charset='utf-8'>
@@ -46,10 +42,7 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
 <a href="/about">/about &mdash; About</a>
 <a href="/work">/work &mdash; Work</a>
-<a href="/systems">/systems &mdash; Systems</a>
 <a href="/systems/cognitive-scaffolding">/systems/cognitive-scaffolding &mdash; Cognitive Scaffolding (generated)</a>
-<a href="/systems/how-i-work">/systems/how-i-work &mdash; How I Work</a>
-<a href="/systems/environment">/systems/environment &mdash; Why I Design My Environment</a>
 </body></html>"""
 
 
@@ -87,7 +80,7 @@ socketserver.TCPServer.allow_reuse_address = True
 with socketserver.TCPServer(("127.0.0.1", PORT), Handler) as httpd:
     print("  site     http://localhost:%d/" % PORT)
     print("  curric.  http://localhost:%d/curriculum" % PORT)
-    print("  pages    http://localhost:%d/_pages  (about · work · systems)" % PORT)
+    print("  pages    http://localhost:%d/_pages  (about · work)" % PORT)
     print("  all      http://localhost:%d/_pages" % PORT)
     print("\n  edit the .html files directly - just refresh. ctrl-c to stop.\n")
     httpd.serve_forever()
