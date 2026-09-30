@@ -99,6 +99,7 @@ LLMS = """# Param Vaswani
   music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
   quotes, aphorisms, neology & etymology.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
+- [About](https://paramv.com/about): what he does now, what he did before, his credentials.
 - [Work](https://paramv.com/work) · [Principles](https://paramv.com/principles) ·
   [Ontology](https://paramv.com/ontology) · [Systems](https://paramv.com/systems): four more
   pages, each kept by hand.
@@ -135,6 +136,10 @@ def main():
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
+        ("about.html", "about.html", "About — " + TAB,
+         "Independent creative technologist-researcher. Co-founder of the Center for Applied "
+         "Post-Phenomenology, independent researcher at Cohort Study, founder of Ostensible; "
+         "ex AI-agent builder and management consultant.", "/about", ""),
         ("work.html", "work.html", "Work — " + TAB,
          "Learning by building, writing, labbing on self + curate my attention inputs + "
          "systemise my time spent + structure my overthinking.", "/work", ""),
@@ -167,7 +172,7 @@ def main():
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
-                                    "/work", "/principles", "/ontology", "/systems",
+                                    "/about", "/work", "/principles", "/ontology", "/systems",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
     print(f"  fonts/ vendor/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 

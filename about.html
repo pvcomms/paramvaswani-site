@@ -1,10 +1,11 @@
-<title>Systems</title>
+<title>About</title>
 <!--
-  paramv.com/systems — the systems — the running things and what they are for.
+  paramv.com/about — who, in the plain-résumé sense: what I do now, what I did before, what I hold.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until it is written in by hand.
+  source: the LinkedIn profile copy, 30 sep 2026. left OUT on purpose: both "trusted by teams at"
+  logo strips (not claims I can verify) and the empty "my learning method:" feature.
 
-  to add a line, drop one <li> into <ol class="lines">:
+  to add a line, drop one <li> into the right <ol class="lines">:
 
     <li class="reveal">
       <span class="t">Title</span>
@@ -12,7 +13,7 @@
       <span class="when">year · status</span>
     </li>
 
-  then change the notation from "= ∅" and delete the <p class="blank"> line beneath the list.
+  then bump the |n| in that section's notation.
 -->
 <style>
   @font-face {
@@ -67,7 +68,7 @@
     --c-cohere: #e3c567;
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
-    --accent: var(--c-creation);
+    --accent: var(--c-create);
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
   }
@@ -239,7 +240,7 @@
     color: var(--accent);
   }
 
-  /* ---------- the systems ---------- */
+  /* ---------- the work ---------- */
   .body {
     padding: 72px 0 0;
   }
@@ -302,6 +303,13 @@
   .lines .t a:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
+  }
+  .lines .t a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .body + .body {
+    padding-top: 56px;
   }
   .lines .dek {
     color: var(--dim);
@@ -490,39 +498,86 @@
     <h1 class="brand"><a href="/">Param V</a></h1>
     <nav class="site" aria-label="site">
       <a href="/#contact">contact</a>
-      <a href="/about">about</a>
+      <a href="/about" class="here" aria-current="page">about</a>
       <a href="/taste">taste</a>
       <a href="/curriculum">curriculum</a>
       <a href="/work">work</a>
       <a href="/principles">principles</a>
       <a href="/ontology">ontology</a>
-      <a href="/systems" class="here" aria-current="page">systems</a>
+      <a href="/systems">systems</a>
     </nav>
   </header>
 
   <section class="head">
-    <div class="figlabel">page · systems</div>
-    <h1>Systems</h1>
-    <p class="figdek">mapping my territory, so i know the brain i have, so i can get to the brain i&#8217;d like.</p>
+    <div class="figlabel">page · about</div>
+    <h1>About</h1>
+    <p class="figdek">independent creative technologist&#8209;researcher. i build, i write, i overthink. fully nomadic: me, my mac studio &amp; my local&#8209;only, foss, self&#8209;hosted ai assistant.</p>
   </section>
 
-  <section class="body" id="lines">
+  <section class="body" id="now">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
-      <h2>the systems</h2>
-      <span class="notation">systems = cognitive scaffolding ∪ ai policy ∪ how i work</span>
+      <h2>now</h2>
+      <span class="notation">|now| = 4</span>
     </div>
     <ol class="lines">
       <li class="reveal">
-        <span class="t"><a href="/systems/cognitive-scaffolding">Cognitive Scaffolding</a></span>
-        <span class="dek">tools for structured overthinking: a fenced run that ends in an intervention, not a conclusion.</span>
-        <span class="when">2026 · live</span>
+        <span class="t"><a href="https://postphenom.com">Center for Applied Post&#8209;Phenomenology</a></span>
+        <span class="dek">co&#8209;founder.</span>
       </li>
       <li class="reveal">
-        <span class="t">AI Policy</span>
+        <span class="t"><a href="https://cohortstudy.co">Cohort Study</a></span>
+        <span class="dek">independent researcher.</span>
       </li>
       <li class="reveal">
-        <span class="t">How I Work</span>
+        <span class="t">Ostensible</span>
+        <span class="dek">founder. dissecting modern society through power, incentives, etc.</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Attentional Environment Engineer</span>
+        <span class="dek">specialized in curating digital &amp; environment for neurodivergent folks.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="body" id="before">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>before</h2>
+      <span class="notation">|before| = 2</span>
+    </div>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">Clodexa</span>
+        <span class="dek">ai&#8209;agent for saas sales builder.</span>
+        <span class="when">2025</span>
+      </li>
+      <li class="reveal">
+        <span class="t">EY&#8209;Parthenon</span>
+        <span class="dek">management consultant.</span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="body" id="credentials">
+    <div class="sec-head reveal">
+      <span class="tick" aria-hidden="true"></span>
+      <h2>credentials</h2>
+      <span class="notation">|credentials| = 3</span>
+    </div>
+    <ol class="lines">
+      <li class="reveal">
+        <span class="t">B.A. Psychology</span>
+        <span class="dek">university of arizona.</span>
+      </li>
+      <li class="reveal">
+        <span class="t">M.S. Strategy</span>
+        <span class="dek">northeastern university, boston.</span>
+      </li>
+      <li class="reveal">
+        <span class="t">Indian Institute of Management&#8209;A</span>
+        <span class="dek">young leader.</span>
+        <span class="when">2025</span>
       </li>
     </ol>
   </section>

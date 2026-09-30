@@ -29,6 +29,8 @@ PAGES = {
     "/taste.html": "taste.html",
     "/curriculum": "curriculum.html",
     "/curriculum.html": "curriculum.html",
+    "/about": "about.html",
+    "/about.html": "about.html",
     "/work": "work.html",
     "/work.html": "work.html",
     "/principles": "principles.html",
@@ -48,6 +50,7 @@ h1{font-weight:400;font-size:22px;margin:0 0 20px}</style></head><body>
 <a href="/">/ &mdash; the site (index.html)</a>
 <a href="/taste">/taste &mdash; Media Taste</a>
 <a href="/curriculum">/curriculum &mdash; Learning Curriculum</a>
+<a href="/about">/about &mdash; About</a>
 <a href="/work">/work &mdash; Work</a>
 <a href="/principles">/principles &mdash; Principles</a>
 <a href="/ontology">/ontology &mdash; Ontology</a>
