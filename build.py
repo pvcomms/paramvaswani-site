@@ -14,6 +14,7 @@ PUB = ROOT / "public"
 DOMAIN = "https://paramv.com"
 
 NAME = "Param Vaswani"
+TAB = "Param V"  # the short name in page titles; NAME stays the full name in metadata
 DESC = ("Param Vaswani studies what machine mediation does to human judgment, and builds "
         "interactive instruments that let people feel those mechanisms — essays, small "
         "systems, and n=1 experiments.")
@@ -128,26 +129,26 @@ def main():
     PUB.mkdir()
 
     pages = [
-        ("index.html", "index.html", NAME, DESC, "/", PERSON_LD),
-        ("figure-legend.html", "legend.html", "Reading the Figures — " + NAME,
+        ("index.html", "index.html", TAB, DESC, "/", PERSON_LD),
+        ("figure-legend.html", "legend.html", "Reading the Figures — " + TAB,
          "What each figure on the site claims, what every animation means, and an honest audit "
          "of which claims are grounded.", "/legend", ""),
-        ("POSITION.html", "position.html", "What You Study — " + NAME,
+        ("POSITION.html", "position.html", "What You Study — " + TAB,
          "The thesis, the fields it maps to, three lengths of answer, a manifesto, and a plan.",
          "/position", ""),
-        ("taste.html", "taste.html", "Media Taste — " + NAME,
+        ("taste.html", "taste.html", "Media Taste — " + TAB,
          "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
          "poem, fiction, non-fiction, research concepts, influences.", "/taste", ""),
-        ("curriculum.html", "curriculum.html", "Learning Curriculum — " + NAME,
+        ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
-        ("work.html", "work.html", "Work — " + NAME,
+        ("work.html", "work.html", "Work — " + TAB,
          "What Param has made, and what each thing was for.", "/work", ""),
-        ("principles.html", "principles.html", "Principles — " + NAME,
+        ("principles.html", "principles.html", "Principles — " + TAB,
          "The rules Param actually runs on, in the order they win.", "/principles", ""),
-        ("ontology.html", "ontology.html", "Ontology — " + NAME,
+        ("ontology.html", "ontology.html", "Ontology — " + TAB,
          "What Param takes to exist, and where the categories are cut.", "/ontology", ""),
-        ("systems.html", "systems.html", "Systems — " + NAME,
+        ("systems.html", "systems.html", "Systems — " + TAB,
          "The running things: what they do, what they cost, what they are for.", "/systems", ""),
     ]
     letterboxd.sync()
