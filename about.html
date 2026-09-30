@@ -2,8 +2,9 @@
 <!--
   paramv.com/about — who, in the plain-résumé sense: what I do now, what I did before, what I hold.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  source: the LinkedIn profile copy, 30 sep 2026. left OUT on purpose: both "trusted by teams at"
-  logo strips (not claims I can verify) and the empty "my learning method:" feature.
+  source: the LinkedIn profile copy, 30 sep 2026. the clodexa line quotes clodexa.com's own
+  "trusted by teams at" strip (its claim about its clients, checked on the page 30 sep 2026).
+  left out: the empty "my learning method:" feature.
 
   to add a line, drop one <li> into the right <ol class="lines">:
 
@@ -315,6 +316,11 @@
     color: var(--dim);
     font-size: 15.5px;
   }
+  /* a second line under a row, flush with the title (counter 15.4px + 18px gap) */
+  .lines .dek.sub {
+    flex-basis: 100%;
+    padding-left: 33.4px;
+  }
   .lines .when {
     font-family: var(--mono);
     font-size: 11.5px;
@@ -551,6 +557,7 @@
         <span class="t">Clodexa</span>
         <span class="dek">ai&#8209;agent for saas sales builder.</span>
         <span class="when">2025</span>
+        <span class="dek sub">clodexa is trusted by teams at bosch, freshworks, welaunch, whatfix, zeropath, cygeniq, astra security, lattice, notion, linear, retool, vercel, supabase, stripe, figma, brex.</span>
       </li>
       <li class="reveal">
         <span class="t">EY&#8209;Parthenon</span>
