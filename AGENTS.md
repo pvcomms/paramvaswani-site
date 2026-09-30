@@ -34,7 +34,13 @@ grep -c '<body' index.html    # must be 0
 ## Invariants
 
 **`public/` is generated.** Editing it directly is always wrong, and the edit is lost on the
-next build. The sources are the seven fragment files.
+next build. The sources are the seven fragment files, plus `cognitive-scaffolding.html`.
+
+**`cognitive-scaffolding.html` is generated, not hand-edited.** It comes from
+`~/personal/tools/apps/cognitive-scaffolding` (`./build.py --site ~/personal/site`), which
+copies the load-gate block out of `systems.html` when it runs. It is served at
+`/systems/cognitive-scaffolding`. To change the page, edit that repo and regenerate, then run
+`./build.py` here.
 
 **Fonts are self-hosted.** Newsreader and IBM Plex Mono as `.woff2` in `fonts/`, copied to
 `public/fonts/` by the build, cached immutable by `vercel.json`. Never add a Google Fonts
@@ -53,7 +59,7 @@ second small `<style>` + inline `<script>` + `<div class="gate">`: an ALTCHA wid
 auto-solves a proof-of-work on load (static challenge in the `challenge` attribute, no server)
 before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fails open on
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
-The block is identical in every page fragment (seven as of Sep 30) — change it everywhere or nowhere.
+The block is identical in every page fragment (seven hand-kept + one generated as of Sep 30) — change it everywhere or nowhere; after changing it, regenerate cognitive-scaffolding.html.
 
 **Letterboxd is a build-time input.** `letterboxd.py` fetches the diary feed and posters when
 `build.py` runs and they ship as first-party files under `/letterboxd/`. Never add a client-side

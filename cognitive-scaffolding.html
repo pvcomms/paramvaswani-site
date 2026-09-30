@@ -1,0 +1,2388 @@
+<title>Cognitive Scaffolding</title>
+<!--
+  paramv.com/systems/cognitive-scaffolding. GENERATED, do not edit here.
+  source: ~/personal/tools/apps/cognitive-scaffolding (github.com/pvcomms/cognitive-scaffolding)
+  rebuild: cd there && ./build.py --site ~/personal/site
+  the load-gate block is copied from systems.html at build time, so it stays identical.
+-->
+<style>
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-300.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "IBM Plex Mono";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/plexmono-latin-400.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: italic;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin-italic.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Newsreader";
+    font-style: normal;
+    font-weight: 300 500;
+    font-display: swap;
+    src: url("/fonts/newsreader-latin.woff2") format("woff2");
+  }
+
+  /* dark is the default, same ground as paramv.com; light follows the system */
+  :root {
+    color-scheme: dark;
+    --bg: #0b0c0e;
+    --fg: #e9e6de;
+    --soft: #cdc9bf;
+    --dim: #a19c8a;
+    --faint: #847f6f;
+    --hair: #222326;
+    --edge: #3a3b3e;
+    --accent: #e3c567;
+    --wash: rgba(227, 197, 103, 0.1); /* --accent at 10%, must match --accent */
+    --tint: rgba(233, 230, 222, 0.035); /* --fg at 3.5%, must match --fg */
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 6rem;
+  }
+  body {
+    color-scheme: inherit;
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--serif);
+    font-size: 1.125rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 400;
+    margin: 0;
+    text-wrap: balance;
+  }
+  h1 {
+    font-size: clamp(2.25rem, 3.5vw + 1rem, 3.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+  }
+  h2 {
+    font-size: clamp(1.75rem, 2vw + 1rem, 2.35rem);
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+  }
+  p {
+    margin: 0 0 1rem;
+    text-wrap: pretty;
+  }
+  a {
+    color: inherit;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--edge);
+    text-underline-offset: 3px;
+    transition:
+      text-decoration-color 0.2s var(--ease),
+      color 0.2s var(--ease);
+  }
+  a:hover {
+    text-decoration-color: var(--accent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .sr {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .lbl,
+  .kicker {
+    display: block;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .kicker {
+    margin-bottom: 0.9rem;
+  }
+  .lede {
+    font-size: 1.2rem;
+    color: var(--soft);
+    margin-top: 1.1rem;
+  }
+  .wrap {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding-inline: 1.5rem;
+  }
+  .narrow > * {
+    max-width: 42rem;
+  }
+
+  /* header */
+  .top {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--bg);
+    border-bottom: 1px solid var(--hair);
+  }
+  .top-in {
+    max-width: 64rem;
+    margin: 0 auto;
+    padding: 0.85rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1.5rem;
+  }
+  .crumb {
+    font-size: 1rem;
+    color: var(--dim);
+    text-decoration: none;
+  }
+  .crumb:hover {
+    color: var(--fg);
+  }
+  .mark {
+    margin-right: auto;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .top nav {
+    display: flex;
+    gap: 1.25rem;
+  }
+  .top nav a {
+    position: relative;
+    color: var(--dim);
+    text-decoration: none;
+    font-size: 1rem;
+  }
+  .top nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -3px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s var(--ease);
+  }
+  .top nav a:hover,
+  .top nav a[aria-current="page"] {
+    color: var(--fg);
+  }
+  .top nav a[aria-current="page"]::after {
+    transform: scaleX(1);
+  }
+  .clock {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--dim);
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+    min-width: 5ch;
+    text-align: right;
+  }
+  .clock.up {
+    color: var(--accent);
+  }
+  .fence-line {
+    height: 1px;
+    margin-bottom: -1px;
+    position: relative;
+  }
+  .fence-line i {
+    display: block;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1s linear;
+  }
+
+  /* fields */
+  fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+  .field {
+    margin-top: 2rem;
+  }
+  .field > label,
+  .field > legend {
+    display: block;
+    font-size: 1rem;
+    color: var(--dim);
+    margin-bottom: 0.4rem;
+    padding: 0;
+  }
+  input[type="text"],
+  textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font: inherit;
+    font-size: 1.15rem;
+    color: var(--fg);
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--edge);
+    border-radius: 0;
+    padding: 0.45rem 0;
+    transition:
+      border-color 0.2s var(--ease),
+      box-shadow 0.2s var(--ease);
+  }
+  textarea {
+    resize: vertical;
+    line-height: 1.45;
+  }
+  input[type="text"]::placeholder,
+  textarea::placeholder {
+    color: var(--faint);
+    font-style: italic;
+    opacity: 1;
+  }
+  input[type="text"]:hover,
+  textarea:hover {
+    border-bottom-color: var(--faint);
+  }
+  input[type="text"]:focus-visible,
+  textarea:focus-visible {
+    outline: none;
+    border-bottom-color: var(--accent);
+    box-shadow: 0 1px 0 0 var(--accent);
+  }
+  textarea.big {
+    font-size: 1.45rem;
+    line-height: 1.35;
+    resize: none;
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .chip {
+    position: relative;
+    display: inline-flex;
+  }
+  .chip input {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .chip span {
+    padding: 0.28rem 0.8rem;
+    border: 1px solid var(--edge);
+    border-radius: 2px;
+    font-size: 1rem;
+    color: var(--dim);
+    transition:
+      border-color 0.2s var(--ease),
+      color 0.2s var(--ease),
+      background-color 0.2s var(--ease);
+  }
+  .chip:hover span {
+    color: var(--fg);
+    border-color: var(--faint);
+  }
+  .chip input:checked + span {
+    color: var(--fg);
+    border-color: var(--accent);
+    background: var(--wash);
+  }
+  .chip input:focus-visible + span {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+  .check {
+    display: inline-flex;
+    gap: 0.6rem;
+    align-items: center;
+    margin-top: 0.5rem;
+    color: var(--soft);
+    cursor: pointer;
+  }
+  .check input {
+    width: 1.05rem;
+    height: 1.05rem;
+    margin: 0;
+    accent-color: var(--accent);
+  }
+  .sure {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  .sure input {
+    flex: 1;
+    accent-color: var(--accent);
+  }
+  .sure output {
+    font-family: var(--mono);
+    font-weight: 300;
+    font-size: 1.6rem;
+    min-width: 3ch;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .was {
+    font-size: 0.9rem;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .hint {
+    font-size: 0.95rem;
+    color: var(--dim);
+    margin: 0.6rem 0 0;
+  }
+  .hint.warn {
+    color: var(--accent);
+  }
+
+  /* buttons */
+  .btn {
+    display: inline-block;
+    font: inherit;
+    font-size: 1rem;
+    line-height: 1.3;
+    padding: 0.6rem 1.15rem;
+    border-radius: 3px;
+    border: 1px solid var(--fg);
+    background: var(--fg);
+    color: var(--bg);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      transform 0.25s var(--ease),
+      opacity 0.2s var(--ease),
+      border-color 0.2s var(--ease);
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn:active {
+    transform: scale(0.98);
+  }
+  .btn.ghost {
+    background: transparent;
+    color: var(--fg);
+    border-color: var(--edge);
+  }
+  .btn.ghost:hover {
+    border-color: var(--faint);
+  }
+  .btn.small {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.92rem;
+  }
+  .btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .linkish {
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 0.95rem;
+    color: var(--dim);
+    text-decoration: underline;
+    text-decoration-color: var(--edge);
+    text-underline-offset: 3px;
+    cursor: pointer;
+    transition:
+      color 0.2s var(--ease),
+      text-decoration-color 0.2s var(--ease);
+  }
+  .linkish:hover {
+    color: var(--fg);
+    text-decoration-color: var(--accent);
+  }
+  .nav-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .nav-row .spacer {
+    flex: 1;
+  }
+  .status {
+    font-size: 0.95rem;
+    color: var(--dim);
+  }
+
+  /* reveal */
+  .rv {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  .rv.in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.6s var(--ease) var(--d, 0ms),
+      transform 0.6s var(--ease) var(--d, 0ms);
+  }
+  .still .rv {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rv {
+      opacity: 1;
+      transform: none;
+    }
+    .rv.in,
+    .fence-line i {
+      transition: none;
+    }
+  }
+
+  /* start */
+  .start {
+    padding-block: 4.5rem 6rem;
+  }
+  .waiting {
+    margin-bottom: 4rem;
+  }
+  .waiting .small {
+    color: var(--dim);
+    font-size: 1rem;
+  }
+  .pending {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 0;
+    border-top: 1px solid var(--hair);
+  }
+  .pend {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.2rem 1.5rem;
+    align-items: center;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .pend .it {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  .pend .meta {
+    grid-column: 1;
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+  .acts {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .pend .acts {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+  .overdue {
+    color: var(--accent);
+  }
+
+  /* the run */
+  .run {
+    display: grid;
+    grid-template-columns: 9.5rem minmax(0, 42rem);
+    gap: 0 3.5rem;
+    padding-block: 3.5rem 6rem;
+  }
+  .rail-wrap {
+    position: sticky;
+    top: 5.5rem;
+    align-self: start;
+  }
+  .rail {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border-left: 1px solid var(--hair);
+  }
+  .rail button {
+    display: flex;
+    gap: 0.7rem;
+    align-items: baseline;
+    width: 100%;
+    margin-left: -1px;
+    padding: 0.42rem 0 0.42rem 1rem;
+    background: none;
+    border: 0;
+    border-left: 1px solid transparent;
+    font: inherit;
+    font-size: 1rem;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--faint);
+    cursor: pointer;
+    transition:
+      color 0.2s var(--ease),
+      border-color 0.3s var(--ease);
+  }
+  .rail .n {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+  }
+  .rail button.past {
+    color: var(--dim);
+  }
+  .rail button:hover {
+    color: var(--fg);
+  }
+  .rail button[aria-current="step"] {
+    color: var(--fg);
+    border-left-color: var(--accent);
+  }
+  .rail button[aria-current="step"] .n {
+    color: var(--accent);
+  }
+  .rail-foot {
+    margin-top: 2rem;
+    padding-left: 1rem;
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+  .rail-foot p {
+    margin-bottom: 0.4rem;
+  }
+  .rail-foot .acts {
+    gap: 0.75rem;
+  }
+  .loopline {
+    margin: 0 0 2.5rem;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--hair);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: var(--soft);
+  }
+  .loopline .lbl {
+    font-style: normal;
+    margin-bottom: 0.2rem;
+  }
+  .fence-up {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.4rem 1rem;
+    margin: 0 0 2.25rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    background: var(--wash);
+  }
+  .ground {
+    margin-top: 2.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--hair);
+    font-size: 0.95rem;
+    color: var(--dim);
+  }
+  .ground p {
+    margin-bottom: 0.5rem;
+  }
+  .src {
+    font-size: 0.86rem;
+    color: var(--faint);
+  }
+  .picked {
+    display: grid;
+    gap: 2.25rem;
+    margin: 2.25rem 0 2.75rem;
+  }
+  .pt {
+    padding-left: 1.25rem;
+    border-left: 2px solid var(--accent);
+  }
+  .pt-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.2rem 1rem;
+  }
+  .pt-head .lbl {
+    width: 100%;
+  }
+  .pt-head h3 {
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+  }
+  .pt-move {
+    color: var(--soft);
+    margin: 0.4rem 0 1.1rem;
+  }
+  .pt label {
+    display: block;
+    font-size: 1rem;
+    color: var(--dim);
+    margin-bottom: 0.3rem;
+  }
+  .pt .more {
+    display: inline-block;
+    margin-top: 0.6rem;
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+  .filters {
+    margin-top: 2rem;
+  }
+  .rowlist {
+    list-style: none;
+    padding: 0;
+    margin: 1.25rem 0 0;
+    border-top: 1px solid var(--hair);
+  }
+  .tool-row,
+  .lens-row {
+    position: relative;
+    display: grid;
+    gap: 0.1rem 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.85rem 0.5rem 0.85rem 1.1rem;
+    background: none;
+    border: 0;
+    border-bottom: 1px solid var(--hair);
+    font: inherit;
+    color: var(--fg);
+    text-align: left;
+    cursor: pointer;
+    transition:
+      background-color 0.25s var(--ease),
+      opacity 0.2s var(--ease);
+  }
+  .tool-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .tool-row::before,
+  .lens-row::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.9rem;
+    bottom: 0.9rem;
+    width: 2px;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.35s var(--ease);
+  }
+  .tool-row[aria-pressed="true"]::before,
+  .lens-row:has(input:checked)::before {
+    transform: scaleY(1);
+  }
+  .tool-row:hover:not(:disabled),
+  .lens-row:hover {
+    background: var(--tint);
+  }
+  .tool-row:disabled {
+    opacity: 0.38;
+    cursor: not-allowed;
+  }
+  .tn,
+  .ln {
+    font-size: 1.1rem;
+  }
+  .tw,
+  .lq {
+    grid-column: 1;
+    font-size: 0.97rem;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+  .tf {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: baseline;
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--faint);
+  }
+  .lens-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lens-row input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .lens-row:has(input:focus-visible) {
+    outline: 2px solid var(--accent);
+    outline-offset: -2px;
+  }
+  .lens-open {
+    padding: 0.75rem 0 1.5rem 1.1rem;
+    border-bottom: 1px solid var(--hair);
+  }
+  .guard {
+    color: var(--soft);
+    font-size: 1rem;
+  }
+  .lens-open label {
+    display: block;
+    color: var(--dim);
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  .spar {
+    margin-top: 3.25rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+    border: 1px solid var(--edge);
+    border-radius: 3px;
+  }
+  .spar h3 {
+    font-size: 1.35rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.5rem;
+  }
+  .spar p {
+    color: var(--soft);
+    font-size: 1.02rem;
+  }
+  .spar textarea[readonly] {
+    margin-top: 1rem;
+    height: 13rem;
+    font-family: var(--mono);
+    font-size: 0.8rem;
+    border: 1px solid var(--edge);
+    padding: 0.75rem;
+  }
+  .ifthen .field:first-child {
+    margin-top: 1.5rem;
+  }
+  .recap {
+    margin-top: 2.75rem;
+    padding: 1.25rem 0;
+    border-block: 1px solid var(--hair);
+  }
+  .it {
+    font-size: 1.3rem;
+    line-height: 1.4;
+    margin: 0.3rem 0;
+  }
+  .recap .meta {
+    color: var(--dim);
+    font-size: 0.95rem;
+    margin: 0;
+  }
+  .logged {
+    padding-block: 5rem 6rem;
+  }
+  .logged h1 {
+    margin-bottom: 1.5rem;
+  }
+  .logged .it {
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    margin-bottom: 1.5rem;
+  }
+  .num {
+    font-family: var(--mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 0.92em;
+  }
+
+  /* toolbox */
+  .book-head {
+    padding-block: 4.5rem 2.5rem;
+    max-width: 42rem;
+  }
+  .dek {
+    font-size: 1.4rem;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--soft);
+    margin: 0.9rem 0 2.25rem;
+  }
+  .book-head > p:not(.dek):not(.rule) {
+    color: var(--soft);
+  }
+  .rule {
+    margin-top: 2.25rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    font-size: 1.35rem;
+    line-height: 1.4;
+  }
+  .toc {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.5rem;
+    padding-bottom: 2.5rem;
+    font-size: 0.98rem;
+  }
+  .toc a {
+    color: var(--dim);
+    text-decoration: none;
+  }
+  .toc a:hover {
+    color: var(--fg);
+  }
+  .toc .num {
+    color: var(--faint);
+    margin-right: 0.4rem;
+    font-size: 0.72rem;
+  }
+  .family {
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr);
+    gap: 0 3rem;
+    padding-block: 3.25rem;
+    border-top: 1px solid var(--hair);
+  }
+  .fam-head {
+    position: sticky;
+    top: 5.5rem;
+    align-self: start;
+  }
+  .fam-head .num {
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+  .fam-head h2 {
+    font-size: 1.6rem;
+    margin: 0.2rem 0 0.6rem;
+  }
+  .fam-head p {
+    color: var(--dim);
+    font-size: 0.98rem;
+    line-height: 1.55;
+  }
+  .tool {
+    border-bottom: 1px solid var(--hair);
+  }
+  .tool:first-child {
+    border-top: 1px solid var(--hair);
+  }
+  .tool summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 1rem;
+    gap: 0.15rem 1rem;
+    padding: 1.05rem 0;
+    list-style: none;
+    cursor: pointer;
+  }
+  .tool summary::-webkit-details-marker {
+    display: none;
+  }
+  .tool summary .tn {
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    transition: color 0.2s var(--ease);
+  }
+  .tool summary:hover .tn {
+    color: var(--accent);
+  }
+  .pm {
+    grid-column: 2;
+    grid-row: 1;
+    position: relative;
+    width: 0.8rem;
+    height: 0.8rem;
+    align-self: center;
+  }
+  .pm::before,
+  .pm::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--dim);
+    transition: transform 0.35s var(--ease);
+  }
+  .pm::after {
+    transform: rotate(90deg);
+  }
+  .tool[open] .pm::after {
+    transform: rotate(0deg);
+  }
+  .tool-body {
+    padding: 0.25rem 0 2rem;
+    max-width: 38rem;
+  }
+  .tool-body .move {
+    font-size: 1.15rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    margin-bottom: 1.4rem;
+  }
+  .tool-body .move .lbl,
+  .tool-body .ask .lbl {
+    margin-bottom: 0.2rem;
+  }
+  .tool-body > p {
+    color: var(--soft);
+  }
+  .tool-body .ask {
+    margin-top: 1.4rem;
+    color: var(--fg);
+    font-style: italic;
+  }
+  .tool-body .ask .lbl {
+    font-style: normal;
+  }
+  .sources {
+    margin: 1.25rem 0 0;
+    padding: 0 0 0 1.1rem;
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--dim);
+  }
+  .sources li {
+    margin-bottom: 0.35rem;
+  }
+  .lens-item {
+    padding: 1.1rem 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .lens-item:first-child {
+    border-top: 1px solid var(--hair);
+  }
+  .lens-item h3 {
+    font-size: 1.25rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.3rem;
+  }
+  .lens-item p {
+    margin: 0 0 0.4rem;
+    color: var(--soft);
+  }
+  .lens-item .guard {
+    color: var(--dim);
+    font-size: 0.97rem;
+  }
+  .steps {
+    list-style: none;
+    counter-reset: s;
+    padding: 0;
+    margin: 0;
+  }
+  .steps li {
+    counter-increment: s;
+    display: grid;
+    grid-template-columns: 2.25rem minmax(0, 1fr);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid var(--hair);
+    color: var(--soft);
+  }
+  .steps li:first-child {
+    border-top: 1px solid var(--hair);
+  }
+  .steps li::before {
+    content: counter(s, decimal-leading-zero);
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--accent);
+    padding-top: 0.35rem;
+  }
+  .steps b {
+    font-weight: 400;
+    color: var(--fg);
+  }
+  .steps .src {
+    display: block;
+    margin-top: 0.25rem;
+  }
+
+  /* ledger */
+  .ledger {
+    padding-block: 4.5rem 6rem;
+  }
+  .ledger > header {
+    max-width: 42rem;
+  }
+  .tally {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+    gap: 1.25rem 2rem;
+    margin: 2.5rem 0 3.5rem;
+    padding: 1.4rem 0;
+    border-block: 1px solid var(--hair);
+  }
+  .tally dt {
+    font-size: 0.92rem;
+    color: var(--dim);
+  }
+  .tally dd {
+    margin: 0;
+    font-family: var(--mono);
+    font-weight: 300;
+    font-size: 1.7rem;
+    font-variant-numeric: tabular-nums;
+  }
+  .tally .done dd {
+    color: var(--accent);
+  }
+  .ledger h2 {
+    font-size: 1.5rem;
+    margin: 0 0 0.25rem;
+  }
+  .ledger section {
+    margin-bottom: 3.5rem;
+  }
+  .entries {
+    border-top: 1px solid var(--hair);
+    margin-top: 1rem;
+  }
+  .entry {
+    border-bottom: 1px solid var(--hair);
+  }
+  .entry summary {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr) auto;
+    gap: 0.2rem 1.25rem;
+    align-items: baseline;
+    padding: 0.85rem 0;
+    list-style: none;
+    cursor: pointer;
+    transition: background-color 0.25s var(--ease);
+  }
+  .entry summary::-webkit-details-marker {
+    display: none;
+  }
+  .entry summary:hover {
+    background: var(--tint);
+  }
+  .entry .date {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--faint);
+    padding-left: 0.25rem;
+  }
+  .entry .loop {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .entry[open] .loop {
+    white-space: normal;
+  }
+  .st {
+    font-size: 0.9rem;
+    padding-right: 0.25rem;
+  }
+  .st-pending {
+    color: var(--accent);
+  }
+  .st-done {
+    color: var(--fg);
+  }
+  .st-dropped {
+    color: var(--faint);
+    text-decoration: line-through;
+  }
+  .entry-body {
+    padding: 0.25rem 0 1.5rem 7rem;
+  }
+  .kv {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    gap: 0.45rem 1.5rem;
+    margin: 0.5rem 0 1.25rem;
+    font-size: 1rem;
+  }
+  .kv dt {
+    color: var(--dim);
+  }
+  .kv dd {
+    margin: 0;
+  }
+  .io {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--hair);
+  }
+  .io p {
+    color: var(--dim);
+    font-size: 0.98rem;
+  }
+  .empty {
+    color: var(--soft);
+  }
+
+  @media (max-width: 760px) {
+    .run {
+      grid-template-columns: minmax(0, 1fr);
+      padding-top: 1.25rem;
+    }
+    .rail-wrap {
+      position: static;
+      margin-bottom: 2rem;
+    }
+    .rail {
+      display: flex;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: none;
+      border-left: 0;
+      border-bottom: 1px solid var(--hair);
+    }
+    .rail button {
+      margin: 0 0 -1px;
+      padding: 0.5rem 0.7rem 0.6rem;
+      border-left: 0;
+      border-bottom: 1px solid transparent;
+    }
+    .rail button[aria-current="step"] {
+      border-bottom-color: var(--accent);
+    }
+    .rail button:not([aria-current]) .l {
+      display: none;
+    }
+    .rail-foot {
+      margin-top: 0.75rem;
+      padding-left: 0;
+    }
+    .family {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .fam-head {
+      position: static;
+      margin-bottom: 1.25rem;
+    }
+    .entry-body {
+      padding-left: 0;
+    }
+  }
+  @media (max-width: 560px) {
+    .wrap,
+    .top-in {
+      padding-inline: 1rem;
+    }
+    /* row one: (crumb) + mark; row two: views + fence clock */
+    .mark {
+      flex: 1 0 60%;
+    }
+    .clock {
+      margin-left: auto;
+    }
+    .start,
+    .book-head,
+    .ledger,
+    .logged {
+      padding-top: 2.5rem;
+    }
+    .pend {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .pend .acts {
+      grid-column: 1;
+      grid-row: auto;
+      margin-top: 0.5rem;
+    }
+    .kv {
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0.1rem;
+    }
+    .kv dd {
+      margin-bottom: 0.6rem;
+    }
+    .entry summary {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+    .entry .date {
+      grid-column: 1 / -1;
+      padding-left: 0;
+    }
+    .spar {
+      padding: 1.25rem 1rem;
+    }
+    .sure {
+      flex-wrap: wrap;
+    }
+  }
+</style>
+<style>
+  /* gate — a proof-of-work runs before the page opens. no js → no gate; solved once per tab session. */
+  html.gated { overflow: hidden; }
+  .gate {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: var(--ink, #0b0c0e);
+    padding: 24px;
+    transition: opacity 0.45s ease;
+  }
+  html.gated .gate, .gate.out { display: grid; place-items: center; }
+  .gate.out { opacity: 0; pointer-events: none; }
+  .gate-inner {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+    max-width: 300px;
+    font-family: var(--mono, "IBM Plex Mono", Menlo, monospace);
+    font-size: 12.5px;
+    line-height: 1.7;
+    color: var(--dim, #96917f);
+  }
+  .gate-kicker { color: var(--paper, #e9e6de); letter-spacing: 0.04em; }
+  .gate altcha-widget {
+    font-family: inherit;
+    font-size: inherit;
+    --altcha-color-base: var(--ink, #0b0c0e);
+    --altcha-color-base-content: var(--paper, #e9e6de);
+    --altcha-color-neutral: var(--hair-2, #66635a);
+    --altcha-color-neutral-content: var(--dim, #96917f);
+    --altcha-color-primary: var(--c-cohere, #e3c567);
+    --altcha-color-primary-content: var(--ink, #0b0c0e);
+    --altcha-color-success: var(--c-cohere, #e3c567);
+    --altcha-color-success-content: var(--ink, #0b0c0e);
+    --altcha-border-color: var(--hair-2, #66635a);
+    --altcha-border-width: 1px;
+    --altcha-border-radius: 2px;
+    --altcha-checkbox-border-color: var(--hair-2, #66635a);
+    --altcha-checkbox-border-radius: 2px;
+    --altcha-checkbox-size: 16px;
+    --altcha-spinner-color: var(--c-cohere, #e3c567);
+    --altcha-max-width: 300px;
+  }
+</style>
+<script>
+  try { if (!sessionStorage.getItem("pv-gate")) document.documentElement.classList.add("gated"); } catch (e) {}
+</script>
+<div class="gate" id="gate" aria-live="polite">
+  <div class="gate-inner">
+    <span class="gate-kicker">paramv.com · proof of work</span>
+    <altcha-widget
+      id="gate-altcha"
+      auto="onload"
+      challenge='{"parameters":{"algorithm":"PBKDF2/SHA-256","cost":5000,"keyLength":32,"keyPrefix":"00","nonce":"4917e0651977f74f5238e1fabe6b2565","salt":"1f49403409e53e4caabd27bc373a2d17"}}'
+      configuration='{"hideLogo":true,"hideFooter":true,"minDuration":700}'
+    ></altcha-widget>
+    <span>a small computation runs in your browser before the page opens. nothing to click, nothing sent anywhere; scrapers pay for the page in cpu instead.</span>
+  </div>
+</div>
+
+<header class="top">
+  <div class="top-in">
+    <a class="crumb" href="/systems">← systems</a>
+    <a class="mark" href="#run">Cognitive Scaffolding</a>
+    <nav aria-label="Views">
+      <a href="#run" data-view="run">Run</a>
+      <a href="#toolbox" data-view="toolbox">Toolbox</a>
+      <a href="#ledger" data-view="ledger">Ledger</a>
+    </nav>
+    <a class="clock" id="clock" href="#run" hidden></a>
+  </div>
+  <div class="fence-line" aria-hidden="true"><i id="fenceFill"></i></div>
+</header>
+<main id="app"></main>
+
+<script type="application/json" id="data">
+  {"about":{"title":"Cognitive Scaffolding","line":"Tools for structured overthinking, so the thinking ends in something done.","rule":"Every run ends in an intervention, not a conclusion.","body":["I overthink. Give me a problem and I'll run it through philosophy, realpolitik, critical theory, the state of the world, the science and the social science, and at the end I'll understand the problem beautifully and be sitting alone in a room. Intellectualised rumination is a very good way to withdraw while feeling like work.","So this is scaffolding. It doesn't cure overthinking. It's a container for it: a fence on the time, a small set of reasoning tools, six lenses with guards on them, and one rule. Every run ends in an intervention, not a conclusion. The intervention is a thing I'll do, with a when, that moves toward a person, the body, or the world off the screen.","The bet is old psychology. We infer who we are from what we watch ourselves do. Log enough interventions and the next time the loop starts, it starts in a different person, one who does interventions.","AI is allowed in, on terms. It can ask. It can't answer for me. The sparring brief tells a model to question me, and it forbids the model from writing the intervention. Augmentation should leave me more capable, not replaced."]},"families":[{"id":"argument","name":"The argument","line":"Whether the reasoning holds, whoever is doing the reasoning."},{"id":"vantage","name":"The vantage","line":"Where you're standing when you look at it: too close, too hot, or at the wrong date."},{"id":"shortcut","name":"The shortcut","line":"Fast judgments that feel like seeing."},{"id":"others","name":"Other people","line":"The predictions about people that keep you away from them."},{"id":"screen","name":"The screen","line":"What reached you through a channel, and what a machine should and shouldn't do for you."},{"id":"exit","name":"The exit","line":"How a run stops, and what it turns into."}],"tools":[{"id":"ad-hominem","name":"Ad hominem, turned inward","family":"argument","when":"You're dismissing a plan because of who's making it, and the who is you.","move":"Separate the claim from the claimant. Judge the plan as if a stranger had proposed it.","ask":"Strip out who's saying it. What is the claim, and does it hold on its own?","order":1,"body":["The textbook ad hominem attacks the arguer instead of the argument. Rumination runs it on yourself: \"this won't work, because I'm the kind of person who doesn't follow through.\" That uses a fact about your history as a verdict on a plan. Your record is evidence about base rates. It is not a refutation.","Run it outward too. An idea from someone you dislike isn't wrong for that reason, and one from someone you admire isn't right for it. Cognitive therapy calls the inward version <em>labelling<\/em>."],"grounding":["Walton, D. (1998). <em>Ad Hominem Arguments<\/em>. University of Alabama Press.","Burns, D. D. (1980). <em>Feeling Good: The New Mood Therapy<\/em>. William Morrow."]},{"id":"non-sequitur","name":"Non sequitur","family":"argument","when":"The conclusion is far bigger than the evidence. One awkward evening became \"I should stop going out.\"","move":"Write the premise and the conclusion on a line each, then name the step that would have to sit between them.","ask":"Premise, then conclusion. What would have to be true to get from one to the other?","order":2,"body":["A non sequitur is a conclusion that doesn't follow. Rumination makes them quickly, because the mood supplies the missing premise without saying so. Getting from \"that went badly\" to \"people don't want me around\" needs \"one evening stands for all evenings\" in the middle. Said out loud, the hidden premise usually doesn't hold up.","Cognitive therapy's names for the everyday versions are <em>overgeneralisation<\/em> and <em>jumping to conclusions<\/em>."],"grounding":["Beck, A. T., Rush, A. J., Shaw, B. F., &amp; Emery, G. (1979). <em>Cognitive Therapy of Depression<\/em>. Guilford Press.","Burns, D. D. (1980). <em>Feeling Good: The New Mood Therapy<\/em>. William Morrow."]},{"id":"skepticism","name":"Skepticism, pointed inward","family":"argument","when":"A thought feels true and you haven't checked it, because it's yours.","move":"Treat the thought as a claim someone handed you. Ask what would make you believe it, and what would show it's false.","ask":"What evidence would change your mind, and have you gone looking for it?","order":3,"body":["You'd never accept a stranger's claim on the evidence you accept for your own 2 a.m. thoughts. Metacognitive awareness means relating to thoughts as events in the mind rather than readouts of reality. It is one of the mechanisms linked to lower relapse in mindfulness-based cognitive therapy for depression.","This isn't cynicism. It's asking your own thoughts for the same evidence you'd ask of anyone else's."],"grounding":["Teasdale, J. D., Moore, R. G., Hayhurst, H., Pope, M., Williams, S., &amp; Segal, Z. V. (2002). Metacognitive awareness and prevention of relapse in depression: Empirical evidence. <em>Journal of Consulting and Clinical Psychology<\/em>, 70(2), 275–287. <a href=\"https://doi.org/10.1037/0022-006X.70.2.275\" rel=\"noopener\">doi:10.1037/0022-006X.70.2.275<\/a>"]},{"id":"other-mouth","name":"Put the words in someone else's mouth","family":"vantage","when":"You can't tell whether the thought is right or just loud.","move":"Give the thought to someone else. If a friend said it about themselves, what would you tell them? If someone you dislike made the argument, would you still accept it?","ask":"Whose mouth did you put it in, and what changed?","order":1,"body":["This has two uses. The first is self-distancing. People reason more wisely about a friend's problem than their own (Solomon's paradox), and the gap closes when they take a third-person view of themselves. Even using your own name in self-talk helps.","The second is a source swap. Hand an argument to a speaker you like or dislike, and you see how much of your judgment was really about the speaker."],"grounding":["Grossmann, I., &amp; Kross, E. (2014). Exploring Solomon's paradox: Self-distancing eliminates the self-other asymmetry in wise reasoning about close relationships in younger and older adults. <em>Psychological Science<\/em>, 25(8), 1571–1580. <a href=\"https://doi.org/10.1177/0956797614535400\" rel=\"noopener\">doi:10.1177/0956797614535400<\/a>","Kross, E., Bruehlman-Senecal, E., Park, J., Burson, A., Dougherty, A., Shablack, H., Bremner, R., Moser, J., &amp; Ayduk, O. (2014). Self-talk as a regulatory mechanism: How you do it matters. <em>Journal of Personality and Social Psychology<\/em>, 106(2), 304–324. <a href=\"https://doi.org/10.1037/a0035173\" rel=\"noopener\">doi:10.1037/a0035173<\/a>"]},{"id":"belief-body","name":"Divorce the belief from the body","family":"vantage","when":"The certainty is strong and physical, felt in the chest, jaw or stomach, and the evidence is thin.","move":"First name the body's state and its likely cause. Then look at the belief again with the feeling set to one side.","ask":"What is the body doing right now, and what caused that, apart from the belief?","order":2,"body":["We read our feelings as information about whatever is in front of us. In Schwarz and Clore's study, people rated their whole lives as worse on rainy days. When the researchers mentioned the weather, the effect went away. Naming the cause of the feeling detached it from the judgment.","The sense of certainty is also a feeling, not a proof. Hunger, tiredness, loneliness, a medication wearing off, too much noise: name the cause and it stops voting."],"grounding":["Schwarz, N., &amp; Clore, G. L. (1983). Mood, misattribution, and judgments of well-being: Informative and directive functions of affective states. <em>Journal of Personality and Social Psychology<\/em>, 45(3), 513–523. <a href=\"https://doi.org/10.1037/0022-3514.45.3.513\" rel=\"noopener\">doi:10.1037/0022-3514.45.3.513<\/a>","Burton, R. A. (2008). <em>On Being Certain: Believing You Are Right Even When You're Not<\/em>. St. Martin's Press."]},{"id":"telescope","name":"Telescoping, so date it","family":"vantage","when":"You hear yourself say \"always\", \"forever\" or \"only the other day\".","move":"Put real dates on it. When did it start? When did it last happen? How many times in the last three months?","ask":"The actual dates, and the actual count.","order":3,"body":["Memory misdates events. Forward telescoping pulls old, vivid events closer in time. A painful thing from two years ago feels recent, and events from outside a period get counted inside it, so how often something happens is overstated.","Checking a calendar, your messages or a journal is cheap, and it usually takes the loop down a notch. You can check a pattern once it has dates. You can't check \"always\"."],"grounding":["Neter, J., &amp; Waksberg, J. (1964). A study of response errors in expenditures data from household interviews. <em>Journal of the American Statistical Association<\/em>, 59(305), 18–55. <a href=\"https://doi.org/10.1080/01621459.1964.10480699\" rel=\"noopener\">doi:10.1080/01621459.1964.10480699<\/a>","Thompson, C. P., Skowronski, J. J., &amp; Lee, D. J. (1988). Telescoping in dating naturally occurring events. <em>Memory &amp; Cognition<\/em>, 16(5), 461–468. <a href=\"https://doi.org/10.3758/BF03214227\" rel=\"noopener\">doi:10.3758/BF03214227<\/a>"]},{"id":"essentialism","name":"Essentialist bias","family":"shortcut","when":"You're describing yourself or someone else as a kind of person, like \"a ruminator\", \"not a social person\" or \"they're just like that\".","move":"Rewrite the kind as a behaviour with a context. Not \"I'm a withdrawer\" but \"I withdrew after the last three launches.\"","ask":"Rewrite the label as a behaviour, with a when and a where.","order":1,"body":["Psychological essentialism is the intuition that a category has a hidden inner essence that makes its members what they are. It develops early in childhood, and it works well for tigers and water. Applied to people, including you, it turns a pattern into a nature. Natures don't change, so why try?","There's a tension in this toolbox worth saying out loud. \"The type of person who does interventions\" is also a type. The way out is to hold the type as a record of behaviour rather than an essence: a type you vote for, one act at a time."],"grounding":["Gelman, S. A. (2003). <em>The Essential Child: Origins of Essentialism in Everyday Thought<\/em>. Oxford University Press.","Haslam, N., Rothschild, L., &amp; Ernst, D. (2000). Essentialist beliefs about social categories. <em>British Journal of Social Psychology<\/em>, 39(1), 113–127. <a href=\"https://doi.org/10.1348/014466600164363\" rel=\"noopener\">doi:10.1348/014466600164363<\/a>"]},{"id":"availability","name":"Availability, where vivid isn't frequent","family":"shortcut","when":"One scene keeps replaying and it's standing in for the whole picture.","move":"Ask how often, not how vivid. List the last five times this situation came up, not the worst one.","ask":"The last five times this came up, how did each one go?","order":2,"body":["We judge how common or likely something is by how easily examples come to mind. Vivid, recent and emotional events come to mind easily, and a bad event outweighs a good one of the same size. So the worst party stands in for every party.","The fix is mechanical. Take a sample instead of relying on recall."],"grounding":["Tversky, A., &amp; Kahneman, D. (1973). Availability: A heuristic for judging frequency and probability. <em>Cognitive Psychology<\/em>, 5(2), 207–232. <a href=\"https://doi.org/10.1016/0010-0285(73)90033-9\" rel=\"noopener\">doi:10.1016/0010-0285(73)90033-9<\/a>","Baumeister, R. F., Bratslavsky, E., Finkenauer, C., &amp; Vohs, K. D. (2001). Bad is stronger than good. <em>Review of General Psychology<\/em>, 5(4), 323–370. <a href=\"https://doi.org/10.1037/1089-2680.5.4.323\" rel=\"noopener\">doi:10.1037/1089-2680.5.4.323<\/a>"]},{"id":"spotlight","name":"The spotlight is dimmer than it feels","family":"others","when":"You're replaying what they must have noticed, like the stumble, the pause or the thing you said.","move":"Discount your estimate. Other people noticed less of your slip, and saw less of your nerves, than you think.","ask":"What did they probably notice? Now halve it.","order":1,"body":["In Gilovich's studies, students made to wear an embarrassing T-shirt into a room guessed that about half the people there noticed it. About a quarter did. The illusion of transparency is the companion finding: people overestimate how much of their nervousness others can see.","Both biases are egocentric. You're the only person watching the whole replay."],"grounding":["Gilovich, T., Medvec, V. H., &amp; Savitsky, K. (2000). The spotlight effect in social judgment: An egocentric bias in estimates of the salience of one's own actions and appearance. <em>Journal of Personality and Social Psychology<\/em>, 78(2), 211–222. <a href=\"https://doi.org/10.1037/0022-3514.78.2.211\" rel=\"noopener\">doi:10.1037/0022-3514.78.2.211<\/a>","Gilovich, T., Savitsky, K., &amp; Medvec, V. H. (1998). The illusion of transparency: Biased assessments of others' ability to read one's emotional states. <em>Journal of Personality and Social Psychology<\/em>, 75(2), 332–346. <a href=\"https://doi.org/10.1037/0022-3514.75.2.332\" rel=\"noopener\">doi:10.1037/0022-3514.75.2.332<\/a>"]},{"id":"social-forecast","name":"The social forecast is too pessimistic","family":"others","when":"You're about to skip it, whether that's not going, not messaging or not asking, because it probably won't be good.","move":"Assume your forecast runs low, because it does. Go or send it anyway, then log what happened against what you predicted.","ask":"Your forecast, 0 to 10, for how it'll go. Log the real score afterwards.","order":2,"body":["Two findings aim straight at withdrawal. Train commuters asked to talk to a stranger predicted it would be unpleasant. In fact it made the ride more pleasant than sitting alone, and they underestimated how interested the other person would be.","After a first conversation, people consistently underestimate how much their partner liked them. This is the liking gap, and among new college suitemates it lasted for months. The prediction that keeps you home is reliably wrong, and wrong in the same direction every time."],"grounding":["Epley, N., &amp; Schroeder, J. (2014). Mistakenly seeking solitude. <em>Journal of Experimental Psychology: General<\/em>, 143(5), 1980–1999. <a href=\"https://doi.org/10.1037/a0037323\" rel=\"noopener\">doi:10.1037/a0037323<\/a>","Boothby, E. J., Cooney, G., Sandstrom, G. M., &amp; Clark, M. S. (2018). The liking gap in conversations: Do people like us more than we think? <em>Psychological Science<\/em>, 29(11), 1742–1756. <a href=\"https://doi.org/10.1177/0956797618783714\" rel=\"noopener\">doi:10.1177/0956797618783714<\/a>"]},{"id":"social-mediation","name":"Social mediation, or whose voice is this?","family":"others","when":"The belief has a sound to it. It's a parent's phrase, a teacher's verdict, or a friend group's standard.","move":"Trace the belief back. Name the person or group it came through, and ask whether they're a good reference for this question.","ask":"Whose voice is it in, and would you ask them about this today?","order":3,"body":["Much of what we believe about ourselves arrives socially. When there's no objective measure, we judge ourselves by comparison with others, and we choose who counts as the comparison, often without noticing that we chose. Asch showed how hard a group's stated view pulls on a person's report of something as plain as the length of a line.","Every belief was socially given at some point, so that's not the question. The question is whether you'd pick that source now."],"grounding":["Festinger, L. (1954). A theory of social comparison processes. <em>Human Relations<\/em>, 7(2), 117–140. <a href=\"https://doi.org/10.1177/001872675400700202\" rel=\"noopener\">doi:10.1177/001872675400700202<\/a>","Asch, S. E. (1956). Studies of independence and conformity: I. A minority of one against a unanimous majority. <em>Psychological Monographs: General and Applied<\/em>, 70(9), 1–70. <a href=\"https://doi.org/10.1037/h0093718\" rel=\"noopener\">doi:10.1037/h0093718<\/a>"]},{"id":"media-mediation","name":"Social media mediation, or what the feed built","family":"screen","when":"The state of the world feels urgent and personal, and you can't say where you learned most of it.","move":"Name the channel. Did this belief arrive through a feed? Would it look the same if you'd read one long source on it instead?","ask":"Where did it reach you, through which feed or which account, and what would the slow version say?","order":1,"body":["Technologies don't just carry perception. They shape it, making some things louder and others quieter. Ihde's postphenomenology calls this mediation. Feeds amplify along a known axis: in one large study, each moral-emotional word in a post raised its spread by about a fifth. And repetition alone makes a claim feel truer. That's the illusory truth effect.","A belief assembled from a feed can still be accurate. But part of its urgency belongs to the channel, not the world."],"grounding":["Ihde, D. (1990). <em>Technology and the Lifeworld: From Garden to Earth<\/em>. Indiana University Press.","Brady, W. J., Wills, J. A., Jost, J. T., Tucker, J. A., &amp; Van Bavel, J. J. (2017). Emotion shapes the diffusion of moralized content in social networks. <em>Proceedings of the National Academy of Sciences<\/em>, 114(28), 7313–7318. <a href=\"https://doi.org/10.1073/pnas.1618923114\" rel=\"noopener\">doi:10.1073/pnas.1618923114<\/a>","Hasher, L., Goldstein, D., &amp; Toppino, T. (1977). Frequency and the conference of referential validity. <em>Journal of Verbal Learning and Verbal Behavior<\/em>, 16(1), 107–112. <a href=\"https://doi.org/10.1016/S0022-5371(77)80012-1\" rel=\"noopener\">doi:10.1016/S0022-5371(77)80012-1<\/a>"]},{"id":"augmentation","name":"Augmentation, the AI rule","family":"screen","when":"You're about to ask a model to think it through for you.","move":"Let the model ask, not answer. It can question, steelman, retrieve and check. It doesn't reach the verdict, and it doesn't write the intervention.","ask":"What did you hand the model, and which part did you keep?","order":2,"body":["Engelbart's 1962 framework was called <em>augmenting human intellect<\/em>. The aim was to raise what a person can do, not to stand in for them. Offloading thinking onto tools is normal and often smart. But in a survey of knowledge workers, more confidence in generative AI went with less critical thinking, and more self-confidence went with more of it.","The sparring brief in the run puts this into practice: the model questions, you decide, and the act stays yours."],"grounding":["Engelbart, D. C. (1962). <em>Augmenting Human Intellect: A Conceptual Framework<\/em> (Summary Report AFOSR-3223). Stanford Research Institute.","Risko, E. F., &amp; Gilbert, S. J. (2016). Cognitive offloading. <em>Trends in Cognitive Sciences<\/em>, 20(9), 676–688. <a href=\"https://doi.org/10.1016/j.tics.2016.07.002\" rel=\"noopener\">doi:10.1016/j.tics.2016.07.002<\/a>","Lee, H.-P., Sarkar, A., Tankelevitch, L., Drosos, I., Rintel, S., Banks, R., &amp; Wilson, N. (2025). The impact of generative AI on critical thinking: Self-reported reductions in cognitive effort and confidence effects from a survey of knowledge workers. <em>Proceedings of the 2025 CHI Conference on Human Factors in Computing Systems<\/em>. <a href=\"https://doi.org/10.1145/3706598.3713778\" rel=\"noopener\">doi:10.1145/3706598.3713778<\/a>"]},{"id":"schelling-fence","name":"Schelling fence","family":"exit","when":"The loop has no natural end, so it doesn't end.","move":"Before you start, set a bright line, either a time or a number of passes. Don't renegotiate it from inside the loop.","ask":"The fence. When does this stop, whatever state it's in?","order":1,"body":["Thomas Schelling wrote about self-command. The self that sets a rule and the self that wants to break it act like two negotiators, and the one that commits first wins. A Schelling fence (Scott Alexander's term) is a bright, somewhat arbitrary line that holds because everyone agreed on it, not because it's the perfect place. Any line you argued your way to, you can argue your way past.","Worry-control research uses the same shape. You set a fixed time and place for worrying, and worry that comes up outside it gets postponed until then."],"grounding":["Schelling, T. C. (1984). Self-command in practice, in policy, and in a theory of rational choice. <em>American Economic Review<\/em>, 74(2), 1–11.","Alexander, S. (2012). Schelling fences on slippery slopes. <em>LessWrong<\/em>.","Borkovec, T. D., Wilkinson, L., Folensbee, R., &amp; Lerman, C. (1983). Stimulus control applications to the treatment of worry. <em>Behaviour Research and Therapy<\/em>, 21(3), 247–251. <a href=\"https://doi.org/10.1016/0005-7967(83)90206-1\" rel=\"noopener\">doi:10.1016/0005-7967(83)90206-1<\/a>"]},{"id":"mental-contrasting","name":"Creative visualisation, done properly","family":"exit","when":"You're picturing the good version, like the talk that goes well or the changed life, and the picture feels like progress.","move":"Picture the outcome, then right away picture the main obstacle inside you, then plan for it. If the obstacle shows up, you'll do one specific thing. The sequence is wish, outcome, obstacle, plan.","ask":"The obstacle inside you, and your if-then for it.","order":2,"body":["Positive fantasy on its own predicts less effort and worse results. Part of the mind treats the imagined success as though it has already happened. Mental contrasting imagines the outcome and then the obstacle in its way. That turns the same imagery into energy and a plan, and it pairs well with if-then planning.","Picture the obstacle as vividly as the prize."],"grounding":["Oettingen, G., &amp; Mayer, D. (2002). The motivating function of thinking about the future: Expectations versus fantasies. <em>Journal of Personality and Social Psychology<\/em>, 83(5), 1198–1212. <a href=\"https://doi.org/10.1037/0022-3514.83.5.1198\" rel=\"noopener\">doi:10.1037/0022-3514.83.5.1198<\/a>","Oettingen, G. (2012). Future thought and behaviour change. <em>European Review of Social Psychology<\/em>, 23(1), 1–63. <a href=\"https://doi.org/10.1080/10463283.2011.643698\" rel=\"noopener\">doi:10.1080/10463283.2011.643698<\/a>"]},{"id":"if-then","name":"If-then","family":"exit","when":"You know what you should do. You've known it for weeks.","move":"Tie the action to a cue. When this situation happens, I will do that. The situation does the remembering.","ask":"When this happens, I will do that. Write both halves.","order":3,"body":["Implementation intentions hand control of an action to a cue in the situation. Starting stops depending on remembering to, or on feeling like it. A meta-analysis of 94 studies found that forming them had a medium-to-large effect on reaching goals (d = .65).","That's why the intervention step in every run is an if-then."],"grounding":["Gollwitzer, P. M. (1999). Implementation intentions: Strong effects of simple plans. <em>American Psychologist<\/em>, 54(7), 493–503. <a href=\"https://doi.org/10.1037/0003-066X.54.7.493\" rel=\"noopener\">doi:10.1037/0003-066X.54.7.493<\/a>","Gollwitzer, P. M., &amp; Sheeran, P. (2006). Implementation intentions and goal achievement: A meta-analysis of effects and processes. <em>Advances in Experimental Social Psychology<\/em>, 38, 69–119. <a href=\"https://doi.org/10.1016/S0065-2601(06)38002-1\" rel=\"noopener\">doi:10.1016/S0065-2601(06)38002-1<\/a>"]},{"id":"evidence-of-a-type","name":"Evidence of a type","family":"exit","when":"You want to be a different kind of person, and you're thinking about it instead of being it.","move":"Do the smallest version of the thing, and log it. The ledger is the argument.","ask":"What's the smallest version you could do today?","order":4,"body":["Self-perception theory says that when our inner states are weak or ambiguous, we infer our attitudes from watching our own behaviour, the way an outsider would. Behavioural activation treats low mood and withdrawal the same way, from the outside in. You act on a plan rather than a mood, and the mood tends to follow.","You don't think your way into being the type of person who intervenes. You collect the evidence."],"grounding":["Bem, D. J. (1972). Self-perception theory. <em>Advances in Experimental Social Psychology<\/em>, 6, 1–62. <a href=\"https://doi.org/10.1016/S0065-2601(08)60024-6\" rel=\"noopener\">doi:10.1016/S0065-2601(08)60024-6<\/a>","Jacobson, N. S., Martell, C. R., &amp; Dimidjian, S. (2001). Behavioral activation treatment for depression: Returning to contextual roots. <em>Clinical Psychology: Science and Practice<\/em>, 8(3), 255–270. <a href=\"https://doi.org/10.1093/clipsy.8.3.255\" rel=\"noopener\">doi:10.1093/clipsy.8.3.255<\/a>"]}],"lenses":[{"id":"philosophy","name":"Philosophy","question":"What is actually given here, before any interpretation? Which of my words are doing more work than they've earned?","guard":"If you're on your third definition of a term, the lens has become the loop.","order":1,"body":[],"grounding":[]},{"id":"realpolitik","name":"Realpolitik","question":"Who holds power in this situation, what do they actually want, and what will they actually do? Not what they should do.","guard":"Cynicism isn't insight. If every answer comes out as \"everyone's selfish\", you've stopped looking.","order":2,"body":[],"grounding":[]},{"id":"critical-theory","name":"Critical theory","question":"Which arrangement am I treating as natural that someone made, and whose interests does that framing serve?","guard":"Critique without a proposal is withdrawal with a better vocabulary.","order":3,"body":[],"grounding":[]},{"id":"state-of-the-world","name":"State of the world","question":"What are the trend line and the base rate, rather than the headline? Which part of it can I reach with my own hands this week?","guard":"The far problem is safer than the near one. Dickens's Mrs Jellyby runs an African mission from a house where her own children fall down the stairs. He called it telescopic philanthropy.","order":4,"body":[],"grounding":[]},{"id":"science","name":"Science","question":"What observation would change my mind, and can I make it within a week?","guard":"n = 1 isn't nothing, but it's one. Run the small experiment instead of reading about the large one.","order":5,"body":[],"grounding":[]},{"id":"social-science","name":"Social science","question":"What do people in my situation usually do, and what usually happens to them?","guard":"You aren't the exception by default. Start from the base rate and argue your way off it.","order":6,"body":[],"grounding":[]}]}
+</script>
+<script>
+  (() => {
+    "use strict";
+    const D = JSON.parse(document.getElementById("data").textContent);
+    const TOOLS = Object.fromEntries(D.tools.map((t) => [t.id, t]));
+    const LENSES = Object.fromEntries(D.lenses.map((l) => [l.id, l]));
+    const FAMS = Object.fromEntries(D.families.map((f) => [f.id, f]));
+    const KEY = "cognitive-scaffolding.v1";
+    const MAX_TOOLS = 3;
+    const FENCES = [10, 15, 25];
+    const STATES = [
+      "hungry",
+      "tired",
+      "wired",
+      "lonely",
+      "anxious",
+      "angry",
+      "overstimulated",
+      "fine",
+    ];
+    const TOWARD = [
+      ["person", "another person"],
+      ["body", "the body"],
+      ["world", "the world off the screen"],
+    ];
+    const BY = [
+      ["today", "today"],
+      ["tomorrow", "tomorrow"],
+      ["week", "this week"],
+    ];
+    const STEPS = [
+      { id: "body", label: "Body" },
+      { id: "how", label: "Why → how" },
+      { id: "tools", label: "Tools" },
+      { id: "lens", label: "Lens" },
+      { id: "act", label: "Intervene" },
+      { id: "close", label: "Close" },
+    ];
+    const WATKINS =
+      "Watkins, E. R. (2008). Constructive and unconstructive repetitive thought. <em>Psychological Bulletin</em>, 134(2), 163–206. <a href='https://doi.org/10.1037/0033-2909.134.2.163' rel='noopener'>doi:10.1037/0033-2909.134.2.163</a>";
+    const WATKINS_TRIAL =
+      "Watkins, E. R., Taylor, R. S., Byng, R., Baeyens, C., Read, R., Pearson, K., &amp; Watson, L. (2012). Guided self-help concreteness training as an intervention for major depression in primary care: A Phase II randomized controlled trial. <em>Psychological Medicine</em>, 42(7), 1359–1371. <a href='https://doi.org/10.1017/S0033291711002480' rel='noopener'>doi:10.1017/S0033291711002480</a>";
+
+    const app = document.getElementById("app");
+    const clock = document.getElementById("clock");
+    const fill = document.getElementById("fenceFill");
+    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let store = load();
+    const ui = {
+      filter: "all",
+      logged: null,
+      confirm: null,
+      open: new Set(),
+      lastKey: "",
+    };
+
+    // ---------- storage
+
+    function load() {
+      try {
+        const s = JSON.parse(localStorage.getItem(KEY));
+        if (s && s.v === 1 && Array.isArray(s.runs)) return s;
+      } catch {}
+      return { v: 1, runs: [], current: null };
+    }
+    let saveTimer;
+    function save(now) {
+      clearTimeout(saveTimer);
+      const write = () => {
+        try {
+          localStorage.setItem(KEY, JSON.stringify(store));
+        } catch {}
+      };
+      if (now) write();
+      else saveTimer = setTimeout(write, 250);
+    }
+    addEventListener("pagehide", () => save(true));
+
+    function newRun(loop, fence) {
+      return {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        started: new Date().toISOString(),
+        fence,
+        loop,
+        step: 0,
+        fenceHit: false,
+        body: { moved: false, states: [], belief: "", sure: 70 },
+        why: "",
+        how: "",
+        tools: [],
+        lens: null,
+        spar: "",
+        act: {
+          when: "",
+          will: "",
+          toward: [],
+          by: "tomorrow",
+          obstacle: "",
+          ifObstacle: "",
+        },
+        sureAfter: null,
+        note: "",
+        ended: null,
+        status: null,
+        resolved: null,
+      };
+    }
+    function normalize(r) {
+      const d = newRun("", 15);
+      const out = {
+        ...d,
+        ...r,
+        body: { ...d.body, ...(r.body || {}) },
+        act: { ...d.act, ...(r.act || {}) },
+      };
+      if (!Array.isArray(out.body.states)) out.body.states = [];
+      if (!Array.isArray(out.act.toward)) out.act.toward = [];
+      if (!Array.isArray(out.tools)) out.tools = [];
+      return out;
+    }
+
+    // ---------- helpers
+
+    const esc = (s) =>
+      String(s ?? "").replace(
+        /[&<>"']/g,
+        (c) =>
+          ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;",
+          })[c],
+      );
+    const plain = (h) => {
+      const d = document.createElement("div");
+      d.innerHTML = h;
+      return d.textContent;
+    };
+    const pad = (n) => String(n).padStart(2, "0");
+    // "The argument" → "Argument", for filter chips
+    const short = (name) => {
+      const s = name.replace(/^The /, "");
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    };
+    const getPath = (o, p) =>
+      p.split(".").reduce((x, k) => (x == null ? x : x[k]), o);
+    function setPath(o, p, v) {
+      const ks = p.split(".");
+      const last = ks.pop();
+      const target = ks.reduce(
+        (x, k) => (x[k] == null ? (x[k] = {}) : x[k]),
+        o,
+      );
+      target[last] = v;
+    }
+    const actReady = (r) =>
+      !!(r.act.when.trim() && r.act.will.trim() && r.act.toward.length);
+    const byLabel = (v) => (BY.find((b) => b[0] === v) || BY[1])[1];
+    const towardLabel = (vs) =>
+      vs.map((v) => (TOWARD.find((t) => t[0] === v) || [v, v])[1]).join(", ");
+    const ifThen = (r) => `When ${esc(r.act.when)}, I will ${esc(r.act.will)}.`;
+    function fmtDate(iso) {
+      const d = new Date(iso);
+      const o = { day: "numeric", month: "short" };
+      if (d.getFullYear() !== new Date().getFullYear()) o.year = "numeric";
+      return d.toLocaleDateString("en-GB", o);
+    }
+    function ago(iso) {
+      const a = new Date(iso);
+      const b = new Date();
+      a.setHours(0, 0, 0, 0);
+      b.setHours(0, 0, 0, 0);
+      const n = Math.round((b - a) / 864e5);
+      return n <= 0 ? "today" : n === 1 ? "yesterday" : `${n} days ago`;
+    }
+    function deadline(r) {
+      const d = new Date(r.ended);
+      d.setHours(23, 59, 59, 999);
+      if (r.act.by === "tomorrow") d.setDate(d.getDate() + 1);
+      if (r.act.by === "week") d.setDate(d.getDate() + 7);
+      return d;
+    }
+    function median(xs) {
+      if (!xs.length) return null;
+      const s = [...xs].sort((a, b) => a - b);
+      const m = s.length >> 1;
+      return s.length % 2 ? s[m] : Math.round((s[m - 1] + s[m]) / 2);
+    }
+    const chip = (type, name, value, label, checked, data) =>
+      `<label class="chip"><input type="${type}" name="${name}" value="${esc(value)}" ${data} ${checked ? "checked" : ""}><span>${label}</span></label>`;
+
+    // ---------- views
+
+    function view() {
+      return location.hash.slice(1).split("/")[0] || "run";
+    }
+
+    function render() {
+      const v = view();
+      document.querySelectorAll(".top nav a").forEach((a) => {
+        if (a.dataset.view === v) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+      if (v === "toolbox") app.innerHTML = viewToolbox();
+      else if (v === "ledger") app.innerHTML = viewLedger();
+      else app.innerHTML = viewRun();
+      const key = [
+        v,
+        store.current ? store.current.step : "start",
+        ui.logged ? "logged" : "",
+      ].join(":");
+      const fresh = key !== ui.lastKey;
+      ui.lastKey = key;
+      app.classList.toggle("still", !fresh);
+      if (fresh) reveal();
+      tick();
+      refreshGates();
+      if (v === "toolbox") {
+        const id = location.hash.split("/")[1];
+        const d = id && document.getElementById("tool-" + id);
+        if (d) {
+          d.open = true;
+          d.scrollIntoView({ block: "start" });
+          // the jump moved new blocks into view before the observer could see them
+          app.querySelectorAll(".rv:not(.in)").forEach((e) => {
+            const b = e.getBoundingClientRect();
+            if (b.top < innerHeight && b.bottom > 0) e.classList.add("in");
+          });
+        }
+      }
+    }
+
+    function reveal() {
+      const els = [...app.querySelectorAll(".rv")];
+      if (reduce || !("IntersectionObserver" in window)) {
+        els.forEach((e) => e.classList.add("in"));
+        return;
+      }
+      const io = new IntersectionObserver(
+        (entries) =>
+          entries.forEach((en) => {
+            if (en.isIntersecting) {
+              en.target.classList.add("in");
+              io.unobserve(en.target);
+            }
+          }),
+        { rootMargin: "0px 0px -6% 0px" },
+      );
+      // what's already on screen reveals now; IntersectionObserver only for the rest,
+      // so a throttled observer (background tab) can never leave the view blank
+      let n = 0;
+      els.forEach((e) => {
+        if (e.getBoundingClientRect().top < innerHeight) {
+          // the rect read above already laid it out at opacity 0, so this transitions
+          e.style.setProperty("--d", `${Math.min(n++, 5) * 70}ms`);
+          e.classList.add("in");
+        } else io.observe(e);
+      });
+    }
+
+    // ----- run
+
+    function viewRun() {
+      const r = store.current;
+      if (!r) return ui.logged ? viewLogged() : viewStart();
+      const s = r.step;
+      const rail = STEPS.map(
+        (st, i) =>
+          `<li><button type="button" data-act="step" data-n="${i}" class="${i < s ? "past" : ""}" ${
+            i === s ? 'aria-current="step"' : ""
+          }><span class="n">${pad(i + 1)}</span><span class="l">${st.label}</span></button></li>`,
+      ).join("");
+      const foot =
+        ui.confirm === "discard"
+          ? `<p>Discard this run? Nothing gets logged.</p><div class="acts"><button type="button" class="linkish" data-act="confirm-discard">Discard</button><button type="button" class="linkish" data-act="cancel">Keep going</button></div>`
+          : `<button type="button" class="linkish" data-act="discard">Discard this run</button>`;
+      return `<div class="wrap run">
+        <aside class="rail-wrap"><nav aria-label="Steps"><ol class="rail">${rail}</ol></nav><div class="rail-foot">${foot}</div></aside>
+        <section class="step rv">
+          <p class="loopline"><span class="lbl">The loop</span>${esc(r.loop)}</p>
+          <div id="fenceSlot">${fenceBanner(r)}</div>
+          ${STEP_VIEWS[STEPS[s].id](r)}
+        </section>
+      </div>`;
+    }
+
+    function fenceBanner(r) {
+      if (!r.fenceHit || r.step >= 4) return "";
+      return `<p class="fence-up" role="status"><span>The fence is up. Whatever state the thinking is in, go and write the intervention.</span><button type="button" class="linkish" data-act="step" data-n="4">Go to Intervene</button></p>`;
+    }
+
+    function navRow(r) {
+      const s = r.step;
+      const id = STEPS[s].id;
+      const back =
+        s > 0
+          ? `<button type="button" class="btn ghost" data-act="go" data-d="-1">Back</button>`
+          : "";
+      const skip =
+        id === "lens"
+          ? `<button type="button" class="linkish" data-act="lens-skip">Skip the lens</button>`
+          : "";
+      const gate = id === "act" ? " data-gate" : "";
+      return `<div class="nav-row">${back}<span class="spacer"></span>${skip}<button type="button" class="btn" data-act="go" data-d="1"${gate}>Next: ${STEPS[s + 1].label}</button></div>`;
+    }
+
+    const input = (id, bind, value, placeholder, extra = "") =>
+      `<input type="text" id="${id}" data-bind="${bind}" value="${esc(value)}" placeholder="${esc(placeholder)}" maxlength="240" autocomplete="off" ${extra}>`;
+
+    const STEP_VIEWS = {
+      body: (r) => `
+        <p class="kicker">01 · Body</p>
+        <h2>Divorce the belief from the body</h2>
+        <p class="lede">Before any thinking, one physical move. Stand up, drink some water, look at something far away, breathe out for longer than you breathe in.</p>
+        <label class="check"><input type="checkbox" data-bool="body.moved" ${r.body.moved ? "checked" : ""}> Done that</label>
+        <fieldset class="field"><legend>What is the body doing?</legend><div class="chips">${STATES.map(
+          (x) =>
+            chip(
+              "checkbox",
+              "states",
+              x,
+              x,
+              r.body.states.includes(x),
+              'data-toggle="body.states"',
+            ),
+        ).join("")}</div></fieldset>
+        <div class="field"><label for="belief">The belief under the loop</label>${input(
+          "belief",
+          "body.belief",
+          r.body.belief,
+          "e.g. if I go, I'll be flat and everyone will notice",
+        )}</div>
+        <div class="field"><label for="sure">How sure are you of it?</label><div class="sure"><input type="range" id="sure" min="0" max="100" step="5" data-bind="body.sure" value="${Number(
+          r.body.sure,
+        )}"><output for="sure">${Number(r.body.sure)}</output></div></div>
+        <aside class="ground"><p>Once you name what's causing a feeling, it stops passing itself off as evidence about something else. <a href="#toolbox/belief-body">Divorce the belief from the body</a></p></aside>
+        ${navRow(r)}`,
+
+      how: (r) => `
+        <p class="kicker">02 · Why → how</p>
+        <h2>Turn the why into a how</h2>
+        <p class="lede">Rumination asks why: why am I like this, why did they, why does it always. Abstract why-questions about yourself don't end. Concrete how-questions do. How did it unfold, step by step? How could the next one go?</p>
+        <div class="field"><label for="why">The why you've been asking</label>${input("why", "why", r.why, "e.g. why do I disappear after a good week?")}</div>
+        <div class="field"><label for="how">The same thing, as a how</label>${input(
+          "how",
+          "how",
+          r.how,
+          "e.g. how did friday go from the call to the closed laptop, step by step?",
+        )}</div>
+        <aside class="ground"><p>Repetitive thought helps when it's concrete and specific, and hurts when it's abstract and evaluative. Training people to think concretely reduced depression in a randomised trial.</p><p class="src">${WATKINS}</p><p class="src">${WATKINS_TRIAL}</p></aside>
+        ${navRow(r)}`,
+
+      tools: (r) => {
+        const picked = r.tools
+          .map((p, i) => {
+            const t = TOOLS[p.id];
+            if (!t) return "";
+            return `<div class="pt">
+              <div class="pt-head"><span class="lbl">${FAMS[t.family].name}</span><h3>${t.name}</h3><button type="button" class="linkish" data-act="pick" data-id="${t.id}">remove</button></div>
+              <p class="pt-move">${t.move}</p>
+              <label for="t-${t.id}">${t.ask}</label>${input("t-" + t.id, `tools.${i}.answer`, p.answer, "one line")}
+              <a class="more" href="#toolbox/${t.id}">Why this works</a>
+            </div>`;
+          })
+          .join("");
+        const full = r.tools.length >= MAX_TOOLS;
+        const filters = [
+          ["all", "All"],
+          ...D.families.map((f) => [f.id, short(f.name)]),
+        ]
+          .map(([v, l]) => chip("radio", "filter", v, l, ui.filter === v, ""))
+          .join("");
+        const rows = D.tools
+          .filter((t) => ui.filter === "all" || t.family === ui.filter)
+          .map((t) => {
+            const on = r.tools.some((p) => p.id === t.id);
+            return `<li><button type="button" class="tool-row" data-act="pick" data-id="${t.id}" aria-pressed="${on}" ${
+              full && !on ? "disabled" : ""
+            }><span class="tn">${t.name}</span>${
+              ui.filter === "all"
+                ? `<span class="tf">${short(FAMS[t.family].name)}</span>`
+                : ""
+            }<span class="tw">${t.when}</span></button></li>`;
+          })
+          .join("");
+        return `
+          <p class="kicker">03 · Tools</p>
+          <h2>Pick up to three tools</h2>
+          <p class="lede">Choose the ones whose <em>when</em> sounds like right now. One line each. The boxes are small on purpose.</p>
+          ${picked ? `<div class="picked">${picked}</div>` : ""}
+          <fieldset class="filters"><legend class="sr">Show tools from</legend><div class="chips">${filters}</div></fieldset>
+          <ul class="rowlist">${rows}</ul>
+          ${full ? `<p class="hint">That's three. Remove one to swap it.</p>` : ""}
+          ${navRow(r)}`;
+      },
+
+      lens: (r) => {
+        const rows = D.lenses
+          .map((l) => {
+            const on = r.lens && r.lens.id === l.id;
+            return `<li><label class="lens-row"><input type="radio" name="lens" value="${l.id}" ${on ? "checked" : ""}><span class="ln">${
+              l.name
+            }</span><span class="lq">${l.question}</span></label>${
+              on
+                ? `<div class="lens-open"><p class="guard"><span class="lbl">Guard</span>${l.guard}</p><label for="lens-a">One line through this lens</label>${input(
+                    "lens-a",
+                    "lens.answer",
+                    r.lens.answer,
+                    "one line",
+                  )}</div>`
+                : ""
+            }</li>`;
+          })
+          .join("");
+        return `
+          <p class="kicker">04 · Lens</p>
+          <h2>One lens, if the loop wants a big frame</h2>
+          <p class="lede">This is where the overthinking gets its structure. Give the loop one lens and one line. Each lens has a guard, which marks the point where the lens turns back into the loop. You can skip this step.</p>
+          <ul class="rowlist">${rows}</ul>
+          <div class="spar">
+            <h3>A second mind, on your terms</h3>
+            <p>Copy a brief for a model. It tells the model to ask one question at a time, to offer no reassurance and no verdict, and to leave the intervention to you. Come back with one line.</p>
+            <div class="acts"><button type="button" class="btn ghost small" data-act="copy-brief">Copy the sparring brief</button><span class="status" id="copyStatus" role="status"></span></div>
+            <label class="sr" for="briefFallback">Sparring brief</label><textarea id="briefFallback" readonly hidden></textarea>
+            <div class="field"><label for="spar">What came out of it, in one line</label>${input("spar", "spar", r.spar, "optional")}</div>
+          </div>
+          ${navRow(r)}`;
+      },
+
+      act: (r) => `
+        <p class="kicker">05 · Intervene</p>
+        <h2>A conclusion is not an intervention</h2>
+        <p class="lede">One thing you'll do. Tie it to a cue so the situation does the remembering.</p>
+        <div class="ifthen">
+          <div class="field"><label for="when">When</label>${input("when", "act.when", r.act.when, "e.g. tomorrow, after the 10:00 call", "data-recheck")}</div>
+          <div class="field"><label for="will">I will</label>${input(
+            "will",
+            "act.will",
+            r.act.will,
+            "e.g. text one person and ask if they're free for a walk this week",
+            "data-recheck",
+          )}</div>
+        </div>
+        <fieldset class="field"><legend>It moves toward</legend><div class="chips">${TOWARD.map(
+          ([v, l]) =>
+            chip(
+              "checkbox",
+              "toward",
+              v,
+              l,
+              r.act.toward.includes(v),
+              'data-toggle="act.toward"',
+            ),
+        ).join(
+          "",
+        )}</div><p class="hint" id="towardHint">Withdrawal is the loop's default direction. Tick at least one.</p></fieldset>
+        <fieldset class="field"><legend>By</legend><div class="chips">${BY.map(
+          ([v, l]) =>
+            chip("radio", "by", v, l, r.act.by === v, 'data-radio="act.by"'),
+        ).join("")}</div></fieldset>
+        <div class="field"><label for="obstacle">What inside you is most likely to stop it?</label>${input(
+          "obstacle",
+          "act.obstacle",
+          r.act.obstacle,
+          "e.g. I'll decide I'm too tired and it can wait",
+        )}</div>
+        <div class="field"><label for="ifob">If that happens, I will</label>${input(
+          "ifob",
+          "act.ifObstacle",
+          r.act.ifObstacle,
+          "e.g. send it before I sit down, tired or not",
+        )}</div>
+        <aside class="ground"><p>Across 94 studies, tying an action to a cue had a medium-to-large effect on actually doing it. Picturing the obstacle is what turns imagining into effort. <a href="#toolbox/if-then">If-then</a> · <a href="#toolbox/mental-contrasting">Creative visualisation, done properly</a></p></aside>
+        ${navRow(r)}`,
+
+      close: (r) => {
+        const after = r.sureAfter ?? r.body.sure;
+        return `
+        <p class="kicker">06 · Close</p>
+        <h2>Re-rate, then log it</h2>
+        <div class="field"><label for="sure2">How sure are you now ${
+          r.body.belief
+            ? `that “${esc(r.body.belief)}”`
+            : "of the belief under the loop"
+        }?</label><div class="sure"><input type="range" id="sure2" min="0" max="100" step="5" data-bind="sureAfter" value="${Number(
+          after,
+        )}"><output for="sure2">${Number(after)}</output><span class="was">was ${Number(r.body.sure)}</span></div></div>
+        <div class="field"><label for="note">Anything worth keeping</label><textarea id="note" rows="2" maxlength="500" data-bind="note" placeholder="optional">${esc(
+          r.note,
+        )}</textarea></div>
+        <div class="recap"><span class="lbl">The intervention</span>${
+          actReady(r)
+            ? `<p class="it">${ifThen(r)}</p><p class="meta">by ${byLabel(r.act.by)} · toward ${towardLabel(r.act.toward)}</p>`
+            : `<p class="it">Not written yet.</p><button type="button" class="linkish" data-act="step" data-n="4">Write it</button>`
+        }</div>
+        <div class="nav-row"><button type="button" class="btn ghost" data-act="go" data-d="-1">Back</button><span class="spacer"></span><button type="button" class="btn" data-act="log" data-gate>Log the run</button></div>
+        <aside class="ground"><p>The run goes into the ledger as pending. It counts once you've done it. <a href="#toolbox/evidence-of-a-type">Evidence of a type</a></p></aside>`;
+      },
+    };
+
+    function viewStart() {
+      const pending = store.runs.filter((r) => r.status === "pending");
+      const waiting = pending.length
+        ? `<section class="waiting rv"><p class="kicker">Waiting on you</p><p class="small">An intervention you've already written beats a new run.</p><ul class="pending">${pending
+            .map(pendRow)
+            .join("")}</ul></section>`
+        : "";
+      return `<div class="wrap narrow start">
+        ${waiting}
+        <section class="rv">
+          <h1>Going round on something?</h1>
+          <p class="lede">Name it in one line. You get a fence, a fixed stretch of time, to work it through with the tools. When the fence is up, the run asks for one intervention: a thing you'll do, with a when, that moves toward a person, your body or the world off the screen. A conclusion doesn't count.</p>
+          <form id="startForm" autocomplete="off">
+            <div class="field"><label for="loopInput">The loop, in one line</label><textarea id="loopInput" class="big" rows="2" maxlength="200" placeholder="e.g. whether to go to thursday's dinner or stay in and finish the essay"></textarea></div>
+            <fieldset class="field"><legend>Fence</legend><div class="chips">${FENCES.map(
+              (m) => chip("radio", "fence", m, `${m} min`, m === 15, ""),
+            ).join("")}</div></fieldset>
+            <div class="nav-row"><button class="btn" type="submit" id="startBtn" disabled>Start the fence</button></div>
+          </form>
+        </section>
+      </div>`;
+    }
+
+    function pendRow(r) {
+      const late = deadline(r) < new Date();
+      return `<li class="pend"><p class="it">${ifThen(r)}</p><p class="meta">${
+        late
+          ? `<span class="overdue">past ${byLabel(r.act.by)}</span>`
+          : `by ${byLabel(r.act.by)}`
+      } · written ${ago(r.ended)}</p><div class="acts"><button type="button" class="btn small" data-act="done" data-id="${
+        r.id
+      }">Done</button><button type="button" class="linkish" data-act="drop" data-id="${r.id}">Drop</button></div></li>`;
+    }
+
+    function viewLogged() {
+      const r = store.runs.find((x) => x.id === ui.logged);
+      const done = store.runs.filter((x) => x.status === "done").length;
+      return `<div class="wrap narrow logged"><section class="rv">
+        <p class="kicker">Logged</p>
+        <h1>It's pending until you do it.</h1>
+        ${r ? `<p class="it">${ifThen(r)}</p>` : ""}
+        <p>When it's done, mark it on the ledger. Interventions done so far: <span class="num">${done}</span>.</p>
+        <div class="nav-row"><a class="btn" href="#ledger">See the ledger</a><button type="button" class="btn ghost" data-act="dismiss-logged">Done for now</button></div>
+      </section></div>`;
+    }
+
+    // ----- toolbox
+
+    function viewToolbox() {
+      const a = D.about;
+      const toc = D.families
+        .map(
+          (f, i) =>
+            `<a href="#toolbox" data-jump="fam-${f.id}"><span class="num">${pad(i + 1)}</span>${f.name}</a>`,
+        )
+        .concat([
+          `<a href="#toolbox" data-jump="fam-lenses"><span class="num">L</span>Lenses</a>`,
+          `<a href="#toolbox" data-jump="fam-run"><span class="num">R</span>The run</a>`,
+        ])
+        .join("");
+      const fams = D.families
+        .map((f, i) => {
+          const tools = D.tools
+            .filter((t) => t.family === f.id)
+            .map(
+              (t) => `<details class="tool" id="tool-${t.id}">
+                <summary><span class="tn">${t.name}</span><span class="pm" aria-hidden="true"></span><span class="tw">${t.when}</span></summary>
+                <div class="tool-body">
+                  <p class="move"><span class="lbl">The move</span>${t.move}</p>
+                  ${t.body.map((p) => `<p>${p}</p>`).join("")}
+                  <p class="ask"><span class="lbl">In a run, you answer</span>${t.ask}</p>
+                  <ol class="sources">${t.grounding.map((g) => `<li>${g}</li>`).join("")}</ol>
+                </div>
+              </details>`,
+            )
+            .join("");
+          return `<section class="family rv" id="fam-${f.id}"><div class="fam-head"><span class="num">${pad(i + 1)}</span><h2>${
+            f.name
+          }</h2><p>${f.line}</p></div><div>${tools}</div></section>`;
+        })
+        .join("");
+      const lenses = D.lenses
+        .map(
+          (l) =>
+            `<div class="lens-item"><h3>${l.name}</h3><p>${l.question}</p><p class="guard"><span class="lbl">Guard</span>${l.guard}</p></div>`,
+        )
+        .join("");
+      return `<div class="wrap">
+        <header class="book-head rv">
+          <h1>${a.title}</h1>
+          <p class="dek">${a.line}</p>
+          ${a.body.map((p) => `<p>${p}</p>`).join("")}
+          <p class="rule">${a.rule}</p>
+        </header>
+        <nav class="toc rv" aria-label="Sections">${toc}</nav>
+        ${fams}
+        <section class="family rv" id="fam-lenses"><div class="fam-head"><span class="num">L</span><h2>Lenses</h2><p>Structured overthinking. Each lens is one question, and each has a guard for the moment it turns back into the loop.</p></div><div>${lenses}</div></section>
+        <section class="family rv" id="fam-run"><div class="fam-head"><span class="num">R</span><h2>The run</h2><p>Six steps inside a fence. The fence is set before you start and doesn't move.</p></div>
+          <ol class="steps">
+            <li><div><b>Body.</b> One physical move first. Name the body's state, write the belief under the loop, and rate how sure you are.</div></li>
+            <li><div><b>Why → how.</b> Rewrite the abstract why as a concrete how.<span class="src">${WATKINS}</span></div></li>
+            <li><div><b>Tools.</b> Up to three from the toolbox, one line each.</div></li>
+            <li><div><b>Lens.</b> Optional. One lens and one line, held to its guard. If you like, spar with a model on the brief's terms.</div></li>
+            <li><div><b>Intervene.</b> When this happens, I will do that. It moves toward a person, the body or the world, it has a deadline, and it names the inner obstacle along with the plan for it.</div></li>
+            <li><div><b>Close.</b> Re-rate the belief and log the run. It stays pending until it's done.</div></li>
+          </ol>
+        </section>
+      </div>`;
+    }
+
+    // ----- ledger
+
+    function viewLedger() {
+      const runs = store.runs;
+      const head = `<header class="rv"><h1>Ledger</h1><p class="lede">Every run, and whether its intervention happened. Each one you've done is a vote for the type.</p></header>`;
+      const io = `<section class="io rv"><p>This is kept in this browser only. Export a copy now and then.</p><div class="acts"><button type="button" class="btn ghost small" data-act="export">Export JSON</button><button type="button" class="btn ghost small" data-act="import">Import JSON</button><span class="status" id="ioStatus" role="status"></span></div><input type="file" id="importFile" accept="application/json,.json" hidden></section>`;
+      if (!runs.length)
+        return `<div class="wrap ledger">${head}<section class="rv"><p class="empty">Nothing logged yet. The first run starts on the <a href="#run">Run</a> page.</p></section>${io}</div>`;
+      const count = (s) => runs.filter((r) => r.status === s).length;
+      const person = runs.filter(
+        (r) => r.status === "done" && r.act.toward.includes("person"),
+      ).length;
+      const rated = runs.filter((r) => r.sureAfter != null);
+      const mb = median(rated.map((r) => Number(r.body.sure)));
+      const ma = median(rated.map((r) => Number(r.sureAfter)));
+      const tally = `<dl class="tally rv">
+        <div><dt>runs</dt><dd>${runs.length}</dd></div>
+        <div class="done"><dt>done</dt><dd>${count("done")}</dd></div>
+        <div><dt>pending</dt><dd>${count("pending")}</dd></div>
+        <div><dt>dropped</dt><dd>${count("dropped")}</dd></div>
+        <div><dt>done, toward a person</dt><dd>${person}</dd></div>
+        <div><dt>certainty, median</dt><dd>${mb == null ? "–" : `${mb}→${ma}`}</dd></div>
+      </dl>`;
+      const pending = runs.filter((r) => r.status === "pending");
+      const waiting = pending.length
+        ? `<section class="rv"><h2>Waiting on you</h2><ul class="pending">${pending.map(pendRow).join("")}</ul></section>`
+        : "";
+      const entries = runs.map(entry).join("");
+      return `<div class="wrap ledger">${head}${tally}${waiting}<section class="rv"><h2>Every run</h2><div class="entries">${entries}</div></section>${io}</div>`;
+    }
+
+    function entry(r) {
+      const kv = [];
+      const add = (k, v) => v && kv.push(`<dt>${k}</dt><dd>${v}</dd>`);
+      add(
+        "Belief",
+        r.body.belief &&
+          `${esc(r.body.belief)} <span class="num">${Number(r.body.sure)}→${Number(r.sureAfter ?? r.body.sure)}</span>`,
+      );
+      add(
+        "Body",
+        [r.body.states.map(esc).join(", "), r.body.moved ? "moved first" : ""]
+          .filter(Boolean)
+          .join(" · "),
+      );
+      add("Why", esc(r.why));
+      add("How", esc(r.how));
+      r.tools.forEach((p) =>
+        add(TOOLS[p.id] ? TOOLS[p.id].name : esc(p.id), esc(p.answer) || "–"),
+      );
+      if (r.lens)
+        add(
+          LENSES[r.lens.id] ? LENSES[r.lens.id].name : esc(r.lens.id),
+          esc(r.lens.answer) || "–",
+        );
+      add("Sparring", esc(r.spar));
+      add(
+        "If-then",
+        `${ifThen(r)} <span class="src">by ${byLabel(r.act.by)} · toward ${esc(towardLabel(r.act.toward))}</span>`,
+      );
+      add(
+        "Obstacle",
+        r.act.obstacle &&
+          `${esc(r.act.obstacle)}${r.act.ifObstacle ? ` → ${esc(r.act.ifObstacle)}` : ""}`,
+      );
+      add("Note", esc(r.note));
+      add("Fence", `${Number(r.fence)} min${r.fenceHit ? ", hit" : ""}`);
+      const status =
+        r.status === "pending"
+          ? `<button type="button" class="btn small" data-act="done" data-id="${r.id}">Done</button><button type="button" class="linkish" data-act="drop" data-id="${r.id}">Drop</button>`
+          : `<span class="src">${r.status} ${r.resolved ? fmtDate(r.resolved) : ""}</span><button type="button" class="linkish" data-act="undo" data-id="${r.id}">Mark pending again</button>`;
+      const del =
+        ui.confirm === "del:" + r.id
+          ? `<span class="src">Delete this run for good?</span><button type="button" class="linkish" data-act="confirm-del" data-id="${r.id}">Delete</button><button type="button" class="linkish" data-act="cancel">Keep it</button>`
+          : `<button type="button" class="linkish" data-act="del" data-id="${r.id}">Delete</button>`;
+      return `<details class="entry" data-id="${r.id}" ${ui.open.has(r.id) ? "open" : ""}>
+        <summary><span class="date">${fmtDate(r.ended)}</span><span class="loop">${esc(r.loop)}</span><span class="st st-${esc(r.status)}">${esc(
+          r.status,
+        )}</span></summary>
+        <div class="entry-body"><dl class="kv">${kv.join("")}</dl><div class="acts">${status}<span class="spacer"></span>${del}</div></div>
+      </details>`;
+    }
+
+    // ---------- fence
+
+    function tick() {
+      const r = store.current;
+      if (!r) {
+        clock.hidden = true;
+        fill.style.transform = "scaleX(0)";
+        return;
+      }
+      const total = r.fence * 60000;
+      const elapsed = Date.now() - Date.parse(r.started);
+      const left = Math.max(0, total - elapsed);
+      clock.hidden = false;
+      fill.style.transform = `scaleX(${Math.min(1, elapsed / total).toFixed(4)})`;
+      if (left > 0) {
+        const s = Math.ceil(left / 1000);
+        clock.textContent = `${pad(Math.floor(s / 60))}:${pad(s % 60)}`;
+        clock.classList.remove("up");
+        clock.setAttribute(
+          "aria-label",
+          `Fence: ${Math.ceil(s / 60)} minutes left`,
+        );
+      } else {
+        clock.textContent = "fence up";
+        clock.classList.add("up");
+        clock.setAttribute("aria-label", "The fence is up");
+        if (!r.fenceHit) {
+          r.fenceHit = true;
+          save(true);
+          const slot = document.getElementById("fenceSlot");
+          if (slot) slot.innerHTML = fenceBanner(r);
+        }
+      }
+    }
+    setInterval(tick, 1000);
+
+    function refreshGates() {
+      const r = store.current;
+      if (!r) return;
+      const ok = actReady(r);
+      app.querySelectorAll("[data-gate]").forEach((b) => (b.disabled = !ok));
+      const h = document.getElementById("towardHint");
+      if (h)
+        h.classList.toggle(
+          "warn",
+          !r.act.toward.length && !!(r.act.when.trim() || r.act.will.trim()),
+        );
+    }
+
+    // ---------- actions
+
+    function setStep(n) {
+      const r = store.current;
+      r.step = Math.max(0, Math.min(STEPS.length - 1, n));
+      if (STEPS[r.step].id === "close" && r.sureAfter == null)
+        r.sureAfter = r.body.sure;
+      ui.confirm = null;
+      save(true);
+      render();
+      scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+    }
+
+    function resolve(id, status) {
+      const r = store.runs.find((x) => x.id === id);
+      if (!r) return;
+      r.status = status;
+      r.resolved = status === "pending" ? null : new Date().toISOString();
+      save(true);
+      render();
+    }
+
+    function brief(r) {
+      const L = [
+        "I'm using you as a sparring partner, not an advisor. I've been going round on this:",
+        "",
+        `"${r.loop}"`,
+        "",
+      ];
+      if (r.body.belief)
+        L.push(
+          `The belief underneath it: "${r.body.belief}" (I'm ${r.body.sure}% sure.)`,
+        );
+      if (r.body.states.length)
+        L.push(`My body right now: ${r.body.states.join(", ")}.`);
+      if (r.why) L.push(`The why I keep asking: "${r.why}"`);
+      if (r.how) L.push(`The same thing as a how: "${r.how}"`);
+      r.tools.forEach(
+        (p) =>
+          TOOLS[p.id] &&
+          p.answer &&
+          L.push(`${plain(TOOLS[p.id].name)}: ${p.answer}`),
+      );
+      if (r.lens && LENSES[r.lens.id] && r.lens.answer)
+        L.push(
+          `Through the lens of ${plain(LENSES[r.lens.id].name).toLowerCase()}: ${r.lens.answer}`,
+        );
+      L.push(
+        "",
+        "Rules for you:",
+        "- Ask me one question at a time, then wait for my answer.",
+        "- No reassurance and no verdict. Don't tell me whether the belief is true.",
+        "- If my reasoning skips a step, attacks a source instead of a claim, or turns a pattern into a type of person, point at it in one sentence.",
+        "- After five questions at most, stop and ask me what I will do, when, and toward whom or what. Don't suggest it. The intervention has to be mine.",
+      );
+      return L.join("\n");
+    }
+
+    async function copyBrief() {
+      const text = brief(store.current);
+      const status = document.getElementById("copyStatus");
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = "Copied. Paste it into a model.";
+      } catch {
+        const ta = document.getElementById("briefFallback");
+        ta.hidden = false;
+        ta.value = text;
+        ta.focus();
+        ta.select();
+        status.textContent = document.execCommand("copy")
+          ? "Copied. Paste it into a model."
+          : "Couldn't reach the clipboard. Copy it from the box.";
+      }
+    }
+
+    function logRun() {
+      const r = store.current;
+      if (!r || !actReady(r)) return;
+      r.ended = new Date().toISOString();
+      r.status = "pending";
+      if (r.sureAfter == null) r.sureAfter = r.body.sure;
+      delete r.step;
+      store.runs.unshift(r);
+      store.current = null;
+      ui.logged = r.id;
+      save(true);
+      render();
+      scrollTo({ top: 0 });
+    }
+
+    function exportJSON() {
+      const blob = new Blob(
+        [
+          JSON.stringify(
+            { v: 1, exported: new Date().toISOString(), runs: store.runs },
+            null,
+            2,
+          ),
+        ],
+        {
+          type: "application/json",
+        },
+      );
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = `cognitive-scaffolding-${new Date().toISOString().slice(0, 10)}.json`;
+      document.body.append(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    }
+
+    async function importFile(file) {
+      if (!file) return;
+      let msg;
+      try {
+        const d = JSON.parse(await file.text());
+        const runs = Array.isArray(d) ? d : d.runs;
+        if (!Array.isArray(runs)) throw new Error("no runs");
+        const have = new Set(store.runs.map((r) => r.id));
+        let added = 0;
+        for (const r of runs) {
+          if (
+            r &&
+            typeof r.id === "string" &&
+            typeof r.loop === "string" &&
+            r.act &&
+            typeof r.act.will === "string" &&
+            !have.has(r.id)
+          ) {
+            store.runs.push(normalize(r));
+            have.add(r.id);
+            added++;
+          }
+        }
+        store.runs.sort((a, b) =>
+          String(b.ended || "").localeCompare(String(a.ended || "")),
+        );
+        save(true);
+        msg = `Imported ${added} run${added === 1 ? "" : "s"}.`;
+      } catch {
+        msg = "That file isn't a ledger export.";
+      }
+      render();
+      document.getElementById("ioStatus").textContent = msg;
+    }
+
+    const ACTIONS = {
+      step: (b) => setStep(Number(b.dataset.n)),
+      go: (b) => setStep(store.current.step + Number(b.dataset.d)),
+      discard: () => {
+        ui.confirm = "discard";
+        render();
+      },
+      "confirm-discard": () => {
+        store.current = null;
+        ui.confirm = null;
+        save(true);
+        render();
+      },
+      cancel: () => {
+        ui.confirm = null;
+        render();
+      },
+      pick: (b) => {
+        const r = store.current;
+        const id = b.dataset.id;
+        const i = r.tools.findIndex((p) => p.id === id);
+        if (i >= 0) r.tools.splice(i, 1);
+        else if (r.tools.length < MAX_TOOLS) r.tools.push({ id, answer: "" });
+        save(true);
+        render();
+        if (i < 0) document.getElementById("t-" + id)?.focus();
+      },
+      "lens-skip": () => {
+        store.current.lens = null;
+        setStep(STEPS.findIndex((s) => s.id === "act"));
+      },
+      "copy-brief": copyBrief,
+      log: logRun,
+      done: (b) => resolve(b.dataset.id, "done"),
+      drop: (b) => resolve(b.dataset.id, "dropped"),
+      undo: (b) => resolve(b.dataset.id, "pending"),
+      del: (b) => {
+        ui.confirm = "del:" + b.dataset.id;
+        render();
+      },
+      "confirm-del": (b) => {
+        store.runs = store.runs.filter((x) => x.id !== b.dataset.id);
+        ui.open.delete(b.dataset.id);
+        ui.confirm = null;
+        save(true);
+        render();
+      },
+      export: exportJSON,
+      import: () => document.getElementById("importFile").click(),
+      "dismiss-logged": () => {
+        ui.logged = null;
+        render();
+      },
+    };
+
+    app.addEventListener("click", (e) => {
+      const jump = e.target.closest("[data-jump]");
+      if (jump) {
+        e.preventDefault();
+        document.getElementById(jump.dataset.jump)?.scrollIntoView({
+          behavior: reduce ? "auto" : "smooth",
+          block: "start",
+        });
+        return;
+      }
+      const b = e.target.closest("[data-act]");
+      if (b && !b.disabled && ACTIONS[b.dataset.act]) ACTIONS[b.dataset.act](b);
+    });
+
+    app.addEventListener("input", (e) => {
+      const el = e.target;
+      if (el.id === "loopInput") {
+        document.getElementById("startBtn").disabled = !el.value.trim();
+        return;
+      }
+      const r = store.current;
+      if (!r || !el.dataset.bind) return;
+      const v = el.type === "range" ? Number(el.value) : el.value;
+      setPath(r, el.dataset.bind, v);
+      if (el.type === "range")
+        el.parentElement.querySelector("output").textContent = v;
+      save();
+      if ("recheck" in el.dataset) refreshGates();
+    });
+
+    app.addEventListener("change", (e) => {
+      const el = e.target;
+      if (el.id === "importFile") return importFile(el.files[0]);
+      if (el.name === "filter") {
+        ui.filter = el.value;
+        return render();
+      }
+      const r = store.current;
+      if (!r) return;
+      if (el.name === "lens") {
+        if (!r.lens || r.lens.id !== el.value)
+          r.lens = { id: el.value, answer: "" };
+        save(true);
+        render();
+        document.getElementById("lens-a")?.focus();
+        return;
+      }
+      if (el.dataset.toggle) {
+        const arr = getPath(r, el.dataset.toggle);
+        const i = arr.indexOf(el.value);
+        if (el.checked && i < 0) arr.push(el.value);
+        if (!el.checked && i >= 0) arr.splice(i, 1);
+      }
+      if (el.dataset.radio) setPath(r, el.dataset.radio, el.value);
+      if (el.dataset.bool) setPath(r, el.dataset.bool, el.checked);
+      save(true);
+      refreshGates();
+    });
+
+    app.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const loop = document.getElementById("loopInput").value.trim();
+      if (!loop) return;
+      const fence = Number(new FormData(e.target).get("fence")) || 15;
+      store.current = newRun(loop, fence);
+      ui.logged = null;
+      save(true);
+      render();
+      scrollTo({ top: 0 });
+    });
+
+    app.addEventListener("keydown", (e) => {
+      if (e.target.id === "loopInput" && e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        e.target.form.requestSubmit();
+      }
+    });
+
+    app.addEventListener(
+      "toggle",
+      (e) => {
+        const id = e.target.dataset && e.target.dataset.id;
+        if (!id || !e.target.classList.contains("entry")) return;
+        if (e.target.open) ui.open.add(id);
+        else ui.open.delete(id);
+      },
+      true,
+    );
+
+    addEventListener("hashchange", () => {
+      ui.confirm = null;
+      if (view() !== "run") ui.logged = null;
+      render();
+      if (!location.hash.includes("/")) scrollTo({ top: 0 });
+    });
+
+    render();
+  })();
+</script>
+<script src="/vendor/altcha/altcha-obfuscation.min.js" defer></script>
+<script src="/vendor/altcha/altcha.min.js" defer></script>
+<script>
+  /* gate: open on verified; fail open on error or after 8s so a broken widget never locks a reader out */
+  (function () {
+    var root = document.documentElement, gate = document.getElementById("gate");
+    if (!gate) return;
+    if (!root.classList.contains("gated")) { gate.remove(); return; }
+    var opened = false;
+    function open() {
+      if (opened) return; opened = true;
+      try { sessionStorage.setItem("pv-gate", "1"); } catch (e) {}
+      gate.classList.add("out");
+      root.classList.remove("gated");
+      setTimeout(function () { gate.remove(); }, 500);
+    }
+    var w = document.getElementById("gate-altcha");
+    w.addEventListener("verified", open);
+    w.addEventListener("statechange", function (ev) { if (ev.detail && ev.detail.state === "error") open(); });
+    setTimeout(open, 8000);
+  })();
+</script>
