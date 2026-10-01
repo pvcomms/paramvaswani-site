@@ -554,6 +554,23 @@
   .al-grid li:hover .t {
     color: var(--accent);
   }
+  /* music · a listening path: numbered, with a line on each */
+  .al-path {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .al-n {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .al-note {
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--faint-t);
+    margin-top: 6px;
+  }
   .al-by {
     font-family: var(--mono);
     font-size: 11px;
@@ -814,6 +831,9 @@
   @media (max-width: 560px) {
     .al-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .al-grid.al-path {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (max-width: 560px) {
@@ -1205,6 +1225,53 @@
           <span class="al-cover" aria-hidden="true"><img src="/albums/channel-orange.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
           <span class="t">channel ORANGE</span>
           <span class="al-by">Frank Ocean · 2012</span>
+        </li>
+      </ol>
+      <div class="lb-head reveal al-after">
+        <span class="lb-label">brian eno&rsquo;s ambient, in listening order</span>
+      </div>
+      <ol class="al-grid al-path">
+        <li class="reveal" style="--i:0">
+          <span class="al-n">start</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/music-for-airports.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Ambient 1: Music for Airports</span>
+          <span class="al-by">Brian Eno · 1978</span>
+          <span class="al-note">Piano and voice loops, very sparse. This is the one to start with.</span>
+        </li>
+        <li class="reveal" style="--i:1">
+          <span class="al-n">1</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/discreet-music.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Discreet Music</span>
+          <span class="al-by">Brian Eno · 1975</span>
+          <span class="al-note">Two tape machines feeding back into each other. Calm and continuous.</span>
+        </li>
+        <li class="reveal" style="--i:2">
+          <span class="al-n">2</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/apollo.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Apollo: Atmospheres and Soundtracks</span>
+          <span class="al-by">Brian Eno · 1983</span>
+          <span class="al-note">With Daniel Lanois and Roger Eno. Warmer, and includes “An Ending (Ascent).”</span>
+        </li>
+        <li class="reveal" style="--i:3">
+          <span class="al-n">3</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/thursday-afternoon.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Thursday Afternoon</span>
+          <span class="al-by">Brian Eno · 1985</span>
+          <span class="al-note">One piano piece that lasts an hour.</span>
+        </li>
+        <li class="reveal" style="--i:4">
+          <span class="al-n">4</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/neroli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Neroli</span>
+          <span class="al-by">Brian Eno · 1993</span>
+          <span class="al-note">Close to silence, made for stillness.</span>
+        </li>
+        <li class="reveal" style="--i:5">
+          <span class="al-n">5</span>
+          <span class="al-cover" aria-hidden="true"><img src="/albums/on-land.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+          <span class="t">Ambient 4: On Land</span>
+          <span class="al-by">Brian Eno · 1982</span>
+          <span class="al-note">Darker and more like a landscape. Leave it until you’ve got the idea.</span>
         </li>
       </ol>
     </div>
