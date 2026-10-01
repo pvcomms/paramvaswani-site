@@ -164,6 +164,7 @@ def main():
     shutil.copytree(ROOT / "albums", PUB / "albums")
     shutil.copytree(ROOT / "films", PUB / "films")
     shutil.copytree(ROOT / "telly", PUB / "telly")
+    shutil.copytree(ROOT / "books", PUB / "books")
     if (ROOT / "letterboxd" / "posters").is_dir():
         shutil.copytree(ROOT / "letterboxd" / "posters", PUB / "letterboxd" / "posters")
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
@@ -172,7 +173,7 @@ def main():
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
                                     "/about", "/work", "/principles",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
-    print(f"  fonts/ vendor/ albums/ films/ telly/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
+    print(f"  fonts/ vendor/ albums/ films/ telly/ books/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
     main()
