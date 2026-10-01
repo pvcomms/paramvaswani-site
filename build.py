@@ -95,7 +95,7 @@ LLMS = """# Param Vaswani
 
 - [Home](https://paramv.com/): the site drawn as a Venn — five domains inside the universal set,
   contact as the dashed set off the record.
-- [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, tv,
+- [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, telly,
   music, concertos, orchestra, poem, fiction, non-fiction, research concepts, influences,
   quotes, aphorisms, neology & etymology.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
@@ -129,7 +129,7 @@ def main():
     pages = [
         ("index.html", "index.html", TAB, DESC, "/", PERSON_LD),
         ("taste.html", "taste.html", "Media Taste — " + TAB,
-         "What Param rates, by form: film, live performance, tv, music, concertos, orchestra, "
+         "What Param rates, by form: film, live performance, telly, music, concertos, orchestra, "
          "poem, fiction, non-fiction, research concepts, influences, quotes, aphorisms, "
          "neology & etymology.", "/taste", ""),
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
@@ -162,6 +162,8 @@ def main():
     shutil.copytree(ROOT / "fonts", PUB / "fonts")
     shutil.copytree(ROOT / "vendor", PUB / "vendor")
     shutil.copytree(ROOT / "albums", PUB / "albums")
+    shutil.copytree(ROOT / "films", PUB / "films")
+    shutil.copytree(ROOT / "telly", PUB / "telly")
     if (ROOT / "letterboxd" / "posters").is_dir():
         shutil.copytree(ROOT / "letterboxd" / "posters", PUB / "letterboxd" / "posters")
     (PUB / "favicon.svg").write_text(FAVICON, encoding="utf-8")
@@ -170,7 +172,7 @@ def main():
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
                                     "/about", "/work", "/principles",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
-    print(f"  fonts/ vendor/ albums/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
+    print(f"  fonts/ vendor/ albums/ films/ telly/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
 if __name__ == "__main__":
     main()

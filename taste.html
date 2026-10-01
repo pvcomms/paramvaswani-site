@@ -513,6 +513,9 @@
     margin-top: 18px;
     max-width: 700px;
   }
+  .al-grid.tall .al-cover {
+    aspect-ratio: 2 / 3;
+  }
   .al-grid li.reveal {
     transition-delay: calc(var(--i) * 40ms);
   }
@@ -930,7 +933,7 @@
       until they aren&#8217;t.
     </p>
     <div class="notation">
-      <b>taste</b> = film ∪ live ∪ tv ∪ music ∪ concertos ∪ orchestra ∪ poem ∪
+      <b>taste</b> = film ∪ live ∪ telly ∪ music ∪ concertos ∪ orchestra ∪ poem ∪
       fiction ∪ non-fiction ∪ concepts ∪ influences ∪ quotes ∪ aphorisms ∪ words
     </div>
   </section>
@@ -938,7 +941,7 @@
   <nav class="tabs" id="tabs" aria-label="forms">
     <a href="#film"><i>01</i>film</a>
     <a href="#live"><i>02</i>live performance</a>
-    <a href="#tv"><i>03</i>tv</a>
+    <a href="#telly"><i>03</i>telly</a>
     <a href="#music"><i>04</i>music</a>
     <a href="#concertos"><i>05</i>concertos</a>
     <a href="#orchestra"><i>06</i>orchestra</a>
@@ -956,10 +959,50 @@
     <div class="sec-head reveal">
       <span class="num">01</span>
       <h2>film</h2>
-      <span class="notation">film = ∅</span>
+      <span class="notation">|films| = 7</span>
     </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <div class="albums">
+      <div class="lb-head reveal">
+        <span class="lb-label">some films that shaped me</span>
+      </div>
+      <ol class="al-grid tall">
+        <li class="reveal" style="--i:0">
+          <span class="al-cover" aria-hidden="true"><img src="/films/goblet-of-fire.jpg" alt="" width="365" height="273" loading="lazy" decoding="async"></span>
+          <span class="t">Harry Potter and the Goblet of Fire</span>
+          <span class="al-by">Mike Newell · 2005</span>
+        </li>
+        <li class="reveal" style="--i:1">
+          <span class="al-cover" aria-hidden="true"><img src="/films/requiem-for-a-dream.jpg" alt="" width="220" height="319" loading="lazy" decoding="async"></span>
+          <span class="t">Requiem for a Dream</span>
+          <span class="al-by">Darren Aronofsky · 2000</span>
+        </li>
+        <li class="reveal" style="--i:2">
+          <span class="al-cover" aria-hidden="true"><img src="/films/perks.jpg" alt="" width="250" height="369" loading="lazy" decoding="async"></span>
+          <span class="t">The Perks of Being a Wallflower</span>
+          <span class="al-by">Stephen Chbosky · 2012</span>
+        </li>
+        <li class="reveal" style="--i:3">
+          <span class="al-cover" aria-hidden="true"><img src="/films/juno.jpg" alt="" width="220" height="343" loading="lazy" decoding="async"></span>
+          <span class="t">Juno</span>
+          <span class="al-by">Jason Reitman · 2007</span>
+        </li>
+        <li class="reveal" style="--i:4">
+          <span class="al-cover" aria-hidden="true"><img src="/films/scott-pilgrim.jpg" alt="" width="220" height="309" loading="lazy" decoding="async"></span>
+          <span class="t">Scott Pilgrim vs. the World</span>
+          <span class="al-by">Edgar Wright · 2010</span>
+        </li>
+        <li class="reveal" style="--i:5">
+          <span class="al-cover" aria-hidden="true"><img src="/films/v-for-vendetta.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
+          <span class="t">V for Vendetta</span>
+          <span class="al-by">James McTeigue · 2005</span>
+        </li>
+        <li class="reveal" style="--i:6">
+          <span class="al-cover" aria-hidden="true"><img src="/films/zoolander.jpg" alt="" width="255" height="389" loading="lazy" decoding="async"></span>
+          <span class="t">Zoolander</span>
+          <span class="al-by">Ben Stiller · 2001</span>
+        </li>
+      </ol>
+    </div>
     <!-- letterboxd:begin · generated from letterboxd/diary.json, edits here are overwritten -->
     <!-- letterboxd:end -->
   </section>
@@ -974,14 +1017,69 @@
     <p class="blank reveal"><b>∅</b>nothing here yet</p>
   </section>
 
-  <section class="cat" id="tv">
+  <section class="cat" id="telly">
     <div class="sec-head reveal">
       <span class="num">03</span>
-      <h2>tv</h2>
-      <span class="notation">tv = ∅</span>
+      <h2>telly</h2>
+      <span class="notation">|telly| = 10</span>
     </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <div class="albums">
+      <div class="lb-head reveal">
+        <span class="lb-label">some shows that shaped me</span>
+      </div>
+      <ol class="al-grid tall">
+        <li class="reveal" style="--i:0">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/the-americans.jpg" alt="" width="400" height="560" loading="lazy" decoding="async"></span>
+          <span class="t">The Americans</span>
+          <span class="al-by">FX · 2013–2018</span>
+        </li>
+        <li class="reveal" style="--i:1">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/the-romanoffs.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+          <span class="t">The Romanoffs</span>
+          <span class="al-by">Prime Video · 2018</span>
+        </li>
+        <li class="reveal" style="--i:2">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/community.jpg" alt="" width="400" height="588" loading="lazy" decoding="async"></span>
+          <span class="t">Community</span>
+          <span class="al-by">NBC · 2009–2015</span>
+        </li>
+        <li class="reveal" style="--i:3">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/counterpart.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+          <span class="t">Counterpart</span>
+          <span class="al-by">Starz · 2017–2019</span>
+        </li>
+        <li class="reveal" style="--i:4">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/man-in-the-high-castle.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+          <span class="t">The Man in the High Castle</span>
+          <span class="al-by">Prime Video · 2015–2019</span>
+        </li>
+        <li class="reveal" style="--i:5">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/night-manager.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+          <span class="t">The Night Manager</span>
+          <span class="al-by">BBC One · 2016–</span>
+        </li>
+        <li class="reveal" style="--i:6">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/30-rock.jpg" alt="" width="400" height="533" loading="lazy" decoding="async"></span>
+          <span class="t">30 Rock</span>
+          <span class="al-by">NBC · 2006–2013</span>
+        </li>
+        <li class="reveal" style="--i:7">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/parks-and-rec.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+          <span class="t">Parks and Recreation</span>
+          <span class="al-by">NBC · 2009–2015</span>
+        </li>
+        <li class="reveal" style="--i:8">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/girls.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+          <span class="t">Girls</span>
+          <span class="al-by">HBO · 2012–2017</span>
+        </li>
+        <li class="reveal" style="--i:9">
+          <span class="al-cover" aria-hidden="true"><img src="/telly/veep.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></span>
+          <span class="t">Veep</span>
+          <span class="al-by">HBO · 2012–2019</span>
+        </li>
+      </ol>
+    </div>
   </section>
 
   <section class="cat" id="music">
