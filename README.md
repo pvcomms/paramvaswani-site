@@ -25,6 +25,7 @@ Seven pages, seven files:
 | `principles.html`    | Principles — the rules I run on, in the order they win |
 | `research.html`      | Research — what I think with: concepts, influences, quotes, aphorisms, words |
 | `downloads.html`     | Downloads — things of mine you can run yourself |
+| `oblique.html`       | Oblique, DIY — your own cards, from your creative values |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |
 
 `/ontology` and `/systems` (with `/systems/how-i-work` and
