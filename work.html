@@ -441,9 +441,7 @@
 </script>
 <style>
   /* gate — a proof-of-work runs before the page opens. no js → no gate; solved once per tab session. */
-  html.gated {
-    overflow: hidden;
-  }
+  html.gated { overflow: hidden; }
   .gate {
     display: none;
     position: fixed;
@@ -453,15 +451,8 @@
     padding: 24px;
     transition: opacity 0.45s ease;
   }
-  html.gated .gate,
-  .gate.out {
-    display: grid;
-    place-items: center;
-  }
-  .gate.out {
-    opacity: 0;
-    pointer-events: none;
-  }
+  html.gated .gate, .gate.out { display: grid; place-items: center; }
+  .gate.out { opacity: 0; pointer-events: none; }
   .gate-inner {
     display: grid;
     gap: 16px;
@@ -472,10 +463,7 @@
     line-height: 1.7;
     color: var(--dim, #96917f);
   }
-  .gate-kicker {
-    color: var(--paper, #e9e6de);
-    letter-spacing: 0.04em;
-  }
+  .gate-kicker { color: var(--paper, #e9e6de); letter-spacing: 0.04em; }
   .gate altcha-widget {
     font-family: inherit;
     font-size: inherit;
@@ -498,10 +486,7 @@
   }
 </style>
 <script>
-  try {
-    if (!sessionStorage.getItem("pv-gate"))
-      document.documentElement.classList.add("gated");
-  } catch (e) {}
+  try { if (!sessionStorage.getItem("pv-gate")) document.documentElement.classList.add("gated"); } catch (e) {}
 </script>
 <div class="gate" id="gate" aria-live="polite">
   <div class="gate-inner">
@@ -512,11 +497,7 @@
       challenge='{"parameters":{"algorithm":"PBKDF2/SHA-256","cost":5000,"keyLength":32,"keyPrefix":"00","nonce":"4917e0651977f74f5238e1fabe6b2565","salt":"1f49403409e53e4caabd27bc373a2d17"}}'
       configuration='{"hideLogo":true,"hideFooter":true,"minDuration":700}'
     ></altcha-widget>
-    <span
-      >a small computation runs in your browser before the page opens. nothing
-      to click, nothing sent anywhere; scrapers pay for the page in cpu
-      instead.</span
-    >
+    <span>a small computation runs in your browser before the page opens. nothing to click, nothing sent anywhere; scrapers pay for the page in cpu instead.</span>
   </div>
 </div>
 
@@ -640,31 +621,20 @@
 <script>
   /* gate: open on verified; fail open on error or after 8s so a broken widget never locks a reader out */
   (function () {
-    var root = document.documentElement,
-      gate = document.getElementById("gate");
+    var root = document.documentElement, gate = document.getElementById("gate");
     if (!gate) return;
-    if (!root.classList.contains("gated")) {
-      gate.remove();
-      return;
-    }
+    if (!root.classList.contains("gated")) { gate.remove(); return; }
     var opened = false;
     function open() {
-      if (opened) return;
-      opened = true;
-      try {
-        sessionStorage.setItem("pv-gate", "1");
-      } catch (e) {}
+      if (opened) return; opened = true;
+      try { sessionStorage.setItem("pv-gate", "1"); } catch (e) {}
       gate.classList.add("out");
       root.classList.remove("gated");
-      setTimeout(function () {
-        gate.remove();
-      }, 500);
+      setTimeout(function () { gate.remove(); }, 500);
     }
     var w = document.getElementById("gate-altcha");
     w.addEventListener("verified", open);
-    w.addEventListener("statechange", function (ev) {
-      if (ev.detail && ev.detail.state === "error") open();
-    });
+    w.addEventListener("statechange", function (ev) { if (ev.detail && ev.detail.state === "error") open(); });
     setTimeout(open, 8000);
   })();
 </script>
