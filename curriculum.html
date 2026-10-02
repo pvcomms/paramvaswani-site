@@ -304,6 +304,10 @@
     font-size: 0.66em;
     color: var(--dim);
   }
+  .study .say {
+    display: block;
+    margin-top: 6px;
+  }
   .study kbd,
   .study code {
     font: inherit;
@@ -860,7 +864,8 @@
         return;
       }
       q.className = "q";
-      q.innerHTML = cur.front;
+      /* english on the front means: say it in german. the old kind label said so; this says it on the card */
+      q.innerHTML = cur.front + (cur.kind === "en → de" ? '<small class="say">in German?</small>' : "");
       anim(q);
       mode("ask");
       focus($("ak-show"), moved);
