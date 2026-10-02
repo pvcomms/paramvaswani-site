@@ -24,6 +24,7 @@ Seven pages, seven files:
 | `work.html`          | Work                                            |
 | `principles.html`    | Principles — the rules I run on, in the order they win |
 | `research.html`      | Research — what I think with: concepts, influences, quotes, aphorisms, words |
+| `downloads.html`     | Downloads — things of mine you can run yourself |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |
 
 `/ontology` and `/systems` (with `/systems/how-i-work` and
