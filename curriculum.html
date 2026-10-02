@@ -245,16 +245,6 @@
     padding-top: 96px;
     max-width: 680px;
   }
-  .anki h2 {
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.16em;
-  }
-  .anki .about {
-    margin-top: 14px;
-    color: var(--dim);
-  }
   .study button:focus-visible,
   .study .card:focus-visible {
     outline: 1px solid var(--c-cohere);
@@ -700,11 +690,7 @@
   </section>
 
   <section class="anki reveal" id="anki" aria-labelledby="anki-h">
-    <h2 id="anki-h">my anki</h2>
-    <p class="about">
-      Anki flashcards of what im learning rn; i do a 10min review every morn
-      to ensure reps
-    </p>
+    <p class="about" id="anki-h">Anki flashcards re: what im currently learning, updated: <span id="ak-date"></span></p>
     <noscript><p class="about">this part needs javascript.</p></noscript>
     <div class="study" id="ak-study" hidden>
       <div class="bar">

@@ -161,8 +161,19 @@ def inject(fragment):
     if i < 0 or j < i:
         return fragment
     i = fragment.index("-->", i) + 3
-    body = data().replace("</", "<\\/")  # nothing in the json can close the script tag
-    return fragment[:i] + f'\n<script type="application/json" id="anki-data">{body}</script>\n' + fragment[j:]
+    raw = data()
+    body = raw.replace("</", "<\\/")  # nothing in the json can close the script tag
+    out = fragment[:i] + f'\n<script type="application/json" id="anki-data">{body}</script>\n' + fragment[j:]
+    return out.replace('<span id="ak-date"></span>', f'<span id="ak-date">{when(json.loads(raw).get("synced"))}</span>', 1)
+
+
+def when(iso):
+    """2026-10-02 -> 2 oct 2026, the way the page writes dates."""
+    try:
+        d = date.fromisoformat(iso)
+    except (TypeError, ValueError):
+        return ""
+    return f"{d.day} {d.strftime('%b').lower()} {d.year}"
 
 
 if __name__ == "__main__":
