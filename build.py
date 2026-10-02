@@ -52,7 +52,7 @@ def wrap(fragment: str, *, title: str, desc: str, path: str, jsonld: str = "") -
 
 PERSON_LD = """<script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Person","name":"Param Vaswani",
-"url":"https://paramv.com","email":"pvcomms (at) pm dot me",
+"url":"https://paramv.com",
 "jobTitle":"Writer and builder",
 "description":"Studies what machine mediation does to human judgment; builds interactive instruments that let people feel those mechanisms.",
 "knowsAbout":["Philosophy of technology","Postphenomenology","4E cognition","Explorable explanations","Attention economy","AI safety"],
@@ -119,7 +119,7 @@ political economy of attention · sociotechnical AI safety.
 
 ## Contact
 
-pvcomms (at) pm dot me
+Footer of https://paramv.com. The address sits behind a small proof-of-work to keep scrapers out.
 """
 
 def sitemap(paths):

@@ -57,9 +57,9 @@ the region scan in `EDITING.md` and confirm real area.
 - **fig. 3 edges:** only `feed ↔ me` and (weakly) `machines ↔ me` are bidirectional. Every
   other edge is one-way and labeled as such. Do not re-inflate to "every edge runs both ways."
 - **Privacy is a hard limit.** No health, diagnoses, medication, family, or third parties.
-  The society card's existing abstraction is the ceiling. Contact is `pvcomms (at) pm dot me`
-  only, written that way everywhere — never a raw address or `mailto:`. Three withholding
-  moves, no fourth. No redaction theatrics.
+  The society card's existing abstraction is the ceiling. Contact is a disposable alias that
+  appears in no form in source — only AES-encrypted in the home-page footer's ALTCHA widget;
+  other pages link to `/#contact`. Three withholding moves, no fourth. No redaction theatrics.
 - **RLHF register: exactly two touches** — "Raised by the algorithm, realigning by hand" and
   the word "overcorrection" on fig. 2. The acronym never appears.
 

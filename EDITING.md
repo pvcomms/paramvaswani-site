@@ -103,12 +103,13 @@ REVEALS 3922
 
 5. **Privacy rules are hard limits.** No health, family, diagnoses, meds, third parties, or
    anything beyond the abstraction level already in the society card. Contact is
-   `pvcomms (at) pm dot me` only, written that way everywhere — never a raw address or
-   `mailto:` in source. The one exception is the footer, where ALTCHA holds the address
-   AES-encrypted in `data-obfuscated` and a proof-of-work in the reader's browser turns it
-   into a mailto link on click. Regenerate the payload with
-   `npx altcha-lib obfuscate "mailto:<address>"` if the address ever changes. Three
-   withholding moves, no fourth.
+   a disposable alias (Proton Pass, forwards to the real inbox), and it appears nowhere in
+   source in any form — not raw, not `(at)`/`dot`, not in JSON-LD or `llms.txt`. It lives only
+   in the home-page footer, where ALTCHA holds it AES-encrypted in `data-obfuscated` and a
+   proof-of-work in the reader's browser turns it into a mailto link on click. Every other
+   page's footer links to `/#contact`. If the alias burns, make a new one and regenerate the
+   payload with `npx altcha-lib obfuscate "mailto:<address>"`. Three withholding moves, no
+   fourth.
 
 ## Sanity checks after editing
 

@@ -137,8 +137,9 @@ paint — see Gotchas.
 - **Society card text** ("Coercive structures leave marks…") is included at Param's explicit
   authorization (his words: text is good, subversive ok). **That sentence is the ceiling** — no
   specifics about people, events, family, or health, ever. Other standing exclusions: no meds, no
-  diagnoses, no third parties, contact = `pvcomms (at) pm dot me` only,
-  written that way everywhere — never a raw address or mailto (Param, 28 Sep 2026).
+  diagnoses, no third parties, contact = one disposable alias, behind the
+  ALTCHA footer widget only — never spelled out, raw, or mailto in source (Param, 2 Oct 2026;
+  supersedes the 28 Sep "(at)/dot everywhere" rule, which scrapers parse).
 - Withholding moves stay at three (off-record set, privacy leaf, colophon clause). No redaction
   theatrics. "fleet foxes ∧ yung lean" + "old ghosts" line = the full music-past dose (two nods).
 - Cut and staying cut: values ticker-of-virtues, the credence tape above the footer (removed
