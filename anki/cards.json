@@ -1,0 +1,3421 @@
+{
+"synced": "2026-10-02",
+"cards": [
+{
+"id": "1790729156043",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: excuse me — the opener<br><mark>[…]</mark>: I'm sorry — the apology",
+"back": "<mark>Entschuldigung</mark>: excuse me — the opener<br><mark>Es tut mir leid</mark>: I'm sorry — the apology",
+"extra": "One opens a conversation, the other closes a wound.",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156044",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Entschuldigung: <mark>[…]</mark><br>Es tut mir leid: <mark>[…]</mark>",
+"back": "Entschuldigung: <mark>excuse me — the opener</mark><br>Es tut mir leid: <mark>I'm sorry — the apology</mark>",
+"extra": "One opens a conversation, the other closes a wound.",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156048",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: bye (casual)<br><mark>[…]</mark>: goodbye (formal)",
+"back": "<mark>Tschüss</mark>: bye (casual)<br><mark>Auf Wiedersehen</mark>: goodbye (formal)",
+"extra": "Register, not meaning.",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156047",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Tschüss: <mark>[…]</mark><br>Auf Wiedersehen: <mark>[…]</mark>",
+"back": "Tschüss: <mark>bye (casual)</mark><br>Auf Wiedersehen: <mark>goodbye (formal)</mark>",
+"extra": "Register, not meaning.",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156051",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>miete: rent without utilities<br><mark>[…]</mark>miete: rent with utilities",
+"back": "<mark>Kalt</mark>miete: rent without utilities<br><mark>Warm</mark>miete: rent with utilities",
+"extra": "Always ask: <i>Was kostet die Miete warm?</i>",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156050",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Kaltmiete: <mark>[…]</mark><br>Warmmiete: <mark>[…]</mark>",
+"back": "Kaltmiete: <mark>rent without utilities</mark><br>Warmmiete: <mark>rent with utilities</mark>",
+"extra": "Always ask: <i>Was kostet die Miete warm?</i>",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156054",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: ambulance / fire<br><mark>[…]</mark>: police",
+"back": "<mark>112</mark>: ambulance / fire<br><mark>110</mark>: police",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156053",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "112: <mark>[…]</mark><br>110: <mark>[…]</mark>",
+"back": "112: <mark>ambulance / fire</mark><br>110: <mark>police</mark>",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156056",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: left<br><mark>[…]</mark>: right<br><mark>[…]</mark>: straight ahead",
+"back": "<mark>links</mark>: left<br><mark>rechts</mark>: right<br><mark>geradeaus</mark>: straight ahead",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156055",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "links: <mark>[…]</mark><br>rechts: <mark>[…]</mark><br>geradeaus: <mark>[…]</mark>",
+"back": "links: <mark>left</mark><br>rechts: <mark>right</mark><br>geradeaus: <mark>straight ahead</mark>",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156057",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: together<br><mark>[…]</mark>: separately",
+"back": "<mark>zusammen</mark>: together<br><mark>getrennt</mark>: separately",
+"extra": "The waiter's question at the end: <i>Zusammen oder getrennt?</i>",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156058",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "zusammen: <mark>[…]</mark><br>getrennt: <mark>[…]</mark>",
+"back": "zusammen: <mark>together</mark><br>getrennt: <mark>separately</mark>",
+"extra": "The waiter's question at the end: <i>Zusammen oder getrennt?</i>",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156059",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Schön, <mark>[…]</mark> kennenzulernen: du (casual)<br>Schön, <mark>[…]</mark> kennenzulernen: Sie (formal)",
+"back": "Schön, <mark>dich</mark> kennenzulernen: du (casual)<br>Schön, <mark>Sie</mark> kennenzulernen: Sie (formal)",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156060",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Schön, dich kennenzulernen: <mark>[…]</mark><br>Schön, Sie kennenzulernen: <mark>[…]</mark>",
+"back": "Schön, dich kennenzulernen: <mark>du (casual)</mark><br>Schön, Sie kennenzulernen: <mark>Sie (formal)</mark>",
+"extra": "",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156062",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "halb <mark>[…]</mark> = 2:30<br>Viertel nach <mark>[…]</mark> = 3:15<br>Viertel vor <mark>[…]</mark> = 2:45",
+"back": "halb <mark>drei</mark> = 2:30<br>Viertel nach <mark>drei</mark> = 3:15<br>Viertel vor <mark>drei</mark> = 2:45",
+"extra": "<i>halb</i> counts toward the next hour: \"half to three\".",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156061",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "halb drei = <mark>[…]</mark><br>Viertel nach drei = <mark>[…]</mark><br>Viertel vor drei = <mark>[…]</mark>",
+"back": "halb drei = <mark>2:30</mark><br>Viertel nach drei = <mark>3:15</mark><br>Viertel vor drei = <mark>2:45</mark>",
+"extra": "<i>halb</i> counts toward the next hour: \"half to three\".",
+"source": "german-month.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156063",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: receipt<br><mark>[…]</mark>: deposit (housing)<br><mark>[…]</mark>: deposit (bottles)",
+"back": "<mark>Kassenbon</mark>: receipt<br><mark>Kaution</mark>: deposit (housing)<br><mark>Pfand</mark>: deposit (bottles)",
+"extra": "Two \"deposits\" and a receipt — three words that share a checkout.",
+"source": "house",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156064",
+"deck": "Deutsch::Distinguishers",
+"kind": "cloze",
+"front": "Kassenbon: <mark>[…]</mark><br>Kaution: <mark>[…]</mark><br>Pfand: <mark>[…]</mark>",
+"back": "Kassenbon: <mark>receipt</mark><br>Kaution: <mark>deposit (housing)</mark><br>Pfand: <mark>deposit (bottles)</mark>",
+"extra": "Two \"deposits\" and a receipt — three words that share a checkout.",
+"source": "house",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155725",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Entschuldigung",
+"back": "excuse me",
+"extra": "Your #1 conversation opener.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155726",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "excuse me <small>(opener, not an apology)</small>",
+"back": "Entschuldigung",
+"extra": "Your #1 conversation opener.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155728",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Es tut mir leid.",
+"back": "I'm sorry",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155729",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'm sorry <small>(an actual apology)</small>",
+"back": "Es tut mir leid.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155731",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Bitte",
+"back": "please / you're welcome / here you go",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155732",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "please / you're welcome / here you go",
+"back": "Bitte",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155733",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Danke schön. / Vielen Dank.",
+"back": "thank you",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155734",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "thank you",
+"back": "Danke schön. / Vielen Dank.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155736",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Tschüss",
+"back": "bye",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155737",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "bye <small>(casual)</small>",
+"back": "Tschüss",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155738",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Auf Wiedersehen",
+"back": "goodbye",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155739",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "goodbye <small>(formal)</small>",
+"back": "Auf Wiedersehen",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155740",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Kein Problem. / Alles gut.",
+"back": "no problem",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155741",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "no problem",
+"back": "Kein Problem. / Alles gut.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155742",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Genau",
+"back": "exactly",
+"extra": "The most German word. A conversation can be held with it alone.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155743",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "exactly",
+"back": "Genau",
+"extra": "The most German word. A conversation can be held with it alone.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155744",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Schönen Tag noch!",
+"back": "Have a good day!",
+"extra": "→ <b>Danke, gleichfalls!</b><br>Checkout reflex: reply \"Danke, gleichfalls!\"",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155745",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Danke, gleichfalls!",
+"back": "Thanks, you too!",
+"extra": "Reply to \"Schönen Tag noch!\"",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155746",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Thanks, you too!",
+"back": "Danke, gleichfalls!",
+"extra": "Reply to \"Schönen Tag noch!\"",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155747",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wie bitte?",
+"back": "Sorry, what?",
+"extra": "Polite. Your best friend.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155748",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Sorry, what?",
+"back": "Wie bitte?",
+"extra": "Polite. Your best friend.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155749",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Können Sie das bitte wiederholen?",
+"back": "Could you repeat that, please?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155750",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Could you repeat that, please?",
+"back": "Können Sie das bitte wiederholen?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155751",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Können Sie das bitte langsamer sagen?",
+"back": "Could you say that more slowly, please?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155752",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Could you say that more slowly, please?",
+"back": "Können Sie das bitte langsamer sagen?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155753",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich verstehe nicht.",
+"back": "I don't understand.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155754",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I don't understand.",
+"back": "Ich verstehe nicht.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155755",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich spreche nur ein bisschen Deutsch.",
+"back": "I only speak a little German.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155756",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I only speak a little German.",
+"back": "Ich spreche nur ein bisschen Deutsch.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155757",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich lerne erst seit einem Monat.",
+"back": "I've only been learning for a month.",
+"extra": "Buys instant goodwill.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155758",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I've only been learning for a month.",
+"back": "Ich lerne erst seit einem Monat.",
+"extra": "Buys instant goodwill.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155759",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Sprechen Sie Englisch?",
+"back": "Do you speak English?",
+"extra": "The fallback, never the opener.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155760",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Do you speak English?",
+"back": "Sprechen Sie Englisch?",
+"extra": "The fallback, never the opener.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155761",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wie sagt man … auf Deutsch?",
+"back": "How do you say … in German?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155762",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "How do you say … in German?",
+"back": "Wie sagt man … auf Deutsch?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155763",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Was bedeutet …?",
+"back": "What does … mean?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155764",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "What does … mean?",
+"back": "Was bedeutet …?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155765",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Können Sie mir helfen?",
+"back": "Can you help me?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155766",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Can you help me?",
+"back": "Können Sie mir helfen?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155767",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wie viel kostet das?",
+"back": "How much does that cost?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155768",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "How much does that cost?",
+"back": "Wie viel kostet das?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155769",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "siebenundvierzig",
+"back": "47",
+"extra": "Units first, then tens: \"seven-and-forty\".",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155770",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "47",
+"back": "siebenundvierzig",
+"extra": "Units first, then tens: \"seven-and-forty\".",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155771",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "halb drei",
+"back": "2:30",
+"extra": "\"Half TO three.\" Not 3:30.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155772",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "2:30",
+"back": "halb drei",
+"extra": "\"Half TO three.\" Not 3:30.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155773",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Viertel nach sieben",
+"back": "7:15",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155774",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "7:15",
+"back": "Viertel nach sieben",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155775",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Viertel vor acht",
+"back": "7:45",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155776",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "7:45",
+"back": "Viertel vor acht",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155777",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich hätte gern zwei Brötchen, bitte.",
+"back": "I'd like two rolls, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155778",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'd like two rolls, please.",
+"back": "Ich hätte gern zwei Brötchen, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155779",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Einen Kaffee zum Mitnehmen, bitte.",
+"back": "A coffee to go, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155780",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "A coffee to go, please.",
+"back": "Einen Kaffee zum Mitnehmen, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155781",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Zum Hier-Essen oder zum Mitnehmen?",
+"back": "For here or to go?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155782",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Sonst noch etwas?",
+"back": "Anything else?",
+"extra": "→ <b>Das wär's, danke.</b>",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155783",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Das wär's, danke.",
+"back": "That's all, thanks.",
+"extra": "Reply to \"Sonst noch etwas?\"",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155784",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "That's all, thanks.",
+"back": "Das wär's, danke.",
+"extra": "Reply to \"Sonst noch etwas?\"",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155785",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Brauchen Sie den Kassenbon?",
+"back": "Do you need the receipt?",
+"extra": "→ Nein, danke.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155786",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wo finde ich Milch?",
+"back": "Where do I find milk?",
+"extra": "Wo finde ich Eier / Kaffee?",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155787",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Where do I find milk?",
+"back": "Wo finde ich Milch?",
+"extra": "Wo finde ich Eier / Kaffee?",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155788",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Haben Sie …?",
+"back": "Do you have …?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155789",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Do you have …?",
+"back": "Haben Sie …?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155790",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Haben Sie eine Payback-Karte?",
+"back": "Do you have a loyalty card?",
+"extra": "→ Nein, danke.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155791",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Brauchen Sie eine Tüte?",
+"back": "Do you need a bag?",
+"extra": "Bags cost money. Bring one.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155792",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "die Tüte, die Tüten",
+"back": "bag",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155793",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "bag",
+"back": "die Tüte, die Tüten",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155794",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "das Pfand",
+"back": "bottle deposit",
+"extra": "8–25¢. Machines at every supermarket eat bottles and print a voucher. Never bin a Pfand bottle.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155795",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "bottle deposit",
+"back": "das Pfand",
+"extra": "8–25¢. Machines at every supermarket eat bottles and print a voucher. Never bin a Pfand bottle.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155796",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Einen Tisch für zwei, bitte.",
+"back": "A table for two, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155797",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "A table for two, please.",
+"back": "Einen Tisch für zwei, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155798",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Die Speisekarte, bitte.",
+"back": "The menu, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155799",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "The menu, please.",
+"back": "Die Speisekarte, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155800",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Was empfehlen Sie?",
+"back": "What do you recommend?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155801",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "What do you recommend?",
+"back": "Was empfehlen Sie?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155802",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich nehme den Salat.",
+"back": "I'll take the salad.",
+"extra": "Ich nehme das Schnitzel.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155803",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'll take the salad.",
+"back": "Ich nehme den Salat.",
+"extra": "Ich nehme das Schnitzel.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155804",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich bin allergisch gegen Nüsse.",
+"back": "I'm allergic to nuts.",
+"extra": "Swap the noun.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155805",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'm allergic to nuts.",
+"back": "Ich bin allergisch gegen Nüsse.",
+"extra": "Swap the noun.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155806",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ein großes Bier, bitte.",
+"back": "A large beer, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155807",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "A large beer, please.",
+"back": "Ein großes Bier, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155808",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Noch eins, bitte.",
+"back": "Another one, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155809",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Another one, please.",
+"back": "Noch eins, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155810",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Was darf's sein?",
+"back": "What'll it be?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155811",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ein Leitungswasser, bitte.",
+"back": "Tap water, please.",
+"extra": "They'll push Mineralwasser. Stand firm or pay.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155812",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Tap water, please.",
+"back": "Ein Leitungswasser, bitte.",
+"extra": "They'll push Mineralwasser. Stand firm or pay.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155813",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Hat es geschmeckt?",
+"back": "Did you enjoy it?",
+"extra": "→ Sehr lecker, danke.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155814",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Zahlen, bitte. / Die Rechnung, bitte.",
+"back": "The check, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155815",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "The check, please.",
+"back": "Zahlen, bitte. / Die Rechnung, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155816",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Zusammen oder getrennt?",
+"back": "Together or separate?",
+"extra": "→ Zusammen, bitte.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155817",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Prost!",
+"back": "Cheers!",
+"extra": "Eye contact mandatory.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155818",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Cheers!",
+"back": "Prost!",
+"extra": "Eye contact mandatory.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155819",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Einmal nach München, bitte.",
+"back": "One ticket to Munich, please.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155820",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "One ticket to Munich, please.",
+"back": "Einmal nach München, bitte.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155821",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Muss ich umsteigen?",
+"back": "Do I need to change (trains)?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155822",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Do I need to change (trains)?",
+"back": "Muss ich umsteigen?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155823",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Welches Gleis?",
+"back": "Which platform?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155824",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Which platform?",
+"back": "Welches Gleis?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155825",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "das Gleis, die Gleise",
+"back": "platform",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155826",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "platform",
+"back": "das Gleis, die Gleise",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155827",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wo ist die nächste U-Bahn-Station?",
+"back": "Where is the nearest U-Bahn station?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155828",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Where is the nearest U-Bahn station?",
+"back": "Wo ist die nächste U-Bahn-Station?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155829",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ist dieser Platz frei?",
+"back": "Is this seat free?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155830",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Is this seat free?",
+"back": "Ist dieser Platz frei?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155831",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Der Zug hat Verspätung.",
+"back": "The train is delayed.",
+"extra": "You will hear this constantly.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155832",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Fahrkarte entwerten",
+"back": "to validate a ticket",
+"extra": "Stamp machines on platforms. Inspectors are plainclothes; fines are real.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155833",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "to validate a ticket",
+"back": "Fahrkarte entwerten",
+"extra": "Stamp machines on platforms. Inspectors are plainclothes; fines are real.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155834",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wo ist die Toilette?",
+"back": "Where is the toilet?",
+"extra": "Entschuldigung, wo ist der Bahnhof?",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155835",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Where is the toilet?",
+"back": "Wo ist die Toilette?",
+"extra": "Entschuldigung, wo ist der Bahnhof?",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155836",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wie komme ich zum Hauptbahnhof?",
+"back": "How do I get to the main station?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155837",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "How do I get to the main station?",
+"back": "Wie komme ich zum Hauptbahnhof?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155838",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "geradeaus",
+"back": "straight ahead",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155839",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "straight ahead",
+"back": "geradeaus",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155840",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "links",
+"back": "left",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155841",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "left",
+"back": "links",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155842",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "rechts",
+"back": "right",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155843",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "right",
+"back": "rechts",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155844",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "die erste Straße links",
+"back": "the first street on the left",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155845",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ist es weit?",
+"back": "Is it far?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155846",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Is it far?",
+"back": "Ist es weit?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155847",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich habe mich verlaufen.",
+"back": "I'm lost.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155848",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'm lost.",
+"back": "Ich habe mich verlaufen.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155849",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Haben Sie WLAN?",
+"back": "Do you have wifi?",
+"extra": "Say \"VEH-lahn\".",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155850",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Do you have wifi?",
+"back": "Haben Sie WLAN?",
+"extra": "Say \"VEH-lahn\".",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155851",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wie ist das WLAN-Passwort?",
+"back": "What's the wifi password?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155852",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "What's the wifi password?",
+"back": "Wie ist das WLAN-Passwort?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155853",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich hätte gern eine SIM-Karte mit Datenvolumen.",
+"back": "I'd like a SIM card with data.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155854",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'd like a SIM card with data.",
+"back": "Ich hätte gern eine SIM-Karte mit Datenvolumen.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155855",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Gibt es das als eSIM?",
+"back": "Is that available as an eSIM?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155856",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Is that available as an eSIM?",
+"back": "Gibt es das als eSIM?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155857",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich suche ein WG-Zimmer.",
+"back": "I'm looking for a room in a flatshare.",
+"extra": "Ich suche eine Wohnung.<br>WG = Wohngemeinschaft.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155858",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'm looking for a room in a flatshare.",
+"back": "Ich suche ein WG-Zimmer.",
+"extra": "Ich suche eine Wohnung.<br>WG = Wohngemeinschaft.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155859",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "die Kaltmiete",
+"back": "rent without utilities",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155860",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "rent without utilities",
+"back": "die Kaltmiete",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155861",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "die Warmmiete",
+"back": "rent with utilities",
+"extra": "Always ask: <b>Was kostet die Miete warm?</b>",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155862",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "rent with utilities",
+"back": "die Warmmiete",
+"extra": "Always ask: <b>Was kostet die Miete warm?</b>",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155863",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "die Kaution, die Kautionen",
+"back": "deposit",
+"extra": "Up to 3 months, standard.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155864",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "deposit",
+"back": "die Kaution, die Kautionen",
+"extra": "Up to 3 months, standard.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155865",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wann kann ich einziehen?",
+"back": "When can I move in?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155866",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "When can I move in?",
+"back": "Wann kann ich einziehen?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155867",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich möchte mich anmelden.",
+"back": "I'd like to register (my address).",
+"extra": "Anmeldung within 2 weeks of a long-term move. Needed for bank, SIM contract, everything.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155868",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'd like to register (my address).",
+"back": "Ich möchte mich anmelden.",
+"extra": "Anmeldung within 2 weeks of a long-term move. Needed for bank, SIM contract, everything.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155869",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich habe einen Termin um zehn Uhr.",
+"back": "I have an appointment at 10.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155870",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I have an appointment at 10.",
+"back": "Ich habe einen Termin um zehn Uhr.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155871",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "der Termin, die Termine",
+"back": "appointment",
+"extra": "Germany runs on Termine. No Termin, no service.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155872",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "appointment",
+"back": "der Termin, die Termine",
+"extra": "Germany runs on Termine. No Termin, no service.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155873",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Hier ist mein Reisepass.",
+"back": "Here is my passport.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155874",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Here is my passport.",
+"back": "Hier ist mein Reisepass.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155875",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich brauche etwas gegen Kopfschmerzen.",
+"back": "I need something for a headache.",
+"extra": "Ich brauche etwas gegen Übelkeit / Erkältung.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155876",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I need something for a headache.",
+"back": "Ich brauche etwas gegen Kopfschmerzen.",
+"extra": "Ich brauche etwas gegen Übelkeit / Erkältung.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155877",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ist das rezeptfrei?",
+"back": "Is that over the counter?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155878",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Is that over the counter?",
+"back": "Ist das rezeptfrei?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155879",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "das Rezept, die Rezepte",
+"back": "prescription",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155880",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "prescription",
+"back": "das Rezept, die Rezepte",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155881",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich möchte einen Termin vereinbaren.",
+"back": "I'd like to book an appointment.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155882",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'd like to book an appointment.",
+"back": "Ich möchte einen Termin vereinbaren.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155883",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Wo tut es weh?",
+"back": "Where does it hurt?",
+"extra": "→ Hier. / Ich habe Schmerzen hier.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155884",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Mir ist schlecht.",
+"back": "I feel nauseous.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155885",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I feel nauseous.",
+"back": "Mir ist schlecht.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155886",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich komme aus den USA.",
+"back": "I'm from the US.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155887",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I'm from the US.",
+"back": "Ich komme aus den USA.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155888",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich bin gerade nach Deutschland gezogen.",
+"back": "I just moved to Germany.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155889",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I just moved to Germany.",
+"back": "Ich bin gerade nach Deutschland gezogen.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155890",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Was machst du so?",
+"back": "What do you do?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155891",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "What do you do? <small>(casual, du)</small>",
+"back": "Was machst du so?",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155892",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Schön, dich kennenzulernen.",
+"back": "Nice to meet you.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155893",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Nice to meet you. <small>(du)</small>",
+"back": "Schön, dich kennenzulernen.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155894",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Schön, Sie kennenzulernen.",
+"back": "Nice to meet you.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155895",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Nice to meet you. <small>(Sie)</small>",
+"back": "Schön, Sie kennenzulernen.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155896",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Mein Deutsch ist noch nicht so gut — können wir auf Englisch weitermachen?",
+"back": "My German isn't good yet — can we continue in English?",
+"extra": "The graceful eject button.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155897",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "My German isn't good yet — can we continue in English?",
+"back": "Mein Deutsch ist noch nicht so gut — können wir auf Englisch weitermachen?",
+"extra": "The graceful eject button.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155898",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Hilfe!",
+"back": "Help!",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155899",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Help!",
+"back": "Hilfe!",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155900",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Rufen Sie einen Krankenwagen!",
+"back": "Call an ambulance!",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155901",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "Call an ambulance!",
+"back": "Rufen Sie einen Krankenwagen!",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155902",
+"deck": "Deutsch::Phrases",
+"kind": "de → en",
+"front": "Ich brauche einen Arzt.",
+"back": "I need a doctor.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729155903",
+"deck": "Deutsch::Phrases",
+"kind": "en → de",
+"front": "I need a doctor.",
+"back": "Ich brauche einen Arzt.",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153320",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: learning two cards together is harder than learning either alone.",
+"back": "<mark>Interference</mark>: learning two cards together is harder than learning either alone.",
+"extra": "e.g. <i>vergeblich</i> / <i>erheblich</i> — rhyme, similar shape, both keep lapsing.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153323",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: the front allows several answers but the back lists only one.",
+"back": "<mark>Ambiguity</mark>: the front allows several answers but the back lists only one.",
+"extra": "e.g. \"great\" → <i>großartig</i> or <i>gewaltig</i>. Either list every answer on the back, or add a constraint.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153325",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "<mark>[…]</mark>: the front does not say which question it is asking.",
+"back": "<mark>Vagueness</mark>: the front does not say which question it is asking.",
+"extra": "e.g. \"Plato\" → recite five factoids. One fact per card instead.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153329",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Fix when no distinguisher is possible (true synonyms): a <mark>[…]</mark> in the cloze hint.",
+"back": "Fix when no distinguisher is possible (true synonyms): a <mark>constraint</mark> in the cloze hint.",
+"extra": "Artificial, so last resort. House shorthand: hint <code>a</code> = contains the letter a; <code>-e</code> = does not contain e.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153330",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Powering through an ambiguous card teaches <mark>[…]</mark> (boldface, position, order) instead of the material.",
+"back": "Powering through an ambiguous card teaches <mark>layout accidents</mark> (boldface, position, order) instead of the material.",
+"extra": "",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153331",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "The one good reason to press Again: <mark>[…]</mark>.",
+"back": "The one good reason to press Again: <mark>tried for a while and nothing came</mark>.",
+"extra": "Bad reasons: interference, ambiguity, vagueness. Those are card bugs, not memory failures — mark the card.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153332",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Broken card during review → <mark>[…]</mark>; fix later from the desktop.",
+"back": "Broken card during review → <mark>mark it (<kbd>*</kbd>) and move on</mark>; fix later from the desktop.",
+"extra": "<code>anki bugs</code> lists marked / flagged / leech notes. <code>anki fix</code> opens them.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153333",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Redundancy: encode a fact <mark>[…]</mark>.",
+"back": "Redundancy: encode a fact <mark>in several contexts</mark>.",
+"extra": "A word plus two example sentences; a conjugation table plus sentences using each form.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153334",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Prefer <mark>[…]</mark> over front/back for algorithm steps, equation terms, conjugations and lines of code.",
+"back": "Prefer <mark>cloze</mark> over front/back for algorithm steps, equation terms, conjugations and lines of code.",
+"extra": "",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153335",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "One <mark>[…]</mark> per card. A note may spawn several cards, but each card asks exactly one thing.",
+"back": "One <mark>fact</mark> per card. A note may spawn several cards, but each card asks exactly one thing.",
+"extra": "",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729153336",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "A <mark>[…]</mark> (a card that keeps lapsing) is usually a card bug: interference or ambiguity, not a memory problem.",
+"back": "A <mark>leech</mark> (a card that keeps lapsing) is usually a card bug: interference or ambiguity, not a memory problem.",
+"extra": "This collection tags leeches after 5 lapses. Treat the tag as a bug report.",
+"source": "house rule",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729229523",
+"deck": "Meta::Anki",
+"kind": "cloze",
+"front": "Fix for interference: a <mark>[…]</mark> — one cloze note that teaches the contrast itself.",
+"back": "Fix for interference: a <mark>distinguisher</mark> — one cloze note that teaches the contrast itself.",
+"extra": "<code>{{c1::e}}r{{c1::h}}eblich: {{c2::considerable}}<br>{{c1::ve}}r{{c1::g}}eblich: {{c2::in vain}}</code> — the wrong word becomes a trigger for the right one.",
+"source": "agentydragon, My Anki patterns (2019)",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156295",
+"deck": "Stats",
+"kind": "cloze",
+"front": "Rule of three: 0 events in n trials → a quick 95% upper bound on the rate is <mark>[…]</mark>.",
+"back": "Rule of three: 0 events in n trials → a quick 95% upper bound on the rate is <mark>3 / n</mark>.",
+"extra": "Exact two-sided Clopper–Pearson gives ≈ 3.69 / n. So 0/87 → about 4.2%, i.e. 1 in 24.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156298",
+"deck": "Stats",
+"kind": "cloze",
+"front": "To defend a 1-in-272 error rate (0.37%) with zero observed errors you need about <mark>[…]</mark> clean trials.",
+"back": "To defend a 1-in-272 error rate (0.37%) with zero observed errors you need about <mark>1,000</mark> clean trials.",
+"extra": "3.69 / 1000 ≈ 0.37%.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156300",
+"deck": "Stats",
+"kind": "cloze",
+"front": "Bonferroni: with m tests, reject only when p &lt; <mark>[…]</mark>.",
+"back": "Bonferroni: with m tests, reject only when p &lt; <mark>α / m</mark>.",
+"extra": "Controls family-wise error. Conservative when tests are correlated.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156302",
+"deck": "Stats",
+"kind": "cloze",
+"front": "Minimum detectable effect shrinks with <mark>[…]</mark>: quadrupling n halves it.",
+"back": "Minimum detectable effect shrinks with <mark>√n</mark>: quadrupling n halves it.",
+"extra": "mcp-tool-selection-eval at n = 44 has an MDE of ~17 percentage points.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156303",
+"deck": "Stats",
+"kind": "cloze",
+"front": "A leaderboard rank order from one eval run is a <mark>[…]</mark>. Ask what fraction of bootstrap resamples reproduce it.",
+"back": "A leaderboard rank order from one eval run is a <mark>point estimate</mark>. Ask what fraction of bootstrap resamples reproduce it.",
+"extra": "mcp-tool-selection-eval: the published order reproduced 24% of the time.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156305",
+"deck": "Stats",
+"kind": "cloze",
+"front": "When every model sees the same items, analyze <mark>[…]</mark> differences: item variance cancels.",
+"back": "When every model sees the same items, analyze <mark>paired</mark> differences: item variance cancels.",
+"extra": "yt-tldr-eval: only \"Haiku is worst\" survives the paired analysis.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156306",
+"deck": "Stats",
+"kind": "cloze",
+"front": "Bean et al. (NeurIPS 2025) audited 445 AI benchmarks; only <mark>[…]</mark> did any statistical testing.",
+"back": "Bean et al. (NeurIPS 2025) audited 445 AI benchmarks; only <mark>16%</mark> did any statistical testing.",
+"extra": "",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729156307",
+"deck": "Stats",
+"kind": "cloze",
+"front": "Items every model gets right, or every model gets wrong, carry <mark>[…]</mark> for ranking.",
+"back": "Items every model gets right, or every model gets wrong, carry <mark>zero information</mark> for ranking.",
+"extra": "14 of 44 items in mcp-tool-selection-eval; 0 separate #1 from #2.",
+"source": "statistics-course.md",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195546",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Mark the current note <small>in Anki</small>",
+"back": "<kbd>*</kbd>",
+"extra": "Then <code>anki bugs</code> lists it. The bug-tracking pattern.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195550",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Red-flag the current card <small>in Anki</small>",
+"back": "<kbd>⌘ 1</kbd>",
+"extra": "Flags 1–7 are ⌘1–⌘7.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195553",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Edit the current note <small>in Anki</small>",
+"back": "<kbd>e</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195555",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Bury the current card until tomorrow <small>in Anki</small>",
+"back": "<kbd>-</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195557",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Suspend the current card <small>in Anki</small>",
+"back": "<kbd>!</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195560",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Suspend the whole note <small>in Anki</small>",
+"back": "<kbd>@</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195561",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Replay audio <small>in Anki</small>",
+"back": "<kbd>r</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195562",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Open the browser <small>in Anki</small>",
+"back": "<kbd>b</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195563",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Undo <small>in Anki</small>",
+"back": "<kbd>⌘ Z</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195565",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Show answer / grade Good <small>in Anki</small>",
+"back": "<kbd>Space</kbd>",
+"extra": "1 Again · 2 Hard · 3 Good · 4 Easy",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195566",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Toggle hidden files in Finder <small>in macOS</small>",
+"back": "<kbd>⌘ ⇧ .</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195567",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Screenshot a region to the clipboard <small>in macOS</small>",
+"back": "<kbd>⌃ ⌘ ⇧ 4</kbd>",
+"extra": "Drop ⌃ to save to the Desktop instead.",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195568",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Emoji and symbol picker <small>in macOS</small>",
+"back": "<kbd>⌃ ⌘ Space</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195569",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Move focus to the menu bar <small>in macOS</small>",
+"back": "<kbd>⌃ F2</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195570",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Change the word under the cursor <small>in Vim</small>",
+"back": "<kbd>ciw</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195571",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Repeat the last change <small>in Vim</small>",
+"back": "<kbd>.</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195572",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Jump to the end / start of the file <small>in Vim</small>",
+"back": "<kbd>G / gg</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195573",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Delete to the end of the line <small>in Vim</small>",
+"back": "<kbd>D</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195574",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Undo / redo <small>in Vim</small>",
+"back": "<kbd>u / ⌃ r</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195575",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Save and quit <small>in Vim</small>",
+"back": "<kbd>:wq or ZZ</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195576",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Amend the last commit without editing the message <small>in Git</small>",
+"back": "<kbd>git commit --amend --no-edit</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195577",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Show only the last commit <small>in Git</small>",
+"back": "<kbd>git log -1</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195578",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Unstage a file <small>in Git</small>",
+"back": "<kbd>git restore --staged FILE</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195579",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Discard working-tree changes to a file <small>in Git</small>",
+"back": "<kbd>git restore FILE</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195580",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Focus the address bar <small>in Browser</small>",
+"back": "<kbd>⌘ L</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195581",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Reopen the last closed tab <small>in Browser</small>",
+"back": "<kbd>⌘ ⇧ T</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195582",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Previous / next tab <small>in Browser</small>",
+"back": "<kbd>⌘ ⌥ ← / ⌘ ⌥ →</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195583",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Reopen the most recent artifact from this session <small>in Claude Code</small>",
+"back": "<kbd>⌃ ]</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195584",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "List this session's artifacts <small>in Claude Code</small>",
+"back": "<kbd>/artifacts</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+},
+{
+"id": "1790729195585",
+"deck": "Tools::Shortcuts",
+"kind": "shortcut",
+"front": "Toggle fast mode <small>in Claude Code</small>",
+"back": "<kbd>/fast</kbd>",
+"extra": "",
+"source": "",
+"me": [
+0,
+0,
+0
+]
+}
+]
+}

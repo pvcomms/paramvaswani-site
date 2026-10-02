@@ -8,6 +8,7 @@ Source of truth stays index.html; ./public is generated — never edit it direct
 """
 import re, shutil, pathlib, html
 import letterboxd
+import anki
 
 ROOT = pathlib.Path(__file__).parent
 PUB = ROOT / "public"
@@ -161,10 +162,13 @@ def main():
          "/systems/cognitive-scaffolding", ""),
     ]
     letterboxd.sync()
+    anki.sync()
     for src, dst, title, desc, path, ld in pages:
         frag = (ROOT / src).read_text(encoding="utf-8")
         if src == "taste.html":
             frag = letterboxd.inject(frag)
+        if src == "curriculum.html":
+            frag = anki.inject(frag)
         (PUB / dst).parent.mkdir(parents=True, exist_ok=True)
         (PUB / dst).write_text(wrap(frag, title=title, desc=desc, path=path, jsonld=ld),
                                encoding="utf-8")

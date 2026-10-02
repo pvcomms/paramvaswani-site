@@ -11,6 +11,7 @@ every request, so you edit the file, hit refresh, and see the change. No build s
 """
 import http.server, socketserver, sys, os, pathlib
 import letterboxd
+import anki
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 4173
 ROOT = pathlib.Path(__file__).parent.resolve()
@@ -78,6 +79,8 @@ class Handler(http.server.SimpleHTTPRequestHandler):
             frag = f.read_text(encoding="utf-8")
             if PAGES[path] == "taste.html":
                 frag = letterboxd.inject(frag)  # renders the committed diary; ./letterboxd.py refreshes it
+            if PAGES[path] == "curriculum.html":
+                frag = anki.inject(frag)  # the committed cards; ./anki.py refreshes them
             body = SHELL_HEAD + frag + SHELL_FOOT
             return self._send(body.encode("utf-8"), "text/html")
 

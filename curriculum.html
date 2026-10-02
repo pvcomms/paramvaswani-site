@@ -240,6 +240,207 @@
     outline-offset: 3px;
   }
 
+  /* ---------- anki: my decks, studied in your browser ---------- */
+  .anki {
+    padding-top: 96px;
+    max-width: 680px;
+  }
+  .anki h2 {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+  }
+  .anki .about {
+    margin-top: 14px;
+    color: var(--dim);
+  }
+  .decks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 22px;
+    margin-top: 26px;
+  }
+  .decks button {
+    position: relative;
+    background: none;
+    border: 0;
+    padding: 0;
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+  .decks button span {
+    color: var(--faint-t);
+    margin-left: 6px;
+    font-size: 11.5px;
+  }
+  .decks button::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .decks button:hover,
+  .decks button[aria-pressed="true"] {
+    color: var(--paper);
+  }
+  .decks button[aria-pressed="true"]::before {
+    transform: scaleX(1);
+  }
+  .decks button:focus-visible,
+  .study button:focus-visible,
+  .study .card:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .study {
+    margin-top: 30px;
+  }
+  .study .bar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--faint-t);
+  }
+  .study .card {
+    margin-top: 10px;
+    min-height: 220px;
+    padding: 30px 32px 28px;
+    border: 1px solid var(--edge);
+    background: var(--panel-bar);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .study .q {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+  .study .a {
+    padding-top: 18px;
+    border-top: 1px solid var(--hair);
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  .study .in {
+    animation: akin 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes akin {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .study mark {
+    background: none;
+    color: var(--accent);
+    border-bottom: 1px solid currentColor;
+  }
+  .study small {
+    font-size: 0.66em;
+    color: var(--dim);
+  }
+  .study kbd,
+  .study code {
+    font: inherit;
+    font-size: 0.86em;
+    padding: 0 6px;
+    border: 1px solid var(--hair-2);
+  }
+  .study .extra {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--dim);
+  }
+  .study .extra code,
+  .study .extra kbd {
+    font-size: 13px;
+  }
+  .study .extra small {
+    display: block;
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--faint-t);
+  }
+  .study .note {
+    font-size: 11.5px;
+    letter-spacing: 0.06em;
+    color: var(--faint-t);
+  }
+  .study .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .study .row button {
+    background: none;
+    border: 1px solid var(--hair-2);
+    border-radius: 0;
+    color: var(--paper);
+    padding: 9px 14px;
+    font: inherit;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      border-color 0.2s ease,
+      color 0.2s ease;
+  }
+  .study .row button:hover {
+    border-color: var(--paper);
+  }
+  .study .row button.got:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .study .row button i {
+    font-style: normal;
+    color: var(--faint-t);
+    margin-left: 8px;
+  }
+  .study .row[hidden] {
+    display: none;
+  }
+  .study .done {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  @media (max-width: 560px) {
+    .study .card {
+      padding: 22px 20px;
+      min-height: 200px;
+    }
+    .study .q {
+      font-size: 19px;
+    }
+    .study .a {
+      font-size: 18px;
+    }
+    .study .row button i {
+      display: none;
+    }
+  }
+
   /* ---------- footer ---------- */
   footer {
     margin-top: 120px;
@@ -313,8 +514,12 @@
       transition: none;
     }
     .prog i,
-    nav.site a::before {
+    nav.site a::before,
+    .decks button::before {
       transition: none;
+    }
+    .study .in {
+      animation: none;
     }
   }
 
@@ -538,6 +743,40 @@
     </p>
   </section>
 
+  <section class="anki reveal" id="anki" aria-labelledby="anki-h">
+    <h2 id="anki-h">my anki</h2>
+    <p class="about">
+      the flashcards i&#8217;m learning from, copied out of my anki. pick a deck
+      and go through them. what you get right is kept in this browser, not sent
+      anywhere.
+    </p>
+    <noscript><p class="about">this part needs javascript.</p></noscript>
+    <div class="decks" id="ak-decks" aria-label="decks"></div>
+    <div class="study" id="ak-study" hidden>
+      <div class="bar">
+        <span id="ak-kind"></span><span id="ak-left" aria-live="polite"></span>
+      </div>
+      <div class="card" id="ak-card" tabindex="-1">
+        <div class="q" id="ak-q"></div>
+        <div class="a" id="ak-a" hidden></div>
+        <div class="extra" id="ak-x" hidden></div>
+        <div class="note" id="ak-me" hidden></div>
+      </div>
+      <div class="row" id="ak-ask">
+        <button type="button" id="ak-show">show<i>space</i></button>
+      </div>
+      <div class="row" id="ak-rate" hidden>
+        <button type="button" id="ak-again">again<i>1</i></button>
+        <button type="button" class="got" id="ak-got">got it<i>2</i></button>
+      </div>
+      <div class="row" id="ak-end" hidden>
+        <button type="button" id="ak-redo">go again</button>
+      </div>
+    </div>
+  </section>
+  <!-- anki:begin — build.py puts anki/cards.json here; ./anki.py refreshes it from the running anki -->
+  <!-- anki:end -->
+
   <footer>
     <div class="contact reveal">
       <span><a href="/#contact">email</a></span>
@@ -601,6 +840,179 @@
         el.classList.add("in");
       });
     }
+  })();
+</script>
+<script>
+  /* anki: my cards, studied by you. the cards are copied into the page at build time
+     (anki.py); what you get right is kept in this browser under pv-anki. a miss puts the
+     card back three places on; got it takes it out until you go again. */
+  (function () {
+    "use strict";
+    var src = document.getElementById("anki-data");
+    var box = document.getElementById("ak-decks");
+    if (!src || !box) return;
+    var data;
+    try { data = JSON.parse(src.textContent); } catch (e) { return; }
+    var cards = data.cards || [];
+    if (!cards.length) return;
+
+    var $ = function (id) { return document.getElementById(id); };
+    var study = $("ak-study"), q = $("ak-q"), a = $("ak-a"), x = $("ak-x"), me = $("ak-me");
+    var ask = $("ak-ask"), rate = $("ak-rate"), end = $("ak-end");
+    var KEY = "pv-anki", ALL = "everything";
+
+    var got = {};
+    try { got = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+    function keep() { try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} }
+
+    var decks = {}, names = [];
+    cards.forEach(function (c) {
+      if (!decks[c.deck]) { decks[c.deck] = []; names.push(c.deck); }
+      decks[c.deck].push(c);
+    });
+    decks[ALL] = cards;
+    names.unshift(ALL);
+
+    function label(d) { return d.toLowerCase().split("::").join(" · "); }
+    function left(d) { return decks[d].filter(function (c) { return !got[c.id]; }).length; }
+
+    var buttons = {};
+    names.forEach(function (d) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-pressed", "false");
+      b.addEventListener("click", function () { start(d, true); });
+      buttons[d] = b;
+      box.appendChild(b);
+    });
+    function paintDecks() {
+      names.forEach(function (d) {
+        var n = left(d), b = buttons[d];
+        b.textContent = label(d);
+        var s = document.createElement("span");
+        s.textContent = n ? String(n) : "done";
+        b.appendChild(s);
+        b.setAttribute("aria-pressed", d === deck ? "true" : "false");
+      });
+    }
+
+    var deck = null, queue = [], cur = null, seen = 0, missed = {};
+
+    function shuffle(xs) {
+      for (var i = xs.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1)), t = xs[i];
+        xs[i] = xs[j]; xs[j] = t;
+      }
+      return xs;
+    }
+    function times(n) { return n === 1 ? "once" : n === 2 ? "twice" : n + " times"; }
+    function record(m) {
+      /* m = [reviews, lapses, interval in days] from my collection; nothing to say until i've reviewed it */
+      if (!m || !m[0]) return "";
+      var bits = ["me: seen it " + times(m[0])];
+      if (m[1]) bits.push("forgot it " + times(m[1]));
+      bits.push(m[2] ? "back in " + m[2] + (m[2] === 1 ? " day" : " days") : "still learning it");
+      return bits.join(" · ");
+    }
+    function show(el, html) { el.innerHTML = html || ""; el.hidden = !html; }
+    function anim(el) { el.classList.remove("in"); void el.offsetWidth; el.classList.add("in"); }
+    function focus(el, moved) { if (moved) el.focus({ preventScroll: true }); }
+    function mode(m) { ask.hidden = m !== "ask"; rate.hidden = m !== "rate"; end.hidden = m !== "end"; }
+
+    function start(d, moved) {
+      deck = d;
+      queue = shuffle(decks[d].filter(function (c) { return !got[c.id]; }));
+      seen = 0; missed = {};
+      study.hidden = false;
+      paintDecks();
+      next(moved);
+    }
+
+    function next(moved) {
+      cur = queue[0] || null;
+      show(a, ""); show(x, ""); show(me, "");
+      var n = queue.length;
+      $("ak-left").textContent = n ? n + " to go" : "";
+      if (!cur) {
+        $("ak-kind").textContent = label(deck);
+        var misses = Object.keys(missed).length;
+        q.innerHTML = seen
+          ? "that&#8217;s the deck. " + seen + (seen === 1 ? " card, " : " cards, ") +
+            (seen - misses) + " first time."
+          : "you&#8217;ve got every card in this deck.";
+        q.className = "q done";
+        anim(q);
+        mode("end");
+        focus($("ak-redo"), moved);
+        return;
+      }
+      $("ak-kind").textContent = (deck === ALL ? label(cur.deck) + " · " : "") +
+        (cur.kind === "cloze" ? "fill the gap" : cur.kind || "card");
+      q.className = "q";
+      q.innerHTML = cur.front;
+      anim(q);
+      mode("ask");
+      focus($("ak-show"), moved);
+    }
+
+    function reveal(moved) {
+      if (!cur || ask.hidden) return;
+      if (cur.kind === "cloze") { q.innerHTML = cur.back; } else { show(a, cur.back); anim(a); }
+      var extra = cur.extra + (cur.source ? (cur.extra ? "<br>" : "") + "<small>" + cur.source + "</small>" : "");
+      show(x, extra);
+      show(me, record(cur.me));
+      [x, me].forEach(function (el) { if (!el.hidden) anim(el); });
+      mode("rate");
+      focus($("ak-got"), moved);
+    }
+
+    function answer(ok, moved) {
+      if (!cur || rate.hidden) return;
+      queue.shift();
+      if (ok) {
+        got[cur.id] = 1;
+        keep();
+        seen++;
+      } else {
+        missed[cur.id] = 1;
+        queue.splice(Math.min(3, queue.length), 0, cur);
+      }
+      paintDecks();
+      next(moved);
+    }
+
+    $("ak-show").addEventListener("click", function () { reveal(true); });
+    $("ak-got").addEventListener("click", function () { answer(true, true); });
+    $("ak-again").addEventListener("click", function () { answer(false, true); });
+    $("ak-redo").addEventListener("click", function () {
+      decks[deck].forEach(function (c) { delete got[c.id]; });
+      keep();
+      start(deck, true);
+    });
+
+    /* space shows (and then counts as got it), 1 = again, 2 = got it. a focused button takes its own space. */
+    document.addEventListener("keydown", function (e) {
+      if (study.hidden || e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target, tag = t && t.tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+      var r = study.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > window.innerHeight) return;
+      if (e.key === " " && tag !== "BUTTON") {
+        if (!ask.hidden) { e.preventDefault(); reveal(false); }
+        else if (!rate.hidden) { e.preventDefault(); answer(true, false); }
+      } else if (e.key === "1" && !rate.hidden) { answer(false, false); }
+      else if (e.key === "2" && !rate.hidden) { answer(true, false); }
+    });
+
+    if (data.synced) {
+      var d = new Date(data.synced + "T12:00:00");
+      var s = document.createElement("span");
+      s.textContent = " last copied " + d.getDate() + " " +
+        ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"][d.getMonth()] +
+        " " + d.getFullYear() + ".";
+      document.querySelector(".anki .about").appendChild(s);
+    }
+    start(ALL, false);
   })();
 </script>
 <audio id="track" src="/audio/casualty-of-society.mp3" preload="none" loop></audio>
