@@ -27,7 +27,20 @@
   run ./letterboxd.py.
 -->
 <style>
-  /* courier prime — one family for everything; self-hosted, latin subset */
+  /* rm typerighter, by ray meadows (cc by-nd 3.0, credited in the footer): the face for
+     everything. one regular style, so the browser draws bold and italic; courier prime stays
+     behind it for the few glyphs it lacks (– • → ∅ ∪ and the non-breaking hyphen). */
+  @font-face {
+    font-family: "RM Typerighter";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("/fonts/rm-typerighter/rm-typerighter.woff2") format("woff2");
+    /* its letters sit at half the size of courier prime's (x-height .227 vs .451 em);
+       doubled, they match it in height and in average width, so every size below holds */
+    size-adjust: 200%;
+  }
+  /* courier prime — fallback only; self-hosted, latin subset */
   @font-face {
     font-family: "Courier Prime";
     font-style: normal;
@@ -69,8 +82,8 @@
     --c-consume: #b48ede;
     --c-cohere: #e3c567;
     --accent: var(--c-consume);
-    --serif: "Courier Prime", "Courier New", Courier, monospace; /* body; name kept, face changed */
-    --mono: "Courier Prime", "Courier New", Courier, monospace;
+    --serif: "RM Typerighter", "Courier Prime", "Courier New", Courier, monospace; /* body; name kept, face changed */
+    --mono: "RM Typerighter", "Courier Prime", "Courier New", Courier, monospace;
     --shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
   }
   :root[data-theme="light"] {
@@ -833,6 +846,7 @@
     <div class="contact reveal">
       <span>pvcomms (at) pm dot me</span>
       <span>emails checked once a week, on saturday</span>
+      <span>type: <a href="https://fontstruct.com/fontstructions/show/250901">rm typerighter</a> by ray meadows, <a href="https://creativecommons.org/licenses/by-nd/3.0/">cc by-nd 3.0</a></span>
     </div>
     <div class="colophon reveal">
       self-hosted · no data · no tracking · no cookies · no fingerprinting · not for sale
