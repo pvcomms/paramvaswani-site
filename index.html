@@ -194,6 +194,67 @@
   .about .bar {
     color: var(--faint);
   }
+  .about a {
+    color: var(--dim);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--hair-2);
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .about a:hover {
+    color: var(--paper);
+    border-bottom-color: var(--dim);
+  }
+  /* the consulting ask: same proof-of-work widget as the footer, styled as a word in the line */
+  .about altcha-widget {
+    display: inline;
+    font: inherit;
+    --altcha-color-base: var(--ink);
+    --altcha-color-base-content: var(--paper);
+    --altcha-color-neutral: var(--hair-2);
+    --altcha-color-neutral-content: var(--dim);
+    --altcha-color-primary: var(--c-cohere);
+    --altcha-color-primary-content: var(--ink);
+    --altcha-color-success: var(--c-cohere);
+    --altcha-color-success-content: var(--ink);
+    --altcha-border-color: var(--hair-2);
+    --altcha-border-width: 1px;
+    --altcha-border-radius: 2px;
+    --altcha-checkbox-border-color: var(--hair-2);
+    --altcha-checkbox-border-radius: 2px;
+    --altcha-checkbox-size: 16px;
+    --altcha-spinner-color: var(--c-cohere);
+    --altcha-max-width: 280px;
+    --altcha-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  }
+  .about .ask,
+  .about altcha-widget a {
+    appearance: none;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    letter-spacing: inherit;
+    color: var(--paper);
+    border-bottom: 1px dashed var(--dim);
+    cursor: pointer;
+    text-decoration: none;
+    transition:
+      color 0.18s ease,
+      border-color 0.18s ease;
+  }
+  .about .ask:hover,
+  .about altcha-widget a:hover {
+    color: var(--c-cohere);
+    border-bottom-color: var(--c-cohere);
+  }
+  .about .ask:focus-visible,
+  .about altcha-widget a:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 2px;
+  }
   .about p {
     margin: 0;
     text-wrap: balance;
@@ -936,9 +997,26 @@
       <svg class="go" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round" /></svg>
       <svg class="stop" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="0.5" /><rect x="14" y="5" width="3.5" height="14" rx="0.5" /></svg>
     </button></p>
-    <p><span class="g">ex&nbsp;ai agent product&nbsp;person&nbsp;<span class="bar">|</span></span> <span class="g">neurophilosophy and social&nbsp;theory&nbsp;nerd&nbsp;<span class="bar">|</span></span> <span class="g">fully nomadic: berlin till oct&nbsp;19&nbsp;<span class="bar">|</span></span> <span class="g">towards Presence</span></p>
-    <p><span class="g">author of the upcoming <i>My Recursive Self&#8209;Improvement Year</i>:</span> <span class="g">the quantified, hyperconnected&nbsp;self&nbsp;<span class="bar">|</span></span> <span class="g">one year of a Claude&nbsp;Code&#8209;mediated&nbsp;life&nbsp;<span class="bar">|</span></span> <span class="g">the mind&#8209;body&nbsp;problem</span></p>
+    <p><span class="g">extremely curious&nbsp;person&nbsp;<span class="bar">|</span></span> <span class="g">fully nomadic: berlin till oct&nbsp;19&nbsp;<span class="bar">|</span></span> <span class="g">living intentionally; reading, writing, developing,&nbsp;learning</span></p>
+    <p><span class="g">book: jan&nbsp;2027&nbsp;<span class="bar">|</span></span> <span class="g"><altcha-widget id="ask" data-obfuscated="eyJwYXJhbWV0ZXJzIjp7ImFsZ29yaXRobSI6IlBCS0RGMi9TSEEtMjU2IiwiY29zdCI6NTAwMCwia2V5TGVuZ3RoIjozMiwia2V5UHJlZml4IjoiYjA0NzU5NzdkMTU1YjdiODM4ZGNiMmM3OGQ5ODAxYmQiLCJub25jZSI6IjJiMjcwYmUxYjhkZDRiMGRmOWVmYzNhYjc4YmViNzIxIiwic2FsdCI6IjkyNzdiNDY5NDJhZmIzMGI1YjkwYzJkOWJlYjNiZWM4In0sImNpcGhlciI6eyJpdiI6IjYxNzdmZmRjZjBmZDFmNmE4MTkzNmQ3MiIsImRhdGEiOiJhMGY1ODE3NjdlZGJiMGU1ODUwMmY4ZWNjMGUxY2JjZGYwNDFmZGJlY2E0YjljNjQ1YzNhZTA3YmIwMDYxMmQyZjc2YjVkZTczOTAwNmIwMWMwNjUwOTQ3ZjhiY2U3ZWRkOGM0YTVlNmQyMmZiYTA1ZGIyYjk2Mzk1YTU1YzA5ZWUyYmI1NmViYjY5Y2M5NTJlYWJkODlmODc3OTNiYzk3Mzg0ZjFhNGQwY2QwNzJjYzc2ZmViZTk4NmRlZDBmMDk5NWVjN2JiMDcyNjVkYmZkMDU3YzZhZmYwODI0YjJiYmIyNzY2NmI2MTJjOGQxNzk5ZmIzZjM2M2YyZDBkZjQ3NmZhYzljNDJkNWQyMWExNmMyYzc0OGNhYjgyZWU2MDhkMTQxNzI3YWUyMjBmNWNlMWNmOWQ5MTBhODE2MmQxZmU5ZjIwYzkyYWFiMjIxN2ZmODQ4MmYwZmQ4NTFlZDAxZmFiNDViODJhMTIwY2IzZmY3ZDI3NTg2MmU1YjNkMjA3YTBlMjBhOWYyNWYxOTIwZGIzNmQ5ZTM4MTY1NWZlZjA0YjQyMmNiMWFjNzc5NjdkOTI4YWQxYWM1NzdjMDBlODMxNzg4MzdmOGZhYTM0MTVhZGQyNTg2ZTNlMTMwZjkyZTkzOWJiNGRhNGViOTVjMjljN2E4Y2JhYWZjODIyYWQ1M2Q4ODU2ZTM4ZTYwYjI5YzVkYThiN2RhMGRlZGZmNzUxNjhmN2M5YjVkNzA0NTQ2OWRiMDczOTUyZGQ3NzFhYWZmZjEwOWM2MjJhZGM5YmI3NzczZmJmNzY2MWMxOGE3NDhiMGQ1ODc2YTA3YTAyNjM4Y2NmODRhYjI3NzdjN2YxZTg1NGI5ZTljMDEwN2I3MDI3ZTk1OWUyN2U2ODBhMGFiZmUwOWM0NjA4YjQzMGI3Y2NmYmM1ODM3ZTFmNDZkNDNiZDAzOWQ1YTViMDM0YWZkYjE3MjIwMmM1MzdmYWYwNWE5ZmJhMmM0NTMzZmFmNzI0ZjA2YzA1NzNmYWQ1YjY0ZDVmYTFkNzNjY2QzMzZkODI1M2EzODg3NDIzMTMwNzBhZDA4Y2UwNjEwMjliNzYyMjU1Y2UyZjE3Njk1MDNmNmU2ZGE4YmZlZjk0Yjc4MWJhYzRkNTVlZjEzOTI1YTUxYzgzYTBkZTI4MmJjN2JmMTZjMWU2OGRiYzlmZjI3MGU0NjBlYTY5MWU5NzBiMmJlZmVkNzM4OTZmNDQ3MDc4NGZlNzA3NWUyZjA1MzlhMzg2MzlkN2VkMSJ9fQ==" display="floating" configuration='{"hideLogo":true,"hideFooter":true,"floatingPlacement":"bottom"}'><button type="button" class="ask" title="one click opens a short email template">local-ai product consulting</button></altcha-widget>&nbsp;<span class="bar">&middot;</span> <a href="/principles">read my principles</a>&nbsp;first</span></p>
   </div>
+<script>
+  /* the consulting ask: the address and a short email template sit behind the same
+     proof-of-work as the footer. once it clears, altcha swaps the button for a link whose
+     text is the address; put the words back and open the mail app straight away. */
+  (function () {
+    var w = document.getElementById("ask");
+    if (!w) return;
+    w.addEventListener("statechange", function (e) {
+      if (!e.detail || e.detail.state !== "verified") return;
+      var a = w.querySelector("a");
+      if (!a) return;
+      a.textContent = "local-ai product consulting";
+      a.title = "opens a short email template";
+      a.click();
+    });
+  })();
+</script>
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
     <div class="figlabel figmotto">the map is not the territory</div>
