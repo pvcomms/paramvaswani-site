@@ -30,8 +30,9 @@ def wrap(fragment: str, *, title: str, desc: str, path: str, jsonld: str = "") -
 <title>{html.escape(title)}</title>
 <meta name="description" content="{html.escape(desc)}">
 <link rel="canonical" href="{url}">
-<meta name="color-scheme" content="dark">
-<meta name="theme-color" content="#0b0c0e">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b0c0e">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f2efe7">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="{html.escape(NAME)}">
 <meta property="og:title" content="{html.escape(title)}">

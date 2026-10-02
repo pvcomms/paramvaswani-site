@@ -4,43 +4,38 @@
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
 -->
 <style>
+  /* courier prime — one family for everything; self-hosted, latin subset */
   @font-face {
-    font-family: "IBM Plex Mono";
-    font-style: italic;
-    font-weight: 300;
-    font-display: swap;
-    src: url("/fonts/plexmono-latin-300-italic.woff2") format("woff2");
-  }
-  @font-face {
-    font-family: "IBM Plex Mono";
-    font-style: normal;
-    font-weight: 300;
-    font-display: swap;
-    src: url("/fonts/plexmono-latin-300.woff2") format("woff2");
-  }
-  @font-face {
-    font-family: "IBM Plex Mono";
+    font-family: "Courier Prime";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("/fonts/plexmono-latin-400.woff2") format("woff2");
+    src: url("/fonts/courierprime-latin-400.woff2") format("woff2");
   }
   @font-face {
-    font-family: "Newsreader";
+    font-family: "Courier Prime";
     font-style: italic;
-    font-weight: 300 400;
+    font-weight: 400;
     font-display: swap;
-    src: url("/fonts/newsreader-latin-italic.woff2") format("woff2");
+    src: url("/fonts/courierprime-latin-400-italic.woff2") format("woff2");
   }
   @font-face {
-    font-family: "Newsreader";
+    font-family: "Courier Prime";
     font-style: normal;
-    font-weight: 300 500;
+    font-weight: 700;
     font-display: swap;
-    src: url("/fonts/newsreader-latin.woff2") format("woff2");
+    src: url("/fonts/courierprime-latin-700.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Courier Prime";
+    font-style: italic;
+    font-weight: 700;
+    font-display: swap;
+    src: url("/fonts/courierprime-latin-700-italic.woff2") format("woff2");
   }
 
   :root {
+    color-scheme: dark;
     --ink: #0b0c0e;
     --paper: #e9e6de;
     --dim: #96917f;
@@ -57,8 +52,31 @@
     --c-me: #e07a6b;
     --c-creation: #d98aa8;
     --accent: var(--c-create);
-    --serif: "Newsreader", Georgia, "Times New Roman", serif;
-    --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
+    --serif: "Courier Prime", "Courier New", Courier, monospace; /* body; name kept, face changed */
+    --mono: "Courier Prime", "Courier New", Courier, monospace;
+    --shadow: 6px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --ink: #f2efe7;
+    --paper: #15161a;
+    --dim: #5e5b52;
+    --faint: #7d7a6e;
+    --faint-t: #6e6a5c;
+    --hair-2: #aaa699;
+    --hair: #dad6ca;
+    --edge: #c4c0b3;
+    --panel-bar: #e9e5db;
+    --c-create: #3f7d33;
+    --c-consume: #6e4bb5;
+    --c-curate: #2a6aa8;
+    --c-cohere: #8f7314;
+    --c-me: #bf4b3b;
+    --c-creation: #ad4a72;
+    --shadow: 6px 6px 0 rgba(0, 0, 0, 0.1);
+  }
+  body {
+    color-scheme: inherit;
   }
   * {
     margin: 0;
@@ -101,7 +119,7 @@
     right: 0;
     height: 2px;
     z-index: 40;
-    background: rgba(255, 255, 255, 0.04);
+    background: color-mix(in srgb, var(--paper) 6%, transparent);
     pointer-events: none;
   }
   .prog i {
@@ -248,6 +266,11 @@
   .stmt p + p {
     margin-top: 10px;
   }
+  .stmt .upd {
+    font-style: italic;
+    font-size: 15.5px;
+    color: var(--dim);
+  }
 
   /* ---------- footer ---------- */
   footer {
@@ -339,7 +362,75 @@
       transition: none;
     }
   }
+
+  /* ---------- theme toggle: sun in the dark, moon in the light ---------- */
+  .theme {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    color: var(--dim);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+  .theme:hover {
+    color: var(--paper);
+  }
+  .theme:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .theme .moon {
+    display: none;
+  }
+  :root[data-theme="light"] .theme .moon {
+    display: block;
+  }
+  :root[data-theme="light"] .theme .sun {
+    display: none;
+  }
+  html.theming,
+  html.theming * {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease,
+      border-color 0.25s ease;
+  }
 </style>
+<script>
+  /* theme: a stored choice wins, else the system's. set before first paint so nothing flashes. */
+  (function () {
+    var root = document.documentElement, KEY = "pv-theme";
+    var mq = window.matchMedia("(prefers-color-scheme: light)");
+    function stored() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+    function apply(t) {
+      root.setAttribute("data-theme", t);
+      var bg = getComputedStyle(root).getPropertyValue("--ink").trim();
+      document.querySelectorAll('meta[name="theme-color"]').forEach(function (m) { m.setAttribute("content", bg); });
+      document.querySelectorAll(".theme").forEach(function (b) {
+        b.setAttribute("aria-label", t === "light" ? "switch to dark theme" : "switch to light theme");
+      });
+    }
+    apply(stored() || (mq.matches ? "light" : "dark"));
+    mq.addEventListener("change", function (e) { if (!stored()) apply(e.matches ? "light" : "dark"); });
+    document.addEventListener("DOMContentLoaded", function () {
+      apply(root.getAttribute("data-theme"));
+      document.querySelectorAll(".theme").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var t = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+          root.classList.add("theming");
+          apply(t);
+          try { localStorage.setItem(KEY, t); } catch (e) {}
+          setTimeout(function () { root.classList.remove("theming"); }, 300);
+        });
+      });
+    });
+  })();
+</script>
 <style>
   /* gate — a proof-of-work runs before the page opens. no js → no gate; solved once per tab session. */
   html.gated {
@@ -432,6 +523,10 @@
       <a href="/curriculum">curriculum</a>
       <a href="/work" class="here" aria-current="page">work</a>
       <a href="/principles">principles</a>
+      <button class="theme" type="button" aria-label="switch to light theme">
+        <svg class="sun" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
+        <svg class="moon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+      </button>
     </nav>
   </header>
 
@@ -455,9 +550,9 @@
           Clodexa, used by teams at Vercel, Figma, and others. May 2026 onwards:
           following my hypercuriosity.
         </p>
-        <p>
-          Updated Sep 3, 2026: following neurophilosophy, AI consciousness &amp;
-          decentralized computing.
+        <p class="upd">
+          Updated Sep 3, 2026: going down rabbit holes into neurophilosophy, AI
+          consciousness &amp; decentralized computing. And reading a lot.
         </p>
       </div>
     </div>
