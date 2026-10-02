@@ -23,6 +23,7 @@ Seven pages, seven files:
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
 | `work.html`          | Work                                            |
 | `principles.html`    | Principles — the rules I run on, in the order they win |
+| `research.html`      | Research — what I think with: concepts, influences, quotes, aphorisms, words |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |
 
 `/ontology` and `/systems` (with `/systems/how-i-work` and
