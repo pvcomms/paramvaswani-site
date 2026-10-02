@@ -8,10 +8,10 @@
   (covers live in /films, /telly, /albums, /books; width/height are the file's pixels):
 
     <li class="reveal" style="--i:N">
-      <span class="al-cover" aria-hidden="true"><img src="/films/slug.jpg" alt="" width="W" height="H" loading="lazy" decoding="async"></span>
-      <span class="t">Title</span>
-      <span class="al-by">who · year</span>
+      <span class="al-cover"><img src="/films/slug.jpg" alt="Title — who, year" width="W" height="H" loading="lazy" decoding="async"></span>
     </li>
+
+  covers carry no caption; the title and credit live in the alt text.
 
   to add to a list:
 
@@ -198,14 +198,6 @@
   }
 
   /* ---------- the page title, then one form after another ---------- */
-  .title {
-    padding-top: 72px;
-    font-family: var(--mono);
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 0.14em;
-    color: var(--paper);
-  }
   .cat {
     margin-top: 56px;
     padding-top: 48px;
@@ -316,15 +308,9 @@
   .al-grid li.reveal {
     transition-delay: calc(var(--i) * 40ms);
   }
-  .al-grid li {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
   .al-cover {
     display: block;
     aspect-ratio: 1 / 1;
-    margin-bottom: 10px;
     background: var(--panel-bar);
     outline: 1px solid var(--hair);
     outline-offset: -1px;
@@ -339,31 +325,6 @@
   }
   .al-grid li:hover .al-cover img {
     transform: scale(1.04);
-  }
-  .al-grid .t {
-    font-size: 13px;
-    line-height: 1.3;
-    transition: color 0.18s ease;
-  }
-  .al-grid li:hover .t {
-    color: var(--accent);
-  }
-  .al-by {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.04em;
-    color: var(--faint-t);
-  }
-  /* a listening order: three across, numbered */
-  .al-path {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .al-n {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    margin-bottom: 6px;
   }
 
   /* ---------- footer ---------- */
@@ -420,17 +381,11 @@
       flex-basis: 100%;
       justify-content: flex-start;
     }
-    .title {
-      padding-top: 56px;
-    }
     .entries .when {
       display: none;
     }
     .al-grid {
       gap: 18px 10px;
-    }
-    .al-grid .t {
-      font-size: 12px;
     }
   }
   @media (max-width: 560px) {
@@ -439,9 +394,6 @@
     }
     .al-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-    .al-grid.al-path {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -609,8 +561,6 @@
     </nav>
   </header>
 
-  <h1 class="title reveal">some art that shaped me</h1>
-
   <section class="cat" id="essays">
     <div class="label reveal">
       <h2>essays</h2>
@@ -660,19 +610,13 @@
     </div>
     <ol class="al-grid tall">
       <li class="reveal" style="--i:0">
-        <span class="al-cover" aria-hidden="true"><img src="/books/geb.jpg" alt="" width="312" height="500" loading="lazy" decoding="async"></span>
-        <span class="t">Gödel, Escher, Bach: An Eternal Golden Braid</span>
-        <span class="al-by">Douglas Hofstadter · 1979</span>
+        <span class="al-cover"><img src="/books/geb.jpg" alt="Gödel, Escher, Bach: An Eternal Golden Braid — Douglas Hofstadter · 1979" width="312" height="500" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:1">
-        <span class="al-cover" aria-hidden="true"><img src="/books/how-to-do-nothing.jpg" alt="" width="330" height="500" loading="lazy" decoding="async"></span>
-        <span class="t">How to Do Nothing</span>
-        <span class="al-by">Jenny Odell · 2019</span>
+        <span class="al-cover"><img src="/books/how-to-do-nothing.jpg" alt="How to Do Nothing — Jenny Odell · 2019" width="330" height="500" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:2">
-        <span class="al-cover" aria-hidden="true"><img src="/books/tiny-experiments.jpg" alt="" width="331" height="500" loading="lazy" decoding="async"></span>
-        <span class="t">Tiny Experiments</span>
-        <span class="al-by">Anne-Laure Le Cunff · 2025</span>
+        <span class="al-cover"><img src="/books/tiny-experiments.jpg" alt="Tiny Experiments — Anne-Laure Le Cunff · 2025" width="331" height="500" loading="lazy" decoding="async"></span>
       </li>
     </ol>
   </section>
@@ -683,14 +627,69 @@
     </div>
     <ol class="al-grid tall">
       <li class="reveal" style="--i:0">
-        <span class="al-cover" aria-hidden="true"><img src="/books/hpmor.jpg" alt="" width="292" height="475" loading="lazy" decoding="async"></span>
-        <span class="t">Harry Potter and the Methods of Rationality</span>
-        <span class="al-by">Eliezer Yudkowsky · 2010–2015</span>
+        <span class="al-cover"><img src="/books/hpmor.jpg" alt="Harry Potter and the Methods of Rationality — Eliezer Yudkowsky · 2010–2015" width="292" height="475" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:1">
-        <span class="al-cover" aria-hidden="true"><img src="/books/my-struggle.jpg" alt="" width="326" height="500" loading="lazy" decoding="async"></span>
-        <span class="t">My Struggle</span>
-        <span class="al-by">Karl Ove Knausgaard · 2009–2011</span>
+        <span class="al-cover"><img src="/books/my-struggle.jpg" alt="My Struggle — Karl Ove Knausgaard · 2009–2011" width="326" height="500" loading="lazy" decoding="async"></span>
+      </li>
+    </ol>
+  </section>
+
+  <section class="cat" id="music">
+    <div class="label reveal">
+      <h2>albums</h2>
+    </div>
+    <ol class="al-grid">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover"><img src="/albums/shore.jpg" alt="Shore — Fleet Foxes · 2020" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover"><img src="/albums/punisher.jpg" alt="Punisher — Phoebe Bridgers · 2020" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-cover"><img src="/albums/bon-iver-bon-iver.jpg" alt="Bon Iver, Bon Iver — Bon Iver · 2011" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:3">
+        <span class="al-cover"><img src="/albums/gallipoli.jpg" alt="Gallipoli — Beirut · 2019" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:4">
+        <span class="al-cover"><img src="/albums/kids.jpg" alt="K.I.D.S. — Mac Miller · 2010" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:5">
+        <span class="al-cover"><img src="/albums/ok-computer.jpg" alt="OK Computer — Radiohead · 1997" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:6">
+        <span class="al-cover"><img src="/albums/a-brief-inquiry.jpg" alt="A Brief Inquiry Into Online Relationships — The 1975 · 2018" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:7">
+        <span class="al-cover"><img src="/albums/the-black-parade.jpg" alt="The Black Parade — My Chemical Romance · 2006" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:8">
+        <span class="al-cover"><img src="/albums/nevermind.jpg" alt="Nevermind — Nirvana · 1991" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:9">
+        <span class="al-cover"><img src="/albums/surrealistic-pillow.jpg" alt="Surrealistic Pillow — Jefferson Airplane · 1967" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:10">
+        <span class="al-cover"><img src="/albums/in-the-aeroplane.jpg" alt="In the Aeroplane Over the Sea — Neutral Milk Hotel · 1998" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:11">
+        <span class="al-cover"><img src="/albums/immunity.jpg" alt="Immunity — Clairo · 2019" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:12">
+        <span class="al-cover"><img src="/albums/father-of-the-bride.jpg" alt="Father of the Bride — Vampire Weekend · 2019" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:13">
+        <span class="al-cover"><img src="/albums/anima.jpg" alt="ANIMA — Thom Yorke · 2019" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:14">
+        <span class="al-cover"><img src="/albums/revolver.jpg" alt="Revolver — The Beatles · 1966" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:15">
+        <span class="al-cover"><img src="/albums/channel-orange.jpg" alt="channel ORANGE — Frank Ocean · 2012" width="400" height="400" loading="lazy" decoding="async"></span>
+      </li>
+      <li class="reveal" style="--i:16">
+        <span class="al-cover"><img src="/albums/apollo.jpg" alt="Apollo: Atmospheres and Soundtracks — Brian Eno · 1983" width="400" height="400" loading="lazy" decoding="async"></span>
       </li>
     </ol>
   </section>
@@ -709,89 +708,55 @@
     </div>
     <ol class="al-grid tall">
       <li class="reveal" style="--i:0">
-        <span class="al-cover" aria-hidden="true"><img src="/films/goblet-of-fire.jpg" alt="" width="365" height="273" loading="lazy" decoding="async"></span>
-        <span class="t">Harry Potter and the Goblet of Fire</span>
-        <span class="al-by">Mike Newell · 2005</span>
+        <span class="al-cover"><img src="/films/goblet-of-fire.jpg" alt="Harry Potter and the Goblet of Fire — Mike Newell · 2005" width="365" height="273" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:1">
-        <span class="al-cover" aria-hidden="true"><img src="/films/requiem-for-a-dream.jpg" alt="" width="220" height="319" loading="lazy" decoding="async"></span>
-        <span class="t">Requiem for a Dream</span>
-        <span class="al-by">Darren Aronofsky · 2000</span>
+        <span class="al-cover"><img src="/films/requiem-for-a-dream.jpg" alt="Requiem for a Dream — Darren Aronofsky · 2000" width="220" height="319" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:2">
-        <span class="al-cover" aria-hidden="true"><img src="/films/perks.jpg" alt="" width="250" height="369" loading="lazy" decoding="async"></span>
-        <span class="t">The Perks of Being a Wallflower</span>
-        <span class="al-by">Stephen Chbosky · 2012</span>
+        <span class="al-cover"><img src="/films/perks.jpg" alt="The Perks of Being a Wallflower — Stephen Chbosky · 2012" width="250" height="369" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:3">
-        <span class="al-cover" aria-hidden="true"><img src="/films/juno.jpg" alt="" width="220" height="343" loading="lazy" decoding="async"></span>
-        <span class="t">Juno</span>
-        <span class="al-by">Jason Reitman · 2007</span>
+        <span class="al-cover"><img src="/films/juno.jpg" alt="Juno — Jason Reitman · 2007" width="220" height="343" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:4">
-        <span class="al-cover" aria-hidden="true"><img src="/films/scott-pilgrim.jpg" alt="" width="220" height="309" loading="lazy" decoding="async"></span>
-        <span class="t">Scott Pilgrim vs. the World</span>
-        <span class="al-by">Edgar Wright · 2010</span>
+        <span class="al-cover"><img src="/films/scott-pilgrim.jpg" alt="Scott Pilgrim vs. the World — Edgar Wright · 2010" width="220" height="309" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:5">
-        <span class="al-cover" aria-hidden="true"><img src="/films/v-for-vendetta.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
-        <span class="t">V for Vendetta</span>
-        <span class="al-by">James McTeigue · 2005</span>
+        <span class="al-cover"><img src="/films/v-for-vendetta.jpg" alt="V for Vendetta — James McTeigue · 2005" width="220" height="325" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:6">
-        <span class="al-cover" aria-hidden="true"><img src="/films/zoolander.jpg" alt="" width="255" height="389" loading="lazy" decoding="async"></span>
-        <span class="t">Zoolander</span>
-        <span class="al-by">Ben Stiller · 2001</span>
+        <span class="al-cover"><img src="/films/zoolander.jpg" alt="Zoolander — Ben Stiller · 2001" width="255" height="389" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:7">
-        <span class="al-cover" aria-hidden="true"><img src="/films/lady-bird.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
-        <span class="t">Lady Bird</span>
-        <span class="al-by">Greta Gerwig · 2017</span>
+        <span class="al-cover"><img src="/films/lady-bird.jpg" alt="Lady Bird — Greta Gerwig · 2017" width="220" height="325" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:8">
-        <span class="al-cover" aria-hidden="true"><img src="/films/virgin-suicides.jpg" alt="" width="250" height="371" loading="lazy" decoding="async"></span>
-        <span class="t">The Virgin Suicides</span>
-        <span class="al-by">Sofia Coppola · 1999</span>
+        <span class="al-cover"><img src="/films/virgin-suicides.jpg" alt="The Virgin Suicides — Sofia Coppola · 1999" width="250" height="371" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:9">
-        <span class="al-cover" aria-hidden="true"><img src="/films/grand-budapest.jpg" alt="" width="220" height="344" loading="lazy" decoding="async"></span>
-        <span class="t">The Grand Budapest Hotel</span>
-        <span class="al-by">Wes Anderson · 2014</span>
+        <span class="al-cover"><img src="/films/grand-budapest.jpg" alt="The Grand Budapest Hotel — Wes Anderson · 2014" width="220" height="344" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:10">
-        <span class="al-cover" aria-hidden="true"><img src="/films/chungking-express.jpg" alt="" width="259" height="383" loading="lazy" decoding="async"></span>
-        <span class="t">Chungking Express</span>
-        <span class="al-by">Wong Kar-wai · 1994</span>
+        <span class="al-cover"><img src="/films/chungking-express.jpg" alt="Chungking Express — Wong Kar-wai · 1994" width="259" height="383" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:11">
-        <span class="al-cover" aria-hidden="true"><img src="/films/the-brutalist.jpg" alt="" width="253" height="395" loading="lazy" decoding="async"></span>
-        <span class="t">The Brutalist</span>
-        <span class="al-by">Brady Corbet · 2024</span>
+        <span class="al-cover"><img src="/films/the-brutalist.jpg" alt="The Brutalist — Brady Corbet · 2024" width="253" height="395" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:12">
-        <span class="al-cover" aria-hidden="true"><img src="/films/control.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
-        <span class="t">Control</span>
-        <span class="al-by">Anton Corbijn · 2007</span>
+        <span class="al-cover"><img src="/films/control.jpg" alt="Control — Anton Corbijn · 2007" width="342" height="513" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:13">
-        <span class="al-cover" aria-hidden="true"><img src="/films/lost-in-translation.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
-        <span class="t">Lost in Translation</span>
-        <span class="al-by">Sofia Coppola · 2003</span>
+        <span class="al-cover"><img src="/films/lost-in-translation.jpg" alt="Lost in Translation — Sofia Coppola · 2003" width="342" height="513" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:14">
-        <span class="al-cover" aria-hidden="true"><img src="/films/reprise.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
-        <span class="t">Reprise</span>
-        <span class="al-by">Joachim Trier · 2006</span>
+        <span class="al-cover"><img src="/films/reprise.jpg" alt="Reprise — Joachim Trier · 2006" width="342" height="513" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:15">
-        <span class="al-cover" aria-hidden="true"><img src="/films/tar.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
-        <span class="t">TÁR</span>
-        <span class="al-by">Todd Field · 2022</span>
+        <span class="al-cover"><img src="/films/tar.jpg" alt="TÁR — Todd Field · 2022" width="342" height="513" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:16">
-        <span class="al-cover" aria-hidden="true"><img src="/films/civil-war.jpg" alt="" width="259" height="384" loading="lazy" decoding="async"></span>
-        <span class="t">Civil War</span>
-        <span class="al-by">Alex Garland · 2024</span>
+        <span class="al-cover"><img src="/films/civil-war.jpg" alt="Civil War — Alex Garland · 2024" width="259" height="384" loading="lazy" decoding="async"></span>
       </li>
     </ol>
   </section>
@@ -802,188 +767,37 @@
     </div>
     <ol class="al-grid tall">
       <li class="reveal" style="--i:0">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/the-americans.jpg" alt="" width="400" height="560" loading="lazy" decoding="async"></span>
-        <span class="t">The Americans</span>
-        <span class="al-by">FX · 2013–2018</span>
+        <span class="al-cover"><img src="/telly/the-americans.jpg" alt="The Americans — FX · 2013–2018" width="400" height="560" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:1">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/the-romanoffs.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-        <span class="t">The Romanoffs</span>
-        <span class="al-by">Prime Video · 2018</span>
+        <span class="al-cover"><img src="/telly/the-romanoffs.jpg" alt="The Romanoffs — Prime Video · 2018" width="400" height="592" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:2">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/community.jpg" alt="" width="400" height="588" loading="lazy" decoding="async"></span>
-        <span class="t">Community</span>
-        <span class="al-by">NBC · 2009–2015</span>
+        <span class="al-cover"><img src="/telly/community.jpg" alt="Community — NBC · 2009–2015" width="400" height="588" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:3">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/counterpart.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-        <span class="t">Counterpart</span>
-        <span class="al-by">Starz · 2017–2019</span>
+        <span class="al-cover"><img src="/telly/counterpart.jpg" alt="Counterpart — Starz · 2017–2019" width="400" height="600" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:4">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/man-in-the-high-castle.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-        <span class="t">The Man in the High Castle</span>
-        <span class="al-by">Prime Video · 2015–2019</span>
+        <span class="al-cover"><img src="/telly/man-in-the-high-castle.jpg" alt="The Man in the High Castle — Prime Video · 2015–2019" width="400" height="592" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:5">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/night-manager.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-        <span class="t">The Night Manager</span>
-        <span class="al-by">BBC One · 2016–</span>
+        <span class="al-cover"><img src="/telly/night-manager.jpg" alt="The Night Manager — BBC One · 2016–" width="400" height="600" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:6">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/30-rock.jpg" alt="" width="400" height="533" loading="lazy" decoding="async"></span>
-        <span class="t">30 Rock</span>
-        <span class="al-by">NBC · 2006–2013</span>
+        <span class="al-cover"><img src="/telly/30-rock.jpg" alt="30 Rock — NBC · 2006–2013" width="400" height="533" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:7">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/parks-and-rec.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-        <span class="t">Parks and Recreation</span>
-        <span class="al-by">NBC · 2009–2015</span>
+        <span class="al-cover"><img src="/telly/parks-and-rec.jpg" alt="Parks and Recreation — NBC · 2009–2015" width="400" height="600" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:8">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/girls.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-        <span class="t">Girls</span>
-        <span class="al-by">HBO · 2012–2017</span>
+        <span class="al-cover"><img src="/telly/girls.jpg" alt="Girls — HBO · 2012–2017" width="400" height="592" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:9">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/veep.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></span>
-        <span class="t">Veep</span>
-        <span class="al-by">HBO · 2012–2019</span>
+        <span class="al-cover"><img src="/telly/veep.jpg" alt="Veep — HBO · 2012–2019" width="400" height="500" loading="lazy" decoding="async"></span>
       </li>
       <li class="reveal" style="--i:10">
-        <span class="al-cover" aria-hidden="true"><img src="/telly/homeland.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-        <span class="t">Homeland</span>
-        <span class="al-by">Showtime · 2011–2020</span>
-      </li>
-    </ol>
-  </section>
-
-  <section class="cat" id="music">
-    <div class="label reveal">
-      <h2>albums</h2>
-    </div>
-    <ol class="al-grid">
-      <li class="reveal" style="--i:0">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/shore.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Shore</span>
-        <span class="al-by">Fleet Foxes · 2020</span>
-      </li>
-      <li class="reveal" style="--i:1">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/punisher.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Punisher</span>
-        <span class="al-by">Phoebe Bridgers · 2020</span>
-      </li>
-      <li class="reveal" style="--i:2">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/bon-iver-bon-iver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Bon Iver, Bon Iver</span>
-        <span class="al-by">Bon Iver · 2011</span>
-      </li>
-      <li class="reveal" style="--i:3">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/gallipoli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Gallipoli</span>
-        <span class="al-by">Beirut · 2019</span>
-      </li>
-      <li class="reveal" style="--i:4">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/kids.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">K.I.D.S.</span>
-        <span class="al-by">Mac Miller · 2010</span>
-      </li>
-      <li class="reveal" style="--i:5">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/ok-computer.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">OK Computer</span>
-        <span class="al-by">Radiohead · 1997</span>
-      </li>
-      <li class="reveal" style="--i:6">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/a-brief-inquiry.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">A Brief Inquiry Into Online Relationships</span>
-        <span class="al-by">The 1975 · 2018</span>
-      </li>
-      <li class="reveal" style="--i:7">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/the-black-parade.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">The Black Parade</span>
-        <span class="al-by">My Chemical Romance · 2006</span>
-      </li>
-      <li class="reveal" style="--i:8">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/nevermind.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Nevermind</span>
-        <span class="al-by">Nirvana · 1991</span>
-      </li>
-      <li class="reveal" style="--i:9">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/surrealistic-pillow.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Surrealistic Pillow</span>
-        <span class="al-by">Jefferson Airplane · 1967</span>
-      </li>
-      <li class="reveal" style="--i:10">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/in-the-aeroplane.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">In the Aeroplane Over the Sea</span>
-        <span class="al-by">Neutral Milk Hotel · 1998</span>
-      </li>
-      <li class="reveal" style="--i:11">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/immunity.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Immunity</span>
-        <span class="al-by">Clairo · 2019</span>
-      </li>
-      <li class="reveal" style="--i:12">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/father-of-the-bride.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Father of the Bride</span>
-        <span class="al-by">Vampire Weekend · 2019</span>
-      </li>
-      <li class="reveal" style="--i:13">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/anima.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">ANIMA</span>
-        <span class="al-by">Thom Yorke · 2019</span>
-      </li>
-      <li class="reveal" style="--i:14">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/revolver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Revolver</span>
-        <span class="al-by">The Beatles · 1966</span>
-      </li>
-      <li class="reveal" style="--i:15">
-        <span class="al-cover" aria-hidden="true"><img src="/albums/channel-orange.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">channel ORANGE</span>
-        <span class="al-by">Frank Ocean · 2012</span>
-      </li>
-    </ol>
-    <div class="label reveal al-after">
-      <h2>my brian eno listening order</h2>
-    </div>
-    <ol class="al-grid al-path">
-      <li class="reveal" style="--i:0">
-        <span class="al-n">start</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/music-for-airports.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Ambient 1: Music for Airports</span>
-        <span class="al-by">Brian Eno · 1978</span>
-      </li>
-      <li class="reveal" style="--i:1">
-        <span class="al-n">1</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/discreet-music.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Discreet Music</span>
-        <span class="al-by">Brian Eno · 1975</span>
-      </li>
-      <li class="reveal" style="--i:2">
-        <span class="al-n">2</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/apollo.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Apollo: Atmospheres and Soundtracks</span>
-        <span class="al-by">Brian Eno · 1983</span>
-      </li>
-      <li class="reveal" style="--i:3">
-        <span class="al-n">3</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/thursday-afternoon.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Thursday Afternoon</span>
-        <span class="al-by">Brian Eno · 1985</span>
-      </li>
-      <li class="reveal" style="--i:4">
-        <span class="al-n">4</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/neroli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Neroli</span>
-        <span class="al-by">Brian Eno · 1993</span>
-      </li>
-      <li class="reveal" style="--i:5">
-        <span class="al-n">5</span>
-        <span class="al-cover" aria-hidden="true"><img src="/albums/on-land.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-        <span class="t">Ambient 4: On Land</span>
-        <span class="al-by">Brian Eno · 1982</span>
+        <span class="al-cover"><img src="/telly/homeland.jpg" alt="Homeland — Showtime · 2011–2020" width="400" height="600" loading="lazy" decoding="async"></span>
       </li>
     </ol>
   </section>
