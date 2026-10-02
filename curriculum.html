@@ -12,8 +12,7 @@
       <span class="when">status · source</span>
     </li>
 
-  then set the "revised" date in the head,
-  and delete the <p class="blank"> line beneath the list.
+  then delete the <p class="blank"> line beneath the list.
 -->
 <style>
   /* courier prime — one family for everything; self-hosted, latin subset */
@@ -211,45 +210,6 @@
     transform: scaleX(1);
   }
 
-  /* ---------- page head ---------- */
-  .head {
-    padding: 84px 0 0;
-    max-width: 680px;
-  }
-  .head h1 {
-    font-size: 40px;
-    font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 1.12;
-    text-wrap: balance;
-  }
-  .head .figdek {
-    color: var(--dim);
-    font-style: italic;
-    font-size: 17px;
-    margin-top: 12px;
-  }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 28px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--faint-t);
-    margin-top: 26px;
-    padding-top: 14px;
-    border-top: 1px solid var(--hair);
-  }
-  .meta b {
-    font-weight: 400;
-    color: var(--dim);
-    padding-right: 8px;
-  }
-  .meta .live {
-    color: var(--accent);
-  }
-
   /* ---------- the syllabus ---------- */
   .body {
     padding: 72px 0 0;
@@ -395,12 +355,6 @@
     nav.site {
       flex-basis: 100%;
       justify-content: flex-start;
-    }
-    .head {
-      padding-top: 56px;
-    }
-    .head h1 {
-      font-size: 32px;
     }
     .body {
       padding-top: 56px;
@@ -576,19 +530,6 @@
       </button>
     </nav>
   </header>
-
-  <section class="head">
-    <h1>Learning Curriculum</h1>
-    <p class="figdek">
-      what i am teaching myself right now, in what order, and in service of
-      what. revised by hand, not by feed.
-    </p>
-    <div class="meta">
-      <span><b>status</b><span class="live">current</span></span>
-      <span><b>revised</b><time id="revised" datetime="2026-09-30">30 sep 2026</time></span>
-      <span><b>lines</b>10</span>
-    </div>
-  </section>
 
   <section class="body" id="syllabus">
     <div class="sec-head reveal">
