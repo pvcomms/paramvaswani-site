@@ -366,13 +366,13 @@
     padding: 0;
     margin: 0;
     line-height: 0;
-    color: var(--dim);
+    color: var(--paper);
     cursor: pointer;
     transition: color 0.18s ease;
   }
   .play:hover,
   .play.on {
-    color: var(--paper);
+    color: var(--c-cohere);
   }
   .play:focus-visible {
     outline: 1px solid var(--c-cohere);
@@ -516,8 +516,8 @@
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5V18a1.5 1.5 0 0 0 1.5 1.5h15A1.5 1.5 0 0 0 21 18V9a1.5 1.5 0 0 0-1.5-1.5h-8L9.5 5h-5A1.5 1.5 0 0 0 3 6.5z" /><path d="M12 10.5v5.5M9.5 13.5 12 16l2.5-2.5" /></svg>
       </a>
       <button class="play" id="play" type="button" aria-pressed="false" aria-label="play casualty of society, by aaron sparling" title="casualty of society · aaron sparling">
-        <svg class="go" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" /></svg>
-        <svg class="stop" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+        <svg class="go" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" stroke="currentColor" stroke-width="1" stroke-linejoin="round" /></svg>
+        <svg class="stop" viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><rect x="6.5" y="5" width="3.5" height="14" rx="0.5" /><rect x="14" y="5" width="3.5" height="14" rx="0.5" /></svg>
       </button>
     </nav>
   </header>
