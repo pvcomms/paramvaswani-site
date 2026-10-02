@@ -224,16 +224,35 @@
     line-height: 1.12;
     text-wrap: balance;
   }
+  .head .since {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    margin-top: 10px;
+  }
   .head .figdek {
     color: var(--dim);
     font-style: italic;
     font-size: 17px;
-    margin-top: 12px;
+    margin-top: 20px;
   }
   .head .motto {
     color: var(--paper);
     font-size: 15.5px;
     margin-top: 16px;
+  }
+
+  /* ---------- stack ---------- */
+  .stack {
+    padding: 48px 0 0;
+    max-width: 680px;
+  }
+  .stack .cv {
+    margin-top: 0;
+  }
+  .stack .cv dd {
+    font-size: 15.5px;
   }
 
   /* ---------- statement ---------- */
@@ -582,10 +601,46 @@
 
   <section class="head">
     <h1>Dev</h1>
+    <p class="since">been building agents since mid 2024</p>
     <p class="figdek">
       i research, i develop, i write. local&#8209;only ai specialist.
     </p>
     <p class="motto">human opted out of your loop</p>
+  </section>
+
+  <section class="stack" id="stack">
+    <dl class="cv reveal">
+      <dt>agents</dt>
+      <dd>
+        Claude Code (hooks, skills, subagents) and tool&#8209;use loops on the
+        Anthropic SDK. A handoff protocol that moves agent state between
+        Claude, GPT and Gemini.
+      </dd>
+      <dt>mcp</dt>
+      <dd>
+        Servers for Todoist, Bluesky and Spaceship. A scanner that red&#8209;teams
+        other people&#8217;s MCP servers.
+      </dd>
+      <dt>rag &amp; evals</dt>
+      <dd>
+        Retrieval over document libraries, BM25, LLM&#8209;as&#8209;judge
+        scoring. A tool&#8209;selection benchmark across seven models.
+      </dd>
+      <dt>models</dt>
+      <dd>
+        Anthropic, OpenAI, Gemini and Mistral APIs. Local: Ollama and MLX, with
+        LoRA fine&#8209;tuning and distillation on Apple silicon.
+      </dd>
+      <dt>ml &amp; nlp</dt>
+      <dd>
+        scikit&#8209;learn and NumPy. A text classifier I trained that runs in
+        the browser: logistic regression over word n&#8209;grams.
+      </dd>
+      <dt>languages</dt>
+      <dd>TypeScript, Python, JavaScript, shell.</dd>
+      <dt>full stack</dt>
+      <dd>Next.js, React, Tailwind, Node, SQLite, Redis, Zod, Vercel.</dd>
+    </dl>
   </section>
 
   <section class="statement" id="statement">
