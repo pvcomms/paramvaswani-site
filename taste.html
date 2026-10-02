@@ -231,6 +231,25 @@
     border-top: 1px solid var(--hair);
     scroll-margin-top: 24px;
   }
+  /* quick small links: titles only, in a wrapping row */
+  .links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin: 0;
+    padding: 6px 0 0;
+    font-size: 17px;
+  }
+  .links a {
+    border-bottom: 1px solid var(--hair-2);
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .links a:hover {
+    border-color: var(--paper);
+  }
   .label {
     display: flex;
     align-items: center;
@@ -696,6 +715,26 @@
         <span class="dek">Jasmine Sun</span>
         <span class="when">2026</span>
       </li>
+    </ul>
+  </section>
+
+  <section class="cat" id="blogs">
+    <div class="label reveal">
+      <h2>blogs i love</h2>
+    </div>
+    <ul class="links reveal">
+      <li><a href="https://jasmi.news/">@jasmine&#8217;s substack</a></li>
+      <li><a href="https://afterschool.substack.com/">After School</a></li>
+      <li><a href="https://www.theargumentmag.com/">The Argument</a></li>
+      <li><a href="https://www.astralcodexten.com/">Astral Codex Ten</a></li>
+      <li><a href="https://www.derekthompson.org/">Derek Thompson</a></li>
+      <li><a href="https://harleyclaes.substack.com/">Dharma Bum Poetess</a></li>
+      <li><a href="https://eroticsofliberation.substack.com/">Erotics of Liberation</a></li>
+      <li><a href="https://escapingflatland.substack.com/">Escaping Flatland</a></li>
+      <li><a href="https://www.thefp.com/">The Free Press</a></li>
+      <li><a href="https://lindseymackereth.substack.com/">Lindsey Mack&#8217;s Complexity Edge</a></li>
+      <li><a href="https://ottessathisottessathat.substack.com/">&#8220;It&#8217;s Ottessa, bitch.&#8221;</a></li>
+      <li><a href="https://www.lesswrong.com/">LessWrong</a></li>
     </ul>
   </section>
 
