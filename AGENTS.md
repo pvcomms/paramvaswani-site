@@ -22,7 +22,7 @@ vercel --prod --yes           # deploys public/. run build.py FIRST or you ship 
 
 ## The format rule — break this and publishing breaks
 
-`index.html`, `taste.html`, `curriculum.html`, `work.html`, `principles.html`, `research.html`, `downloads.html` and `oblique.html` are **artifact fragments**: `<title>`
+`index.html`, `taste.html`, `curriculum.html`, `work.html`, `principles.html`, `research.html`, `words.html`, `downloads.html` and `oblique.html` are **artifact fragments**: `<title>`
 on line 1, then `<link>`, `<style>`, markup, `<script>`. There is deliberately **no**
 `<!doctype>`, `<html>`, `<head>` or `<body>` tag. `build.py` and `dev.py` add the wrapper.
 Never "fix" this by adding them.
@@ -34,9 +34,9 @@ grep -c '<body' index.html    # must be 0
 ## Invariants
 
 **`public/` is generated.** Editing it directly is always wrong, and the edit is lost on the
-next build. The sources are the eight fragment files, plus `cognitive-scaffolding.html`.
+next build. The sources are the nine fragment files, plus `cognitive-scaffolding.html`.
 
-**`cognitive-scaffolding.html` is generated, not hand-edited.** It comes from
+**`cognitive-scaffolding.html` is generated, not hand-edited.** (`work.html` is served at `/dev`; `/work` redirects. The file keeps its name because this generator copies the gate out of it.) It comes from
 `~/personal/tools/apps/cognitive-scaffolding` (`./build.py --site ~/personal/site`), which
 copies the load-gate block out of `work.html` when it runs. It is served at
 `/systems/cognitive-scaffolding`. To change the page, edit that repo and regenerate, then run
@@ -61,7 +61,7 @@ second small `<style>` + inline `<script>` + `<div class="gate">`: an ALTCHA wid
 auto-solves a proof-of-work on load (static challenge in the `challenge` attribute, no server)
 before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fails open on
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
-The block is identical in every page fragment (eight hand-kept + one generated as of Oct 2) — change it everywhere or nowhere; after changing it, regenerate cognitive-scaffolding.html.
+The block is identical in every page fragment (nine hand-kept + one generated as of Oct 2) — change it everywhere or nowhere; after changing it, regenerate cognitive-scaffolding.html.
 
 **Letterboxd is switched off (2026-10-02).** `letterboxd/config.json` has `user: ""`, so
 `build.py` skips the sync and `taste.html` carries no `letterboxd:begin/end` markers; the four

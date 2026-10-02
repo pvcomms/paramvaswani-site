@@ -21,9 +21,10 @@ Seven pages, seven files:
 | `index.html`         | the site, drawn as a Venn                       |
 | `taste.html`         | Taste — what shaped me, by form, kept by hand   |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
-| `work.html`          | Work                                            |
+| `work.html`          | Dev (served at /dev; /work redirects)           |
 | `principles.html`    | Principles — the rules I run on, in the order they win |
 | `research.html`      | Research — what I think with: concepts, influences, quotes, aphorisms, words |
+| `words.html`         | Words — neology & etymology                     |
 | `downloads.html`     | Downloads — tools I build and use to curate my internet |
 | `oblique.html`       | Oblique, DIY — your own cards, from your creative values |
 | `cognitive-scaffolding.html` | generated: /systems/cognitive-scaffolding |

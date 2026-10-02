@@ -98,10 +98,11 @@ LLMS = """# Param Vaswani
   contact as the dashed set off the record.
 - [Taste](https://paramv.com/taste): what shaped him, by form — films, shows, albums, poetry, books, essays.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
-- [Work](https://paramv.com/work): then, now, and the terms he consults on.
+- [Dev](https://paramv.com/dev): then, now, and the terms he consults on.
 - [Principles](https://paramv.com/principles): the rules he actually runs on, in the order they win.
-- [Research](https://paramv.com/research): what he thinks with — research concepts, influences,
-  quotes, aphorisms, neology & etymology.
+- [Research](https://paramv.com/research): what he thinks with — research concepts, quotes, aphorisms.
+- [Words](https://paramv.com/words): neology & etymology — words he coined, or coined in usage, and
+  words he borrowed.
 - [Downloads](https://paramv.com/downloads): tools he builds and uses to be more intentional, curate
   his internet, and remove noise: kan, niwa, kiku, cognitive scaffolding, and more.
 - [Oblique, DIY](https://paramv.com/oblique): write your own oblique strategies from your creative
@@ -137,14 +138,16 @@ def main():
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
-        ("work.html", "work.html", "Work — " + TAB,
+        ("work.html", "dev.html", "Dev — " + TAB,
          "I research, I develop, I write. Local-only AI specialist. Privacy-first AI "
-         "consulting: selective, six months minimum.", "/work", ""),
+         "consulting: selective, six months minimum.", "/dev", ""),
         ("principles.html", "principles.html", "Principles — " + TAB,
          "The rules Param actually runs on, in the order they win.", "/principles", ""),
         ("research.html", "research.html", "Research — " + TAB,
-         "What Param thinks with: research concepts, influences, quotes, aphorisms, "
-         "neology & etymology.", "/research", ""),
+         "What Param thinks with: research concepts, quotes, aphorisms.", "/research", ""),
+        ("words.html", "words.html", "Words — " + TAB,
+         "Neology & etymology: words Param coined, or coined in usage, and words he borrowed.",
+         "/words", ""),
         ("downloads.html", "downloads.html", "Downloads — " + TAB,
          "Tools Param builds and uses to be more intentional, curate his internet, and remove noise.",
          "/downloads", ""),
@@ -179,7 +182,7 @@ def main():
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
-                                    "/work", "/principles", "/research", "/downloads", "/oblique",
+                                    "/dev", "/principles", "/research", "/words", "/downloads", "/oblique",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
     print(f"  fonts/ vendor/ albums/ films/ telly/ books/ pictures/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
