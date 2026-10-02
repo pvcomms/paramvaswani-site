@@ -61,10 +61,12 @@ before the page opens, once per tab session (`sessionStorage["pv-gate"]`). It fa
 error or after 8s, and without JS there is no gate at all, so crawlers still read the HTML.
 The block is identical in every page fragment (seven hand-kept + one generated as of Sep 30) — change it everywhere or nowhere; after changing it, regenerate cognitive-scaffolding.html.
 
-**Letterboxd is a build-time input.** `letterboxd.py` fetches the diary feed and posters when
-`build.py` runs and they ship as first-party files under `/letterboxd/`. (`/taste` was removed
-and restored on 2026-09-30.) Never add a client-side fetch or embed to letterboxd.com. Spec:
-`docs/features/003-letterboxd-diary.md`.
+**Letterboxd is switched off (2026-10-02).** `letterboxd/config.json` has `user: ""`, so
+`build.py` skips the sync and `taste.html` carries no `letterboxd:begin/end` markers; the four
+pinned films are typed into the films grid by hand with posters in `films/`, and a small inline
+dots mark links to the profile. `letterboxd.py` stays for when the diary comes back (set `user`,
+restore the markers, run it). Never add a client-side fetch or embed to letterboxd.com. Spec:
+`docs/features/003-letterboxd-diary.md` (parked).
 
 **The figures are not here any more.** The six figures, "Reading the Figures" and "What You Study" moved to the Center on 2026-09-30: postphenom.com/figures, /figures/legend and /position, served as static HTML from `~/work/capp/site/site/public/`. Don't rebuild them on paramv.com. **Except fig. 1, the venn, which came back to the home page the same day on Param's word** — it lives in both places now; its technology and society circles lead to figs. 2 and 3 on postphenom.com.
 

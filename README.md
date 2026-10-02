@@ -19,7 +19,7 @@ Seven pages, seven files:
 | File                 | Page                                            |
 | -------------------- | ----------------------------------------------- |
 | `index.html`         | the site, drawn as a Venn                       |
-| `taste.html`         | Media Taste — eleven forms, kept by hand        |
+| `taste.html`         | Taste — what shaped me, by form, kept by hand   |
 | `curriculum.html`    | Learning Curriculum — the current syllabus      |
 | `about.html`         | About — now, before, credentials                |
 | `work.html`          | Work                                            |

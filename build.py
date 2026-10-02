@@ -95,8 +95,7 @@ LLMS = """# Param Vaswani
 
 - [Home](https://paramv.com/): the site drawn as a Venn — five domains inside the universal set,
   contact as the dashed set off the record.
-- [Media Taste](https://paramv.com/taste): what he rates, by form — film, live performance, telly,
-  music, concertos, orchestra, poem, fiction, non-fiction.
+- [Taste](https://paramv.com/taste): what shaped him, by form — films, shows, albums, poetry, books, essays.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
 - [About](https://paramv.com/about): what he does now, what he did before, his credentials.
 - [Work](https://paramv.com/work): what he has made, and what it was for.
@@ -128,9 +127,8 @@ def main():
 
     pages = [
         ("index.html", "index.html", TAB, DESC, "/", PERSON_LD),
-        ("taste.html", "taste.html", "Media Taste — " + TAB,
-         "What Param rates, by form: film, live performance, telly, music, concertos, orchestra, "
-         "poem, fiction, non-fiction.", "/taste", ""),
+        ("taste.html", "taste.html", "Taste — " + TAB,
+         "What shaped Param, by form: films, shows, albums, poetry, books, essays.", "/taste", ""),
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),

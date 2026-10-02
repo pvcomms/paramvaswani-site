@@ -1,26 +1,30 @@
-<title>Media Taste</title>
+<title>Taste</title>
 <!--
-  paramv.com/taste — media taste, by form.
+  paramv.com/taste — some art that shaped me, by form. kept by hand.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  nine sets. every one of them is empty on purpose until entries are added by hand.
 
-  to add an entry, find the form's <ul class="entries"> and drop in one <li>:
+  each section is one mono label and either a cover grid (<ol class="al-grid">) or a list
+  (<ul class="entries">). to add a film, show, album or book, drop a <li> into the grid
+  (covers live in /films, /telly, /albums, /books; width/height are the file's pixels):
+
+    <li class="reveal" style="--i:N">
+      <span class="al-cover" aria-hidden="true"><img src="/films/slug.jpg" alt="" width="W" height="H" loading="lazy" decoding="async"></span>
+      <span class="t">Title</span>
+      <span class="al-by">who · year</span>
+    </li>
+
+  to add to a list:
 
     <li class="reveal">
       <span class="t">Title</span>
-      <span class="dek">one line on why it is here</span>
+      <span class="dek">one line</span>
       <span class="when">year</span>
     </li>
 
-  then change that form's notation from "= ∅" to "= { … }" (or leave it, it is only a label)
-  and delete the <p class="blank"> line beneath the list.
-
-  a set can split by whose it is: put <h3 class="group reveal">label <i>n</i></h3> above each
-  <ul class="entries">.
-
-  film also carries a letterboxd diary between the letterboxd:begin/end markers. that space is
-  filled at build time (and by dev.py) from letterboxd/diary.json — never type into it. to connect
-  or change the account, set "user" in letterboxd/config.json and run ./letterboxd.py.
+  the mark beside the films label links to the letterboxd profile. the diary that used to render
+  under film is switched off: letterboxd/config.json has user "" and the markers are gone. to bring
+  it back, set user, put the letterboxd:begin / letterboxd:end comment markers back in film, and
+  run ./letterboxd.py.
 -->
 <style>
   @font-face {
@@ -63,18 +67,12 @@
     --ink: #0b0c0e;
     --paper: #e9e6de;
     --dim: #96917f;
-    --faint: #807c6c;
     --faint-t: #8c8777;
     --hair-2: #66635a;
     --hair: #26272a;
-    --edge: #3a3b3e;
     --panel-bar: #101216;
-    --c-create: #7fb069;
     --c-consume: #b48ede;
-    --c-curate: #6fa8dc;
     --c-cohere: #e3c567;
-    --c-me: #e07a6b;
-    --c-creation: #d98aa8;
     --accent: var(--c-consume);
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
@@ -112,25 +110,6 @@
     padding: 0 24px;
   }
 
-  /* ---------- rail ---------- */
-  .prog {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    z-index: 40;
-    background: rgba(255, 255, 255, 0.04);
-    pointer-events: none;
-  }
-  .prog i {
-    display: block;
-    height: 100%;
-    width: 0;
-    background: var(--accent);
-    transition: width 0.12s linear;
-  }
-
   /* ---------- masthead (same grammar as the home page) ---------- */
   header {
     display: flex;
@@ -156,20 +135,6 @@
   .brand a:focus-visible {
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
-  }
-  .brand .where {
-    font-family: var(--mono);
-    font-size: 10.5px;
-    letter-spacing: 0.14em;
-    color: var(--faint);
-    text-transform: none;
-    padding-left: 14px;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-  }
-  .brand .where.on {
-    opacity: 1;
-    color: var(--accent);
   }
   nav.site {
     display: flex;
@@ -197,8 +162,7 @@
     outline-offset: 3px;
   }
   /* ink-draw underline — grows from the left, like a pen */
-  nav.site a::before,
-  .tabs a::before {
+  nav.site a::before {
     content: "";
     position: absolute;
     left: 0;
@@ -211,126 +175,72 @@
     transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
   }
   nav.site a:hover::before,
-  nav.site a.here::before,
-  .tabs a:hover::before,
-  .tabs a.here::before {
+  nav.site a.here::before {
     transform: scaleX(1);
   }
 
-  /* ---------- page head ---------- */
-  .head {
-    padding: 84px 0 0;
-    max-width: 680px;
-  }
-  .figlabel {
+  /* ---------- the page title, then one form after another ---------- */
+  .title {
+    padding-top: 72px;
     font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.16em;
-    text-transform: lowercase;
-    color: var(--dim);
-  }
-  .head h1 {
-    font-size: 40px;
+    font-size: 14px;
     font-weight: 400;
-    letter-spacing: -0.015em;
-    line-height: 1.12;
-    margin-top: 14px;
-    text-wrap: balance;
-  }
-  .head .figdek {
-    color: var(--dim);
-    font-style: italic;
-    font-size: 17px;
-    margin-top: 12px;
-  }
-  .head .notation {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    line-height: 1.9;
-    color: var(--faint-t);
-    margin-top: 26px;
-    padding-top: 14px;
-    border-top: 1px solid var(--hair);
-  }
-  .head .notation b {
-    font-weight: 400;
-    color: var(--accent);
-  }
-
-  /* ---------- the sub-tabs: one strip, nine forms ---------- */
-  .tabs {
-    position: sticky;
-    top: 0;
-    z-index: 30;
-    margin-top: 44px;
-    padding: 14px 0 12px;
-    background: var(--ink);
-    border-bottom: 1px solid var(--hair);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px 22px;
-  }
-  .tabs a {
-    position: relative;
-    flex: 0 0 auto;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    color: var(--dim);
-    white-space: nowrap;
-    transition: color 0.18s ease;
-  }
-  .tabs a i {
-    font-style: normal;
-    font-size: 9.5px;
-    color: var(--faint-t);
-    padding-right: 6px;
-    font-variant-numeric: tabular-nums;
-  }
-  .tabs a:hover,
-  .tabs a.here {
+    letter-spacing: 0.14em;
     color: var(--paper);
   }
-  .tabs a.here i {
-    color: var(--accent);
-  }
-  .tabs a:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
-  }
-
-  /* ---------- one form ---------- */
   .cat {
-    padding: 64px 0 0;
-    scroll-margin-top: 112px; /* clears the sticky strip at its two-line height */
+    margin-top: 56px;
+    padding-top: 48px;
+    border-top: 1px solid var(--hair);
+    scroll-margin-top: 24px;
   }
-  .sec-head {
+  .label {
     display: flex;
-    align-items: baseline;
+    align-items: center;
+    justify-content: space-between;
     gap: 14px;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 12px;
-    margin-bottom: 8px;
-  }
-  .sec-head .num {
+    max-width: 700px; /* the grids' width, so the mark sits on their right edge */
     font-family: var(--mono);
     font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .sec-head h2 {
-    font-size: 26px;
     font-weight: 400;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.16em;
+    color: var(--accent);
   }
-  .sec-head .notation {
-    font-family: var(--mono);
-    font-size: 12px;
+  .label h2 {
+    font: inherit;
+    letter-spacing: inherit;
+  }
+  .label.sub {
     color: var(--faint-t);
-    margin-left: auto;
-    text-align: right;
+    letter-spacing: 0.1em;
+    padding-top: 34px;
   }
+  .label + .entries {
+    margin-top: 6px;
+  }
+  .al-after {
+    margin-top: 44px;
+  }
+
+  /* the letterboxd mark: the three dots, drawn here so nothing is fetched from them */
+  .letterboxd {
+    display: inline-flex;
+    align-items: center;
+    opacity: 0.75;
+    transition: opacity 0.18s ease;
+  }
+  .letterboxd:hover {
+    opacity: 1;
+  }
+  .letterboxd:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 4px;
+  }
+  .letterboxd svg {
+    display: block;
+  }
+
+  /* lists */
   .entries {
     list-style: none;
   }
@@ -372,139 +282,8 @@
     white-space: nowrap;
     font-variant-numeric: tabular-nums;
   }
-  .group {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    font-family: var(--mono);
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: var(--faint-t);
-    padding: 34px 0 2px;
-  }
-  .sec-head + .group {
-    padding-top: 14px;
-  }
-  .group i {
-    font-style: normal;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .blank {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--faint-t);
-    padding: 22px 0 26px;
-    border-bottom: 1px dashed var(--hair);
-  }
-  .blank b {
-    font-weight: 400;
-    font-size: 15px;
-    color: var(--faint);
-  }
 
-  /* ---------- film · the letterboxd diary ---------- */
-  .cat:has(.lb) .blank {
-    display: none;
-  }
-  .lb {
-    margin-top: 28px;
-  }
-  .lb-head {
-    display: flex;
-    align-items: baseline;
-    gap: 6px 14px;
-    flex-wrap: wrap;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--faint-t);
-  }
-  .lb-label {
-    color: var(--accent);
-    letter-spacing: 0.16em;
-  }
-  .lb-src a {
-    color: var(--dim);
-    border-bottom: 1px solid var(--hair);
-    transition: color 0.18s ease, border-color 0.18s ease;
-  }
-  .lb-src a:hover {
-    color: var(--paper);
-    border-color: var(--hair-2);
-  }
-  .lb-src a:focus-visible,
-  .lb-link:focus-visible,
-  .lb-bar:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
-  }
-
-  /* favourites: the four pinned on the profile, poster-first like letterboxd shows them */
-  .lb-favs {
-    margin-bottom: 44px;
-  }
-  .lb-fav-row {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 18px;
-    margin-top: 18px;
-    max-width: 700px;
-  }
-  .lb-fav-row li.reveal {
-    transition-delay: calc(var(--i) * 70ms);
-  }
-  .lb-fav-link {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  .lb-fav-poster {
-    display: block;
-    aspect-ratio: 2 / 3;
-    margin-bottom: 10px;
-    background: var(--panel-bar);
-    outline: 1px solid var(--hair);
-    outline-offset: -1px;
-    overflow: hidden;
-  }
-  .lb-fav-poster img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .lb-fav-link:hover .lb-fav-poster img,
-  .lb-fav-link:focus-visible .lb-fav-poster img {
-    transform: scale(1.04);
-  }
-  .lb-fav-link .t {
-    font-size: 15.5px;
-    line-height: 1.3;
-    transition: color 0.18s ease;
-  }
-  .lb-fav-link:hover .t {
-    color: var(--accent);
-  }
-  .lb-fav-link .lb-year {
-    padding-left: 0;
-  }
-  .lb-fav-link:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 4px;
-  }
-
-  /* music · some albums that shaped me, cover-first */
-  .albums {
-    margin-top: 28px;
-  }
+  /* covers: films, shows, books stand tall; albums are square */
   .al-grid {
     list-style: none;
     display: grid;
@@ -512,9 +291,6 @@
     gap: 26px 18px;
     margin-top: 18px;
     max-width: 700px;
-  }
-  .al-after {
-    margin-top: 40px;
   }
   .al-grid.tall .al-cover {
     aspect-ratio: 2 / 3;
@@ -554,7 +330,13 @@
   .al-grid li:hover .t {
     color: var(--accent);
   }
-  /* music · a listening path: numbered, with a line on each */
+  .al-by {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--faint-t);
+  }
+  /* a listening order: three across, numbered */
   .al-path {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -564,173 +346,6 @@
     letter-spacing: 0.06em;
     color: var(--accent);
     margin-bottom: 6px;
-  }
-  .al-note {
-    font-size: 13.5px;
-    line-height: 1.4;
-    color: var(--faint-t);
-    margin-top: 6px;
-  }
-  .al-by {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--faint-t);
-  }
-
-  /* the distribution: ten half-star bins, one bar each */
-  .lb-dist {
-    margin-top: 20px;
-    padding-bottom: 18px;
-    border-bottom: 1px solid var(--hair);
-  }
-  .lb-bars {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 4px;
-    height: 72px;
-    max-width: 360px;
-  }
-  .lb-bar {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: stretch;
-    padding: 0;
-    border: 0;
-    background: none;
-    color: var(--faint-t);
-    font: inherit;
-    cursor: pointer;
-  }
-  .lb-bar[disabled] {
-    cursor: default;
-  }
-  .lb-bar i {
-    display: block;
-    height: 60px;
-    background: var(--hair-2);
-    transform: scaleY(max(var(--h), 0.03));
-    transform-origin: bottom;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.18s ease;
-  }
-  .lb-dist:not(.in) .lb-bar i {
-    transform: scaleY(0.03);
-  }
-  .lb-bar span {
-    height: 12px;
-    font-family: var(--mono);
-    font-size: 9.5px;
-    line-height: 12px;
-    text-align: center;
-    font-variant-numeric: tabular-nums;
-  }
-  .lb-bar:not([disabled]):hover i,
-  .lb-bar[aria-pressed="true"] i {
-    background: var(--accent);
-  }
-  .lb-bar[aria-pressed="true"] span {
-    color: var(--accent);
-  }
-  .lb-axis {
-    display: flex;
-    justify-content: space-between;
-    max-width: 360px;
-    margin-top: 6px;
-    font-family: var(--mono);
-    font-size: 9.5px;
-    color: var(--faint-t);
-  }
-  .lb-read {
-    margin-top: 12px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    color: var(--dim);
-  }
-
-  /* the rows keep the page's entry grammar, with a poster in the margin */
-  .lb-list li {
-    padding: 0;
-    transition: opacity 0.3s ease;
-  }
-  .lb-list.filtering li.off {
-    opacity: 0.18;
-  }
-  .lb-link {
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    width: 100%;
-    padding: 14px 0;
-  }
-  .lb-poster {
-    flex: 0 0 46px;
-    height: 69px;
-    background: var(--panel-bar);
-    outline: 1px solid var(--hair);
-    outline-offset: -1px;
-    overflow: hidden;
-  }
-  .lb-poster img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: saturate(0.7);
-    transition: filter 0.3s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .lb-link:hover .lb-poster img,
-  .lb-link:focus-visible .lb-poster img {
-    filter: none;
-    transform: scale(1.06);
-  }
-  .lb-body {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-    min-width: 0;
-    flex: 1 1 auto;
-  }
-  .lb-link .t {
-    transition: color 0.18s ease;
-  }
-  .lb-link:hover .t {
-    color: var(--accent);
-  }
-  .lb-year {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--faint-t);
-    padding-left: 4px;
-  }
-  .lb-meta {
-    display: flex;
-    gap: 10px;
-    align-items: baseline;
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--c-cohere);
-    letter-spacing: 0.04em;
-  }
-  .lb-like {
-    color: var(--c-me);
-  }
-  .lb-re {
-    color: var(--faint-t);
-    font-size: 10px;
-    letter-spacing: 0.1em;
-  }
-  .lb-link .dek {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-width: 58ch;
-  }
-  .lb-link .when {
-    padding-top: 4px;
   }
 
   /* ---------- footer ---------- */
@@ -787,39 +402,11 @@
       flex-basis: 100%;
       justify-content: flex-start;
     }
-    .head {
+    .title {
       padding-top: 56px;
-    }
-    .tabs {
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-    }
-    .tabs::-webkit-scrollbar {
-      display: none;
-    }
-    .head h1 {
-      font-size: 32px;
-    }
-    .cat {
-      padding-top: 52px;
-    }
-    .sec-head .notation {
-      display: none;
     }
     .entries .when {
       display: none;
-    }
-    .lb-bars,
-    .lb-axis {
-      max-width: none;
-    }
-    .lb-fav-row {
-      gap: 10px;
-    }
-    .lb-fav-link .t {
-      font-size: 13px;
     }
     .al-grid {
       gap: 18px 10px;
@@ -829,19 +416,14 @@
     }
   }
   @media (max-width: 560px) {
+    nav.site {
+      gap: 14px;
+    }
     .al-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     .al-grid.al-path {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
-  @media (max-width: 560px) {
-    .brand .where {
-      display: none;
-    }
-    nav.site {
-      gap: 14px;
     }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -853,17 +435,10 @@
       transform: none;
       transition: none;
     }
-    .prog i,
     nav.site a::before,
-    .tabs a::before,
-    .lb-bar i,
-    .lb-poster img,
-    .lb-list li,
-    .lb-fav-poster img,
     .al-cover img {
       transition: none;
     }
-    .lb-fav-row li.reveal,
     .al-grid li.reveal {
       transition-delay: 0s;
     }
@@ -932,12 +507,8 @@
 </div>
 
 <div class="wrap" id="top">
-  <div class="prog" aria-hidden="true"><i id="progBar"></i></div>
   <header>
-    <h1 class="brand">
-      <a href="/">Param V</a
-      ><span class="where" id="where" aria-hidden="true"></span>
-    </h1>
+    <h1 class="brand"><a href="/">Param V</a></h1>
     <nav class="site" aria-label="site">
       <a href="/#contact">contact</a>
       <a href="/about">about</a>
@@ -948,415 +519,350 @@
     </nav>
   </header>
 
-  <section class="head">
-    <div class="figlabel">page · taste</div>
-    <h1>Media Taste</h1>
-    <p class="figdek">
-      what i rate, by form. nine sets, kept by hand. all of them are empty
-      until they aren&#8217;t.
-    </p>
-    <div class="notation">
-      <b>taste</b> = film ∪ live ∪ telly ∪ music ∪ concertos ∪ orchestra ∪ poem ∪
-      fiction ∪ non-fiction
-    </div>
-  </section>
-
-  <nav class="tabs" id="tabs" aria-label="forms">
-    <a href="#film"><i>01</i>film</a>
-    <a href="#live"><i>02</i>live performance</a>
-    <a href="#telly"><i>03</i>telly</a>
-    <a href="#music"><i>04</i>music</a>
-    <a href="#concertos"><i>05</i>concertos</a>
-    <a href="#orchestra"><i>06</i>orchestra</a>
-    <a href="#poem"><i>07</i>poem</a>
-    <a href="#fiction"><i>08</i>fiction</a>
-    <a href="#non-fiction"><i>09</i>non-fiction</a>
-  </nav>
+  <h1 class="title reveal">some art that shaped me</h1>
 
   <section class="cat" id="film">
-    <div class="sec-head reveal">
-      <span class="num">01</span>
-      <h2>film</h2>
-      <span class="notation">|films| = 12</span>
+    <div class="label reveal">
+      <h2>films</h2>
+      <a class="letterboxd" href="https://letterboxd.com/critiquealmass/" rel="noopener" aria-label="letterboxd/critiquealmass" title="letterboxd/critiquealmass">
+        <svg viewBox="0 0 378 140" width="35" height="13" aria-hidden="true" focusable="false">
+          <circle cx="70" cy="70" r="70" fill="#ff8000"/>
+          <circle cx="308" cy="70" r="70" fill="#40bcf4"/>
+          <circle cx="189" cy="70" r="70" fill="#00e054"/>
+          <path d="M129.5 33.1A70 70 0 0 1 129.5 106.9A70 70 0 0 1 129.5 33.1ZM248.5 33.1A70 70 0 0 1 248.5 106.9A70 70 0 0 1 248.5 33.1Z" fill="#556677"/>
+        </svg>
+      </a>
     </div>
-    <div class="albums">
-      <div class="lb-head reveal">
-        <span class="lb-label">some films that shaped me</span>
-      </div>
-      <ol class="al-grid tall">
-        <li class="reveal" style="--i:0">
-          <span class="al-cover" aria-hidden="true"><img src="/films/goblet-of-fire.jpg" alt="" width="365" height="273" loading="lazy" decoding="async"></span>
-          <span class="t">Harry Potter and the Goblet of Fire</span>
-          <span class="al-by">Mike Newell · 2005</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-cover" aria-hidden="true"><img src="/films/requiem-for-a-dream.jpg" alt="" width="220" height="319" loading="lazy" decoding="async"></span>
-          <span class="t">Requiem for a Dream</span>
-          <span class="al-by">Darren Aronofsky · 2000</span>
-        </li>
-        <li class="reveal" style="--i:2">
-          <span class="al-cover" aria-hidden="true"><img src="/films/perks.jpg" alt="" width="250" height="369" loading="lazy" decoding="async"></span>
-          <span class="t">The Perks of Being a Wallflower</span>
-          <span class="al-by">Stephen Chbosky · 2012</span>
-        </li>
-        <li class="reveal" style="--i:3">
-          <span class="al-cover" aria-hidden="true"><img src="/films/juno.jpg" alt="" width="220" height="343" loading="lazy" decoding="async"></span>
-          <span class="t">Juno</span>
-          <span class="al-by">Jason Reitman · 2007</span>
-        </li>
-        <li class="reveal" style="--i:4">
-          <span class="al-cover" aria-hidden="true"><img src="/films/scott-pilgrim.jpg" alt="" width="220" height="309" loading="lazy" decoding="async"></span>
-          <span class="t">Scott Pilgrim vs. the World</span>
-          <span class="al-by">Edgar Wright · 2010</span>
-        </li>
-        <li class="reveal" style="--i:5">
-          <span class="al-cover" aria-hidden="true"><img src="/films/v-for-vendetta.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
-          <span class="t">V for Vendetta</span>
-          <span class="al-by">James McTeigue · 2005</span>
-        </li>
-        <li class="reveal" style="--i:6">
-          <span class="al-cover" aria-hidden="true"><img src="/films/zoolander.jpg" alt="" width="255" height="389" loading="lazy" decoding="async"></span>
-          <span class="t">Zoolander</span>
-          <span class="al-by">Ben Stiller · 2001</span>
-        </li>
-        <li class="reveal" style="--i:7">
-          <span class="al-cover" aria-hidden="true"><img src="/films/lady-bird.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
-          <span class="t">Lady Bird</span>
-          <span class="al-by">Greta Gerwig · 2017</span>
-        </li>
-        <li class="reveal" style="--i:8">
-          <span class="al-cover" aria-hidden="true"><img src="/films/virgin-suicides.jpg" alt="" width="250" height="371" loading="lazy" decoding="async"></span>
-          <span class="t">The Virgin Suicides</span>
-          <span class="al-by">Sofia Coppola · 1999</span>
-        </li>
-        <li class="reveal" style="--i:9">
-          <span class="al-cover" aria-hidden="true"><img src="/films/grand-budapest.jpg" alt="" width="220" height="344" loading="lazy" decoding="async"></span>
-          <span class="t">The Grand Budapest Hotel</span>
-          <span class="al-by">Wes Anderson · 2014</span>
-        </li>
-        <li class="reveal" style="--i:10">
-          <span class="al-cover" aria-hidden="true"><img src="/films/chungking-express.jpg" alt="" width="259" height="383" loading="lazy" decoding="async"></span>
-          <span class="t">Chungking Express</span>
-          <span class="al-by">Wong Kar-wai · 1994</span>
-        </li>
-        <li class="reveal" style="--i:11">
-          <span class="al-cover" aria-hidden="true"><img src="/films/the-brutalist.jpg" alt="" width="253" height="395" loading="lazy" decoding="async"></span>
-          <span class="t">The Brutalist</span>
-          <span class="al-by">Brady Corbet · 2024</span>
-        </li>
-      </ol>
-    </div>
-    <!-- letterboxd:begin · generated from letterboxd/diary.json, edits here are overwritten -->
-    <!-- letterboxd:end -->
-  </section>
-
-  <section class="cat" id="live">
-    <div class="sec-head reveal">
-      <span class="num">02</span>
-      <h2>live performance</h2>
-      <span class="notation">live = ∅</span>
-    </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <ol class="al-grid tall">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover" aria-hidden="true"><img src="/films/goblet-of-fire.jpg" alt="" width="365" height="273" loading="lazy" decoding="async"></span>
+        <span class="t">Harry Potter and the Goblet of Fire</span>
+        <span class="al-by">Mike Newell · 2005</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover" aria-hidden="true"><img src="/films/requiem-for-a-dream.jpg" alt="" width="220" height="319" loading="lazy" decoding="async"></span>
+        <span class="t">Requiem for a Dream</span>
+        <span class="al-by">Darren Aronofsky · 2000</span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-cover" aria-hidden="true"><img src="/films/perks.jpg" alt="" width="250" height="369" loading="lazy" decoding="async"></span>
+        <span class="t">The Perks of Being a Wallflower</span>
+        <span class="al-by">Stephen Chbosky · 2012</span>
+      </li>
+      <li class="reveal" style="--i:3">
+        <span class="al-cover" aria-hidden="true"><img src="/films/juno.jpg" alt="" width="220" height="343" loading="lazy" decoding="async"></span>
+        <span class="t">Juno</span>
+        <span class="al-by">Jason Reitman · 2007</span>
+      </li>
+      <li class="reveal" style="--i:4">
+        <span class="al-cover" aria-hidden="true"><img src="/films/scott-pilgrim.jpg" alt="" width="220" height="309" loading="lazy" decoding="async"></span>
+        <span class="t">Scott Pilgrim vs. the World</span>
+        <span class="al-by">Edgar Wright · 2010</span>
+      </li>
+      <li class="reveal" style="--i:5">
+        <span class="al-cover" aria-hidden="true"><img src="/films/v-for-vendetta.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
+        <span class="t">V for Vendetta</span>
+        <span class="al-by">James McTeigue · 2005</span>
+      </li>
+      <li class="reveal" style="--i:6">
+        <span class="al-cover" aria-hidden="true"><img src="/films/zoolander.jpg" alt="" width="255" height="389" loading="lazy" decoding="async"></span>
+        <span class="t">Zoolander</span>
+        <span class="al-by">Ben Stiller · 2001</span>
+      </li>
+      <li class="reveal" style="--i:7">
+        <span class="al-cover" aria-hidden="true"><img src="/films/lady-bird.jpg" alt="" width="220" height="325" loading="lazy" decoding="async"></span>
+        <span class="t">Lady Bird</span>
+        <span class="al-by">Greta Gerwig · 2017</span>
+      </li>
+      <li class="reveal" style="--i:8">
+        <span class="al-cover" aria-hidden="true"><img src="/films/virgin-suicides.jpg" alt="" width="250" height="371" loading="lazy" decoding="async"></span>
+        <span class="t">The Virgin Suicides</span>
+        <span class="al-by">Sofia Coppola · 1999</span>
+      </li>
+      <li class="reveal" style="--i:9">
+        <span class="al-cover" aria-hidden="true"><img src="/films/grand-budapest.jpg" alt="" width="220" height="344" loading="lazy" decoding="async"></span>
+        <span class="t">The Grand Budapest Hotel</span>
+        <span class="al-by">Wes Anderson · 2014</span>
+      </li>
+      <li class="reveal" style="--i:10">
+        <span class="al-cover" aria-hidden="true"><img src="/films/chungking-express.jpg" alt="" width="259" height="383" loading="lazy" decoding="async"></span>
+        <span class="t">Chungking Express</span>
+        <span class="al-by">Wong Kar-wai · 1994</span>
+      </li>
+      <li class="reveal" style="--i:11">
+        <span class="al-cover" aria-hidden="true"><img src="/films/the-brutalist.jpg" alt="" width="253" height="395" loading="lazy" decoding="async"></span>
+        <span class="t">The Brutalist</span>
+        <span class="al-by">Brady Corbet · 2024</span>
+      </li>
+      <li class="reveal" style="--i:12">
+        <span class="al-cover" aria-hidden="true"><img src="/films/control.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
+        <span class="t">Control</span>
+        <span class="al-by">Anton Corbijn · 2007</span>
+      </li>
+      <li class="reveal" style="--i:13">
+        <span class="al-cover" aria-hidden="true"><img src="/films/lost-in-translation.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
+        <span class="t">Lost in Translation</span>
+        <span class="al-by">Sofia Coppola · 2003</span>
+      </li>
+      <li class="reveal" style="--i:14">
+        <span class="al-cover" aria-hidden="true"><img src="/films/reprise.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
+        <span class="t">Reprise</span>
+        <span class="al-by">Joachim Trier · 2006</span>
+      </li>
+      <li class="reveal" style="--i:15">
+        <span class="al-cover" aria-hidden="true"><img src="/films/tar.jpg" alt="" width="342" height="513" loading="lazy" decoding="async"></span>
+        <span class="t">TÁR</span>
+        <span class="al-by">Todd Field · 2022</span>
+      </li>
+    </ol>
   </section>
 
   <section class="cat" id="telly">
-    <div class="sec-head reveal">
-      <span class="num">03</span>
+    <div class="label reveal">
       <h2>telly</h2>
-      <span class="notation">|telly| = 11</span>
     </div>
-    <div class="albums">
-      <div class="lb-head reveal">
-        <span class="lb-label">some shows that shaped me</span>
-      </div>
-      <ol class="al-grid tall">
-        <li class="reveal" style="--i:0">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/the-americans.jpg" alt="" width="400" height="560" loading="lazy" decoding="async"></span>
-          <span class="t">The Americans</span>
-          <span class="al-by">FX · 2013–2018</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/the-romanoffs.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-          <span class="t">The Romanoffs</span>
-          <span class="al-by">Prime Video · 2018</span>
-        </li>
-        <li class="reveal" style="--i:2">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/community.jpg" alt="" width="400" height="588" loading="lazy" decoding="async"></span>
-          <span class="t">Community</span>
-          <span class="al-by">NBC · 2009–2015</span>
-        </li>
-        <li class="reveal" style="--i:3">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/counterpart.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-          <span class="t">Counterpart</span>
-          <span class="al-by">Starz · 2017–2019</span>
-        </li>
-        <li class="reveal" style="--i:4">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/man-in-the-high-castle.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-          <span class="t">The Man in the High Castle</span>
-          <span class="al-by">Prime Video · 2015–2019</span>
-        </li>
-        <li class="reveal" style="--i:5">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/night-manager.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-          <span class="t">The Night Manager</span>
-          <span class="al-by">BBC One · 2016–</span>
-        </li>
-        <li class="reveal" style="--i:6">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/30-rock.jpg" alt="" width="400" height="533" loading="lazy" decoding="async"></span>
-          <span class="t">30 Rock</span>
-          <span class="al-by">NBC · 2006–2013</span>
-        </li>
-        <li class="reveal" style="--i:7">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/parks-and-rec.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-          <span class="t">Parks and Recreation</span>
-          <span class="al-by">NBC · 2009–2015</span>
-        </li>
-        <li class="reveal" style="--i:8">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/girls.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
-          <span class="t">Girls</span>
-          <span class="al-by">HBO · 2012–2017</span>
-        </li>
-        <li class="reveal" style="--i:9">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/veep.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></span>
-          <span class="t">Veep</span>
-          <span class="al-by">HBO · 2012–2019</span>
-        </li>
-        <li class="reveal" style="--i:10">
-          <span class="al-cover" aria-hidden="true"><img src="/telly/homeland.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
-          <span class="t">Homeland</span>
-          <span class="al-by">Showtime · 2011–2020</span>
-        </li>
-      </ol>
-    </div>
+    <ol class="al-grid tall">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/the-americans.jpg" alt="" width="400" height="560" loading="lazy" decoding="async"></span>
+        <span class="t">The Americans</span>
+        <span class="al-by">FX · 2013–2018</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/the-romanoffs.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+        <span class="t">The Romanoffs</span>
+        <span class="al-by">Prime Video · 2018</span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/community.jpg" alt="" width="400" height="588" loading="lazy" decoding="async"></span>
+        <span class="t">Community</span>
+        <span class="al-by">NBC · 2009–2015</span>
+      </li>
+      <li class="reveal" style="--i:3">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/counterpart.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+        <span class="t">Counterpart</span>
+        <span class="al-by">Starz · 2017–2019</span>
+      </li>
+      <li class="reveal" style="--i:4">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/man-in-the-high-castle.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+        <span class="t">The Man in the High Castle</span>
+        <span class="al-by">Prime Video · 2015–2019</span>
+      </li>
+      <li class="reveal" style="--i:5">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/night-manager.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+        <span class="t">The Night Manager</span>
+        <span class="al-by">BBC One · 2016–</span>
+      </li>
+      <li class="reveal" style="--i:6">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/30-rock.jpg" alt="" width="400" height="533" loading="lazy" decoding="async"></span>
+        <span class="t">30 Rock</span>
+        <span class="al-by">NBC · 2006–2013</span>
+      </li>
+      <li class="reveal" style="--i:7">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/parks-and-rec.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+        <span class="t">Parks and Recreation</span>
+        <span class="al-by">NBC · 2009–2015</span>
+      </li>
+      <li class="reveal" style="--i:8">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/girls.jpg" alt="" width="400" height="592" loading="lazy" decoding="async"></span>
+        <span class="t">Girls</span>
+        <span class="al-by">HBO · 2012–2017</span>
+      </li>
+      <li class="reveal" style="--i:9">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/veep.jpg" alt="" width="400" height="500" loading="lazy" decoding="async"></span>
+        <span class="t">Veep</span>
+        <span class="al-by">HBO · 2012–2019</span>
+      </li>
+      <li class="reveal" style="--i:10">
+        <span class="al-cover" aria-hidden="true"><img src="/telly/homeland.jpg" alt="" width="400" height="600" loading="lazy" decoding="async"></span>
+        <span class="t">Homeland</span>
+        <span class="al-by">Showtime · 2011–2020</span>
+      </li>
+    </ol>
   </section>
 
   <section class="cat" id="music">
-    <div class="sec-head reveal">
-      <span class="num">04</span>
-      <h2>music</h2>
-      <span class="notation">|albums| = 16</span>
+    <div class="label reveal">
+      <h2>albums</h2>
     </div>
-    <div class="albums">
-      <div class="lb-head reveal">
-        <span class="lb-label">some albums that shaped me</span>
-      </div>
-      <ol class="al-grid">
-        <li class="reveal" style="--i:0">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/shore.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Shore</span>
-          <span class="al-by">Fleet Foxes · 2020</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/punisher.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Punisher</span>
-          <span class="al-by">Phoebe Bridgers · 2020</span>
-        </li>
-        <li class="reveal" style="--i:2">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/bon-iver-bon-iver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Bon Iver, Bon Iver</span>
-          <span class="al-by">Bon Iver · 2011</span>
-        </li>
-        <li class="reveal" style="--i:3">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/gallipoli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Gallipoli</span>
-          <span class="al-by">Beirut · 2019</span>
-        </li>
-        <li class="reveal" style="--i:4">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/kids.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">K.I.D.S.</span>
-          <span class="al-by">Mac Miller · 2010</span>
-        </li>
-        <li class="reveal" style="--i:5">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/ok-computer.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">OK Computer</span>
-          <span class="al-by">Radiohead · 1997</span>
-        </li>
-        <li class="reveal" style="--i:6">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/a-brief-inquiry.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">A Brief Inquiry Into Online Relationships</span>
-          <span class="al-by">The 1975 · 2018</span>
-        </li>
-        <li class="reveal" style="--i:7">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/the-black-parade.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">The Black Parade</span>
-          <span class="al-by">My Chemical Romance · 2006</span>
-        </li>
-        <li class="reveal" style="--i:8">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/nevermind.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Nevermind</span>
-          <span class="al-by">Nirvana · 1991</span>
-        </li>
-        <li class="reveal" style="--i:9">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/surrealistic-pillow.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Surrealistic Pillow</span>
-          <span class="al-by">Jefferson Airplane · 1967</span>
-        </li>
-        <li class="reveal" style="--i:10">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/in-the-aeroplane.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">In the Aeroplane Over the Sea</span>
-          <span class="al-by">Neutral Milk Hotel · 1998</span>
-        </li>
-        <li class="reveal" style="--i:11">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/immunity.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Immunity</span>
-          <span class="al-by">Clairo · 2019</span>
-        </li>
-        <li class="reveal" style="--i:12">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/father-of-the-bride.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Father of the Bride</span>
-          <span class="al-by">Vampire Weekend · 2019</span>
-        </li>
-        <li class="reveal" style="--i:13">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/anima.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">ANIMA</span>
-          <span class="al-by">Thom Yorke · 2019</span>
-        </li>
-        <li class="reveal" style="--i:14">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/revolver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Revolver</span>
-          <span class="al-by">The Beatles · 1966</span>
-        </li>
-        <li class="reveal" style="--i:15">
-          <span class="al-cover" aria-hidden="true"><img src="/albums/channel-orange.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">channel ORANGE</span>
-          <span class="al-by">Frank Ocean · 2012</span>
-        </li>
-      </ol>
-      <div class="lb-head reveal al-after">
-        <span class="lb-label">brian eno&rsquo;s ambient, in listening order</span>
-      </div>
-      <ol class="al-grid al-path">
-        <li class="reveal" style="--i:0">
-          <span class="al-n">start</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/music-for-airports.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Ambient 1: Music for Airports</span>
-          <span class="al-by">Brian Eno · 1978</span>
-          <span class="al-note">Piano and voice loops, very sparse. This is the one to start with.</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-n">1</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/discreet-music.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Discreet Music</span>
-          <span class="al-by">Brian Eno · 1975</span>
-          <span class="al-note">Two tape machines feeding back into each other. Calm and continuous.</span>
-        </li>
-        <li class="reveal" style="--i:2">
-          <span class="al-n">2</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/apollo.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Apollo: Atmospheres and Soundtracks</span>
-          <span class="al-by">Brian Eno · 1983</span>
-          <span class="al-note">With Daniel Lanois and Roger Eno. Warmer, and includes “An Ending (Ascent).”</span>
-        </li>
-        <li class="reveal" style="--i:3">
-          <span class="al-n">3</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/thursday-afternoon.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Thursday Afternoon</span>
-          <span class="al-by">Brian Eno · 1985</span>
-          <span class="al-note">One piano piece that lasts an hour.</span>
-        </li>
-        <li class="reveal" style="--i:4">
-          <span class="al-n">4</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/neroli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Neroli</span>
-          <span class="al-by">Brian Eno · 1993</span>
-          <span class="al-note">Close to silence, made for stillness.</span>
-        </li>
-        <li class="reveal" style="--i:5">
-          <span class="al-n">5</span>
-          <span class="al-cover" aria-hidden="true"><img src="/albums/on-land.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
-          <span class="t">Ambient 4: On Land</span>
-          <span class="al-by">Brian Eno · 1982</span>
-          <span class="al-note">Darker and more like a landscape. Leave it until you’ve got the idea.</span>
-        </li>
-      </ol>
+    <ol class="al-grid">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/shore.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Shore</span>
+        <span class="al-by">Fleet Foxes · 2020</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/punisher.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Punisher</span>
+        <span class="al-by">Phoebe Bridgers · 2020</span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/bon-iver-bon-iver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Bon Iver, Bon Iver</span>
+        <span class="al-by">Bon Iver · 2011</span>
+      </li>
+      <li class="reveal" style="--i:3">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/gallipoli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Gallipoli</span>
+        <span class="al-by">Beirut · 2019</span>
+      </li>
+      <li class="reveal" style="--i:4">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/kids.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">K.I.D.S.</span>
+        <span class="al-by">Mac Miller · 2010</span>
+      </li>
+      <li class="reveal" style="--i:5">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/ok-computer.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">OK Computer</span>
+        <span class="al-by">Radiohead · 1997</span>
+      </li>
+      <li class="reveal" style="--i:6">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/a-brief-inquiry.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">A Brief Inquiry Into Online Relationships</span>
+        <span class="al-by">The 1975 · 2018</span>
+      </li>
+      <li class="reveal" style="--i:7">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/the-black-parade.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">The Black Parade</span>
+        <span class="al-by">My Chemical Romance · 2006</span>
+      </li>
+      <li class="reveal" style="--i:8">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/nevermind.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Nevermind</span>
+        <span class="al-by">Nirvana · 1991</span>
+      </li>
+      <li class="reveal" style="--i:9">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/surrealistic-pillow.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Surrealistic Pillow</span>
+        <span class="al-by">Jefferson Airplane · 1967</span>
+      </li>
+      <li class="reveal" style="--i:10">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/in-the-aeroplane.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">In the Aeroplane Over the Sea</span>
+        <span class="al-by">Neutral Milk Hotel · 1998</span>
+      </li>
+      <li class="reveal" style="--i:11">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/immunity.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Immunity</span>
+        <span class="al-by">Clairo · 2019</span>
+      </li>
+      <li class="reveal" style="--i:12">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/father-of-the-bride.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Father of the Bride</span>
+        <span class="al-by">Vampire Weekend · 2019</span>
+      </li>
+      <li class="reveal" style="--i:13">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/anima.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">ANIMA</span>
+        <span class="al-by">Thom Yorke · 2019</span>
+      </li>
+      <li class="reveal" style="--i:14">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/revolver.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Revolver</span>
+        <span class="al-by">The Beatles · 1966</span>
+      </li>
+      <li class="reveal" style="--i:15">
+        <span class="al-cover" aria-hidden="true"><img src="/albums/channel-orange.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">channel ORANGE</span>
+        <span class="al-by">Frank Ocean · 2012</span>
+      </li>
+    </ol>
+    <div class="label reveal al-after">
+      <h2>my brian eno listening order</h2>
     </div>
-  </section>
-
-  <section class="cat" id="concertos">
-    <div class="sec-head reveal">
-      <span class="num">05</span>
-      <h2>concertos</h2>
-      <span class="notation">concertos = ∅</span>
-    </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
-  </section>
-
-  <section class="cat" id="orchestra">
-    <div class="sec-head reveal">
-      <span class="num">06</span>
-      <h2>orchestra</h2>
-      <span class="notation">orchestra = ∅</span>
-    </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <ol class="al-grid al-path">
+      <li class="reveal" style="--i:0">
+        <span class="al-n">start</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/music-for-airports.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Ambient 1: Music for Airports</span>
+        <span class="al-by">Brian Eno · 1978</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-n">1</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/discreet-music.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Discreet Music</span>
+        <span class="al-by">Brian Eno · 1975</span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-n">2</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/apollo.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Apollo: Atmospheres and Soundtracks</span>
+        <span class="al-by">Brian Eno · 1983</span>
+      </li>
+      <li class="reveal" style="--i:3">
+        <span class="al-n">3</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/thursday-afternoon.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Thursday Afternoon</span>
+        <span class="al-by">Brian Eno · 1985</span>
+      </li>
+      <li class="reveal" style="--i:4">
+        <span class="al-n">4</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/neroli.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Neroli</span>
+        <span class="al-by">Brian Eno · 1993</span>
+      </li>
+      <li class="reveal" style="--i:5">
+        <span class="al-n">5</span>
+        <span class="al-cover" aria-hidden="true"><img src="/albums/on-land.jpg" alt="" width="400" height="400" loading="lazy" decoding="async"></span>
+        <span class="t">Ambient 4: On Land</span>
+        <span class="al-by">Brian Eno · 1982</span>
+      </li>
+    </ol>
   </section>
 
   <section class="cat" id="poem">
-    <div class="sec-head reveal">
-      <span class="num">07</span>
-      <h2>poem</h2>
-      <span class="notation">poem = ∅</span>
+    <div class="label reveal">
+      <h2>poetry</h2>
     </div>
-    <ul class="entries"></ul>
-    <p class="blank reveal"><b>∅</b>nothing here yet</p>
+    <ul class="entries">
+      <li class="reveal">
+        <span class="t">Bluebird</span>
+        <span class="dek">Charles Bukowski</span>
+        <span class="when">1992</span>
+      </li>
+    </ul>
   </section>
 
   <section class="cat" id="fiction">
-    <div class="sec-head reveal">
-      <span class="num">08</span>
+    <div class="label reveal">
       <h2>fiction</h2>
-      <span class="notation">|fiction| = 2</span>
     </div>
-    <div class="albums">
-      <div class="lb-head reveal">
-        <span class="lb-label">some books that shaped me</span>
-      </div>
-      <ol class="al-grid tall">
-        <li class="reveal" style="--i:0">
-          <span class="al-cover" aria-hidden="true"><img src="/books/hpmor.jpg" alt="" width="292" height="475" loading="lazy" decoding="async"></span>
-          <span class="t">Harry Potter and the Methods of Rationality</span>
-          <span class="al-by">Eliezer Yudkowsky · 2010–2015</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-cover" aria-hidden="true"><img src="/books/my-struggle.jpg" alt="" width="326" height="500" loading="lazy" decoding="async"></span>
-          <span class="t">My Struggle</span>
-          <span class="al-by">Karl Ove Knausgaard · 2009–2011</span>
-        </li>
-      </ol>
-    </div>
+    <ol class="al-grid tall">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover" aria-hidden="true"><img src="/books/hpmor.jpg" alt="" width="292" height="475" loading="lazy" decoding="async"></span>
+        <span class="t">Harry Potter and the Methods of Rationality</span>
+        <span class="al-by">Eliezer Yudkowsky · 2010–2015</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover" aria-hidden="true"><img src="/books/my-struggle.jpg" alt="" width="326" height="500" loading="lazy" decoding="async"></span>
+        <span class="t">My Struggle</span>
+        <span class="al-by">Karl Ove Knausgaard · 2009–2011</span>
+      </li>
+    </ol>
   </section>
 
   <section class="cat" id="non-fiction">
-    <div class="sec-head reveal">
-      <span class="num">09</span>
+    <div class="label reveal">
       <h2>non-fiction</h2>
-      <span class="notation">|non-fiction| = 10</span>
     </div>
-    <div class="albums">
-      <div class="lb-head reveal">
-        <span class="lb-label">some books that shaped me</span>
-      </div>
-      <ol class="al-grid tall">
-        <li class="reveal" style="--i:0">
-          <span class="al-cover" aria-hidden="true"><img src="/books/geb.jpg" alt="" width="312" height="500" loading="lazy" decoding="async"></span>
-          <span class="t">Gödel, Escher, Bach: An Eternal Golden Braid</span>
-          <span class="al-by">Douglas Hofstadter · 1979</span>
-        </li>
-        <li class="reveal" style="--i:1">
-          <span class="al-cover" aria-hidden="true"><img src="/books/how-to-do-nothing.jpg" alt="" width="330" height="500" loading="lazy" decoding="async"></span>
-          <span class="t">How to Do Nothing</span>
-          <span class="al-by">Jenny Odell · 2019</span>
-        </li>
-        <li class="reveal" style="--i:2">
-          <span class="al-cover" aria-hidden="true"><img src="/books/tiny-experiments.jpg" alt="" width="331" height="500" loading="lazy" decoding="async"></span>
-          <span class="t">Tiny Experiments</span>
-          <span class="al-by">Anne-Laure Le Cunff · 2025</span>
-        </li>
-      </ol>
-    </div>
-    <div class="lb-head reveal al-after">
-      <span class="lb-label">some essays that shaped me</span>
+    <ol class="al-grid tall">
+      <li class="reveal" style="--i:0">
+        <span class="al-cover" aria-hidden="true"><img src="/books/geb.jpg" alt="" width="312" height="500" loading="lazy" decoding="async"></span>
+        <span class="t">Gödel, Escher, Bach: An Eternal Golden Braid</span>
+        <span class="al-by">Douglas Hofstadter · 1979</span>
+      </li>
+      <li class="reveal" style="--i:1">
+        <span class="al-cover" aria-hidden="true"><img src="/books/how-to-do-nothing.jpg" alt="" width="330" height="500" loading="lazy" decoding="async"></span>
+        <span class="t">How to Do Nothing</span>
+        <span class="al-by">Jenny Odell · 2019</span>
+      </li>
+      <li class="reveal" style="--i:2">
+        <span class="al-cover" aria-hidden="true"><img src="/books/tiny-experiments.jpg" alt="" width="331" height="500" loading="lazy" decoding="async"></span>
+        <span class="t">Tiny Experiments</span>
+        <span class="al-by">Anne-Laure Le Cunff · 2025</span>
+      </li>
+    </ol>
+    <div class="label reveal al-after">
+      <h2>essays</h2>
     </div>
     <ul class="entries">
       <li class="reveal">
@@ -1412,115 +918,6 @@
 <script>
   (function () {
     "use strict";
-
-    /* ---- the rail: which form you are standing in, how far through the list ---- */
-    (function rail() {
-      var bar = document.getElementById("progBar");
-      var where = document.getElementById("where");
-      var strip = document.getElementById("tabs");
-      var tabs = Array.prototype.slice.call(strip.querySelectorAll("a"));
-      var marks = tabs
-        .map(function (a) {
-          var id = a.getAttribute("href").slice(1);
-          var el = document.getElementById(id);
-          return el
-            ? { a: a, el: el, id: id, name: a.textContent.replace(/^\d+/, "") }
-            : null;
-        })
-        .filter(Boolean);
-      var ticking = false,
-        cur = "";
-      function paint() {
-        ticking = false;
-        var h = document.documentElement;
-        var max = h.scrollHeight - h.clientHeight;
-        var pct = max > 0 ? Math.min(1, Math.max(0, h.scrollTop / max)) : 0;
-        bar.style.width = (pct * 100).toFixed(2) + "%";
-        /* the form you are in = the last heading that has passed under the strip;
-           at the very bottom the last form wins, even if it never reaches the probe */
-        var probe = h.scrollTop + strip.offsetHeight + 40;
-        var active = null;
-        marks.forEach(function (m) {
-          if (m.el.offsetTop <= probe) active = m;
-        });
-        if (max > 0 && h.scrollTop >= max - 2) active = marks[marks.length - 1];
-        var id = active ? active.id : "";
-        if (id === cur) return;
-        cur = id;
-        marks.forEach(function (m) {
-          m.a.classList.toggle("here", m === active);
-        });
-        if (active) {
-          where.textContent = "§ " + active.name;
-          where.classList.add("on");
-          if (active.a.scrollIntoView)
-            active.a.scrollIntoView({ block: "nearest", inline: "nearest" });
-        } else {
-          where.classList.remove("on");
-        }
-      }
-      window.addEventListener(
-        "scroll",
-        function () {
-          if (ticking) return;
-          ticking = true;
-          if (typeof requestAnimationFrame === "function")
-            requestAnimationFrame(paint);
-          else setTimeout(paint, 60);
-        },
-        { passive: true },
-      );
-      paint();
-    })();
-
-    /* ---- film diary: hover a rating bin to find those films, press to hold it ---- */
-    (function diary() {
-      var dist = document.querySelector(".lb-dist");
-      var list = document.getElementById("lbList");
-      var read = document.getElementById("lbRead");
-      if (!dist || !list || !read) return;
-      var bars = Array.prototype.slice.call(dist.querySelectorAll(".lb-bar"));
-      var rows = Array.prototype.slice.call(list.querySelectorAll(".lb-row"));
-      var idle = read.textContent;
-      var held = null;
-      function stars(r) {
-        var n = parseFloat(r);
-        return new Array(Math.floor(n) + 1).join("\u2605") + (n % 1 ? "\u00bd" : "");
-      }
-      function show(r) {
-        if (r === null) {
-          list.classList.remove("filtering");
-          rows.forEach(function (li) { li.classList.remove("off"); });
-          read.textContent = idle;
-          return;
-        }
-        var n = 0;
-        rows.forEach(function (li) {
-          var on = li.getAttribute("data-r") === r;
-          li.classList.toggle("off", !on);
-          if (on) n++;
-        });
-        list.classList.add("filtering");
-        read.textContent = stars(r) + " \u00b7 " + n + (n === 1 ? " film" : " films") +
-          (held === r ? " \u00b7 held, press again to let go" : "");
-      }
-      bars.forEach(function (b) {
-        var r = b.getAttribute("data-r");
-        b.addEventListener("mouseenter", function () { if (!b.disabled) show(r); });
-        b.addEventListener("mouseleave", function () { show(held); });
-        b.addEventListener("focus", function () { if (!b.disabled) show(r); });
-        b.addEventListener("blur", function () { show(held); });
-        b.addEventListener("click", function () {
-          held = held === r ? null : r;
-          bars.forEach(function (x) {
-            x.setAttribute("aria-pressed", String(x.getAttribute("data-r") === held));
-          });
-          show(held === null ? r : held);
-          if (held === null) read.textContent = idle;
-        });
-      });
-    })();
-
     /* ---- reveals ---- */
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(

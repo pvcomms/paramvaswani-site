@@ -1,6 +1,7 @@
 ---
 title: Show the Letterboxd diary in the film section of /taste
-status: shipped
+status: parked
+parked: 2026-10-02 — /taste cut to one label per form; diary and favourites block removed, the four pinned films typed into the films grid by hand, a dots mark links to the profile. user is "" in config, markers removed, diary.json and posters/ deleted.
 created: 2026-09-30
 ---
 
