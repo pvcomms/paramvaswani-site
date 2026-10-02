@@ -223,20 +223,52 @@
     padding: 64px 0 0;
     max-width: 680px;
   }
-  .stmt {
-    padding: 24px 0;
+  .statement .upd {
+    font-style: italic;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--dim);
   }
-  .stmt p {
+  /* dates down the left, the entry on the right */
+  .cv {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 14px 28px;
+    margin-top: 32px;
+  }
+  .statement .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+    margin-top: 40px;
+  }
+  .k + .cv {
+    margin-top: 16px;
+  }
+  .cv + .k {
+    margin-top: 52px;
+  }
+  .cv dt {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    padding-top: 6px;
+  }
+  .cv dd {
     font-size: 17px;
     line-height: 1.6;
   }
-  .stmt p + p {
-    margin-top: 10px;
+  .cv dd b {
+    font-weight: 700;
   }
-  .stmt .upd {
-    font-style: italic;
-    font-size: 15.5px;
-    color: var(--dim);
+  .cv dd p + p {
+    margin-top: 10px;
   }
 
   /* ---------- footer ---------- */
@@ -301,6 +333,16 @@
     }
     .statement {
       padding-top: 48px;
+    }
+    .cv {
+      grid-template-columns: 1fr;
+      gap: 4px 0;
+    }
+    .cv dt {
+      padding-top: 0;
+    }
+    .cv dd + dt {
+      margin-top: 18px;
     }
   }
   @media (max-width: 560px) {
@@ -498,30 +540,32 @@
   </section>
 
   <section class="statement" id="statement">
-    <div class="stmt reveal">
-      <div>
-        <p class="upd">
-          Updated Sep 3, 2026: reading across neurophilosophy, consciousness
-          &amp; decentralized computing.
-        </p>
+    <p class="upd reveal">
+      Updated Sep 3, 2026: reading across neurophilosophy, consciousness
+      &amp; decentralized computing.
+    </p>
+    <h2 class="k reveal">jobs</h2>
+    <dl class="cv reveal">
+      <dt>2025&#8211;2026</dt>
+      <dd>
+        <b>Clodexa.</b> First job out of grad school, a year building agentic
+        products used by teams at Vercel, Figma, and others.
+      </dd>
+      <dt>2024&#8211;2025</dt>
+      <dd><b>EY&#8209;Parthenon.</b> Management consulting.</dd>
+    </dl>
+    <h2 class="k reveal">consultancy</h2>
+    <dl class="cv reveal">
+      <dt>2025&#8211;</dt>
+      <dd>
         <p>
-          2025&#8211;2026: Clodexa. First job out of grad school, a year building
-          agentic products used by teams at Vercel, Figma, and others.
-        </p>
-        <p>2024&#8211;2025: EY&#8209;Parthenon. Management consulting.</p>
-      </div>
-    </div>
-    <div class="stmt reveal">
-      <div>
-        <p>
-          2025&#8211;: Consulting. Privacy&#8209;first AI: local&#8209;only or
-          EU&#8209;only models, weights, and harnesses. Selective, six months
-          minimum, confidential. Last engagement: Government of Denmark, 2026.
-          Ongoing: Mistral.
+          Privacy&#8209;first AI: local&#8209;only or EU&#8209;only models,
+          weights, and harnesses. Selective, six months minimum, confidential.
+          Last engagement: Government of Denmark, 2026. Ongoing: Mistral.
         </p>
         <p>Considering AI safety next.</p>
-      </div>
-    </div>
+      </dd>
+    </dl>
   </section>
 
   <footer>
