@@ -139,8 +139,9 @@ def main():
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
         ("work.html", "dev.html", "Dev — " + TAB,
-         "I research, I develop, I write. Local-only AI specialist. Privacy-first AI "
-         "consulting: selective, six months minimum.", "/dev", ""),
+         "Full stack agentic builder; open weights, local AI product specialist. "
+         "Building agents since mid 2024. Privacy-first AI consulting: selective, "
+         "six months minimum.", "/dev", ""),
         ("principles.html", "principles.html", "Principles — " + TAB,
          "The rules Param actually runs on, in the order they win.", "/principles", ""),
         ("research.html", "research.html", "Research — " + TAB,
