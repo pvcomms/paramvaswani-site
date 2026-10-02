@@ -663,7 +663,7 @@
     }
   }
 
-  /* ---------- the venn cursor: a live membership test ---------- */
+  /* ---------- the venn cursor: a crosshair, and the motto beneath the frame label ---------- */
   .vret line {
     stroke: var(--paper);
     stroke-width: 0.6;
@@ -675,26 +675,18 @@
     stroke-width: 0.9;
     opacity: 0.32;
   }
-  text.vread {
+  text.vmotto {
     font-family: var(--mono);
     font-size: 12px;
+    font-style: italic;
     letter-spacing: 0.06em;
-    fill: var(--faint-t);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-  }
-  text.vread.on {
-    opacity: 1;
-  }
-  text.vread tspan.nm {
     fill: var(--dim);
+    pointer-events: none;
   }
   svg.venn {
     cursor: crosshair;
   }
   @media (hover: none) {
-    text.vread,
     .vret {
       display: none !important;
     }
@@ -1351,13 +1343,13 @@
         me
       </text>
 
-      <!-- the cursor is a membership test. it reads the region you are in. -->
+      <!-- a crosshair follows the cursor. -->
       <g class="vret" id="vRet" style="display: none" aria-hidden="true">
         <line id="vRetV" x1="0" y1="16" x2="0" y2="622" />
         <line id="vRetH" x1="18" y1="0" x2="882" y2="0" />
         <circle id="vRetC" cx="0" cy="0" r="9" />
       </g>
-      <text class="vread" id="vRead" x="48" y="80">cursor ∉ 𝒰</text>
+      <text class="vmotto" x="48" y="80">the map is not the territory</text>
     </svg>
     <div class="vennpanel" id="cap1" aria-live="polite"></div>
   </div>
@@ -1884,70 +1876,20 @@
       });
     }
 
-    /* ----- the venn cursor: membership, computed live -----
-       not a decoration. it runs the same point-in-set test the click
-       handler runs, and prints the region you are actually standing in. */
+    /* ----- the venn cursor: a crosshair that follows the pointer ----- */
     (function vennReticle() {
       if (!svg || hoverNone) return;
       var vRet = document.getElementById("vRet"),
-        vRead = document.getElementById("vRead"),
         vV = document.getElementById("vRetV"),
         vH = document.getElementById("vRetH"),
         vC = document.getElementById("vRetC");
-      if (!vRet || !vRead) return;
-      var OFFREC = { cx: 820, cy: 580, r: 76 };
-      var last = "";
-      function regionAt(x, y) {
-        var inside = sets.filter(function (s) {
-          var dx = x - s.cx,
-            dy = y - s.cy;
-          return dx * dx + dy * dy <= s.r * s.r;
-        });
-        var offdx = x - OFFREC.cx,
-          offdy = y - OFFREC.cy;
-        var off = offdx * offdx + offdy * offdy <= OFFREC.r * OFFREC.r;
-        return { inside: inside, off: off };
-      }
-      function readout(x, y) {
-        var r = regionAt(x, y);
-        if (r.off)
-          return {
-            f: "cursor ∈ ∁",
-            n: "contact, off the record",
-            plain: "offrec",
-          };
-        if (!r.inside.length)
-          return { f: "cursor ∈ 𝒰 ∖ (C ∪ S ∪ P ∪ T ∪ W)", n: "ontology", plain: "u" };
-        var letters = r.inside
-          .map(function (s) {
-            return s.letter;
-          })
-          .sort()
-          .join(" ∩ ");
-        var name = "";
-        if (r.inside.length === 2) {
-          var key = r.inside
-            .map(function (s) {
-              return s.id;
-            })
-            .sort()
-            .join(",");
-          var p = PAIRS[key];
-          if (p) name = p.name;
-        } else if (r.inside.length === 1) {
-          name = r.inside[0].label;
-        } else if (letters === "C ∩ P ∩ S") {
-          name = "where the dot is";
-        }
-        return { f: "cursor ∈ " + letters, n: name, plain: letters };
-      }
+      if (!vRet) return;
       svg.addEventListener("pointermove", function (ev) {
         var box = svg.getBoundingClientRect();
         if (!box.width) return;
         var x = ((ev.clientX - box.left) / box.width) * 900;
         var y = ((ev.clientY - box.top) / box.height) * 640;
         vRet.style.display = "";
-        vRead.classList.add("on");
         vV.setAttribute("x1", x);
         vV.setAttribute("x2", x);
         vH.setAttribute("y1", y);
@@ -1955,25 +1897,9 @@
         vC.setAttribute("cx", x);
         vC.setAttribute("cy", y);
         vennPointer = { x: x, y: y };
-        var o = readout(x, y);
-        if (o.plain === last) return;
-        last = o.plain;
-        vRead.textContent = "";
-        vRead.appendChild(document.createTextNode(o.f));
-        if (o.n) {
-          var t = document.createElementNS(
-            "http://www.w3.org/2000/svg",
-            "tspan",
-          );
-          t.setAttribute("class", "nm");
-          t.textContent = "  ·  " + o.n;
-          vRead.appendChild(t);
-        }
       });
       svg.addEventListener("pointerleave", function () {
         vRet.style.display = "none";
-        vRead.classList.remove("on");
-        last = "";
         vennPointer = null;
       });
     })();
