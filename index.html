@@ -276,9 +276,6 @@
       0 0 40px -12px color-mix(in srgb, var(--c-consume) 45%, transparent),
       0 0 90px -20px color-mix(in srgb, var(--c-consume) 30%, transparent);
   }
-  .hero .figlabel {
-    padding-bottom: 6px;
-  }
   svg.venn {
     display: block;
     width: 100%;
@@ -769,54 +766,9 @@
       transition: none;
     }
   }
-  /* ---------- marginalia: notes in the gutter, the way a notebook has them ---------- */
   .hero,
   #create {
     position: relative;
-  }
-  .marg {
-    display: none;
-  }
-  @media (min-width: 1240px) {
-    .marg {
-      display: block;
-      position: absolute;
-      top: 0;
-      left: -184px;
-      width: 152px;
-      font-family: var(--mono);
-      font-size: 10.5px;
-      line-height: 1.75;
-      color: var(--faint);
-      text-align: right;
-      border-right: 1px solid var(--hair);
-      padding-right: 14px;
-      opacity: 0.001;
-      transform: translateY(8px);
-      transition:
-        opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .marg.seen {
-      opacity: 1;
-      transform: none;
-    }
-    .marg b {
-      color: var(--faint-t);
-      font-weight: 400;
-      display: block;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-size: 9.5px;
-      padding-bottom: 5px;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .marg {
-      transition: none;
-      opacity: 1 !important;
-      transform: none !important;
-    }
   }
 
   /* ---------- theme toggle: sun in the dark, moon in the light ---------- */
@@ -975,12 +927,6 @@
   </div>
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
-    <aside class="marg">
-      <b>note</b>five circles cannot show all thirty-one combinations. the
-      overlaps that aren&#8217;t here are geometry, not claims &#8212; and the
-      circle sizes measure nothing.
-    </aside>
-    <div class="figlabel">fig. 1 · what coexists</div>
     <svg
       class="venn"
       viewBox="0 0 900 640"
@@ -1622,10 +1568,8 @@
       hovOff = false,
       fltSet = null;
     function panelRest() {
-      cap1.innerHTML =
-        '<div class="vp-k">𝒰 · ontology</div>' +
-        '<div class="vp-desc">Five domains; the red dot sits where curriculum, systems and principles meet. Hover to read — click to filter; curriculum, taste, principles and work open their pages on a second click. The frame is the ontology; the dashed set, off the record, is contact.</div>';
-      cap1.style.borderColor = "var(--hair)";
+      cap1.innerHTML = "";
+      cap1.style.borderColor = "transparent";
     }
     function paint() {
       var pairKey = null;
@@ -2089,20 +2033,6 @@
     );
     document.querySelectorAll(".reveal").forEach(function (el) {
       io.observe(el);
-    });
-    var ioM = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add("seen");
-            ioM.unobserve(e.target);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "0px 0px -8% 0px" },
-    );
-    document.querySelectorAll(".marg").forEach(function (el) {
-      ioM.observe(el);
     });
   })();
 </script>
