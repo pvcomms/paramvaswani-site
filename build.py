@@ -102,8 +102,8 @@ LLMS = """# Param Vaswani
 - [Principles](https://paramv.com/principles): the rules he actually runs on, in the order they win.
 - [Research](https://paramv.com/research): what he thinks with — research concepts, influences,
   quotes, aphorisms, neology & etymology.
-- [Downloads](https://paramv.com/downloads): things of his you can run yourself, starting with kan,
-  a small local assistant over your own notes.
+- [Downloads](https://paramv.com/downloads): tools he builds and uses to be more intentional, curate
+  his internet, and remove noise: kan, niwa, kiku, cognitive scaffolding, and more.
 - [Oblique, DIY](https://paramv.com/oblique): write your own oblique strategies from your creative
   values and draw one when stuck; kept in the browser.
 - [Cognitive Scaffolding](https://paramv.com/systems/cognitive-scaffolding): tools for
@@ -146,7 +146,7 @@ def main():
          "What Param thinks with: research concepts, influences, quotes, aphorisms, "
          "neology & etymology.", "/research", ""),
         ("downloads.html", "downloads.html", "Downloads — " + TAB,
-         "Things of Param's you can run yourself: kan, a small local assistant over your own notes.",
+         "Tools Param builds and uses to be more intentional, curate his internet, and remove noise.",
          "/downloads", ""),
         ("oblique.html", "oblique.html", "Oblique, DIY — " + TAB,
          "Your own oblique strategies, from your creative values: one line per card, drawn at random, kept in your browser.",
