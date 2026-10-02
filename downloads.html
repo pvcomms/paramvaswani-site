@@ -220,6 +220,9 @@
     font-size: 17px;
     line-height: 1.6;
   }
+  .head .more {
+    margin-top: 64px;
+  }
   .head .pic {
     display: block;
     margin-top: 14px;
@@ -586,6 +589,72 @@
       <img src="/pictures/privacy-stack.png" width="1200" height="1497" loading="lazy"
         alt="my no big-tech privacy first tech stack. search: SearXNG, self-hosted, Kagi on the side. mail: Proton Mail on my own domain. files: Proton Drive, restic backups. browser: Mullvad Browser. passwords: KeePassXC. notes: Obsidian, plain markdown, local git. newsletters: yomu, my own reader. AI: kan, on my own machine. DNS: Quad9 over dnscrypt-proxy. VPN: Proton VPN. firewall: LuLu. devices: Tailscale. editor: VSCodium. containers: Colima. creative: GIMP, Inkscape, OBS, VLC. social: Mastodon and Bluesky. reading: shosai, my own study. still choosing: music, video, messages." />
     </a>
+
+    <p class="lede more">
+      and some other things i&#8217;ve built. different problems, one habit:
+      say what it does, measure it, write down what i got wrong.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/mcp-red-team">mcp-red-team</a>: a
+      security scanner for MCP servers. ten checks: prompt injection hidden in
+      a tool&#8217;s own description, command injection and path traversal
+      confirmed by canary, typosquat pairs, read-then-send exfiltration
+      chains. its own three false negatives were found by auditing the
+      scanner, not by scanning anything.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/mcp-fleet">mcp-fleet</a>: four MCP
+      servers i use daily, for a wearable, a hosting platform, a registrar and
+      my editor&#8217;s own hooks. 47 tools, written in a week with no house
+      style, and they converged on the same three patterns anyway: one
+      token refresh at a time, dry-run by default on anything irreversible,
+      and one composite tool that returns ranked next actions.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/cmchp">cmchp</a>: a wire format for
+      handing an agent&#8217;s state from one model to another, and the
+      retraction of its original benchmark, which scored 100% by construction.
+      the proof is a test, not prose.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/bonp">bonp</a>: a signed-envelope
+      protocol for biometric claims, so a market settling on a recovery score
+      can verify where the number came from. v1.1 fixes a canonicalisation
+      defect that made every v1.0 signature forgeable; the defect stays pinned
+      in the test suite.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/biometric-json-eval">biometric-json-eval</a>:
+      can a frontier model read wearable data well enough to move real money?
+      29 cases, five models. the KPI is dangerous-error rate, not accuracy;
+      one prompt rewrite raised both at once.
+    </p>
+    <p class="upd">
+      <a href="https://github.com/pvcomms/yt-tldr-eval">yt-tldr-eval</a>: four
+      models summarise 40 youtube videos, one grades them. after paired tests
+      the leaderboard mostly evaporates: it separates the cheapest model from
+      the dearest and says nothing else about rank. all four invent things.
+    </p>
+    <p class="upd">
+      <a href="https://www.npmjs.com/package/@paramxclaudedev/claude-code-hooks-mcp">claude-code-hooks-mcp</a>:
+      an MCP server that lets claude code read its own hooks. the model
+      inspecting the rules it runs under. read-only by design.
+    </p>
+    <p class="upd">
+      koe: a fully local two-host podcast. a markdown file or a topic goes in,
+      an mp3 of two voices talking it through comes out. no cloud, no keys,
+      nothing bound to a port.
+    </p>
+    <p class="upd">
+      keep: commitment markets where your body is the oracle. stake money on
+      &#8220;recovery 70 or higher, five days this week&#8221;; your wearable
+      settles it, not your word, and a miss goes to charity.
+    </p>
+    <p class="upd">
+      life-os: eight scheduled agents running my day. a red recovery score at
+      06:30 reschedules deep work; a green one blocks focus time; a brief at
+      07:30 with the top three things that matter.
+    </p>
   </section>
 
   <footer>
