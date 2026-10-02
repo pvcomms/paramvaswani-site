@@ -1,20 +1,8 @@
 <title>Learning Curriculum</title>
 <!--
-  paramv.com/curriculum — the current personal learning curriculum.
+  paramv.com/curriculum — what i am learning, in a line.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until the syllabus is written in by hand.
-
-  to add a line, drop one <li> into <ol class="syllabus">:
-
-    <li class="reveal">
-      <span class="t">What is being learned</span>
-      <span class="dek">why now, and what it is in service of</span>
-      <span class="when">status · source</span>
-    </li>
-
-  then delete the <p class="blank"> line beneath the list.
--->
-<style>
+--><style>
   /* courier prime — one family for everything; self-hosted, latin subset */
   @font-face {
     font-family: "Courier Prime";
@@ -239,98 +227,6 @@
     outline-offset: 3px;
   }
 
-  /* ---------- the syllabus ---------- */
-  .body {
-    padding: 72px 0 0;
-  }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 12px;
-    margin-bottom: 8px;
-  }
-  .sec-head .tick {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    align-self: center;
-  }
-  .sec-head h2 {
-    font-size: 26px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-  .syllabus {
-    list-style: none;
-    counter-reset: line;
-  }
-  .syllabus li {
-    display: flex;
-    align-items: baseline;
-    gap: 6px 18px;
-    flex-wrap: wrap;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--hair);
-    counter-increment: line;
-  }
-  .syllabus li::before {
-    content: counter(line, decimal-leading-zero);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .syllabus .t {
-    font-size: 17px;
-    font-weight: 400;
-  }
-  .syllabus .t a {
-    border-bottom: 1px solid var(--hair-2);
-    transition:
-      color 0.18s ease,
-      border-color 0.18s ease;
-  }
-  .syllabus .t a:hover {
-    color: var(--accent);
-    border-color: currentColor;
-  }
-  .syllabus .t a:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
-  }
-  .syllabus .dek {
-    color: var(--dim);
-    font-size: 15.5px;
-  }
-  .syllabus .when {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--faint-t);
-    margin-left: auto;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .blank {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--faint-t);
-    padding: 22px 0 26px;
-    border-bottom: 1px dashed var(--hair);
-  }
-  .blank b {
-    font-weight: 400;
-    font-size: 15px;
-    color: var(--faint);
-  }
-
   /* ---------- footer ---------- */
   footer {
     margin-top: 120px;
@@ -387,12 +283,6 @@
     }
     .head {
       padding-top: 56px;
-    }
-    .body {
-      padding-top: 56px;
-    }
-    .syllabus .when {
-      display: none;
     }
   }
   @media (max-width: 560px) {
@@ -567,47 +457,14 @@
     <p class="lede">i love learning. i&#8217;m endlessly curious.</p>
     <p class="upd">
       Update 2026:
-      <a href="https://continuingstudies.stanford.edu/courses/liberal-arts-and-sciences/the-meaning-of-life-kierkegaard-nietzsche-and-more/20261_PHI-91">The Meaning of Life: Kierkegaard, Nietzsche, and More</a>
+      The Meaning of Life: Kierkegaard, Nietzsche, and More
       and
-      <a href="https://online.stanford.edu/courses/soe-xetech0001-ethics-technology-public-policy-practitioners">Ethics, Technology + Public Policy for Practitioners</a>,
+      Ethics, Technology + Public Policy for Practitioners,
       both at Stanford. Took a PyTorch for AI alignment course. A short
       strategy course on campus at the Indian Institute of Management
       Ahmedabad in 2025. Undergrad in psychology, master&#8217;s in strategy.
       Currently learning German.
     </p>
-  </section>
-
-  <section class="body" id="own">
-    <div class="sec-head reveal">
-      <span class="tick" aria-hidden="true"></span>
-      <h2>own curriculum</h2>
-    </div>
-    <ol class="syllabus">
-      <li class="reveal">
-        <span class="t">Formal Logic</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Propositional Logic</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Bayesian Reasoning</span>
-      </li>
-      <li class="reveal">
-        <span class="t">German</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Statistics</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Philosophy of Mind</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Python</span>
-      </li>
-      <li class="reveal">
-        <span class="t">ML &amp; PyTorch</span>
-      </li>
-    </ol>
   </section>
 
   <footer>
