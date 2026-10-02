@@ -255,49 +255,6 @@
     margin-top: 14px;
     color: var(--dim);
   }
-  .decks {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 22px;
-    margin-top: 26px;
-  }
-  .decks button {
-    position: relative;
-    background: none;
-    border: 0;
-    padding: 0;
-    font: inherit;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--dim);
-    cursor: pointer;
-    transition: color 0.18s ease;
-  }
-  .decks button span {
-    color: var(--faint-t);
-    margin-left: 6px;
-    font-size: 11.5px;
-  }
-  .decks button::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -3px;
-    height: 1px;
-    width: 100%;
-    background: currentColor;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .decks button:hover,
-  .decks button[aria-pressed="true"] {
-    color: var(--paper);
-  }
-  .decks button[aria-pressed="true"]::before {
-    transform: scaleX(1);
-  }
-  .decks button:focus-visible,
   .study button:focus-visible,
   .study .card:focus-visible {
     outline: 1px solid var(--c-cohere);
@@ -514,8 +471,7 @@
       transition: none;
     }
     .prog i,
-    nav.site a::before,
-    .decks button::before {
+    nav.site a::before {
       transition: none;
     }
     .study .in {
@@ -746,12 +702,10 @@
   <section class="anki reveal" id="anki" aria-labelledby="anki-h">
     <h2 id="anki-h">my anki</h2>
     <p class="about">
-      the flashcards i&#8217;m learning from, copied out of my anki. pick a deck
-      and go through them. what you get right is kept in this browser, not sent
-      anywhere.
+      Anki flashcards of what im learning rn; i do a 10min review every morn
+      to ensure reps
     </p>
     <noscript><p class="about">this part needs javascript.</p></noscript>
-    <div class="decks" id="ak-decks" aria-label="decks"></div>
     <div class="study" id="ak-study" hidden>
       <div class="bar">
         <span id="ak-kind"></span><span id="ak-left" aria-live="polite"></span>
@@ -849,8 +803,7 @@
   (function () {
     "use strict";
     var src = document.getElementById("anki-data");
-    var box = document.getElementById("ak-decks");
-    if (!src || !box) return;
+    if (!src) return;
     var data;
     try { data = JSON.parse(src.textContent); } catch (e) { return; }
     var cards = data.cards || [];
@@ -865,36 +818,14 @@
     try { got = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
     function keep() { try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} }
 
-    var decks = {}, names = [];
+    var decks = {};
     cards.forEach(function (c) {
-      if (!decks[c.deck]) { decks[c.deck] = []; names.push(c.deck); }
+      if (!decks[c.deck]) decks[c.deck] = [];
       decks[c.deck].push(c);
     });
     decks[ALL] = cards;
-    names.unshift(ALL);
 
     function label(d) { return d.toLowerCase().split("::").join(" · "); }
-    function left(d) { return decks[d].filter(function (c) { return !got[c.id]; }).length; }
-
-    var buttons = {};
-    names.forEach(function (d) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.setAttribute("aria-pressed", "false");
-      b.addEventListener("click", function () { start(d, true); });
-      buttons[d] = b;
-      box.appendChild(b);
-    });
-    function paintDecks() {
-      names.forEach(function (d) {
-        var n = left(d), b = buttons[d];
-        b.textContent = label(d);
-        var s = document.createElement("span");
-        s.textContent = n ? String(n) : "done";
-        b.appendChild(s);
-        b.setAttribute("aria-pressed", d === deck ? "true" : "false");
-      });
-    }
 
     var deck = null, queue = [], cur = null, seen = 0, missed = {};
 
@@ -924,7 +855,6 @@
       queue = shuffle(decks[d].filter(function (c) { return !got[c.id]; }));
       seen = 0; missed = {};
       study.hidden = false;
-      paintDecks();
       next(moved);
     }
 
@@ -977,7 +907,6 @@
         missed[cur.id] = 1;
         queue.splice(Math.min(3, queue.length), 0, cur);
       }
-      paintDecks();
       next(moved);
     }
 
@@ -1004,14 +933,6 @@
       else if (e.key === "2" && !rate.hidden) { answer(true, false); }
     });
 
-    if (data.synced) {
-      var d = new Date(data.synced + "T12:00:00");
-      var s = document.createElement("span");
-      s.textContent = " last copied " + d.getDate() + " " +
-        ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"][d.getMonth()] +
-        " " + d.getFullYear() + ".";
-      document.querySelector(".anki .about").appendChild(s);
-    }
     start(ALL, false);
   })();
 </script>
