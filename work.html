@@ -239,6 +239,41 @@
     color: var(--accent);
   }
 
+  /* ---------- statement: then / now / how i work ---------- */
+  .statement {
+    padding: 64px 0 0;
+    max-width: 680px;
+  }
+  .stmt {
+    display: grid;
+    grid-template-columns: 110px minmax(0, 1fr);
+    gap: 10px 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--hair);
+  }
+  .stmt .k {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.16em;
+    text-transform: lowercase;
+    color: var(--dim);
+    padding-top: 7px;
+  }
+  .stmt p {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .stmt p + p {
+    margin-top: 10px;
+  }
+  .stmt.rules p + p {
+    margin-top: 6px;
+  }
+  .stmt .q {
+    color: var(--dim);
+  }
+
   /* ---------- the work ---------- */
   .body {
     padding: 72px 0 0;
@@ -298,7 +333,9 @@
   }
   .lines .t a {
     border-bottom: 1px solid var(--hair-2);
-    transition: color 0.2s ease, border-color 0.2s ease;
+    transition:
+      color 0.2s ease,
+      border-color 0.2s ease;
   }
   .lines .t a:hover {
     color: var(--accent);
@@ -400,6 +437,16 @@
     .body {
       padding-top: 56px;
     }
+    .statement {
+      padding-top: 48px;
+    }
+    .stmt {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .stmt .k {
+      padding-top: 0;
+    }
     .sec-head .notation {
       display: none;
     }
@@ -429,7 +476,9 @@
 </style>
 <style>
   /* gate — a proof-of-work runs before the page opens. no js → no gate; solved once per tab session. */
-  html.gated { overflow: hidden; }
+  html.gated {
+    overflow: hidden;
+  }
   .gate {
     display: none;
     position: fixed;
@@ -439,8 +488,15 @@
     padding: 24px;
     transition: opacity 0.45s ease;
   }
-  html.gated .gate, .gate.out { display: grid; place-items: center; }
-  .gate.out { opacity: 0; pointer-events: none; }
+  html.gated .gate,
+  .gate.out {
+    display: grid;
+    place-items: center;
+  }
+  .gate.out {
+    opacity: 0;
+    pointer-events: none;
+  }
   .gate-inner {
     display: grid;
     gap: 16px;
@@ -451,7 +507,10 @@
     line-height: 1.7;
     color: var(--dim, #96917f);
   }
-  .gate-kicker { color: var(--paper, #e9e6de); letter-spacing: 0.04em; }
+  .gate-kicker {
+    color: var(--paper, #e9e6de);
+    letter-spacing: 0.04em;
+  }
   .gate altcha-widget {
     font-family: inherit;
     font-size: inherit;
@@ -474,7 +533,10 @@
   }
 </style>
 <script>
-  try { if (!sessionStorage.getItem("pv-gate")) document.documentElement.classList.add("gated"); } catch (e) {}
+  try {
+    if (!sessionStorage.getItem("pv-gate"))
+      document.documentElement.classList.add("gated");
+  } catch (e) {}
 </script>
 <div class="gate" id="gate" aria-live="polite">
   <div class="gate-inner">
@@ -485,7 +547,11 @@
       challenge='{"parameters":{"algorithm":"PBKDF2/SHA-256","cost":5000,"keyLength":32,"keyPrefix":"00","nonce":"4917e0651977f74f5238e1fabe6b2565","salt":"1f49403409e53e4caabd27bc373a2d17"}}'
       configuration='{"hideLogo":true,"hideFooter":true,"minDuration":700}'
     ></altcha-widget>
-    <span>a small computation runs in your browser before the page opens. nothing to click, nothing sent anywhere; scrapers pay for the page in cpu instead.</span>
+    <span
+      >a small computation runs in your browser before the page opens. nothing
+      to click, nothing sent anywhere; scrapers pay for the page in cpu
+      instead.</span
+    >
   </div>
 </div>
 
@@ -506,19 +572,78 @@
   <section class="head">
     <div class="figlabel">page · work</div>
     <h1>Work</h1>
-    <p class="figdek">learning by building, writing, labbing on self + curate my attention inputs + systemise my time spent + structure my overthinking.</p>
+    <p class="figdek">
+      developer, designer, writer. nlp and affect research. privacy&#8209;first
+      systems.
+    </p>
+    <div class="meta">
+      <span><b>base</b>remote · fully nomadic</span>
+      <span><b>passport</b>us citizen</span>
+    </div>
+  </section>
+
+  <section class="statement" id="statement">
+    <div class="stmt reveal">
+      <h2 class="k">then</h2>
+      <div>
+        <p>
+          First job out of grad school: a year building agentic products at
+          Clodexa, used by teams at Vercel, Figma, and others. Then
+          neurophilosophy and decentralized computing.
+        </p>
+      </div>
+    </div>
+    <div class="stmt reveal">
+      <h2 class="k">now</h2>
+      <div>
+        <p>An affect&#8209;first dataset on Gen&nbsp;Z.</p>
+        <p>
+          Ostensible: I design, build, and visualize interactive models of the
+          incentive structures that run modern life.
+        </p>
+        <p>
+          Privacy&#8209;first AI consulting. Models, weights, and harnesses that
+          run locally or stay in the EU. Confidential.
+        </p>
+        <p>Considering AI safety next.</p>
+      </div>
+    </div>
+    <div class="stmt rules reveal">
+      <h2 class="k">how i work</h2>
+      <div>
+        <p>Selective consulting, six months minimum.</p>
+        <p>Not everything should be for everyone.</p>
+        <p>Scale is not a good measure.</p>
+        <p>Minimal and utilitarian.</p>
+        <p>
+          Aligned with my principles or not at all.
+          <span class="q"
+            >Less surveillance. Less quantification of people. A
+            privacy&#8209;first, decentralized internet.</span
+          >
+        </p>
+      </div>
+    </div>
   </section>
 
   <section class="body" id="lines">
     <div class="sec-head reveal">
       <span class="tick" aria-hidden="true"></span>
       <h2>the work</h2>
-      <span class="notation">work = cohort study ∪ niwa ∪ kiku ∪ lab of self ∪ no slop ∪ kan ∪ capp ∪ ostensible ∪ attentional environments ∪ cognitive scaffolding</span>
+      <span class="notation"
+        >work = cohort study ∪ niwa ∪ kiku ∪ lab of self ∪ no slop ∪ kan ∪ capp
+        ∪ ostensible ∪ attentional environments ∪ cognitive scaffolding</span
+      >
     </div>
     <ol class="lines">
       <li class="reveal">
         <span class="t">Cohort Study</span>
-        <span class="dek">a live, dynamic dataset of affect anecdata and subjective well&#8209;being: tracking how &#8220;feels&#8221; and &#8220;vibes&#8221; get augmented and hijacked, <em>and</em> how they mediate gen&nbsp;z decision&#8209;making.</span>
+        <span class="dek"
+          >a live, dynamic dataset of affect anecdata and subjective
+          well&#8209;being: tracking how &#8220;feels&#8221; and
+          &#8220;vibes&#8221; get augmented and hijacked, <em>and</em> how they
+          mediate gen&nbsp;z decision&#8209;making.</span
+        >
         <span class="when">2026 · live</span>
       </li>
       <li class="reveal">
@@ -534,29 +659,55 @@
       </li>
       <li class="reveal">
         <span class="t">Eat no SLOP &amp; Cook no SLOP</span>
-        <span class="dek">a 1&#8209;click browser extension to detect and block ai&#8209;generated content + text.</span>
+        <span class="dek"
+          >a 1&#8209;click browser extension to detect and block
+          ai&#8209;generated content + text.</span
+        >
         <span class="when">2026 · v0.1</span>
       </li>
       <li class="reveal">
-        <span class="t"><a href="https://github.com/pvcomms/kan-eu">Kan</a></span>
-        <span class="dek">a small assistant that runs on your own computer and answers from your own notes, on eu&#8209;made model weights only. free to download.</span>
+        <span class="t"
+          ><a href="https://github.com/pvcomms/kan-eu">Kan</a></span
+        >
+        <span class="dek"
+          >a small assistant that runs on your own computer and answers from
+          your own notes, on eu&#8209;made model weights only. free to
+          download.</span
+        >
         <span class="when">2026 · v0.1</span>
       </li>
       <li class="reveal">
-        <span class="t"><a href="https://postphenom.com">Center for Applied Post&#8209;Phenomenology</a></span>
+        <span class="t"
+          ><a href="https://postphenom.com"
+            >Center for Applied Post&#8209;Phenomenology</a
+          ></span
+        >
         <span class="dek">co&#8209;founder.</span>
       </li>
       <li class="reveal">
         <span class="t">Ostensible</span>
-        <span class="dek">founder. dissecting modern society through power, incentives, etc.</span>
+        <span class="dek"
+          >founder. dissecting modern society through power, incentives,
+          etc.</span
+        >
       </li>
       <li class="reveal">
         <span class="t">Attentional Environment Engineer</span>
-        <span class="dek">specialized in curating digital &amp; environment for neurodivergent folks.</span>
+        <span class="dek"
+          >specialized in curating digital &amp; environment for neurodivergent
+          folks.</span
+        >
       </li>
       <li class="reveal">
-        <span class="t"><a href="/systems/cognitive-scaffolding">Cognitive Scaffolding</a></span>
-        <span class="dek">tools for structured overthinking, so the thinking ends in something done.</span>
+        <span class="t"
+          ><a href="/systems/cognitive-scaffolding"
+            >Cognitive Scaffolding</a
+          ></span
+        >
+        <span class="dek"
+          >tools for structured overthinking, so the thinking ends in something
+          done.</span
+        >
         <span class="when">2026</span>
       </li>
     </ol>
@@ -631,20 +782,31 @@
 <script>
   /* gate: open on verified; fail open on error or after 8s so a broken widget never locks a reader out */
   (function () {
-    var root = document.documentElement, gate = document.getElementById("gate");
+    var root = document.documentElement,
+      gate = document.getElementById("gate");
     if (!gate) return;
-    if (!root.classList.contains("gated")) { gate.remove(); return; }
+    if (!root.classList.contains("gated")) {
+      gate.remove();
+      return;
+    }
     var opened = false;
     function open() {
-      if (opened) return; opened = true;
-      try { sessionStorage.setItem("pv-gate", "1"); } catch (e) {}
+      if (opened) return;
+      opened = true;
+      try {
+        sessionStorage.setItem("pv-gate", "1");
+      } catch (e) {}
       gate.classList.add("out");
       root.classList.remove("gated");
-      setTimeout(function () { gate.remove(); }, 500);
+      setTimeout(function () {
+        gate.remove();
+      }, 500);
     }
     var w = document.getElementById("gate-altcha");
     w.addEventListener("verified", open);
-    w.addEventListener("statechange", function (ev) { if (ev.detail && ev.detail.state === "error") open(); });
+    w.addEventListener("statechange", function (ev) {
+      if (ev.detail && ev.detail.state === "error") open();
+    });
     setTimeout(open, 8000);
   })();
 </script>

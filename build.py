@@ -139,8 +139,8 @@ def main():
          "Post-Phenomenology, independent researcher at Cohort Study, founder of Ostensible; "
          "ex AI-agent builder and management consultant.", "/about", ""),
         ("work.html", "work.html", "Work — " + TAB,
-         "Learning by building, writing, labbing on self + curate my attention inputs + "
-         "systemise my time spent + structure my overthinking.", "/work", ""),
+         "Developer, designer, writer. NLP and affect research, privacy-first systems. "
+         "Selective consulting, six months minimum.", "/work", ""),
         ("principles.html", "principles.html", "Principles — " + TAB,
          "The rules Param actually runs on, in the order they win, and the research they are "
          "cut from: concepts, influences, quotes, aphorisms, neology & etymology.", "/principles", ""),
