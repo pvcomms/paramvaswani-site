@@ -277,6 +277,7 @@
       0 0 90px -20px color-mix(in srgb, var(--c-consume) 30%, transparent);
   }
   .hero .figmotto {
+    padding-left: 2%; /* in line with the dotted frame: x=18 of 900 */
     font-size: 12px;
     font-style: italic;
     letter-spacing: 0.06em;
@@ -381,40 +382,6 @@
     font-size: 11px;
     letter-spacing: 0.12em;
     transition: opacity 0.25s ease;
-  }
-  .vennpanel {
-    max-width: 680px;
-    margin: 16px auto 0;
-    min-height: 96px;
-    padding-left: 16px;
-    border-left: 2px solid var(--hair);
-    transition: border-color 0.22s ease;
-  }
-  .vennpanel .vp-k {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--dim);
-  }
-  .vennpanel .vp-k .vp-hint {
-    color: var(--faint-t);
-    text-transform: none;
-    letter-spacing: 0.08em;
-  }
-  .vennpanel .vp-name {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 400;
-    color: var(--paper);
-    margin-top: 4px;
-  }
-  .vennpanel .vp-desc {
-    font-size: 14.5px;
-    line-height: 1.68;
-    color: var(--dim);
-    max-width: 540px;
-    margin-top: 4px;
   }
   @keyframes breathe {
     0%,
@@ -921,7 +888,7 @@
       class="venn"
       viewBox="0 0 900 640"
       role="group"
-      aria-label="A Venn diagram of the site. Five domains — curriculum, systems, principles, taste, work — inside the universal set. Curriculum, taste, principles and work have pages. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
+      aria-label="A Venn diagram of the site. Five domains — curriculum, systems, principles, taste, work — inside the universal set. Curriculum, taste, principles and work have pages. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Click a set to filter it; click again to open its page."
     >
       <defs>
         <clipPath id="uclip">
@@ -1286,7 +1253,6 @@
         <circle id="vRetC" cx="0" cy="0" r="9" />
       </g>
     </svg>
-    <div class="vennpanel" id="cap1" aria-live="polite"></div>
   </div>
 </div>
 
@@ -1410,7 +1376,6 @@
 
     /* ================= FIG 1 · VENN ================= */
     var svg = document.querySelector("svg.venn");
-    var cap1 = document.getElementById("cap1");
     var vennPointer = null; // live cursor, in the 900×640 venn space — the dust motes feel it
     var sets = [
       {
@@ -1468,16 +1433,6 @@
       },
     ];
     var offrec = { cx: 820, cy: 580, r: 76 };
-    var SET_COPY = {
-      mindbody:
-        "What I’m teaching myself right now. Two Stanford courses this fall — Kierkegaard and the meaning of life; ethics, technology and public policy — and a syllabus of my own: formal and propositional logic, Bayesian reasoning, German, statistics, philosophy of mind.",
-      tech: "The running things: cognitive scaffolding, an AI policy, how I work. Mapping my territory, so I know the brain I have, so I can get to the brain I’d like.",
-      philosophy: "The rules I actually run on, in the order they win.",
-      society:
-        "What I rate, by form: film, live performance, tv, music, books. Kept by hand.",
-      creation:
-        "What I’ve made, and what it was for: Cohort Study, a live dataset of how feels and vibes steer Gen Z decisions; Niwa; Kiku; the lab of self.",
-    };
     var PAIRS = {
       "mindbody,tech": {
         name: "cognitive scaffolding",
@@ -1540,11 +1495,6 @@
         );
       })[0];
     }
-    function byId(id) {
-      return sets.filter(function (x) {
-        return x.id === id;
-      })[0];
-    }
 
     var lensGs = Array.prototype.slice.call(
       document.querySelectorAll("svg.venn g.lens"),
@@ -1555,10 +1505,6 @@
     var hovSets = [],
       hovOff = false,
       fltSet = null;
-    function panelRest() {
-      cap1.innerHTML = "";
-      cap1.style.borderColor = "transparent";
-    }
     function paint() {
       var pairKey = null;
       if (hovSets.length === 2) {
@@ -1620,83 +1566,7 @@
         else op = 0.6;
         g.style.opacity = op;
       });
-
-      if (hovOff) {
-        cap1.innerHTML =
-          '<div class="vp-k">∁ · contact</div><div class="vp-name">off the record. click to reach me.</div>';
-        cap1.style.borderColor = "var(--faint)";
-      } else if (hovSets.length >= 3) {
-        var ids = hovSets.map(function (x) {
-          return x.id;
-        });
-        var isMe =
-          ids.indexOf("mindbody") !== -1 &&
-          ids.indexOf("tech") !== -1 &&
-          ids.indexOf("philosophy") !== -1 &&
-          hovSets.length === 3;
-        if (isMe) {
-          cap1.innerHTML =
-            '<div class="vp-k">C ∩ S ∩ P</div>' +
-            '<div class="vp-name">me</div>' +
-            '<div class="vp-desc">the one point in all three drawn. the rest is off the frame.</div>';
-          cap1.style.borderColor = "var(--c-me)";
-        } else {
-          cap1.innerHTML =
-            '<div class="vp-k">' +
-            hovSets
-              .map(function (x) {
-                return x.letter;
-              })
-              .sort()
-              .join(" ∩ ") +
-            "</div>" +
-            '<div class="vp-desc">rare air — the named regions are one set over.</div>';
-          cap1.style.borderColor = "var(--hair)";
-        }
-      } else if (pairKey) {
-        var pr = PAIRS[pairKey];
-        var names = pairKey
-          .split(",")
-          .map(function (id) {
-            return byId(id).label;
-          })
-          .join(" · ");
-        cap1.innerHTML =
-          '<div class="vp-k">' +
-          pr.form +
-          '&#160;&#160;<span class="vp-hint">' +
-          names +
-          "</span></div>" +
-          '<div class="vp-name">' +
-          pr.name +
-          "</div>" +
-          '<div class="vp-desc">' +
-          pr.line +
-          "</div>";
-        cap1.style.borderColor = "var(--faint)";
-      } else if (effId) {
-        var c2 = byId(effId);
-        var hint =
-          fltSet === effId
-            ? (c2.destName ? "click again → " + c2.destName + " · " : "") + "esc to clear"
-            : "click to filter";
-        cap1.innerHTML =
-          '<div class="vp-k" style="color:' +
-          c2.color +
-          '">' +
-          c2.label +
-          '&#160;<span class="vp-hint">· ' +
-          hint +
-          "</span></div>" +
-          '<div class="vp-desc">' +
-          SET_COPY[effId] +
-          "</div>";
-        cap1.style.borderColor = c2.color;
-      } else {
-        panelRest();
-      }
     }
-    panelRest();
     paint();
 
     svg.addEventListener("mousemove", function (evt) {
