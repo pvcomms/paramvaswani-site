@@ -255,7 +255,7 @@
   }
   .study .bar {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 16px;
     font-size: 11.5px;
     letter-spacing: 0.08em;
@@ -694,7 +694,7 @@
     <noscript><p class="about">this part needs javascript.</p></noscript>
     <div class="study" id="ak-study" hidden>
       <div class="bar">
-        <span id="ak-kind"></span><span id="ak-left" aria-live="polite"></span>
+        <span id="ak-left" aria-live="polite"></span>
       </div>
       <div class="card" id="ak-card" tabindex="-1">
         <div class="q" id="ak-q"></div>
@@ -811,8 +811,6 @@
     });
     decks[ALL] = cards;
 
-    function label(d) { return d.toLowerCase().split("::").join(" · "); }
-
     var deck = null, queue = [], cur = null, seen = 0, missed = {};
 
     function shuffle(xs) {
@@ -850,7 +848,6 @@
       var n = queue.length;
       $("ak-left").textContent = n ? n + " to go" : "";
       if (!cur) {
-        $("ak-kind").textContent = label(deck);
         var misses = Object.keys(missed).length;
         q.innerHTML = seen
           ? "that&#8217;s the deck. " + seen + (seen === 1 ? " card, " : " cards, ") +
@@ -862,8 +859,6 @@
         focus($("ak-redo"), moved);
         return;
       }
-      $("ak-kind").textContent = (deck === ALL ? label(cur.deck) + " · " : "") +
-        (cur.kind === "cloze" ? "fill the gap" : cur.kind || "card");
       q.className = "q";
       q.innerHTML = cur.front;
       anim(q);
