@@ -98,7 +98,6 @@ LLMS = """# Param Vaswani
   contact as the dashed set off the record.
 - [Taste](https://paramv.com/taste): what shaped him, by form — films, shows, albums, poetry, books, essays.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
-- [About](https://paramv.com/about): what he does now, what he did before, his credentials.
 - [Work](https://paramv.com/work): then, now, and the terms he consults on.
 - [Principles](https://paramv.com/principles): the rules he actually runs on, in the order they win,
   and the research they are cut from: concepts, influences, quotes, aphorisms, neology & etymology.
@@ -133,10 +132,6 @@ def main():
         ("curriculum.html", "curriculum.html", "Learning Curriculum — " + TAB,
          "The current personal learning curriculum: what is being learned, in what order, "
          "and in service of what.", "/curriculum", ""),
-        ("about.html", "about.html", "About — " + TAB,
-         "Independent creative technologist-researcher. Co-founder of the Center for Applied "
-         "Post-Phenomenology, independent researcher at Cohort Study, founder of Ostensible; "
-         "ex AI-agent builder and management consultant.", "/about", ""),
         ("work.html", "work.html", "Work — " + TAB,
          "I research, I develop, I write. Local-only AI specialist. Privacy-first AI "
          "consulting: selective, six months minimum.", "/work", ""),
@@ -170,7 +165,7 @@ def main():
     (PUB / "robots.txt").write_text(ROBOTS, encoding="utf-8")
     (PUB / "llms.txt").write_text(LLMS, encoding="utf-8")
     (PUB / "sitemap.xml").write_text(sitemap(["/", "/taste", "/curriculum",
-                                    "/about", "/work", "/principles",
+                                    "/work", "/principles",
                                     "/systems/cognitive-scaffolding"]), encoding="utf-8")
     print(f"  fonts/ vendor/ albums/ films/ telly/ books/ letterboxd/posters/ favicon.svg robots.txt llms.txt sitemap.xml -> public/")
 
