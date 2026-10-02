@@ -1,18 +1,7 @@
 <title>Work</title>
 <!--
-  paramv.com/work — the work — what was made and what it was for.
+  paramv.com/work — then, now, and the terms.
   artifact fragment: <title> first, no doctype/html/head/body (build.py wraps it).
-  empty on purpose until it is written in by hand.
-
-  to add a line, drop one <li> into <ol class="lines">:
-
-    <li class="reveal">
-      <span class="t">Title</span>
-      <span class="dek">one line on why it is here</span>
-      <span class="when">year · status</span>
-    </li>
-
-  then delete the <p class="blank"> line beneath the list.
 -->
 <style>
   @font-face {
@@ -260,99 +249,6 @@
     margin-top: 10px;
   }
 
-  /* ---------- the work ---------- */
-  .body {
-    padding: 72px 0 0;
-  }
-  .sec-head {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    border-bottom: 1px solid var(--hair);
-    padding-bottom: 12px;
-    margin-bottom: 8px;
-  }
-  .sec-head .tick {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid var(--accent);
-    align-self: center;
-  }
-  .sec-head h2 {
-    white-space: nowrap;
-    font-size: 26px;
-    font-weight: 400;
-    letter-spacing: -0.01em;
-  }
-  .lines {
-    list-style: none;
-    counter-reset: line;
-  }
-  .lines li {
-    display: flex;
-    align-items: baseline;
-    gap: 6px 18px;
-    flex-wrap: wrap;
-    padding: 14px 0;
-    border-bottom: 1px solid var(--hair);
-    counter-increment: line;
-  }
-  .lines li::before {
-    content: counter(line, decimal-leading-zero);
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--accent);
-    font-variant-numeric: tabular-nums;
-  }
-  .lines .t {
-    font-size: 17px;
-    font-weight: 400;
-  }
-  .lines .t a {
-    border-bottom: 1px solid var(--hair-2);
-    transition:
-      color 0.2s ease,
-      border-color 0.2s ease;
-  }
-  .lines .t a:hover {
-    color: var(--accent);
-    border-bottom-color: var(--accent);
-  }
-  .lines .t a:focus-visible {
-    outline: 1px solid var(--c-cohere);
-    outline-offset: 3px;
-  }
-  .lines .dek {
-    color: var(--dim);
-    font-size: 15.5px;
-  }
-  .lines .when {
-    font-family: var(--mono);
-    font-size: 11.5px;
-    color: var(--faint-t);
-    margin-left: auto;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
-  .blank {
-    display: flex;
-    align-items: baseline;
-    gap: 14px;
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.06em;
-    color: var(--faint-t);
-    padding: 22px 0 26px;
-    border-bottom: 1px dashed var(--hair);
-  }
-  .blank b {
-    font-weight: 400;
-    font-size: 15px;
-    color: var(--faint);
-  }
-
   /* ---------- footer ---------- */
   footer {
     margin-top: 120px;
@@ -413,9 +309,6 @@
     .head h1 {
       font-size: 32px;
     }
-    .body {
-      padding-top: 56px;
-    }
     .statement {
       padding-top: 48px;
     }
@@ -425,9 +318,6 @@
     }
     .stmt .k {
       padding-top: 0;
-    }
-    .lines .when {
-      display: none;
     }
   }
   @media (max-width: 560px) {
@@ -582,92 +472,10 @@
     </div>
   </section>
 
-  <section class="body" id="lines">
-    <div class="sec-head reveal">
-      <span class="tick" aria-hidden="true"></span>
-      <h2>the work</h2>
-    </div>
-    <ol class="lines">
-      <li class="reveal">
-        <span class="t">Cohort Study</span>
-        <span class="dek"
-          >a live, dynamic dataset of affect anecdata and subjective
-          well&#8209;being: tracking how &#8220;feels&#8221; and
-          &#8220;vibes&#8221; get augmented and hijacked, <em>and</em> how they
-          mediate gen&nbsp;z decision&#8209;making.</span
-        >
-        <span class="when">2026 · live</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Niwa</span>
-        <span class="when">2026</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Kiku</span>
-        <span class="when">2026</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Lab of Self</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Eat no SLOP &amp; Cook no SLOP</span>
-        <span class="dek"
-          >a 1&#8209;click browser extension to detect and block
-          ai&#8209;generated content + text.</span
-        >
-        <span class="when">2026 · v0.1</span>
-      </li>
-      <li class="reveal">
-        <span class="t"
-          ><a href="https://github.com/pvcomms/kan-eu">Kan</a></span
-        >
-        <span class="dek"
-          >a small assistant that runs on your own computer and answers from
-          your own notes, on eu&#8209;made model weights only. free to
-          download.</span
-        >
-        <span class="when">2026 · v0.1</span>
-      </li>
-      <li class="reveal">
-        <span class="t"
-          ><a href="https://postphenom.com"
-            >Center for Applied Post&#8209;Phenomenology</a
-          ></span
-        >
-        <span class="dek">co&#8209;founder.</span>
-      </li>
-      <li class="reveal">
-        <span class="t">Ostensible</span>
-        <span class="dek"
-          >founder. dissecting modern society through power, incentives,
-          etc.</span
-        >
-      </li>
-      <li class="reveal">
-        <span class="t">Attentional Environment Engineer</span>
-        <span class="dek"
-          >specialized in curating digital &amp; environment for neurodivergent
-          folks.</span
-        >
-      </li>
-      <li class="reveal">
-        <span class="t"
-          ><a href="/systems/cognitive-scaffolding"
-            >Cognitive Scaffolding</a
-          ></span
-        >
-        <span class="dek"
-          >tools for structured overthinking, so the thinking ends in something
-          done.</span
-        >
-        <span class="when">2026</span>
-      </li>
-    </ol>
-  </section>
-
   <footer>
     <div class="contact reveal">
       <span>pvcomms (at) pm dot me</span>
+      <span>emails checked once a week, on saturday</span>
     </div>
     <div class="colophon reveal">
       self-hosted · no data · no tracking · no cookies · no fingerprinting · not

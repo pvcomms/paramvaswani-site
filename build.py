@@ -98,7 +98,7 @@ LLMS = """# Param Vaswani
 - [Taste](https://paramv.com/taste): what shaped him, by form — films, shows, albums, poetry, books, essays.
 - [Learning Curriculum](https://paramv.com/curriculum): the current personal learning curriculum.
 - [About](https://paramv.com/about): what he does now, what he did before, his credentials.
-- [Work](https://paramv.com/work): what he has made, and what it was for.
+- [Work](https://paramv.com/work): then, now, and the terms he consults on.
 - [Principles](https://paramv.com/principles): the rules he actually runs on, in the order they win,
   and the research they are cut from: concepts, influences, quotes, aphorisms, neology & etymology.
 - [Cognitive Scaffolding](https://paramv.com/systems/cognitive-scaffolding): tools for
