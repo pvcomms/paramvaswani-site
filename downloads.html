@@ -366,6 +366,37 @@
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
   }
+  /* the track: one small play button; position and state survive page changes */
+  .play {
+    display: inline-flex;
+    align-items: center;
+    align-self: center;
+    background: none;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    line-height: 0;
+    color: var(--dim);
+    cursor: pointer;
+    transition: color 0.18s ease;
+  }
+  .play:hover,
+  .play.on {
+    color: var(--paper);
+  }
+  .play:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 3px;
+  }
+  .play .stop {
+    display: none;
+  }
+  .play.on .go {
+    display: none;
+  }
+  .play.on .stop {
+    display: inline;
+  }
   .theme .moon {
     display: none;
   }
@@ -494,6 +525,10 @@
       <a class="dl here" href="/downloads" aria-label="downloads" title="downloads" aria-current="page">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7.5V18a1.5 1.5 0 0 0 1.5 1.5h15A1.5 1.5 0 0 0 21 18V9a1.5 1.5 0 0 0-1.5-1.5h-8L9.5 5h-5A1.5 1.5 0 0 0 3 6.5z" /><path d="M12 10.5v5.5M9.5 13.5 12 16l2.5-2.5" /></svg>
       </a>
+      <button class="play" id="play" type="button" aria-pressed="false" aria-label="play casualty of society, by aaron sparling" title="casualty of society · aaron sparling">
+        <svg class="go" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5v15l12-7.5z" /></svg>
+        <svg class="stop" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M8 5v14M16 5v14" /></svg>
+      </button>
     </nav>
   </header>
 
@@ -558,6 +593,7 @@
       <span>pvcomms (at) pm dot me</span>
       <span>emails checked once a week, on saturday</span>
       <span>type: <a href="https://fontstruct.com/fontstructions/show/250901">rm typerighter</a> by ray meadows, <a href="https://creativecommons.org/licenses/by-nd/3.0/">cc by-nd 3.0</a></span>
+      <span>music: <a href="https://aaronsparling.bandcamp.com">casualty of society</a> by aaron sparling</span>
     </div>
     <div class="colophon reveal">
       self-hosted · no data · no tracking · no cookies · no fingerprinting · not for sale
@@ -615,6 +651,33 @@
         el.classList.add("in");
       });
     }
+  })();
+</script>
+<audio id="track" src="/audio/casualty-of-society.mp3" preload="none" loop></audio>
+<script>
+  /* the track: play/pause; where it is and whether it's on are kept in this browser,
+     so it carries on across pages. if the browser refuses to resume without a
+     click, the button just shows it as off. */
+  (function () {
+    var a = document.getElementById("track"), b = document.getElementById("play");
+    if (!a || !b) return;
+    var T = "pv-track-t", ON = "pv-track-on";
+    a.volume = 0.6;
+    function keep(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+    function paint(on) { b.setAttribute("aria-pressed", on ? "true" : "false"); b.classList.toggle("on", on); }
+    function resume() {
+      var t = 0; try { t = parseFloat(localStorage.getItem(T)) || 0; } catch (e) {}
+      if (t) a.currentTime = t;
+      var p = a.play();
+      if (p && p.catch) p.catch(function () { paint(false); });
+    }
+    a.addEventListener("play", function () { paint(true); keep(ON, "1"); });
+    a.addEventListener("pause", function () { paint(false); keep(ON, "0"); });
+    a.addEventListener("timeupdate", function () { keep(T, a.currentTime.toFixed(1)); });
+    window.addEventListener("pagehide", function () { if (!a.paused) { keep(T, a.currentTime.toFixed(1)); keep(ON, "1"); } });
+    b.addEventListener("click", function () { if (a.paused) resume(); else a.pause(); });
+    var on = false; try { on = localStorage.getItem(ON) === "1"; } catch (e) {}
+    if (on) { paint(true); resume(); }
   })();
 </script>
 <script src="/vendor/altcha/altcha-obfuscation.min.js" defer></script>
