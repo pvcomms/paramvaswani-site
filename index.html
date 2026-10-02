@@ -276,6 +276,12 @@
       0 0 40px -12px color-mix(in srgb, var(--c-consume) 45%, transparent),
       0 0 90px -20px color-mix(in srgb, var(--c-consume) 30%, transparent);
   }
+  .hero .figmotto {
+    font-size: 12px;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    padding-bottom: 6px;
+  }
   svg.venn {
     display: block;
     width: 100%;
@@ -323,12 +329,6 @@
   svg.venn .u-link:focus-visible {
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
-  }
-  svg.venn .u-label {
-    font-family: var(--mono);
-    font-style: normal;
-    fill: var(--dim);
-    letter-spacing: 0.14em;
   }
   .me-dot {
     fill: var(--c-me);
@@ -439,9 +439,6 @@
   @media (max-width: 560px) {
     svg.venn text {
       font-size: 34px;
-    }
-    svg.venn .u-label {
-      font-size: 15px;
     }
     svg.venn .melbl {
       font-size: 22px;
@@ -660,7 +657,7 @@
     }
   }
 
-  /* ---------- the venn cursor: a crosshair, and the motto beneath the frame label ---------- */
+  /* ---------- the venn cursor: a crosshair ---------- */
   .vret line {
     stroke: var(--paper);
     stroke-width: 0.6;
@@ -671,14 +668,6 @@
     stroke: var(--paper);
     stroke-width: 0.9;
     opacity: 0.32;
-  }
-  text.vmotto {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-style: italic;
-    letter-spacing: 0.06em;
-    fill: var(--dim);
-    pointer-events: none;
   }
   svg.venn {
     cursor: crosshair;
@@ -927,11 +916,12 @@
   </div>
   <!-- ============ FIG 1 · VENN ============ -->
   <div class="hero">
+    <div class="figlabel figmotto">the map is not the territory</div>
     <svg
       class="venn"
       viewBox="0 0 900 640"
       role="group"
-      aria-label="A Venn diagram of the site. Five domains — curriculum, systems, principles, taste, work — inside the universal set, labeled ontology. Curriculum, taste, principles and work have pages. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
+      aria-label="A Venn diagram of the site. Five domains — curriculum, systems, principles, taste, work — inside the universal set. Curriculum, taste, principles and work have pages. Named intersections: cognitive scaffolding, influences, the examined life, AI policy, how I work, discernment, lab of self. A red dot marks where curriculum, systems and principles meet. A dashed set, partly outside the frame, is contact. Hover a set to read it; click to filter, click again to open the page."
     >
       <defs>
         <clipPath id="uclip">
@@ -971,7 +961,6 @@
         stroke-dasharray="1 6"
         stroke-linecap="round"
       />
-      <text class="u-label" x="48" y="58" font-size="13">𝒰 · ontology</text>
 
       <circle
         class="offrec"
@@ -1296,7 +1285,6 @@
         <line id="vRetH" x1="18" y1="0" x2="882" y2="0" />
         <circle id="vRetC" cx="0" cy="0" r="9" />
       </g>
-      <text class="vmotto" x="48" y="80">the map is not the territory</text>
     </svg>
     <div class="vennpanel" id="cap1" aria-live="polite"></div>
   </div>
