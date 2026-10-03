@@ -9,7 +9,8 @@ Readers never talk to Anki. The collection is read here, at build time, on the m
 on, and shipped as JSON inside the page. If Anki is not running the refresh is skipped and the
 committed anki/cards.json stands, so a build anywhere still ships the last good copy.
 
-Every deck goes out except those in EXCLUDE (People holds photos of real people). Suspended
+Every deck goes out except those in EXCLUDE (People holds photos of real people; LessWrong is
+the bulk import of the LessWrong wiki, ~3,000 cards, kept off the site). Suspended
 cards stay home. Field HTML is cut down to a handful of inline tags; anything else is dropped
 to its text. Each card carries Param's own record on it (reps, lapses, interval) so a reader can
 see where he is with it.
@@ -21,7 +22,7 @@ from html.parser import HTMLParser
 ROOT = pathlib.Path(__file__).parent
 OUT = ROOT / "anki" / "cards.json"
 URL = "http://127.0.0.1:8765"
-EXCLUDE = ("People", "Default")
+EXCLUDE = ("People", "Default", "LessWrong")
 BEGIN, END = "<!-- anki:begin", "<!-- anki:end -->"
 
 
