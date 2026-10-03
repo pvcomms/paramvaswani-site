@@ -316,17 +316,20 @@
     color: var(--dim);
     font-size: 15.5px;
   }
-  .entries .t a {
+  .entries .t a,
+  .head .note a {
     border-bottom: 1px solid var(--hair-2);
     transition:
       color 0.18s ease,
       border-color 0.18s ease;
   }
-  .entries .t a:hover {
+  .entries .t a:hover,
+  .head .note a:hover {
     color: var(--accent);
     border-color: currentColor;
   }
-  .entries .t a:focus-visible {
+  .entries .t a:focus-visible,
+  .head .note a:focus-visible {
     outline: 1px solid var(--c-cohere);
     outline-offset: 3px;
   }
@@ -670,7 +673,7 @@
     <p class="lede">some art that shaped me</p>
     <p class="note">
       to choose is to discern. to discern is to be alive. i opted out of
-      superstimuli and infinite scrolls, and toward intentional choice: who,
+      <a href="https://www.emarketer.com/content/digital-media-makes-up-nearly-two-thirds-of-consumers-total-time-spent-with-media">superstimuli</a> and infinite scrolls, and toward intentional choice: who,
       what and how gets my attention.
     </p>
   </section>
