@@ -259,6 +259,30 @@
     padding: 36px 0 88px;
     border-top: 1px solid var(--hair);
   }
+  /* not by ai badge: the two official variants, swapped with the theme. unaltered, 42px tall (their minimum). */
+  .nba {
+    display: block;
+    width: fit-content;
+    margin-top: 26px;
+  }
+  .nba img {
+    display: block;
+    height: 42px;
+    width: auto;
+  }
+  .nba .nba-light {
+    display: none;
+  }
+  :root[data-theme="light"] .nba .nba-dark {
+    display: none;
+  }
+  :root[data-theme="light"] .nba .nba-light {
+    display: block;
+  }
+  .nba:focus-visible {
+    outline: 1px solid var(--c-cohere);
+    outline-offset: 4px;
+  }
   .contact {
     display: flex;
     gap: 26px;
@@ -704,6 +728,10 @@
     <div class="colophon reveal">
       self-hosted · no data · no tracking · no cookies · no fingerprinting · not for sale
     </div>
+    <a class="nba reveal" href="https://notbyai.fyi/" rel="noopener">
+      <img class="nba-dark" src="/pictures/written-by-human-not-by-ai-black.svg" width="131" height="42" alt="Written by Human, Not by AI" loading="lazy" />
+      <img class="nba-light" src="/pictures/written-by-human-not-by-ai-white.svg" width="131" height="42" alt="Written by Human, Not by AI" loading="lazy" />
+    </a>
   </footer>
 </div>
 
